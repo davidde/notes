@@ -108,7 +108,7 @@ Pushes the specified branch to the specified remote.
 
 * git pull origin master  
 = git fetch origin  
-+ git merge master origin/master  
+\+ git merge master origin/master  
 When you clone a git repository from github, you get separate pointers
 to master (= latest commit in local master branch) and to origin/master
 (= latest commit in githubs master branch). When you commit locally,
