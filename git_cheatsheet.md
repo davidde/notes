@@ -10,7 +10,6 @@
 | local repository       |     git push             |
 | remote repository      | "Pull Request on Github" |
 | upstream repository    |     /                    |
------------------------------------------------------
 
 Git commands like log and diff show their result in the less editor,
 which means 'q' to exit.
@@ -104,7 +103,7 @@ for that branch.)
 * git merge --abort  
 Restore your files to their state before you started the merge.
 
-* git push <REMOTENAME> <BRANCHNAME>  
+* git push REMOTENAME BRANCHNAME  
 Pushes the specified branch to the specified remote.
 
 * git pull origin master  
@@ -125,7 +124,7 @@ necessary since they are already linked.)
 (-> Udacity Git/Github Lesson 4, 21.)
 
 * Pull request (Github-specific):  
-you request the original author to pull your changes into his master.  
+You request the original author to pull your changes into his master.  
 -> could also be called "Merge request"  
 To contribute to a public project on Github, you have to first 'fork' it
 (similar to clone, but Github-specific), so you have your own version of
@@ -138,7 +137,7 @@ you can easily keep your master branch up-to-date with the master of the
 original repository, and merge changes from your master into your branch
 when you are ready.
 
-* git remote add origin <remote repository URL>  
+* git remote add origin "remote repository URL"  
 Add your project to github by setting a remote first.  
 Afterwards, push or pull your project by running:  
 $ git push origin master  
@@ -147,7 +146,7 @@ $ git pull origin master
 upstream/master: this is the repository you forked, to which you're trying
 to contribute. When collaborating, it's often necessary to add this repository
 as a remote, in order to resolve merge conflicts between your fork and upstream:  
-$ git remote add upstream <remote repository URL>  
+$ git remote add upstream "remote repository URL"  
 then you can pull in the conflicting changes from upstream/master:  
 $ git pull upstream master  
 and merge the master branch into your 'change' branch:  
@@ -157,7 +156,8 @@ $ git merge master
 Resolve merge conflicts locally:
   - update 'file.txt'
   - git add 'file.txt'
-  - git commit   (-> the 'merge commit')  
+  - git commit   (-> the 'merge commit')
+
 Then push your 'change' branch to your fork (NOT upstream):
 (which will automatically update your pull request)  
 $ git push origin change  
@@ -175,7 +175,7 @@ Undo all changes.
 so it is dangerous to lose uncommitted changes.
 
 * git reset HEAD~  
-Undo the latest commit, the staged/tracked files will no longer be staged/tracked.
+Undo the latest commit, the staged/tracked files will no longer be staged/tracked.  
 (HEAD is a pointer to the most recent git commit in a specific branch;
 detached head means the head does not point to the most recent commit.
 This happens when you move the head back in time by checking out a
