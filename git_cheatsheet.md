@@ -42,15 +42,17 @@ git won't let you checkout another branch. The "--force" flag
 forces git to checkout anyway, which will result in losing the changes.
 
 * git checkout -b test_branch (cffd76070)  
-= Shorthand for: $ git branch test_branch (cffd76070)  
-                 $ git checkout test_branch (cffd76070)  
+= Shorthand for:  
+$ git branch test_branch (cffd76070)  
+$ git checkout test_branch (cffd76070)  
 (cffd76070): Optionally specify a commit hash to base the branch on.
 When not specified, it is based on the currently checked out commit
 (current position of head) So when you're in detached head state
 (= after checkout of commit hash instead of branch), you can simply
 run 'git checkout -b test_branch' to turn that commit into a real branch.
-Afterwards, simply: $ git checkout master  
-                    $ git branch -d test-branch  
+Afterwards, simply:  
+$ git checkout master  
+$ git branch -d test-branch  
 to checkout master, and delete the branch if you don't need it anymore.
 
 * git commit -m "Description of changes"  
@@ -73,10 +75,10 @@ Compare 2 specific commits (get commit hash from 'git log' command)
 
 * git log (--stat)  
           (--oneline --graph master other_branch)  
-Log of all git commits in less editor (q to exit).
+Log of all git commits in less editor (q to exit).  
 --stat: shows additional data like the files that were changed,
-and insertions/deletions.
---oneline: show only one line per commit.
+and insertions/deletions.  
+--oneline: show only one line per commit.  
 --graph master other_branch: show a graph of how the commits
 in both branches relate to each other.
 
@@ -90,8 +92,9 @@ List the files managed by git.
 Merges the other_branch and the master branch into the
 currently checked out branch.
 So the currently checked out branch is always included in a merge!
-To merge other_branch into master, do: $ git checkout master  
-                                       $ git merge other_branch  
+To merge other_branch into master, do:  
+$ git checkout master  
+$ git merge other_branch  
 (Also, since the two branches are merged, the order in which they
 are typed into the command line does not matter. The key is to remember
 that "git merge" always merges all the specified branches
@@ -114,11 +117,12 @@ only the master branch is updated. When you commit on github and then fetch,
 the origin/master branch will be updated locally. If you then merge both
 branches, you'll get the same result as a 'git pull origin master'.  
 (But if 'git pull' is the same as 'fetch + merge', why don't we get
-merge commits when pulling?
+merge commits when pulling?  
 => This is because git by default performs 'fast-forward merges'
 when one commit is reachable from the other; the oldest commit's label
 is fast-forwarded to the head of the branch. No merge commit is
-necessary since they are already linked.) (-> Udacity Git/Github Lesson 4, 21.)
+necessary since they are already linked.)  
+(-> Udacity Git/Github Lesson 4, 21.)
 
 * Pull request (Github-specific):  
 you request the original author to pull your changes into his master.  
@@ -136,8 +140,9 @@ when you are ready.
 
 * git remote add origin <remote repository URL>  
 Add your project to github by setting a remote first.  
-Afterwards, push your project by running: $ git push origin master  
-                  (or pull it by running: $ git pull origin master )  
+Afterwards, push or pull your project by running:  
+$ git push origin master  
+$ git pull origin master  
 (Run: "git remote -v" to check if remote was added correctly)  
 upstream/master: this is the repository you forked, to which you're trying
 to contribute. When collaborating, it's often necessary to add this repository
@@ -149,10 +154,10 @@ and merge the master branch into your 'change' branch:
 $ git checkout change  
 $ git merge master  
 (git merge merges all specified branches into the currently checked out branch)  
-Resolve merge conflicts locally:  
+Resolve merge conflicts locally:
   - update 'file.txt'
   - git add 'file.txt'
-  - git commit   (-> the 'merge commit')
+  - git commit   (-> the 'merge commit')  
 Then push your 'change' branch to your fork (NOT upstream):
 (which will automatically update your pull request)  
 $ git push origin change  
