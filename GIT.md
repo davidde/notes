@@ -174,12 +174,15 @@ Undo all changes.
 --hard: also modifies your working directory;
 so it is dangerous to lose uncommitted changes.
 
-* git reset HEAD~  
+* git reset HEAD~ (--hard)  
 Undo the latest commit, the staged/tracked files will no longer be staged/tracked.  
 (HEAD is a pointer to the most recent git commit in a specific branch;
 detached head means the head does not point to the most recent commit.
 This happens when you move the head back in time by checking out a
-specific commit hash)
+specific commit hash)  
+If the commit was already pushed to your remote, you will have to push the newly
+deleted version again with the --force flag to delete it from the remote:
+$ git push origin master --force
 
 * git reset cffd76070aaebf82e4b  
 Undo all commits that came after cffd76070aaebf82e4b!
