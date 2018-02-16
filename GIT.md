@@ -158,8 +158,8 @@ Resolve merge conflicts locally:
   - git add 'file.txt'
   - git commit   (-> the 'merge commit')
 
-  Then push your 'change' branch to your fork (NOT upstream):
-  (which will automatically update your pull request)  
+  Then push your 'change' branch to your fork (NOT upstream):  
+  (this will automatically update your pull request)  
   $ git push origin change  
   Finally, just update the master branch on your fork:  
   $ git checkout master  
@@ -181,7 +181,7 @@ detached head means the head does not point to the most recent commit.
 This happens when you move the head back in time by checking out a
 specific commit hash)  
 If the commit was already pushed to your remote, you will have to push the newly
-deleted version again with the --force flag to delete it from the remote:
+deleted version again with the --force flag to delete it from the remote:  
 $ git push origin master --force
 
 * git reset cffd76070aaebf82e4b  
