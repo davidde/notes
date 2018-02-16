@@ -158,13 +158,13 @@ Resolve merge conflicts locally:
   - git add 'file.txt'
   - git commit   (-> the 'merge commit')
 
-Then push your 'change' branch to your fork (NOT upstream):
-(which will automatically update your pull request)  
-$ git push origin change  
-Finally, just update the master branch on your fork:  
-$ git checkout master  
-$ git push origin master  
-(-> Udacity Git/Github Lesson 4, 33.)
+  Then push your 'change' branch to your fork (NOT upstream):
+  (which will automatically update your pull request)  
+  $ git push origin change  
+  Finally, just update the master branch on your fork:  
+  $ git checkout master  
+  $ git push origin master  
+  (-> Udacity Git/Github Lesson 4, 33.)
 
 * git reset main.go  
 Unstages main.go, but preserves its contents.
