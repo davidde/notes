@@ -139,10 +139,10 @@ when you are ready.
 
 * Keeping a Github fork up to date:
   - Clone your fork:  
-  $ git clone https://github.com/YOUR-USERNAME/YOUR-FORKED-REPO.git
+  $ git clone `https://github.com/YOUR-USERNAME/YOUR-FORKED-REPO.git`
   - Add remote from original repository in your forked repository:  
   $ cd into/cloned/fork-repo  
-  $ git remote add upstream https://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git  
+  $ git remote add upstream `https://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git`  
   $ git fetch upstream  
   - Updating your fork from original repo to keep up with their changes:  
   $ git pull upstream master  
