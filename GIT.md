@@ -11,7 +11,7 @@
 | remote repository      | "Pull Request on Github" |
 | upstream repository    |     /                    |
 
-Git commands like log and diff show their result in the less editor,
+Git commands like log and diff show their output in the 'less' pager,
 which means 'q' to exit.
 
 ## Basic git commands and usage, alphabetically:
@@ -74,7 +74,7 @@ Compare 2 specific commits (get commit hash from 'git log' command)
 
 * git log (--stat)  
           (--oneline --graph master other_branch)  
-Log of all git commits in less editor (q to exit).  
+Log of all git commits in less pager (q to exit).  
 --stat: shows additional data like the files that were changed,
 and insertions/deletions.  
 --oneline: show only one line per commit.  
@@ -206,7 +206,7 @@ Lists all new or modified files to be committed.
 Compare a specific commit to its parent commit.
 
 * git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go  
-Look at a specific commit of the main.go file (path required) in less editor.
+Look at a specific commit of the main.go file (path required) in less pager.
 
 * git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go | vi -  
 Look at a specific commit of the main.go file (path required) in vi editor.
