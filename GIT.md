@@ -81,11 +81,14 @@ and insertions/deletions.
 --graph master other_branch: show a graph of how the commits
 in both branches relate to each other.
 
+* git log --name-status
+Adds the names and status of the changed files on every commit.
+
 * git log | cat  
 Prints git log output on standard output/ terminal.
 
 * git ls-files  
-List the files managed by git.
+Lists all the files that exist in the latest commit on the current branch.
 
 * git merge master other_branch  
 Merges the other_branch and the master branch into the
