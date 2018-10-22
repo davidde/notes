@@ -81,7 +81,7 @@ and insertions/deletions.
 --graph master other_branch: show a graph of how the commits
 in both branches relate to each other.
 
-* git log --name-status
+* git log --name-status  
 Adds the names and status of the changed files on every commit.
 
 * git log | cat  
