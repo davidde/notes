@@ -106,7 +106,7 @@ for that branch.)
 * git merge --abort  
 Restore your files to their state before you started the merge.
 
-* git push REMOTENAME BRANCHNAME 
+* git push REMOTENAME BRANCHNAME  
 Pushes the specified branch to the specified remote.
 
 * git push origin --all  
