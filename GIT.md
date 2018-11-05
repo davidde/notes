@@ -109,8 +109,10 @@ Restore your files to their state before you started the merge.
 * git push REMOTENAME BRANCHNAME  
 Pushes the specified branch to the specified remote.
 
-* git push origin --all  
-Pushes all branches to the origin remote.
+* git push origin --all --set-upstream  
+Pushes all branches to the origin remote, and sets all of them as 'upstream'.  
+This means on next push you don't need to specify neither your branch, nor  
+your remote; simply run 'git push'.
 
 * git pull origin master  
 = git fetch origin  
