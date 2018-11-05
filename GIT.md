@@ -110,7 +110,7 @@ Restore your files to their state before you started the merge.
 Pushes the specified branch to the specified remote.
 
 * git push origin --all --set-upstream  
-Pushes all branches to the origin remote, and sets all of them as 'upstream'.  
+Pushes all branches to the origin remote, and sets origin as 'upstream' for all of them.  
 This means on next push you don't need to specify neither your branch, nor  
 your remote; simply run 'git push'.
 
