@@ -206,7 +206,7 @@ deleted version again with the --force flag to delete it from the remote:
 $ git push origin master --force
 
 * git reset cffd76070aaebf82e4b (--hard)  
-Undo all commits that came after cffd76070aaebf82e4b!
+Undo all commits that came after cffd76070aaebf82e4b!  
 --hard: will also get rid of everything you've done since then;  
 all unpublished commits will be lost from your hard disk.  
 
