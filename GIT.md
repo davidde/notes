@@ -28,10 +28,10 @@ This is useful if you want to upload an existing project to Github.
 * git branch 'new_branch'  
 Create the 'new_branch' branch.
 
-* git branch --set-upstream <remote-branch>  
+* git branch --set-upstream 'remote-branch'  
 This sets the default remote branch for the current local branch.  
 Any future git pull command (with the current local branch checked-out),  
-will attempt to bring in commits from the <remote-branch>  
+will attempt to bring in commits from the 'remote-branch'  
 into the current local branch.  
 One way to avoid having to explicitly do --set-upstream is  
 to use the shorthand flag -u along-with the very first git push as follows:  
