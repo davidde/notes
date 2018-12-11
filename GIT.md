@@ -62,7 +62,9 @@ run 'git checkout -b test_branch' to turn that commit into a real branch.
 Afterwards, simply:  
 $ git checkout master  
 $ git branch -d test-branch  
-to checkout master, and delete the branch if you don't need it anymore.
+to checkout master, and delete the branch (locally) if you don't need it anymore.  
+To also delete the branch remotely (on Github):  
+$ git push origin --delete 'test_branch'  
 
 * git commit -m "Description of changes"  
 Commit all tracked files permanently to version history.
