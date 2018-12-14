@@ -25,7 +25,7 @@ Add all files in the directory.
 This is useful if you want to upload an existing project to Github.
 (Use a .gitignore file that lists all exceptions)
 
-* git branch 'new_branch'  
+* git branch new_branch  
 Create the 'new_branch' branch.
 
 * git branch --set-upstream-to 'origin/remote-branch'  
@@ -64,7 +64,7 @@ $ git checkout master
 $ git branch -d test-branch  
 to checkout master, and delete the branch (locally) if you don't need it anymore.  
 To also delete the branch remotely (on Github):  
-$ git push origin --delete 'test_branch'  
+$ git push origin --delete test_branch  
 
 * git commit -m "Description of changes"  
 Commit all tracked files permanently to version history.
@@ -117,6 +117,9 @@ for that branch.)
 
 * git merge --abort  
 Restore your files to their state before you started the merge.
+
+* git mv old_filename new_filename  
+Rename a tracked file.
 
 * git push REMOTENAME BRANCHNAME  
 Pushes the specified branch to the specified remote.
@@ -221,6 +224,10 @@ $ git push origin master --force
 Undo all commits that came after cffd76070aaebf82e4b!  
 --hard: will also get rid of everything you've done since then;  
 all unpublished commits will be lost from your hard disk.  
+
+* git rm filename  
+Remove a file from both git and working directory,  
+so it doesn't longer show up as an untracked file.
 
 * git status  
 Lists all new or modified files to be committed.
