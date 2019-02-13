@@ -84,3 +84,24 @@ Detect what process is listening to (and occupying) port 8000.
 
 * sudo kill -9 <PID>  
 Kill process with PID.
+    
+* sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <PUBKEY>  
+Fix the GPG error 'NO_PUBKEY', for example when adding a ppa to your system.  
+When you run `sudo apt update` with this error, you will get;
+`W: GPG error: http://ppa.launchpad.net trusty Release: The following signatures couldn't
+be verified because the public key is not available: NO_PUBKEY 93C4A3FD7BB9C367`,  
+where `93C4A3FD7BB9C367` is the pubkey you need to use in the command.
+
+* sudo apt update  
+Update package lists (installed applications list).
+
+* sudo apt dist-upgrade  
+Upgrade your machine.
+
+* sudo apt update && time sudo apt dist-upgrade  
+Update package lists and upgrade your machine while timing it.
+
+* sudo apt -f install  
+-f: 'fix broken'  
+Fix broken dependencies.
+
