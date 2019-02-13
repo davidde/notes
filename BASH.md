@@ -106,3 +106,8 @@ Update package lists and upgrade your machine while timing it.
 -f: 'fix broken'  
 Fix broken dependencies.
 
+* Install more recent versions of software than what Debian 9 (stretch) provides by default:  
+echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list  
+sudo apt-get update  
+sudo apt-get install -t stretch-backports git  
+Backports will install the latest stable version of git instead of the one included in stretch.
