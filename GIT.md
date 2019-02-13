@@ -270,3 +270,12 @@ Apply the stash and then immediately drop it from your stack.
 Stash a single file, by specifying a stash message and a path to the file.  
 (NOTE: git 2.13 and up ONLY!)
 
+* git stash show  
+Shows which files were changed in the latest stash.
+
+* git stash show -p  
+View the content of the most recent stash (-p: 'patch').
+
+* git stash show -p stash@{2}  
+View the content of a specific stash.
+
