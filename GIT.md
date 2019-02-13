@@ -229,9 +229,6 @@ all unpublished commits will be lost from your hard disk.
 Remove a file from both git and working directory,  
 so it doesn't longer show up as an untracked file.
 
-* git status  
-Lists all new or modified files to be committed.
-
 * git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81  
 Compare a specific commit to its parent commit.
 
@@ -246,3 +243,26 @@ Show the head (most recent) commit of main.go
 
 * git show HEAD~2:main.go | vi -  
 Show the third latest commit of main.go in the vi editor.
+
+* git status  
+Lists all new or modified files to be committed.
+
+* git stash  
+Takes the dirty state of your working directory (uncommitted changes in tracked  
+files) and saves it on a stack of unfinished changes that you can reapply at any time.
+
+* git stash list  
+Lists the entire stash (each `git stash` command creates a new snapshot).
+
+* git stash apply  
+Apply the most recent stash.
+
+* git stash apply stash@{2}  
+Apply an older stash; git its id from `git stash list`.
+
+* git stash drop (stash@{2})  
+Remove a stash from your stack.
+
+* git stash pop (stash@{2})  
+Apply the stash and then immediately drop it from your stack.
+
