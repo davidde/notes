@@ -249,7 +249,7 @@ Lists all new or modified files to be committed.
 
 * git stash  
 Takes the dirty state of your working directory (uncommitted changes in tracked  
-files) and saves it on a stack of unfinished changes that you can reapply at any time.
+files) and saves ('stashes') it on a stack of unfinished changes that you can reapply at any time.
 
 * git stash list  
 Lists the entire stash (each `git stash` command creates a new snapshot).
@@ -265,4 +265,8 @@ Remove a stash from your stack.
 
 * git stash pop (stash@{2})  
 Apply the stash and then immediately drop it from your stack.
+
+* git stash push -m 'Put counter in Status' src/app/status/status.js  
+Stash a single file, by specifying a stash message and a path to the file.  
+(NOTE: git 2.13 and up ONLY!)
 
