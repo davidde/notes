@@ -205,6 +205,9 @@ Resolve merge conflicts locally:
 * git reset main.go  
 Unstages main.go, but preserves its contents.
 
+* git reset 6f16fb26b3294 src/app/app.js  
+Reset a specific file (app.js) to the state of a previous commit.
+
 * git reset (--hard)  
 Undo all changes.  
 --hard: also modifies your working directory;
