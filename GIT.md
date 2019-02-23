@@ -181,20 +181,20 @@ when you are ready.
   $ git push
 
 * git rebase -i HEAD~3  
-  git rebase -i 'commit hash you want to change'  
-Change commit messages from the last 3 commits.  
-This command will present you with your default editor;  
-change 'pick' to 'reword' for the commit message(s) you want to change, then save and close.  
-A new editor window will appear for each commit message you wish to change.   
+  (or: git rebase -i 'commit hash you want to change')  
+Change the commit messages or commit content for the last 3 commits.  
+This command will present you with your default editor;
+change 'pick' to 'reword' for the commit message(s) you want to change, then save and close.
+A new editor window will appear for each commit message you wish to change.
 If you also want to change the commit content, change 'pick' to 'edit'.  
-Note that amending the commit message will result in a new commit ID since the message itself  
-is used in the SHA1 hash that generates the commit ID. However, in this case, every commit  
-that follows the amended commit will also get a new ID because each commit also contains  
+Note: amending the commit message will result in a new commit ID since the message itself
+is used in the SHA1 hash that generates the commit ID. However, in this case, every commit
+that follows the amended commit will also get a new ID because each commit also contains
 the id of its parent.
-If you have already pushed to GitHub, you will have to force push the amended messages.  
-However, be aware that 'force pushing' is strongly discouraged, since this changes  
-the history of your repository. If you force push, people who have already cloned  
-your repository will have to manually fix their local history.  
+So if you have already pushed to GitHub, you will have to force push the amended messages.  
+However, **'force pushing' is strongly discouraged**, since this changes
+the history of your repository. If you force push, people who have already cloned
+your repository will have to manually fix their local history.
 For more information, see ["Recovering from upstream rebase"](https://git-scm.com/docs/git-rebase#_recovering_from_upstream_rebase) in the Git manual.
 
 * git remote add origin "remote repository URL"  
