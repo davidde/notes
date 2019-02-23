@@ -79,7 +79,7 @@ To rename index1_type9.txt to t9_i1.txt
 * qpdf -decrypt InputFile OutputFile  
 Remove protection/encryption from pdf files
 
-* rename -S .rar .cbr *.rar
+* rename -S .rar .cbr *.rar  
 Batch rename all files in the current working directory from .rar to .cbr
 
 * sudo apt -f install  
