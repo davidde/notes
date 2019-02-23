@@ -1,11 +1,11 @@
 # Useful BASH/Zshell commands
 
 * cat >package.json  
-Create package.json from command line; will await input from user.  
-After typing/copying text, press CTRL+D to exit.
+Create package.json from command line. This command will await input from user;  
+after typing/copying text, press CTRL+D to exit.
 
-* cat package.json  
- Show the content of the file.
+* cat package.json  
+ Show the content of the 'package.json' file.
 
 * cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4  
 Concatenate .vob dvd files, and then convert them to .mp4
@@ -117,6 +117,9 @@ Follows (-f) all log files, so you can troubleshoot.
 (tail = last 10 lines)
 
 More specific logs:  
-* tail -f /var/log/kern.log    // kernel-only, i.e. dmesg output
-* tail -f /var/log/syslog      // kernel + programs
+* tail -f /var/log/kern.log   
+// kernel-only, i.e. dmesg output
+
+* tail -f /var/log/syslog     
+// kernel + programs
 
