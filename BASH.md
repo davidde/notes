@@ -123,3 +123,6 @@ More specific logs:
 * tail -f /var/log/syslog     
 // kernel + programs
 
+* touch file.txt  
+Create an empty file called 'file.txt'.
+
