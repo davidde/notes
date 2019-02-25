@@ -185,7 +185,8 @@ when you are ready.
   $ git push
 
 * git rebase -i HEAD~3  
-  (or: git rebase -i 'commit hash you want to change')  
+  (or: git rebase -i 'commit hash you want to change'^  
+  with the ^ to refer to the parent of that commit; otherwise you'll be off-by-one)  
 Change the commit messages or commit content for the last 3 commits.  
 This command will present you with your default editor;
 change 'pick' to 'reword' for the commit message(s) you want to change, then save and close.
