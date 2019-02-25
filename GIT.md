@@ -109,7 +109,8 @@ Adds the names and status of the changed files on every commit.
 
 * git log --format=fuller  
 Shows the difference between AuthorDate and CommitDate. They are usually the same,
-but can differ for example after a 'git rebase'.  
+but can differ for example after a 'git rebase'. The CommitDate is taken into account
+when creating the commit hash, so a 'git rebase' without changes still modifies the hash.  
 Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
 
 * git log | cat  
