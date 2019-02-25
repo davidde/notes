@@ -195,7 +195,7 @@ Back in your shell, you'll notice you're no longer on 'master', but on the speci
 hash you chose to modify; simply change the code you want, 'git add' the changes, and
 'git commit --amend' the commit. Enter 'git rebase --continue' to finish up the rebase.
 Most likely this will include fixing a merge conflict because git will have trouble
-auto-merging the succeeding commits with your change ...  
+auto-merging the succeeding commit with your change ...  
 **Note:**  
 Amending the commit message will result in a new commit ID since the message itself
 is used in the SHA1 hash that generates the commit ID. However, in this case, every commit
