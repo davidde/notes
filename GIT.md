@@ -66,15 +66,19 @@ to checkout master, and delete the branch (locally) if you don't need it anymore
 To also delete the branch remotely (on Github):  
 $ git push origin --delete test_branch  
 
-* git commit -m "Description of changes"  
-Commit all tracked files permanently to version history.
+* git commit (-a) -m "Description of changes"  
+Commit all staged files permanently to version history.  
+-a/--all: Automatically stage/add all tracked files that were modified; this means you don't
+have to manually stage/'git add' all files that are modified.  
+Shortcut: $ git commit -am "Description of changes"
 
 * git commit --amend  
-Rewrite the most recent commit message (if it has not yet been pushed online).  
+Rewrite the most recent commit message and/or commit content (if they have not yet been pushed online).  
+If you want to also edit the commit's content, you need to 'git add' the edited files before amending,  
+so you may or may not have to 'git stash' code that shouldn't be included.  
 (In Git, the text of the commit message is part of the commit.  
-Changing the commit message will change the commit ID,  
-i.e. the SHA1 checksum that names the commit.  
-Effectively, you are creating a new commit that replaces the old one.)
+Changing the commit message will change the commit ID, i.e. the SHA1 checksum that names the commit.  
+Effectively, you are creating a new commit that replaces the old one, but keeps its date.)
 
 * git diff  
 Shows all modifications that are NOT yet staged.  
@@ -185,13 +189,17 @@ when you are ready.
 Change the commit messages or commit content for the last 3 commits.  
 This command will present you with your default editor;
 change 'pick' to 'reword' for the commit message(s) you want to change, then save and close.
-A new editor window will appear for each commit message you wish to change.
-If you also want to change the commit content, change 'pick' to 'edit'.  
-Note: amending the commit message will result in a new commit ID since the message itself
+A new editor window will appear for each commit message you wish to change.  
+If you also want to change the commit content, change 'pick' to 'edit', then save and close.
+Back in your shell, you'll notice you're no longer on 'master', but on the specific commit
+hash you chose to modify; simply change the code you want, 'git add' the changes, and
+'git commit --amend' the commit. Enter 'git rebase --continue' to finish up the rebase.  
+**Note:**  
+Amending the commit message will result in a new commit ID since the message itself
 is used in the SHA1 hash that generates the commit ID. However, in this case, every commit
 that follows the amended commit will also get a new ID because each commit also contains
-the id of its parent.
-So if you have already pushed to GitHub, you will have to force push the amended messages.  
+the id of its parent.  
+So if you have already pushed to GitHub, you will have to force push the amended messages/content.  
 However, **'force pushing' is strongly discouraged**, since this changes
 the history of your repository. If you force push, people who have already cloned
 your repository will have to manually fix their local history.
