@@ -90,13 +90,25 @@ The "from" and "to" parameters must immediately follow the argument.
 text by the "to" text.  
 -n, --dry-run, --just-print: no-execute mode; just print out the changes without actually making them.
 
-* rename -n 's/\.rar$/.cbr/' *.rar  
+* rename -n 's/.rar/.cbr/' *.rar  
 (**Debian/Ubuntu Perl-based version** of rename by Larry Wall & Robin Barker;  
 fully supports Perl regexes, named 'prename' on CentOS and Fedora!)  
 Batch rename all files in the current working directory from .rar to .cbr  
 -n, -nono: no-execute mode; just print out the changes without actually making them.  
-Regex intro:  
-
+**Regex intro**:  
+a) Search and replace is performed using 's/regex/replacement/modifiers';  
+'s' stands for 'substitute', 'regex' is the regex pattern that you want to replace,
+'replacement' is what it should be replaced by, and the modifiers are options of the
+regex itself, e.g.:  
+'g': global; affects all occurrences of the expression  
+'i': perform case-insensitive substitution  
+$ rename -n 's/DSC/photo/gi' *.jpg   
+=> This would apply to all .jpg files that contain 'DSC', 'dsc' or 'dSC',
+and change that part of the filename to 'photo'.  
+b) Translation is performed using 'y/regex/replacement/modifiers', which is most often 
+used to change the filename case:  
+$ rename 'y/a-z/A-Z/' *.jpg  
+=> This would change the names of all .jpg files from lowercase to uppercase.
 
 **Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
