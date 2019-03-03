@@ -121,7 +121,7 @@ $ rename 'y/a-z/A-Z/' *.jpg
 => This would change the names of all .jpg files from lowercase to uppercase.  
 c) Legend:  
 
-|   regex      |        Meaning                 |             Examples                         |
+| regex symbol |        Meaning                 |             Examples                         |
 |--------------|--------------------------------|----------------------------------------------|
 |  .           | any character except newline   | ".a" matches two consecutive characters where the last one is "a" |
 |  ^           | - anchor for start of string   | "^a" matches "a" at the start of the string  |
