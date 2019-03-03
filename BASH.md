@@ -71,7 +71,7 @@ Start up briss, app to crop/resize/split pdfs.
 Where the "#1" is replaced by whatever is matched by the first wildcard.
 Similarly #2 is replaced by the second, etc. Quotes are necessary!  
 **Options**:  
--n: no-execute mode; simply print out which changes would be made when executed.
+-n: no-execute mode; just print out the changes without actually making them.
 
 So you do something like:
 
@@ -88,7 +88,17 @@ Batch rename all files in the current working directory from .rar to .cbr
 The "from" and "to" parameters must immediately follow the argument.  
 -S, --subst-all: Same as "-s", but replaces every instance of the "from"
 text by the "to" text.  
--n, --dry-run, --just-print: no-execute mode; just print out the changes without making them.
+-n, --dry-run, --just-print: no-execute mode; just print out the changes without actually making them.
+
+* rename -n 's/\.rar$/.cbr/' *.rar  
+(**Debian/Ubuntu Perl-based version** of rename by Larry Wall & Robin Barker;  
+fully supports Perl regexes, named 'prename' on CentOS and Fedora!)  
+Batch rename all files in the current working directory from .rar to .cbr  
+-n, -nono: no-execute mode; just print out the changes without actually making them.  
+Regex intro:  
+
+
+**Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
 * sudo apt -f install  
 -f: 'fix broken'  
