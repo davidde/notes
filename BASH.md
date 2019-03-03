@@ -69,7 +69,9 @@ Start up briss, app to crop/resize/split pdfs.
 
 * mmv "long_name*.txt" "short_#1.txt"  
 Where the "#1" is replaced by whatever is matched by the first wildcard.
-Similarly #2 is replaced by the second, etc. Quotes are necessary!
+Similarly #2 is replaced by the second, etc. Quotes are necessary!  
+**Options**:  
+-n: no-execute mode; simply print out which changes would be made when executed.
 
 So you do something like:
 
@@ -80,7 +82,13 @@ To rename index1_type9.txt to t9_i1.txt
 Remove protection/encryption from pdf files
 
 * rename -S .rar .cbr *.rar  
-Batch rename all files in the current working directory from .rar to .cbr
+(**Mac version** of rename by Aristotle Pagaltzis)  
+Batch rename all files in the current working directory from .rar to .cbr  
+-s, --subst: Perform a simple textual substitution of "from" to "to".
+The "from" and "to" parameters must immediately follow the argument.  
+-S, --subst-all: Same as "-s", but replaces every instance of the "from"
+text by the "to" text.  
+-n, --dry-run, --just-print: no-execute mode; just print out the changes without making them.
 
 * sudo apt -f install  
 -f: 'fix broken'  
