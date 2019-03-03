@@ -91,10 +91,18 @@ text by the "to" text.
 -n, --dry-run, --just-print: no-execute mode; just print out the changes without actually making them.
 
 * rename -n 's/.rar/.cbr/' *.rar  
-(**Debian/Ubuntu Perl-based version** of rename by Larry Wall & Robin Barker;  
-fully supports Perl regexes, named 'prename' on CentOS and Fedora!)  
+(**Debian/Ubuntu Perl-based version** of rename by Larry Wall & Robin Barker,  
+named 'prename' on CentOS and Fedora!)  
 Batch rename all files in the current working directory from .rar to .cbr  
 -n, -nono: no-execute mode; just print out the changes without actually making them.  
+Note that this powerful command fully supports Perl regular expressions (regexes);
+see ahead for a quick 'Regex intro'.
+
+* rename -n 's/(?=\w)(?=[A-Z])/ /g' *.txt  
+Batch rename all .txt files in current directory to have spaces before uppercase letters.
+
+**Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
+
 **Regex intro**:  
 a) Search and replace is performed using 's/regex/replacement/modifiers';  
 's' stands for 'substitute', 'regex' is the regex pattern that you want to replace,
@@ -108,9 +116,37 @@ and change that part of the filename to 'photo'.
 b) Translation is performed using 'y/regex/replacement/modifiers', which is most often 
 used to change the filename case:  
 $ rename 'y/a-z/A-Z/' *.jpg  
-=> This would change the names of all .jpg files from lowercase to uppercase.
+=> This would change the names of all .jpg files from lowercase to uppercase.  
+c) Legend:  
 
-**Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
+| regex     |        Meaning                 |             Examples                         |
+|-----------|--------------------------------|----------------------------------------------|
+|  .        | any character except newline   | ".a" matches two consecutive characters where the last one is "a" |
+|  ^        | - anchor for start of string   | "^a" matches "a" at the start of the string  |
+|           | - negation symbol              | "[^0-9]" matches any non digit               |
+|  $        | anchor for end of string       | "b$" matches "b" at the end of a line        |
+|           |                                | "^$" matches the empty string                |
+|  < >      | anchors that specify a left or right word boundary |                          |
+|  *        | match-zero-or-more quantifier  | "^.*$" matches an entire line                |
+|  +        | match-one-or-more quantifier   |                                              |
+|  ?        | match-zero-or-one quantifier   |                                              |
+|  \|       | separates a series of alternatives | "(a\|b\|c)a" matches "aa" or "ba" or "ca"  |
+|                                                                                           |
+|  \        | escape character               |                                              |
+|  \\. \\* \\\	| escaped special characters  | "\\." matches the literal dot "."            |
+|           |                                | "\\\\" matches the actual backslash "\\"     |
+|  \t \n \r |	tab, linefeed, carriage return |
+|  \w \d \s | word, digit, whitespace        |
+|  \W \D \S | not word, digit, whitespace    |	
+|                                                                                           |
+|  { }      | range quantifiers              | "a{2,3}" matches "aa" or "aaa"               |
+|  ( )      | used for grouping characters or other regexes |                               |
+|  [ ]      | character class to match a single character |                                 |
+|  [abc]	   | any of a, b, or c              |
+|  [^abc]  	| not a, b, or c                 |
+|  [a-g]	   | character between a & g        |
+|  [A-Z]	   | any uppercase letter           |
+
 
 * sudo apt -f install  
 -f: 'fix broken'  
