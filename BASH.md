@@ -82,13 +82,16 @@ To rename index1_type9.txt to t9_i1.txt
 Remove protection/encryption from pdf files
 
 * rename -S .rar .cbr *.rar  
-(**Mac version** of rename by Aristotle Pagaltzis)  
+(**Mac version** of rename by Aristotle Pagaltzis; this is a newer implementation of
+Debian's version by Larry Wall, which it is backwards compatible with, meaning the Mac version
+understands "rename 's/.rar/.cbr/' *.rar", but Debian's version does not have the -S flag.)  
 Batch rename all files in the current working directory from .rar to .cbr  
 -s, --subst: Perform a simple textual substitution of "from" to "to".
 The "from" and "to" parameters must immediately follow the argument.  
 -S, --subst-all: Same as "-s", but replaces every instance of the "from"
 text by the "to" text.  
--n, --dry-run, --just-print: no-execute mode; just print out the changes without actually making them.
+-n, --dry-run, --just-print: no-execute mode; just print out the changes without actually making them.  
+-v, --verbose: Print additional information about the operations (not) executed.
 
 * rename -n 's/.rar/.cbr/' *.rar  
 (**Debian/Ubuntu Perl-based version** of rename by Larry Wall & Robin Barker,  
@@ -96,7 +99,8 @@ named 'prename' on CentOS and Fedora!)
 Batch rename all files in the current working directory from .rar to .cbr  
 -n, -nono: no-execute mode; just print out the changes without actually making them.  
 Note that this powerful command fully supports Perl regular expressions (regexes);
-see ahead for a quick 'Regex intro'.
+see ahead for a quick 'Regex intro'.  
+-v, -verbose: Print names of files successfully renamed.
 
 * rename -n 's/(?<=\w)(?=[A-Z])/ /g' *.txt  
 ~ rename -n 's/([A-Z])/ $1/g' *.txt  
