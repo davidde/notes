@@ -98,37 +98,41 @@ text by the "to" text.
 named 'prename' on CentOS and Fedora!)  
 Batch rename all files in the current working directory from .rar to .cbr  
 -n, -nono: no-execute mode; just print out the changes without actually making them.  
-Note that this powerful command fully supports Perl regular expressions (regexes);
-see ahead for a quick 'Regex intro'.  
--v, -verbose: Print names of files successfully renamed.
+-v, -verbose: Print names of files successfully renamed.  
+
+**Note**: Both rename versions are powerful commands that fully support Perl regular expressions (regexes);
+see ahead for a quick 'Regex intro'.
 
 * rename -n 's/(?<=\w)(?=[A-Z])/ /g' *.txt  
 ~ rename -n 's/([A-Z])/ $1/g' *.txt  
 Batch rename all .txt files in current directory to have spaces before uppercase letters. The second command,
 although much simpler, will also add a space before the first letter of the filename if it is uppercase.
 
-* remove some text from filenames:  
+* Remove the text 'useless_prefix_' from filenames/directories:  
 Mac: rename -nS useless_prefix_ '' *  
 Deb: rename -n 's/useless_prefix_//' *  
 The Debian command will work on Mac, but not the other way around.
 
 **Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
-**Regex intro**:  
-a) Search and replace is performed using 's/regex/replacement/modifiers';  
-'s' stands for 'substitute', 'regex' is the regex pattern that you want to replace,
-'replacement' is what it should be replaced by, and the modifiers are options of the
-regex itself, e.g.:  
-'g': global; affects all occurrences of the expression  
-'i': perform case-insensitive substitution  
+### Regex intro
+#### Substitution: using 's/regex/replacement/modifiers'  
+'s': substitute  
+'regex': the regex pattern that you want to replace  
+'replacement': what should replace the regex  
+'modifiers': options of the regex itself, e.g.:  
+  - 'g': global; affects all occurrences of the expression  
+  - 'i': perform case-insensitive substitution  
 $ rename -n 's/DSC/photo/gi' *.jpg   
 => This would apply to all .jpg files that contain 'DSC', 'dsc' or 'dSC',
 and change that part of the filename to 'photo'.  
-b) Translation is performed using 'y/regex/replacement/modifiers', which is most often 
-used to change the filename case:  
+
+#### Translation: using 'y/regex/replacement/modifiers'
+-> most often used to change the filename case:  
 $ rename 'y/a-z/A-Z/' *.jpg  
 => This would change the names of all .jpg files from lowercase to uppercase.  
-c) Legend:  
+
+#### Legend
 
 | regex symbol |        Meaning                 |             Examples                         |
 |--------------|--------------------------------|----------------------------------------------|
@@ -137,7 +141,7 @@ c) Legend:
 |              | - negation symbol              | "[^0-9]" matches any non digit               |
 |  $           | - anchor for end of string     | "b$" matches "b" at the end of a line        |
 |              |                                | "^$" matches the empty string                |
-|              | - backreference at sub-expression | A search for "(a)(b)" in the string "abc", followed by a replace "\2\1" results in "bac" |
+|              | - backreference at sub-expression | A search for "(a)(b)" in the string "abc", followed by a replace "$2$1" results in "bac" |
 |  < >         | anchors that specify a left or right word boundary |                          |
 |  *           | match-zero-or-more quantifier  | "^.*$" matches an entire line                |
 |  +           | match-one-or-more quantifier   |                                              |
