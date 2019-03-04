@@ -107,6 +107,11 @@ see ahead for a quick 'Regex intro'.
 Batch rename all .txt files in current directory to have spaces before uppercase letters. The second command,
 although much simpler, will also add a space before the first letter of the filename if it is uppercase.
 
+* remove some text from filenames:  
+Mac: rename -nS useless_prefix_ '' *  
+Deb: rename -n 's/useless_prefix_//' *  
+The Debian command will work on Mac, but not the other way around.
+
 **Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
 **Regex intro**:  
