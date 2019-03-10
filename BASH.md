@@ -170,7 +170,7 @@ $ rename 'y/a-z/A-Z/' *.jpg
 
 
 ## SSH intro
-ssh (Secure SHell) is a networking protocol, commonly used to 'log in' to a VPS or cloud server.  
+SSH (Secure SHell) is a networking protocol, commonly used to 'log in' to a VPS or cloud server.  
 
 ### Core packages
 - openssh-client:  
@@ -273,6 +273,15 @@ $ eval $(ssh-agent)
    $ ssh-add  
    - If you created your key with a different name/path, add the path to the command:  
    $ ssh-add ~/.ssh/user1_host1  
+   
+### Adding your public key to VPS server/Github/Gitlab/etc.
+- Open the id_rsa.pub file and copy the entire content of that file (or use `$ cat id_rsa.pub`).
+- Login to your account of the specific service (e.g. Github, DigitalOCean, Vultr, etc.) you want to ssh into,
+and go to the 'SSH key Settings'.
+- Paste the exact content of the public key into the Key input.
+- Give it a descriptive name, which will still be meaningful to you 2 years from now.
+- Click 'Add SSH key'.
+- Once the string is saved to the service, you should be good to go!
 
 ---------------------------------------------------------------------------------------------------------------------
 
