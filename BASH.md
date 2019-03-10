@@ -204,7 +204,12 @@ a shell session is spawned or the requested command is executed.
 
 ### How-to
 The first step to configure SSH key authentication to your server is to generate an SSH key pair on your local computer:  
-$ ssh-keygen  
+$ ssh-keygen (-C 'your_email@example.com')  
+(-C: comment; this can be any random string. This flag is not required, but exists so people can recognize
+what/who each key belongs to; in professional environments there are often multiple network techs, 
+and typical authorized_keys files can hold dozens of keys. The comment flag can be used however you like,
+but is often used to specify an email address to identify who generated the key if there is potential for ambiguity.
+Sentences with spaces are also allowed!)  
 Your shell will prompt you to select a location for both keys. By default, the keys will be stored in the ~/.ssh directory. 
 The private key will be called id_rsa and the associated public key will be called id_rsa.pub.
 It is usually best to stick with the default location, so your SSH client will automatically find
