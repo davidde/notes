@@ -204,7 +204,7 @@ a shell session is spawned or the requested command is executed.
 
 ### How-to
 The first step to configure SSH key authentication to your server is to generate an SSH key pair on your local computer:  
-$ ssh-keygen (-C 'your_email@example.com')  
+$ ssh-keygen (-C `your_email@example.com`)  
 (-C: comment; this can be any random string. This flag is not required, but exists so people can recognize
 what/who each key belongs to; in professional environments there are often multiple network techs, 
 and typical authorized_keys files can hold dozens of keys. The comment flag can be used however you like,
@@ -261,7 +261,8 @@ the settings will apply to all SSH connections. This configuration will check "i
 as private keys when connecting with `$ ssh youruser@yourhost`.
 
 Generally speaking though, using a **single ssh key pair WITH a passphrase** holds a great middle ground
-between security and convenience, especially with the help of `ssh-agent`.
+between security and convenience, especially with the help of `ssh-agent`. On the other hand though, reusing
+a single key on too many services *will* make it inconvenient if you ever decide/require to renew it.
 
 ### Setting up `ssh-agent`
 (By doing this you don't have to enter the passphrase on every authentication)
