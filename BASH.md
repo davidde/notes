@@ -219,14 +219,14 @@ using the old key! In this case you need to specify a different name (but note t
 to simply reuse your existing key).
 
 *Optionally* provide a **passphrase**, which is used to encrypt the private key file on disk.
-This is an additional security that makes the private key by itself useless to an attacker.
+This is an additional security that makes the private key by itself useless to an attacker.  
 Possible security concerns:
 - Private keys could be compromised for example if you are not careful with old harddisks or backups,
 or your computer itself was compromised.
 - The more places a single key is authorized, the more valuable that key becomes.
 If that key gets compromised, more targets are put at risk.
 - The more places the private key is stored (e.g. desktop, laptop, work computer, backup storage, etc.),
-the more places there are for an attacker to go grab a copy.
+the more places there are for an attacker to grab a copy.
 
 A private key corresponds to a single "identity" for a given user, whatever that means to you.
 If, to you, an "identity" is a single person, or a single person on a single machine,
@@ -298,9 +298,9 @@ and go to the 'SSH key Settings'.
 - Give it a descriptive name, which will still be meaningful to you 2 years from now.
 - Click 'Add SSH key'.
 - Once the string is saved to the service, you should be good to go:   
-$ ssh user@192.168.2.1   
+$ ssh root@192.168.2.1   
 '192.168.2.1': IP address of your VPS server  
-'user': your username on the VPS server
+'root': your username on the VPS server
 
 ---------------------------------------------------------------------------------------------------------------------
 
