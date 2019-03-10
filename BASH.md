@@ -250,7 +250,7 @@ in the ssh command like so:
 $ ssh user@server -i /path/to/mykey  
 
 It is not uncommon to use multiple key pairs. Instead of running `$ ssh user@server -i /path/to/mykey`,
-you can use a configuration file, ~/.ssh/config:  
+you can use a **configuration file, ~/.ssh/config**:  
 ```
 Host yourhost
    IdentityFile ~/.ssh/id_dsa
@@ -260,8 +260,22 @@ Common settings are the IdentityFile (= the private keys) and Host. If you omit 
 the settings will apply to all SSH connections. This configuration will check "id_dsa" and "custom_key" only
 as private keys when connecting with `$ ssh youruser@yourhost`.
 
-Generally speaking though, using a **single ssh key pair WITH a passphrase** holds a great middle ground
-between security and convenience, especially with the help of `ssh-agent`. On the other hand though, reusing
+Example to tell git which private key to use:
+```
+host github.com
+ HostName github.com
+ IdentityFile ~/.ssh/github_rsa
+ User git
+```
+Now you can do `$ git clone git@github.com:username/repo.git`.
+
+NOTE: If the config file is new, don't forget to do `$ chmod 600 ~/.ssh/config`.  
+Also verify that the permissions on IdentityFile are 400! SSH will reject, in a not clearly explicit manner,
+SSH keys that are too readable. It will just look like a credential rejection. The solution, in this case, is:  
+$ chmod 400 ~/.ssh/github_rsa
+
+Generally speaking though, using a **single ssh key pair WITH a passphrase** holds a fair middle ground
+between security and convenience, especially with the help of `ssh-agent`. But on the other hand, reusing
 a single key on too many services *will* make it inconvenient if you ever decide/require to renew it.
 
 ### Setting up `ssh-agent`
@@ -281,7 +295,10 @@ and go to the 'SSH key Settings'.
 - Paste the exact content of the public key into the Key input.
 - Give it a descriptive name, which will still be meaningful to you 2 years from now.
 - Click 'Add SSH key'.
-- Once the string is saved to the service, you should be good to go!
+- Once the string is saved to the service, you should be good to go, e.g. use:
+$ ssh user@192.168.2.1   
+'192.168.2.1': IP address of your VPS server  
+'user': your username on the VPS server
 
 ---------------------------------------------------------------------------------------------------------------------
 
