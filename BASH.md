@@ -174,8 +174,8 @@ ssh (Secure SHell) is a networking protocol, commonly used to 'log in' to a VPS 
 
 ### Core packages
 - openssh-client:  
-installed on your computer to initiate a connection with the VPS server
-using the 'ssh' command; e.g. `$ ssh username@vpsserver`  
+installed on your computer to initiate a connection with the VPS server using the 'ssh' command;   
+e.g. `$ ssh username@vpsserver`  
 - openssh-server:  
 installed on the VPS server to securely access it from your computer.  
 
@@ -238,8 +238,8 @@ $ ssh-keygen -p
 (You will be prompted to specify the file in which the private key resides.)
 
 ### Do SSH keys have to be named 'id_rsa'?
-**NO**, you can give them any name you like, or even place them in a different directory,
-which is even required when you don't want a single ssh key pair for sshing into multiple servers.
+**NO**, you can give them any name you like, or even place them in a different directory.
+(Another name is even required when you don't want a single ssh key pair for sshing into multiple servers.)
 However, if they are not named `~/.ssh/id_rsa`, then you need to explicitly reference the key
 in the ssh command like so:  
 $ ssh user@server -i /path/to/mykey  
