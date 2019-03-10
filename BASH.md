@@ -63,6 +63,24 @@ $ sudo apt-get update
 $ sudo apt-get install -t stretch-backports git  
 => Backports will install the latest stable version of git instead of the one included in stretch.
 
+* ip a  
+Find your IP address in the output:   
+```
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+3: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 56:00:01:f1:54:e8 brd ff:ff:ff:ff:ff:ff
+    inet 95.179.191.141/23 brd 95.179.191.255 scope global dynamic ens3
+       valid_lft 80247sec preferred_lft 80247sec
+    inet6 fe80::5400:1ff:fef1:54e8/64 scope link 
+       valid_lft forever preferred_lft forever
+```
+'95.179.191.141' is the IP address of this machine.
+
 * java -jar briss-0.9.jar  
 (in directory where briss-0.9.jar is located; requires java)  
 Start up briss, app to crop/resize/split pdfs.
