@@ -115,8 +115,8 @@ The Debian command will work on Mac, but not the other way around.
 
 **Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
-### Regex intro
-#### Substitution: using 's/regex/replacement/modifiers'  
+## Regex intro
+### Substitution: using 's/regex/replacement/modifiers'  
 's': substitute  
 'regex': the regex pattern that you want to replace  
 'replacement': what should replace the regex  
@@ -127,12 +127,12 @@ $ rename -n 's/DSC/photo/gi' *.jpg
 => This would apply to all .jpg files that contain 'DSC', 'dsc' or 'dSC',
 and change that part of the filename to 'photo'.  
 
-#### Translation: using 'y/regex/replacement/modifiers'
+### Translation: using 'y/regex/replacement/modifiers'
 -> most often used to change the filename case:  
 $ rename 'y/a-z/A-Z/' *.jpg  
 => This would change the names of all .jpg files from lowercase to uppercase.  
 
-#### Legend
+### Legend
 
 | regex symbol |        Meaning                 |             Examples                         |
 |--------------|--------------------------------|----------------------------------------------|
@@ -169,13 +169,15 @@ $ rename 'y/a-z/A-Z/' *.jpg
 |  (?<!…)      | Negative lookbehind            |	\w{3}(?<!mon)ster	Munster                    |
 
 
-### SSH intro
+## SSH intro
 ssh (Secure SHell) is a networking protocol, commonly used to 'log in' to a VPS or cloud server.  
 
-#### Core packages
-- openssh-client: installed on your computer to initiate a connection with the VPS server
-  using the 'ssh' command; e.g. $ `ssh username@vpsserver`  
-- openssh-server: installed on the VPS server to securely access it from your computer.  
+### Core packages
+- openssh-client:  
+installed on your computer to initiate a connection with the VPS server
+using the 'ssh' command; e.g. `$ ssh username@vpsserver`  
+- openssh-server:  
+installed on the VPS server to securely access it from your computer.  
 
 => When not present:  
 $ sudo apt install openssh-client/openssh-server  
@@ -184,10 +186,10 @@ When installing openssh-server, the server's public and private keys are generat
 For the client, you'll have to do that on your own (i.e. with the `ssh-keygen` command, see ahead).
 When you, the client, connects with a server, public keys are exchanged. You'll receive the servers one,
 and the server yours. The first time you receive the server public key, you'll be asked to accept it.
-The public keys are stored in '~/.ssh/known_hosts' on the client, and in '~/.ssh/authorized_keys'
+The public keys are stored in ~/.ssh/known_hosts on the client, and in ~/.ssh/authorized_keys
 on the server.
   
-#### SSH key pairs
+### SSH key pairs
 SSH key pairs are two cryptographically secure keys used to authenticate a client to an SSH server.
 Each key pair consists of a public key and a private key. The private key is retained by the client
 and should be kept absolutely secret (it can be encrypted on disk with a passphrase). The associated
@@ -200,7 +202,7 @@ When a client attempts to authenticate using SSH keys, the server can test the c
 on whether they are in possession of the private key. If the client can prove that it owns the private key,
 a shell session is spawned or the requested command is executed.
 
-#### How-to
+### How-to
 The first step to configure SSH key authentication to your server is to generate an SSH key pair on your local computer:  
 $ ssh-keygen  
 Your shell will prompt you to select a location for both keys. By default, the keys will be stored in the ~/.ssh directory. 
@@ -208,7 +210,8 @@ The private key will be called id_rsa and the associated public key will be call
 It is usually best to stick with the default location, so your SSH client will automatically find
 your SSH keys when attempting to authenticate. However, if you have previously generated ~/.ssh/id_rsa,
 you will be asked permission to overwrite; obviously do not overwrite if you still need to be able to authenticate
-using that key! In this case you need to specify a different name.
+using the old key! In this case you need to specify a different name (but note that is is probably more convenient
+to simply reuse your existing key).
 
 *Optionally* provide a **passphrase**, which is used to encrypt the private key file on disk.
 This is an additional security that makes the private key by itself useless to an attacker.
@@ -234,7 +237,7 @@ the keypair by typing the following command:
 $ ssh-keygen -p  
 (You will be prompted to specify the file in which the private key resides.)
 
-#### Do SSH keys have to be named 'id_rsa'?
+### Do SSH keys have to be named 'id_rsa'?
 **NO**, you can give them any name you like, or even place them in a different directory,
 which is even required when you don't want a single ssh key pair for sshing into multiple servers.
 However, if they are not named `~/.ssh/id_rsa`, then you need to explicitly reference the key
@@ -255,7 +258,7 @@ as private keys when connecting with `$ ssh youruser@yourhost`.
 Generally speaking though, using a **single ssh key pair WITH a passphrase** holds a great middle ground
 between security and convenience, especially with the help of `ssh-agent`.
 
-#### Setting up `ssh-agent`
+### Setting up `ssh-agent`
 (By doing this you don't have to enter the passphrase on every authentication)
 1. Start the ssh-agent in the background:  
 $ eval $(ssh-agent)
@@ -265,7 +268,7 @@ $ eval $(ssh-agent)
    - If you created your key with a different name/path, add the path to the command:  
    $ ssh-add ~/.ssh/user1_host1  
 
-
+---------------------------------------------------------------------------------------------------------------------
 
 * sudo apt -f install  
 -f: 'fix broken'  
