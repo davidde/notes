@@ -295,7 +295,7 @@ and go to the 'SSH key Settings'.
 - Paste the exact content of the public key into the Key input.
 - Give it a descriptive name, which will still be meaningful to you 2 years from now.
 - Click 'Add SSH key'.
-- Once the string is saved to the service, you should be good to go, e.g. use:
+- Once the string is saved to the service, you should be good to go:   
 $ ssh user@192.168.2.1   
 '192.168.2.1': IP address of your VPS server  
 'user': your username on the VPS server
