@@ -186,7 +186,7 @@ When installing openssh-server, the server's public and private keys are generat
 For the client, you'll have to do that on your own (i.e. with the `ssh-keygen` command, see ahead).
 When you, the client, connects with a server, public keys are exchanged. You'll receive the servers one,
 and the server yours. The first time you receive the server public key, you'll be asked to accept it.
-The public keys are stored in ~/.ssh/known_hosts on the client, and in ~/.ssh/authorized_keys
+The public keys are stored in **~/.ssh/known_hosts** on the client, and in **~/.ssh/authorized_keys**
 on the server.
   
 ### SSH key pairs
@@ -269,7 +269,7 @@ host github.com
 ```
 Now you can do `$ git clone git@github.com:username/repo.git`.
 
-NOTE: If the config file is new, don't forget to do `$ chmod 600 ~/.ssh/config`.  
+**NOTE**: If the config file is new, don't forget to do `$ chmod 600 ~/.ssh/config`.  
 Also verify that the permissions on IdentityFile are 400! SSH will reject, in a not clearly explicit manner,
 SSH keys that are too readable. It will just look like a credential rejection. The solution, in this case, is:  
 $ chmod 400 ~/.ssh/github_rsa
@@ -279,7 +279,8 @@ between security and convenience, especially with the help of `ssh-agent`. But o
 a single key on too many services *will* make it inconvenient if you ever decide/require to renew it.
 
 ### Setting up `ssh-agent`
-(By doing this you don't have to enter the passphrase on every authentication)
+(This is only necessary when you have set a passphrase for your private key,
+and you don't want to specify it on every authentication)
 1. Start the ssh-agent in the background:  
 $ eval $(ssh-agent)
 2. Add your SSH private key to the ssh-agent:
@@ -287,9 +288,10 @@ $ eval $(ssh-agent)
    $ ssh-add  
    - If you created your key with a different name/path, add the path to the command:  
    $ ssh-add ~/.ssh/user1_host1  
+   - Enter the passphrase for the specific private key
    
 ### Adding your public key to VPS server/Github/Gitlab/etc.
-- Open the id_rsa.pub file and copy the entire content of that file (or use `$ cat id_rsa.pub`).
+- Open the id_rsa.pub file and copy the entire content of that file (or use `$ cat ~/.ssh/id_rsa.pub`).
 - Login to your account of the specific service (e.g. Github, DigitalOCean, Vultr, etc.) you want to ssh into,
 and go to the 'SSH key Settings'.
 - Paste the exact content of the public key into the Key input.
