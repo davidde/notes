@@ -193,6 +193,13 @@ $ rename 'y/a-z/A-Z/' *.jpg
 |  (?!…)       |	Negative lookahead             |	(?!theatre)the\w+	theme                      |
 |  (?<!…)      | Negative lookbehind            |	\w{3}(?<!mon)ster	Munster                    |
 
+------------------------------------------------------------------------------------------------------
+
+* ssh username@ipaddress (-i /path/to/privatekey)  
+SSH into the server with 'ipaddress' as user 'username'.  
+If your username is the same locally and on the server, you can leave it out:  
+$ ssh ipaddress  
+-i: Only required when using a private key not named '~/.ssh/id_rsa'.
 
 ## SSH intro
 SSH (Secure SHell) is a networking protocol, commonly used to 'log in' to a VPS or cloud server.  
@@ -268,8 +275,8 @@ $ ssh-keygen -p
 (You will be prompted to specify the file in which the private key resides.)
 
 ### Do SSH keys have to be named 'id_rsa'?
-**NO**, you can give them any name you like, or even place them in a different directory.
-(Another name is even required when you don't want a single ssh key pair for sshing into multiple servers.)
+**NO**, you can give them any name you like, or even place them in a different directory.  
+(Another name is required when you don't want a single ssh key pair for sshing into multiple servers.)  
 However, if they are not named `~/.ssh/id_rsa`, then you need to explicitly reference the key
 in the ssh command like so:  
 $ ssh user@server -i /path/to/mykey  
