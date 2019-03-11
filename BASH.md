@@ -85,6 +85,13 @@ Find your IP address in the output:
 (in directory where briss-0.9.jar is located; requires java)  
 Start up briss, app to crop/resize/split pdfs.
 
+* ls -lha /path/to/directory/or/file  
+Show stats of the directory or file, including permissions (and which files for directories).  
+-l (list): Display more information in a well-ordered list.  
+-h (human-readable): Files sizes are displayed in the human-readable format of kilobytes, megabytes, and so on, rather than in raw bytes.  
+-a (all): Display hidden files, including the directory itself, and its parent directory.  
+=> On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
+
 * mmv "long_name*.txt" "short_#1.txt"  
 Where the "#1" is replaced by whatever is matched by the first wildcard.
 Similarly #2 is replaced by the second, etc. Quotes are necessary!  
