@@ -195,7 +195,7 @@ $ rename 'y/a-z/A-Z/' *.jpg
 
 ------------------------------------------------------------------------------------------------------
 
-* ssh username@ipaddress (-i /path/to/privatekey)  
+* ssh username@ipaddress (-i /path/to/privatekey)   
 SSH into the server with 'ipaddress' as user 'username'.  
 If your username is the same locally and on the server, you can leave it out:  
 $ ssh ipaddress  
