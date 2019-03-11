@@ -85,11 +85,11 @@ Find your IP address in the output:
 (in directory where briss-0.9.jar is located; requires java)  
 Start up briss, app to crop/resize/split pdfs.
 
-* ls -lha /path/to/directory/or/file  
+* ls -hal /path/to/directory/or/file  
 Show stats of the directory or file, including permissions (and which files for directories).  
--l (list): Display more information in a well-ordered list.  
--h (human-readable): Files sizes are displayed in the human-readable format of kilobytes, megabytes, and so on, rather than in raw bytes.  
+-h (human-readable): Files sizes are displayed in the human-readable format of kilobytes and megabytes.  
 -a (all): Display hidden files, including the directory itself, and its parent directory.  
+-l (list): Display more information in a well-ordered list.  
 => On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
 
 * mmv "long_name*.txt" "short_#1.txt"  
@@ -105,6 +105,18 @@ To rename index1_type9.txt to t9_i1.txt
 
 * qpdf -decrypt InputFile OutputFile  
 Remove protection/encryption from pdf files
+
+* passwd   
+Change the password for the current user.   
+To change the password of root:   
+  - Login to root with either:   
+  $ su -   
+  $ sudo -i   
+  - Change the password:    
+  $ passwd
+  - Log back out using `exit`, `CTRL + D` or `su - username`.
+  - Test login using new password:   
+  $ su -
 
 * rename -S .rar .cbr *.rar  
 (**Mac version** of rename by Aristotle Pagaltzis; this is a newer implementation of
@@ -195,11 +207,14 @@ $ rename 'y/a-z/A-Z/' *.jpg
 
 ------------------------------------------------------------------------------------------------------
 
-* ssh username@ipaddress (-i /path/to/privatekey)    
-SSH into the server with 'ipaddress' as user 'username'.  
+* ssh remote_username@server_ipaddress (-i /path/to/privatekey)    
+SSH into the server with IP address 'server_ipaddress' as user 'remote_username'.  
 If your username is the same locally and on the server, you can leave it out:  
 $ ssh ipaddress  
--i: Only required when using a private key not named '~/.ssh/id_rsa'.
+-i: Only required when using a private key not named '~/.ssh/id_rsa'.  
+-p: Port to connect to on the remote host. Only required when it's a non-standard port number for ssh.   
+-vvv: verbosity, useful for debugging.   
+Enter `exit` or press **CTRL + D** to exit the remote server.
 
 ## SSH intro
 SSH (Secure SHell) is a networking protocol, commonly used to 'log in' to a VPS or cloud server.  
@@ -301,6 +316,20 @@ host github.com
 ```
 Now you can do `$ git clone git@github.com:username/repo.git`.
 
+Another **~/.ssh/config** example for Vultr:  
+```
+Host vultr
+ HostName 198.13.59.103
+ Port 22
+ User root
+ IdentityFile ~/.ssh/vultr_rsa
+```
+Now you can simply type:   
+$ ssh vultr   
+Which is equivalent to:   
+$ ssh root@198.13.59.103 -i ~/.ssh/vultr_rsa -p 22   
+(It would find everything it needs in your  ~/.ssh/config, under the `Host vultr` entry.)
+ 
 **NOTE**: If the config file is new, don't forget to do `$ chmod 600 ~/.ssh/config`.  
 Also verify that the permissions on IdentityFile are 400! SSH will reject, in a not clearly explicit manner,
 SSH keys that are too readable. It will just look like a credential rejection. The solution, in this case, is:  
@@ -336,6 +365,28 @@ $ ssh root@192.168.2.1
 
 ---------------------------------------------------------------------------------------------------------------------
 
+* su - david  
+Switch to another user (**s** witch **u** ser). You can also switch to the root user
+by invoking the command with no parameter. Unlike `sudo`, `su` asks you for the password of the user you switch to.
+Note `su -` here:  
+`su -` invokes a login shell after switching the user, which resets most environment variables, providing a clean base.   
+`su` just switches the user, providing a normal shell with an environment nearly the same as with the old user.
+
+* sudo 'command'   
+`sudo` is meant to run a single command with root privileges. 
+Unlike `su` it prompts you for the password of the current user. This user must be in the sudoers file (`/etc/sudoers`),
+or a group that is in the sudoers file. By default, Ubuntu "remembers" your password for 15 minutes,
+so that you don't have to type your password every time.
+
+* sudo cat /etc/sudoers   
+Print out the sudoers file; this file contains the rules that users must follow when using the sudo command.
+You should never edit it directly, but use the `visudo` command (< vi + sudo):   
+$ visudo
+Check the man pages for extra info on the sudoers file / vi(m) / visudo:   
+$ man sudoers   
+$ man vi   
+$ man visudo
+
 * sudo apt -f install  
 -f: 'fix broken'  
 Fix broken dependencies.
@@ -365,6 +416,7 @@ Detect what process is listening to (and occupying) port 8000.
 
 * sudo kill -9 <PID>  
 Kill process with PID.
+
 
 * tail -f *.log  
 Follows (-f) all log files, so you can troubleshoot.
