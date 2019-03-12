@@ -1,5 +1,8 @@
 # Useful BASH/Zshell commands
 
+* apt-cache search "searchterm"   
+See which packages are available with "searchterm".
+
 * cat >package.json  
 Create package.json from command line. This command will await input from user;  
 after typing/copying text, press CTRL+D to exit.
@@ -24,6 +27,13 @@ curl = see url; it returns the content at the requested url
 * diff -u old_file new_file  
 Check where the differences between 2 versions of a file are.  
 (-u = unified diff format => easier to read.)
+
+* dpkg -s "packagename"   
+dpkg: Debian Package Manager   
+Check the status (-s, --status) of the package named "packagename", i.e. is it installed, what does it do, etc.   
+Make sure to use the official packagename or it won't work. If not sure about the name, use:   
+$ apt-cache search "packagename"   
+This will list either the official name of your package or similar packages.
 
 * ~/.dropbox-dist/dropboxd  
 Execute dropbox-daemon on Linux
