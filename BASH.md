@@ -361,17 +361,36 @@ $ eval $(ssh-agent)
    $ ssh-add ~/.ssh/user1_host1  
    - Enter the passphrase for the specific private key
    
-### Adding your public key to VPS server/Github/Gitlab/etc.
+### Adding your public key to a remote server
+#### a) Github/Gitlab/etc.
 - Open the id_rsa.pub file and copy the entire content of that file (or use `$ cat ~/.ssh/id_rsa.pub`).
-- Login to your account of the specific service (e.g. Github, DigitalOCean, Vultr, etc.) you want to ssh into,
-and go to the 'SSH key Settings'.
+- Login to your account and go to the 'SSH key Settings'.
 - Paste the exact content of the public key into the Key input.
 - Give it a descriptive name, which will still be meaningful to you 2 years from now.
 - Click 'Add SSH key'.
-- Once the string is saved to the service, you should be good to go:   
-$ ssh root@192.168.2.1   
-'192.168.2.1': IP address of your VPS server  
-'root': your username on the VPS server
+- Once the string is saved to the service, you should be good to go.   
+
+#### b) VPS server, e.g. DigitalOCean, Vultr, Linode, etc.
+The recommended way to add your public key to a VPS is through the command line, since trying to do this through
+your hosting company's online UI often results in more trouble than it's worth.   
+In your local terminal, it's as simple as:   
+$ ssh-copy-id remote_username@remote_ip_address  
+
+Then check if everything went properly by logging in:  
+$ ssh remote_username@remote_ip_address  
+If everything went well, you will be logged in immediately.
+
+**Note**:   
+It's unsafe and considered bad practice to put your public key onto the remote machine's root user,
+since this allows SSHing straight into the root.   
+So do NOT execute:   
+$ ssh-copy-id root@remote_ip_address  
+
+Accessing the root user should be done by escalating privileges after SSHing
+into the non-root user with sudo privileges, using either:   
+$ su -   
+$ sudo -i   
+$ sudo 'command'
 
 ---------------------------------------------------------------------------------------------------------------------
 
