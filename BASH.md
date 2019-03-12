@@ -395,11 +395,12 @@ $ sudo 'command'
 ---------------------------------------------------------------------------------------------------------------------
 
 * su - david  
-Switch to another user (**s** witch **u** ser). You can also switch to the root user
-by invoking the command with no parameter. Unlike `sudo`, `su` asks you for the password of the user you switch to.
+Switch to the user 'david' (su = **s**witch **u**ser). You can also switch to the root user
+by invoking the command with no parameter. Unlike `sudo`, `su` asks you for the password of the user you switch to.   
 Note `su -` here:  
 `su -` invokes a login shell after switching the user, which resets most environment variables, providing a clean base.   
-`su` just switches the user, providing a normal shell with an environment nearly the same as with the old user.
+`su` just switches the user, providing a normal shell with an environment nearly the same as with the old user.   
+This means it's generally safest to use `su -`.
 
 * sudo 'command'   
 `sudo` is meant to run a single command with root privileges. 
