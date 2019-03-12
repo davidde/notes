@@ -363,7 +363,7 @@ $ eval $(ssh-agent)
    
 ### Adding your public key to a remote server
 #### a) Github/Gitlab/etc.
-- Open the id_rsa.pub file and copy the entire content of that file (or use `$ cat ~/.ssh/id_rsa.pub`).
+- Open the id_rsa.pub file (or use `$ cat ~/.ssh/id_rsa.pub`) and copy the entire content of that file.
 - Login to your account and go to the 'SSH key Settings'.
 - Paste the exact content of the public key into the Key input.
 - Give it a descriptive name, which will still be meaningful to you 2 years from now.
@@ -374,7 +374,9 @@ $ eval $(ssh-agent)
 The recommended way to add your public key to a VPS is through the command line, since trying to do this through
 your hosting company's online UI often results in more trouble than it's worth.   
 In your local terminal, it's as simple as:   
-$ ssh-copy-id remote_username@remote_ip_address  
+$ ssh-copy-id remote_username@remote_ip_address   
+Use the -i flag for a non-default public key, e.g.:   
+$ ssh-copy-id remote_username@remote_ip_address -i ~/.ssh/github_rsa.pub
 
 Then check if everything went properly by logging in:  
 $ ssh remote_username@remote_ip_address  
