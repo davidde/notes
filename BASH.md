@@ -13,23 +13,23 @@ after typing/copying text, press CTRL+D to exit.
 * cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4  
 Concatenate .vob dvd files, and then convert them to .mp4
 
-* chmod 'permissions' 'filepath'
+* chmod  "permissions"  "filepath"   
 chmod = **ch**ange **mod**e: Change the file mode / permissions for the file specified by 'filepath'.   
 'permissions' can be specified in either symbolic or octal notation.   
-**Symbolic notation** uses either +/- r/w/x to add/restrict read/write/execute permissions:
-$ chmod -x $(find . -name '*.ntl')  
+**Symbolic notation** uses either +/- r/w/x to add/restrict read/write/execute permissions:   
+$ chmod -x $(find -name '*.ntl')  
 Change the file mode (permissions) by restricting execution (-x) for all files ending in '.ntl'.  
 The file will no longer be an ‘Unix executable file’.  
-=> This is necessary to have Python read it as text-type instead of binary-type   
-chmod +x would allow execution.   
+=> This is necessary to have Python read it as text-type instead of binary-type on Mac.   
+`chmod +x` would allow execution.   
 [chmod permissions calculator](http://permissions-calculator.org/)
 
-* chown -R 'username':'groupname' 'filepath'   
+* chown -R  "username":"groupname"  "filepath"   
 Change ownership of the file/directory with 'filepath' to the specified 'username' and 'groupname'.   
-Simply use `chown 'username'` if you don't want to change group ownership,
-or use `chown 'username:'` (Note the left-out group), if you want to set the groupname
+Simply use `chown "username"` if you don't want to change group ownership.   
+Use `chown "username":`, note the left-out group, if you want to set the groupname
 to the default group for that user.   
-If you want to change only the group, you can use `chown :'groupname'`(Note the left-out user).   
+If you want to change only the group, you can use `chown :"groupname"`(note the left-out user).   
 -R, --recursive: Also change ownership of all files/directories inside the specified directory.   
 (Files/directories created in the future will not inherit the newly set 'username' or 'groupname',
 but resort to the old ones specified by the system.)   
@@ -76,26 +76,26 @@ Recursively finds all files/directories in the current directory and its subdire
 You can specify another path to find items in, like so:   
 $ find app   
 This will return everything contained in the app directory (which should itself be in the current directory;
-otherwise specify an absolute path).   
-Some of find’s power comes from it’s ability to filter which files or directories it 'selects'.
+otherwise specify an absolute path).Some of find’s power comes from it’s ability to filter which
+files or directories it 'selects'.
 It does this by using **'tests'**, e.g.:   
 -type: f (file) or d (directory)   
 $ find app -type f   
 Find all files in the app directory, including files in its subdirectories.   
 -maxdepth 1: Do not recurse into subdirectories.   
-$ find -type f -maxdepth 1   
-Find all files in the current directory, excluding files in its subdirectories.
+$ find -type f -maxdepth 1   
+Find all files in the current directory, excluding files in its subdirectories.   
 -name: Takes a glob that will be matched against the base of the filename (filepath without leading directories).   
 $ find -name '*.ntl'
 Find all files with the extension '.ntl' in the current working directory and its subdirectories.   
--path: Same as -name, but applies to the whole filepath (including leading directories).
+-path: Same as -name, but applies to the whole filepath (including leading directories).   
 -regex: takes a regex pattern.   
 -amin 5: returns files last **a**ccessed less than 5 minutes ago.   
 -mmin 5: returns files last **m**odified less than 5 minutes ago.   
--atime 5: returns files last **a**ccessed less than 5 days ago.   
--mtime 5: returns files last **m**odified less than 5 days ago.   
+-atime 5: returns files last **a**ccessed less than 5 days ago.   
+-mtime 5: returns files last **m**odified less than 5 days ago.   
 -user 'uname': returns files owned by user 'uname'.   
--group 'gname': returns files owned by group 'gname'.   
+-group 'gname': returns files owned by group 'gname'.   
 On top of that, find can also directly do something with the results it finds; it accomplishes this with **actions**:   
 -delete: Deletes the files that were found. Be careful!   
 First run without the -delete flag, so you see which files will be deleted.   
