@@ -13,10 +13,10 @@ Enter `exit` or press **CTRL + D** to exit the remote server.
 
 ## Core packages
 - openssh-client:  
-installed on your computer to initiate a connection with the VPS server using the 'ssh' command;   
-e.g. `$ ssh username@vpsserver`  
+Installed on your local computer to initiate a connection with the VPS server using the `ssh` command;   
+$ `ssh username@vpsserver`  
 - openssh-server:  
-installed on the VPS server to securely access it from your computer.  
+Installed on the VPS server to securely access it from your local computer.  
 
 => When not present:  
 $ `sudo apt install openssh-client/openssh-server`  
