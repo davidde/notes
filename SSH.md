@@ -19,7 +19,7 @@ e.g. `$ ssh username@vpsserver`
 installed on the VPS server to securely access it from your computer.  
 
 => When not present:  
-$ sudo apt install openssh-client/openssh-server  
+$ `sudo apt install openssh-client/openssh-server`  
 
 When installing openssh-server, the server's public and private keys are generated automatically.
 For the client, you'll have to do that on your own (i.e. with the `ssh-keygen` command, see ahead).
