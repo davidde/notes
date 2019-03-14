@@ -37,15 +37,15 @@ Permissions can be specified in either octal or symbolic notation.
 Use `ls -l` or `ll` to verify permissions.
 
 #### Symbolic notation
-Symbolic notation uses either +/- r/w/x to add/restrict read/write/execute permissions:   
+Symbolic notation uses either +/- r/w/x to add/restrict read/write/execute permissions, e.g.:   
 $ `chmod -x $(find -name '*.ntl')`  
-Change the file mode (permissions) by restricting execution (-x) for all files ending in '.ntl'.  
-=> This is necessary for example to have Python read it as text-type instead of binary-type on Mac.   
+Change the permissions by restricting execution (-x) for all files ending in '.ntl'.  
+=> This is necessary for example to have Python read them as text-type instead of binary-type on Mac.   
 `chmod +x` would allow execution; be aware though that `+x` sets the execute bits of the user, group *and* other.  
 If you wish to set the execute bit more specifically, use:   
-  $ `chmod u+x 'filename'` to set the execute bit for the user.   
-  $ `chmod g+x 'filename'` to set the execute bit for the group.   
-  $ `chmod o+x 'filename'` to set the execute bit for other.   
+  $ `chmod u+x [filename]` to set the execute bit for the user.   
+  $ `chmod g+x [filename]` to set the execute bit for the group.   
+  $ `chmod o+x [filename]` to set the execute bit for other.   
 
 #### Octal notation
 Octal notation uses a 4 number format to denote which permissions bits are set for the user,
@@ -114,7 +114,9 @@ but resort to the old ones specified by the system.)
 Example:   
 $ sudo chown -R david /www   
 This changes the ownership of /www (and its content) from the root user to david.   
-If the directory is empty, the -R flag is pointless; it will not do anything for files yet to be created ...
+If the directory is empty, the -R flag is pointless; it will not do anything for files yet to be created ...   
+However, if you want newly created files/directories to inherit the group of its parent directory,
+you can set the setgid bit on that parent directory: `chmod u+s [directory]`.    
 
 * curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create  
 curl = see url; it returns the content at the requested url  
