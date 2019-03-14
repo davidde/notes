@@ -33,7 +33,7 @@ r‒‒ permissions = 100 in binary = 4+0+0 in octal = 4
 ‒w‒ permissions = 010 in binary = 0+2+0 in octal = 2   
 ‒‒x permissions = 001 in binary = 0+0+1 in octal = 1   
 
-Permissions can be specified in either symbolic or octal notation.   
+Permissions can be specified in either octal or symbolic notation.   
 Use `ls -l` or `ll` to verify permissions.
 
 #### Symbolic notation
@@ -53,9 +53,9 @@ group and other: 0UGO.
 * The leading 0 denotes octal, but can also be used for setting **special modes** (see ahead).
 This leading 0 has no special significance and can be left out;   
 `chmod 0755 foo.sh` = `chmod 755 foo.sh`   
-* The second number (or first when the leading 0 is left out) indicates the permission bits of the user.
-* The third number indicates the permission bits of the group.
-* The fourth number indicates the permission bits of other.
+* The second number (or first when the leading 0 is left out) indicates the permission bits of the **user**.
+* The third number indicates the permission bits of the **group**.
+* The fourth number indicates the permission bits of **other**.
 
 #### Classification of Users: user, group and other
 * **user**: The user is the owner of the files. The user of a file or directory can be changed with the `chown` command.
