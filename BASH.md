@@ -10,9 +10,9 @@ after typing/copying text, press CTRL+D to exit.
 * cat package.json  
  Show the content of the 'package.json' file.
 
-* cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4  
+### `$ cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4`  
 Concatenate .vob dvd files, and then convert them to .mp4
-
+  
 ### $ `chmod 'permissions' 'filepath'`   
 chmod = **ch**ange **mod**e:   
 Change the file mode / permissions for the file specified by 'filepath'.   
@@ -24,21 +24,21 @@ The file will no longer be an ‘Unix executable file’.
 => This is necessary to have Python read it as text-type instead of binary-type on Mac.   
 `chmod +x` would allow execution; be aware though that `+x` sets the execute bits of the user, group *and* other.  
 If you wish to set the execute bit more specifically, use:   
-$ `chmod u+x 'filename'` to set the execute bit for the user.   
-$ `chmod g+x 'filename'` to set the execute bit for the group.   
-$ `chmod o+x 'filename'` to set the execute bit for other.   
+  $ `chmod u+x 'filename'` to set the execute bit for the user.   
+  $ `chmod g+x 'filename'` to set the execute bit for the group.   
+  $ `chmod o+x 'filename'` to set the execute bit for other.   
 
 
-**user**: The user is the owner of the files. The user of a file or directory can be changed with the `chown` command.
+* **user**: The user is the owner of the files. The user of a file or directory can be changed with the `chown` command.
 Read, write and execute privileges are individually set for the user with 0400, 0200 and 0100 respectively.
 Combinations can be applied as necessary eg: 0700 is read, write and execute for the user.   
 
-**group**: A group is the set of people that are able to interact with that file.  
+* **group**: A group is the set of people that are able to interact with that file.  
 The group set on a file or directory can be changed with the `chgrp` command.  
 Read, write and execute privileges are individually set for the group with 0040, 0020 and 0010 respectively.
 Combinations can be applied as necessary eg: 0070 is read, write and execute for the group.
 
-**other**: Represents everyone who isn't an owner or a member of the group associated with that resource.
+* **other**: Represents everyone who isn't an owner or a member of the group associated with that resource.
 Other is often referred to as "world", "everyone" etc.
 Read, write and execute privileges are individually set for the other with 0004, 0002 and 0001 respectively.
 Combinations can be applied as necessary eg: 0007 is read, write and execute for other.
