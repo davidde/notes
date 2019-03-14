@@ -78,8 +78,10 @@ However, **keeping your private key encrypted with a passphrase adds a significa
 
 You can change the passphrase for an existing private key without regenerating
 the keypair by typing the following command:  
-$ ssh-keygen -p  
-(You will be prompted to specify the file in which the private key resides.)
+$ `ssh-keygen -p`  
+(You will be prompted to specify the file in which the private key resides.)   
+To delete a single entry from known_hosts:    
+$ `ssh-keygen -R [hostname or IP address]`
 
 ## Do SSH keys have to be named 'id_rsa'?
 **NO**, you can give them any name you like, or even place them in a different directory.  
