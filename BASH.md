@@ -21,19 +21,22 @@ Change the file mode / permissions for the file specified by 'filepath'.
 * Read: Allows files to be read.
 * Write: Allows files to be written.
 * Execute: Allow binary files to be executed, and directories to be entered/searched.
-For example if a directory has permissions of 0600 you cannot use the cd command to "change directory" into it,
+For example, if a directory has no execute permission, you cannot use the cd command to "change directory" into it,
 nor can you list it's contents.
 
-The permissions are internally set as bits, so they are efficiently to represent in octal:   
-rwx permissions = 111 in binary = 4+2+1 in octal = 7   
-rw‒ permissions = 110 in binary = 4+2+0 in octal = 6   
-r‒x permissions = 101 in binary = 4+0+1 in octal = 5   
-r‒‒ permissions = 100 in binary = 4+0+0 in octal = 4   
-‒wx permissions = 021 in binary = 0+2+1 in octal = 3   
-‒w‒ permissions = 010 in binary = 0+2+0 in octal = 2   
-‒‒x permissions = 001 in binary = 0+0+1 in octal = 1   
+Permissions can be specified in either symbolic or octal notation; since they   
+are internally set as bits, the conversion from symbolic to octal is straightforward:   
+rwx in symbolic = 111 in binary = 4+2+1 in octal = 7   
+rw‒ in symbolic = 110 in binary = 4+2+0 in octal = 6   
+r‒x in symbolic = 101 in binary = 4+0+1 in octal = 5   
+r‒‒ in symbolic = 100 in binary = 4+0+0 in octal = 4   
+‒wx in symbolic = 021 in binary = 0+2+1 in octal = 3   
+‒w‒ in symbolic = 010 in binary = 0+2+0 in octal = 2   
+‒‒x in symbolic = 001 in binary = 0+0+1 in octal = 1   
 
-Permissions can be specified in either octal or symbolic notation.   
+Default permissions:  
+* Files: -rw-r--r-- or 0644.  
+* Directories: drwxr-xr-x or 0755.
 Use `ls -l` or `ll` to verify permissions.
 
 #### Symbolic notation
@@ -71,8 +74,6 @@ Combinations can be applied as necessary eg: 0070 is read, write and execute for
 Other is often referred to as "world", "everyone" etc.
 Read, write and execute privileges are individually set for the other with 0004, 0002 and 0001 respectively.
 Combinations can be applied as necessary eg: 0007 is read, write and execute for other.
-
-The default permissions are 0755 for directories, and 0644 for files.
 
 #### Special Modes
 * **setuid**: Binary executables with the setuid bit can be executed with the privileges of the file's owner.   
