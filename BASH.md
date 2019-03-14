@@ -26,12 +26,12 @@ nor can you list it's contents.
 
 The permissions are internally set as bits, so they are efficiently to represent in octal:   
 rwx permissions = 111 in binary = 4+2+1 in octal = 7   
-rw- permissions = 110 in binary = 4+2+0 in octal = 6   
-r-x permissions = 101 in binary = 4+0+1 in octal = 5   
-r-- permissions = 100 in binary = 4+0+0 in octal = 4   
--wx permissions = 021 in binary = 0+2+1 in octal = 3   
--w- permissions = 010 in binary = 0+2+0 in octal = 2   
---x permissions = 001 in binary = 0+0+1 in octal = 1   
+rw– permissions = 110 in binary = 4+2+0 in octal = 6   
+r–x permissions = 101 in binary = 4+0+1 in octal = 5   
+r–– permissions = 100 in binary = 4+0+0 in octal = 4   
+–wx permissions = 021 in binary = 0+2+1 in octal = 3   
+–w– permissions = 010 in binary = 0+2+0 in octal = 2   
+––x permissions = 001 in binary = 0+0+1 in octal = 1   
 
 
 Permissions can be specified in either symbolic or octal notation.   
