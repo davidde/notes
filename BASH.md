@@ -20,11 +20,11 @@ Change the file mode / permissions for the file specified by 'filepath'.
 #### Permissions: read (r), write (w), execute (x)
 * Read: Allows files to be read.
 * Write: Allows files to be written.
-* Execute: Allow binary files to be executed, and directories to be entered/searched.
+* Execute: Allows binary files to be executed, and directories to be entered/searched.
 For example, if a directory has no execute permission, you cannot use the cd command to "change directory" into it,
-nor can you list it's contents.
+nor can you list its contents.
 
-Permissions can be specified in either symbolic or octal notation;    
+Permissions can be specified in either **symbolic or octal notation**;    
 since they are internally set as bits, the conversion from symbolic to octal is straightforward:   
 rwx in symbolic = 111 in binary = 4+2+1 in octal = 7   
 rw‒ in symbolic = 110 in binary = 4+2+0 in octal = 6   
