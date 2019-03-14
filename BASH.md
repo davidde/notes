@@ -86,6 +86,8 @@ Due to it's nature it should be used with care. It has no effect if the user doe
   `chmod u+s foo.sh`
   - Octal notation: 4000   
   `chmod 4755 foo.sh`
+  - Resulting permissions:   
+  ‒rw**s**r‒xr‒x
 
 * **setgid**: Binary executables with the setgid bit can be executed with the privileges of the file's group.   
 A useful property is to **set the setgid bit on a directory so that all files and directories newly created
@@ -94,6 +96,8 @@ within it inherit the group from that directory**. setgid has no effect if the g
   `chmod g+s foo.sh`
   - Octal notation: 2000   
   `chmod 2755 foo.sh`
+  - Resulting permissions:   
+  ‒rwxr‒**s**r‒x
 
 * **Sticky bit**: The sticky bit is most commonly used on directories where it allows the files or directories within
 to only be moved or deleted by that object's owner, the directory owner, or the superuser.
@@ -102,6 +106,8 @@ The sticky bit has no effect if other does not have execute permissions.
   `chmod +t foo.sh`
   - Octal notation: 1000   
   `chmod 1755 foo.sh`
+  - Resulting permissions:   
+  ‒rwxr‒xr‒**t**
 
 These special modes can also be combined, e.g. 7000 sets all the special bits: `chmod 7755 foo.sh`.
 
