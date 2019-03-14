@@ -13,8 +13,9 @@ after typing/copying text, press CTRL+D to exit.
 * cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4  
 Concatenate .vob dvd files, and then convert them to .mp4
 
-## $ `chmod "permissions" "filepath"`   
-chmod = **ch**ange **mod**e: Change the file mode / permissions for the file specified by 'filepath'.   
+### $ `chmod 'permissions' 'filepath'`   
+chmod = **ch**ange **mod**e:   
+Change the file mode / permissions for the file specified by 'filepath'.   
 'permissions' can be specified in either symbolic or octal notation.   
 **Symbolic notation** uses either +/- r/w/x to add/restrict read/write/execute permissions:   
 $ `chmod -x $(find -name '*.ntl')`  
@@ -24,7 +25,7 @@ The file will no longer be an ‘Unix executable file’.
 `chmod +x` would allow execution; be aware though that `+x` sets the execute bits of the user, group *and* other.  
 If you wish to set the execute bit more specifically, use:   
 $ `chmod u+x 'filename'` to set the execute bit for the user.   
-$ `chmod g+x 'filename'` to set the execute bit for the group.   
+$ `chmod g+x 'filename'` to set the execute bit for the group.   
 $ `chmod o+x 'filename'` to set the execute bit for other.   
 
 
