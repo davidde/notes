@@ -1,17 +1,17 @@
 # Useful BASH/Zshell commands
 
-* apt-cache search "searchterm"   
-See which packages are available with "searchterm".
+### $ `apt-cache search 'searchterm'`   
+See which packages are available with 'searchterm'.
 
-* cat >package.json  
+### $ `cat package.json`  
+Show the content of the 'package.json' file.
+ 
+* `cat >package.json`  
 Create package.json from command line. This command will await input from user;  
-after typing/copying text, press CTRL+D to exit.
+after typing/copying text, press **CTRL+D** to exit.
 
-* cat package.json  
- Show the content of the 'package.json' file.
-
-### `$ cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4`  
-Concatenate .vob dvd files, and then convert them to .mp4
+* `cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4`  
+Concatenate .vob dvd files, and then convert them to .mp4.
   
 ### $ `chmod 'permissions' 'filepath'`   
 chmod = **ch**ange **mod**e:   
