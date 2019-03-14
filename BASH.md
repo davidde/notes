@@ -36,7 +36,7 @@ r‒‒ in symbolic = 100 in binary = 4+0+0 in octal = 4
 
 Default permissions:  
 * Files: -rw-r--r-- or 0644.  
-* Directories: drwxr-xr-x or 0755.
+* Directories: drwxr-xr-x or 0755.   
 Use `ls -l` or `ll` to verify permissions.
 
 #### Symbolic notation
