@@ -109,7 +109,9 @@ The sticky bit has no effect if other does not have execute permissions.
   - Resulting permissions:   
   ‒rwxr‒xr‒**t**
 
-These special modes can also be combined, e.g. 7000 sets all the special bits: `chmod 7755 foo.sh`.
+These special modes can also be combined, e.g. 7000 sets all the special bits: `chmod 7755 foo.sh`.   
+To clear/remove the special bits, use either '-' in symbolic notation, e.g. `chmod g-s foo.sh`,
+or 2 leading '0' in octal notation: `chmod 00755 foo.sh` to unset them all.
 
 Check out the [chmod permissions calculator](http://permissions-calculator.org/) to better visualise file permissions.
 
