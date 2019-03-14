@@ -24,8 +24,8 @@ Change the file mode / permissions for the file specified by 'filepath'.
 For example, if a directory has no execute permission, you cannot use the cd command to "change directory" into it,
 nor can you list it's contents.
 
-Permissions can be specified in either symbolic or octal notation; since they   
-are internally set as bits, the conversion from symbolic to octal is straightforward:   
+Permissions can be specified in either symbolic or octal notation;    
+since they are internally set as bits, the conversion from symbolic to octal is straightforward:   
 rwx in symbolic = 111 in binary = 4+2+1 in octal = 7   
 rw‒ in symbolic = 110 in binary = 4+2+0 in octal = 6   
 r‒x in symbolic = 101 in binary = 4+0+1 in octal = 5   
@@ -34,9 +34,13 @@ r‒‒ in symbolic = 100 in binary = 4+0+0 in octal = 4
 ‒w‒ in symbolic = 010 in binary = 0+2+0 in octal = 2   
 ‒‒x in symbolic = 001 in binary = 0+0+1 in octal = 1   
 
-Default permissions:  
-* Files: -rw-r--r-- or 0644.  
-* Directories: drwxr-xr-x or 0755.   
+Default permissions:   
+
+|    Filetype        |   symbolic   |   octal    |
+|--------------------|--------------|------------|
+|   **Files**        |  ‒rw‒r‒‒r‒‒  |   0644     |
+|   **Directories**  |  drwxr‒xr‒x  |   0755     |
+
 Use `ls -l` or `ll` to verify permissions.
 
 #### Symbolic notation
