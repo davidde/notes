@@ -86,7 +86,7 @@ Remember: In SQL, we always put string **and date values** inside single quotes.
 
 The select statement can express arbitrary complex searches and aggregations
 of data; it uses 'select clauses' like where, limit and order/group by for more
-specific searches.
+specific searches.   
 E.g. QUERY = "select * from animals where species = 'orangutan' order by birthdate;"   
 The result of a query is always a (subset) table.
 
