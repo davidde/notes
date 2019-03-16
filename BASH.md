@@ -24,9 +24,9 @@ Enter the new value, or press ENTER for the default
 Is the information correct? [Y/n] y
 ```
 If you want to add an existing user to an existing group, use:   
-$ `sudo adduser [USER] [GROUP]`   
+$ `sudo adduser [USER] [GROUP]`   
 For example, to grant the previously created user sudo privileges:   
-$ `sudo adduser david sudo`   
+$ `sudo adduser david sudo`   
 To revoke the sudo privileges:   
 $ `sudo deluser david sudo`   
 
@@ -187,21 +187,20 @@ Check where the differences between 2 versions of a file are.
 dpkg: Debian Package Manager   
 Check the status (-s, --status) of the package named "packagename", i.e. is it installed, what does it do, etc.   
 Make sure to use the official packagename, or it won't work. If not sure about the name, use:   
-$ `apt-cache search [packagename]`   
+$ `apt-cache search [packagename]`   
 This will list either the official name of your package or the official names of similar packages
 if the packagename doesn't exist.
 
 ### $ `~/.dropbox-dist/dropboxd`  
 Execute dropbox-daemon on Linux.
 
-### $ `ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4`  
-Convert input.mov to output.mp4 and compresses the video with a constant rate
-factor of 24!
-
 ### $ `ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4`  
-Only convert the video.
+Convert the video 'input.mov' to 'output.mp4'.
 
-### $ `ffmpeg -i input.mp4 -b 1000000 output.mp4`  
+* $ `ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4`  
+Compress 'input.mov' with a constant rate factor of 24, and convert it to 'output.mp4'.
+
+* $ `ffmpeg -i input.mp4 -b 1000000 output.mp4`  
 Change the bitrate (quality) to 1000000 bytes/sec.
 (Calculate the bitrate you need by dividing 1 GB by the video length in seconds.
 So, for a video of length 16:40 (1000 seconds), use a bitrate of 1000000 bytes/sec.)  
