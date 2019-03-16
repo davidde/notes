@@ -164,7 +164,7 @@ To remove a user from a group, use:
 $ `sudo gpasswd -d [USER] [group]`   
 Example:   
 $ `sudo gpasswd -a david www-data`   
-$ `sudo gpasswd -d david www-data`   
+$ `sudo gpasswd -d david www-data`   
 Or alternatively, use `adduser`:   
 $ `sudo adduser david www-data`   
 $ `sudo deluser david www-data`
