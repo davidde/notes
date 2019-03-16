@@ -306,6 +306,9 @@ The Debian command will work on Mac, but not the other way around.
 
 **Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
+* scp /path/to/local/file remote_username@remote_server:/path/to/destination   
+Securely copy a file over SSH.
+
 * ssh remote_username@remote_ipaddress (-i /path/to/privatekey)    
 SSH into the server with IP address 'remote_ipaddress' as user 'remote_username'.  
 If your username is the same locally and on the server, you can leave it out:  
