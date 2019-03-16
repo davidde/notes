@@ -16,26 +16,26 @@ which means 'q' to exit.
 
 ## Basic git commands and usage, alphabetically:
 
-* git add main.go  
-Add main.go to be tracked by git, it is now said to be staged.
+### $ `git add main.go`  
+Add main.go to be tracked by git, it is now said to be staged.   
 (It still needs to be committed to actually be included in version control)
 
-* git add .  
+### $ `git add .`  
 Add all files in the directory.
-This is useful if you want to upload an existing project to Github.
+This is useful if you want to upload an existing project to Github.   
 (Use a .gitignore file that lists all exceptions)
 
-* git branch new_branch  
+### $ `git branch [new_branch]`  
 Create the 'new_branch' branch.
 
-* git branch --set-upstream-to 'origin/remote-branch'  
+### $ `git branch -u [origin/remote-branch]`
+= $ `git branch --set-upstream-to=[origin/remote-branch]`  
 This sets the default remote branch for the current local branch.  
-Any future git pull command (with the current local branch checked-out),  
-will attempt to bring in commits from the 'remote-branch'  
-into the current local branch.  
-One way to avoid having to explicitly do --set-upstream-to is  
-to use the shorthand flag -u along-with the very first git push as follows:  
-$ git push -u origin local-branch  
+Any future git pull command (with the current local branch checked-out),
+will attempt to bring in commits from the 'remote-branch' into the current local branch.
+One way to avoid having to explicitly do `--set-upstream-to` is to use the shorthand flag
+`-u` along with the very first `git push` as follows:  
+$ `git push -u origin local-branch`  
 which sets the upstream association for any future push/pull attempts automatically.  
 
 * git branch -a  
