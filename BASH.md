@@ -1,5 +1,37 @@
 # Useful BASH/Zshell commands
 
+### $ `adduser david`   
+Create a new user named 'david'; you will be prompted to set and confirm the new user password:
+```
+Adding user `david' ...
+Adding new group `david' (1000) ...
+Adding new user `david' (1000) with group `david' ...
+Creating home directory `/home/david' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+```
+Then it will prompt you to set the new user’s information. If you want to leave all of this information blank just press ENTER to accept the defaults:
+```
+Changing the user information for david
+Enter the new value, or press ENTER for the default
+	Full Name []:
+	Room Number []:
+	Work Phone []:
+	Home Phone []:
+	Other []:
+Is the information correct? [Y/n] y
+```
+If you want to create the user with sudo privileges, use:   
+$ `sudo adduser david sudo`   
+
+**Note:**   
+Debian/Ubuntu's `adduser` was written with the purpose of being a convenient frontend to a range of utilities
+(it makes use of, at one step or another, `useradd`, `usermod`, `gpasswd`, `passwd`, `chfn`, and a couple more commands).   
+`adduser` and co are somewhat distro-specific in nature, being frontend scripts.   
+Debian recommends that system administrators use `adduser`, `addgroup`, `deluser`, etc. over the more specific utilities.
+
 ### $ `apt-cache search [searchterm]`   
 See which packages are available with 'searchterm'.
 
@@ -164,49 +196,64 @@ Change the bitrate (quality) to 1000000 bytes/sec.
 So, for a video of length 16:40 (1000 seconds), use a bitrate of 1000000 bytes/sec.)  
 Bitrate= video in bytes/ length in seconds
 
-* find   
+### $ `find`   
 Recursively finds all files/directories in the current directory and its subdirectories.   
 You can specify another path to find items in, like so:   
-$ find app   
+$ `find app`   
 This will return everything contained in the app directory (which should itself be in the current directory;
-otherwise specify an absolute path).Some of find’s power comes from it’s ability to filter which
-files or directories it 'selects'.
-It does this by using **'tests'**, e.g.:   
--type: f (file) or d (directory)   
-$ find app -type f   
+otherwise specify an absolute path).    
+Some of find’s power comes from it’s ability to filter which files or directories it selects
+with **'tests'**, and directly performing **'actions'** on the results:   
+
+**Tests:**   
+* -type: f (file) or d (directory)   
+$ `find app -type f`   
 Find all files in the app directory, including files in its subdirectories.   
--maxdepth 1: Do not recurse into subdirectories.   
-$ find -type f -maxdepth 1   
+* -maxdepth 1: Do not recurse into subdirectories.   
+$ `find -type f -maxdepth 1`   
 Find all files in the current directory, excluding files in its subdirectories.   
--name: Takes a glob that will be matched against the base of the filename (filepath without leading directories).   
-$ find -name '*.ntl'   
+* -name: Takes a glob that will be matched against the base of the filename (filepath without leading directories).   
+$ `find -name '*.ntl'`   
 Find all files with the extension '.ntl' in the current working directory and its subdirectories.   
--path: Same as -name, but applies to the whole filepath (including leading directories).   
--regex: takes a regex pattern.   
--amin 5: returns files last **a**ccessed less than 5 minutes ago.   
--mmin 5: returns files last **m**odified less than 5 minutes ago.   
--atime 5: returns files last **a**ccessed less than 5 days ago.   
--mtime 5: returns files last **m**odified less than 5 days ago.   
--user 'uname': returns files owned by user 'uname'.   
--group 'gname': returns files owned by group 'gname'.   
-On top of that, find can also directly do something with the results it finds; it accomplishes this with **actions**:   
--delete: Deletes the files that were found. Be careful!   
+* -path: Same as -name, but applies to the whole filepath (including leading directories).   
+* -regex: takes a regex pattern.   
+* -amin 5: returns files last **a**ccessed less than 5 minutes ago.   
+* -mmin 5: returns files last **m**odified less than 5 minutes ago.   
+* -atime 5: returns files last **a**ccessed less than 5 days ago.   
+* -mtime 5: returns files last **m**odified less than 5 days ago.   
+* -user 'uname': returns files owned by user 'uname'.   
+* -group 'gname': returns files owned by group 'gname'.   
+
+**Actions:**   
+* -delete: Deletes the files that were found. Be careful!   
 First run without the -delete flag, so you see which files will be deleted.   
--exec 'command': Executes 'command' on the files that were found.   
-$ find /www -type d -exec chmod 2750 {} \\;   
-$ find /www -type f -exec chmod 0640 {} \\;   
+* -exec 'command': Executes 'command' on the files that were found.   
+$ `find /www -type d -exec chmod 2750 {} \;`   
+$ `find /www -type f -exec chmod 0640 {} \;`   
 These examples combine find with the chmod command to set different permissions on the files vs directories
 in the /www directory. `{}` is replaced by the file paths generated by find.
 The semicolon `;` denotes the end of the command, but needs to be escaped with `\`,
 otherwise it would be interpreted by the shell itself instead of find.
 
-* for file in *.rar  
+### BASH script to bulk rename all files in working directory from .rar to .cbr:
+```
+$ for file in *.rar  
     $ do  
     $ mv "$file" "${file%.rar}.cbr"  
-    $ done  
+    $ done
+```
+=> Other option for same result: rename or mmv
 
-    => Batch rename all files in the current working directory from .rar to .cbr!  
-    => Other option for same result: rename or mmv
+### $ `gpasswd -a [USER] [group]`   
+Add the user 'USER' to the group 'GROUP' (~file permissions).   
+To remove a user from a group, use:   
+$ `sudo gpasswd -d [USER] [group]`   
+Example:   
+$ `sudo gpasswd -a david www-data`   
+$ `sudo gpasswd -d david www-data`   
+Or alternatively, use `adduser`:   
+$ `sudo adduser david www-data`   
+$ `sudo deluser david www-data`
 
 * grep -r "StringToFind" .  
 Look for "StringToFind" in all files in the current directory (.)  
