@@ -129,7 +129,7 @@ $ sudo chown -R david /www
 This changes the ownership of /www (and its content) from the root user to david.   
 If the directory is empty, the -R flag is pointless; it will not do anything for files yet to be created ...   
 However, if you want newly created files/directories to inherit the group of its parent directory,
-you can set the setgid bit on that parent directory: `chmod u+s [directory]`.    
+you can set the setgid bit on that parent directory: `chmod g+s [directory]`.    
 
 * curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create  
 curl = see url; it returns the content at the requested url  
