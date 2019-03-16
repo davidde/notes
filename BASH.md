@@ -1,6 +1,6 @@
 # Useful BASH/Zshell commands
 
-### $ `adduser david`   
+### $ `(sudo) adduser david`   
 Create a new user named 'david'; you will be prompted to set and confirm the new user password:
 ```
 Adding user `david' ...
@@ -23,8 +23,12 @@ Enter the new value, or press ENTER for the default
 	Other []:
 Is the information correct? [Y/n] y
 ```
-If you want to create the user with sudo privileges, use:   
+If you want to add an existing user to an existing group, use:   
+$ `sudo adduser [USER] [GROUP]`   
+For example, to grant the previously created user sudo privileges:   
 $ `sudo adduser david sudo`   
+To revoke the sudo privileges:   
+$ `sudo deluser david sudo`   
 
 **Note:**   
 Debian/Ubuntu's `adduser` was written with the purpose of being a convenient frontend to a range of utilities
@@ -48,6 +52,11 @@ Concatenate .vob dvd files, and then convert them to .mp4.
 ### $ `chmod [permissions] [filepath]`   
 chmod = **ch**ange **mod**e:   
 Change the file mode / permissions for the file specified by 'filepath'.   
+-R, --recursive: Also change permissions of files/directories inside the specified directory **and** its subdirectories.   
+Example:   
+$ `chmod -R 750 ~/projects/app`   
+However, use the -R flag with care, since the default permissions for files and directories are not the same ...   
+(You can use `find` combined with `chmod` to set different permissions for each.)
 
 #### Permissions: read (r), write (w), execute (x)
 * Read: Allows files to be read.
@@ -153,48 +162,50 @@ Simply use `chown [username]` if you don't want to change group ownership.
 Use `chown [username]:`, note the left-out group, if you want to set the groupname
 to the default group for that user.   
 If you want to change only the group, you can use `chown :[groupname]`(note the left-out user).   
--R, --recursive: Also change ownership of all files/directories inside the specified directory.   
+-R, --recursive: Also change ownership of files/directories inside the specified directory **and** its subdirectories.   
 (Files/directories created in the future will not inherit the newly set 'username' or 'groupname',
 but resort to the old ones specified by the system.)   
 Example:   
-$ sudo chown -R david /www   
+$ `sudo chown -R david /www`   
 This changes the ownership of /www (and its content) from the root user to david.   
 If the directory is empty, the -R flag is pointless; it will not do anything for files yet to be created ...   
 However, if you want newly created files/directories to inherit the group of its parent directory,
-you can set the setgid bit on that parent directory: `chmod g+s [directory]`.    
+you can set the setgid bit on that parent directory:   
+$ `chmod g+s [directory]`    
 
-* curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create  
+### $ `curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create`  
 curl = see url; it returns the content at the requested url  
 -i: include http headers  
 -X: Specify request command to use (e.g. POST, default is GET)  
 -d: HTTP POST data
 
-* diff -u old_file new_file  
+### $ `diff -u [old_file] [new_file]`  
 Check where the differences between 2 versions of a file are.  
 (-u = unified diff format => easier to read.)
 
-* dpkg -s "packagename"   
+### $ `dpkg -s [packagename]`   
 dpkg: Debian Package Manager   
 Check the status (-s, --status) of the package named "packagename", i.e. is it installed, what does it do, etc.   
-Make sure to use the official packagename or it won't work. If not sure about the name, use:   
-$ apt-cache search "packagename"   
-This will list either the official name of your package or similar packages.
+Make sure to use the official packagename, or it won't work. If not sure about the name, use:   
+$ `apt-cache search [packagename]`   
+This will list either the official name of your package or the official names of similar packages
+if the packagename doesn't exist.
 
-* ~/.dropbox-dist/dropboxd  
-Execute dropbox-daemon on Linux
+### $ `~/.dropbox-dist/dropboxd`  
+Execute dropbox-daemon on Linux.
 
-* ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4  
+### $ `ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4`  
 Convert input.mov to output.mp4 and compresses the video with a constant rate
 factor of 24!
 
-* ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4  
+### $ `ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4`  
 Only convert the video.
 
-* ffmpeg -i input.mp4 -b 1000000 output.mp4  
+### $ `ffmpeg -i input.mp4 -b 1000000 output.mp4`  
 Change the bitrate (quality) to 1000000 bytes/sec.
 (Calculate the bitrate you need by dividing 1 GB by the video length in seconds.
 So, for a video of length 16:40 (1000 seconds), use a bitrate of 1000000 bytes/sec.)  
-Bitrate= video in bytes/ length in seconds
+Bitrate = video in bytes / length in seconds
 
 ### $ `find`   
 Recursively finds all files/directories in the current directory and its subdirectories.   
@@ -244,7 +255,7 @@ $ for file in *.rar
 ```
 => Other option for same result: rename or mmv
 
-### $ `gpasswd -a [USER] [group]`   
+### $ `gpasswd -a [USER] [GROUP]`   
 Add the user 'USER' to the group 'GROUP' (~file permissions).   
 To remove a user from a group, use:   
 $ `sudo gpasswd -d [USER] [group]`   
