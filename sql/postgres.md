@@ -35,3 +35,9 @@ create the actual database tables and populate the created database with data.
 To login to the sams database, or:  
 $ `psql -U postgres -d sams`  
 to login to the sams database as root user postgres.
+
+7. PSQL Commands:  
+\l: list all databases  
+\c database: connect to 'database'  
+\dt: show all tables in the current database  
+\d table_name: show all columns in the table
