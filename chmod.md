@@ -6,7 +6,7 @@ Change the file mode/permissions of the file/directory specified by 'filepath'.
 Example:   
 $ `chmod -R 750 ~/projects/app`   
 However, use the -R flag with care, since the default permissions for files and directories are not the same ...   
-(You can use `find` combined with `chmod` to set different permissions for each.)
+(You can use [find](./BASH.md#-find) combined with `chmod` to set different permissions for each.)
 
 ### Permissions: read (r), write (w), execute (x)
 * Read: Allows files to be read.
@@ -50,7 +50,7 @@ Octal notation uses a 4 number format to denote which permissions bits are set f
 group and other: 0UGO.   
 * The leading 0 denotes octal, but can also be used for setting **special modes** (see ahead).
 This leading 0 has no special significance and can be left out;   
-`chmod 0755 foo.sh` = `chmod 755 foo.sh`   
+$ `chmod 0755 foo.sh` = $ `chmod 755 foo.sh`   
 * The second number (or first when the leading 0 is left out) indicates the permission bits of the **user**.
 * The third number indicates the permission bits of the **group**.
 * The fourth number indicates the permission bits of **other**.
@@ -74,9 +74,9 @@ Combinations can be applied as necessary eg: 0007 is read, write and execute for
 * **setuid**: Binary executables with the setuid bit can be executed with the privileges of the file's owner.   
 Due to it's nature it should be used with care. It has no effect if the user does not have execute permissions.
   - Symbolic notation: u+s (also represented as 's' in the output of ls, or 'S' when it has no effect)   
-  `chmod u+s foo.sh`
+  $ `chmod u+s foo.sh`
   - Octal notation: 4000   
-  `chmod 4755 foo.sh`
+  $ `chmod 4755 foo.sh`
   - Resulting permissions:   
   ‒rw**s**r‒xr‒x
 
@@ -84,9 +84,9 @@ Due to it's nature it should be used with care. It has no effect if the user doe
 A useful property is to **set the setgid bit on a directory so that all files and directories newly created
 within it inherit the group from that directory**. setgid has no effect if the group does not have execute permissions.
   - Symbolic notation: g+s (also represented as 's' in the output of ls, or 'S' when it has no effect)   
-  `chmod g+s foo.sh`
+  $ `chmod g+s foo.sh`
   - Octal notation: 2000   
-  `chmod 2755 foo.sh`
+  $ `chmod 2755 foo.sh`
   - Resulting permissions:   
   ‒rwxr‒**s**r‒x
 
@@ -94,15 +94,15 @@ within it inherit the group from that directory**. setgid has no effect if the g
 to only be moved or deleted by that object's owner, the directory owner, or the superuser.
 The sticky bit has no effect if other does not have execute permissions.
   - Symbolic notation: +t (also represented as 't' in the output of ls, or 'T' when it has no effect)   
-  `chmod +t foo.sh`
+  $ `chmod +t foo.sh`
   - Octal notation: 1000   
-  `chmod 1755 foo.sh`
+  $ `chmod 1755 foo.sh`
   - Resulting permissions:   
   ‒rwxr‒xr‒**t**
 
-These special modes can also be combined, e.g. 7000 sets all the special bits: `chmod 7755 foo.sh`.   
-To clear/remove the special bits, use either '-' in symbolic notation, e.g. `chmod g-s foo.sh`,
-or 2 leading '0' in octal notation: `chmod 00755 foo.sh` to unset them all.
+These special modes can also be combined, e.g. 7000 sets all the special bits: $ `chmod 7755 foo.sh`.   
+To clear/remove the special bits, use either '-' in symbolic notation, e.g. $ `chmod g-s foo.sh`,
+or 2 leading '0' in octal notation: $ `chmod 00755 foo.sh` to unset them all.
 
 Check out the [chmod permissions calculator](http://permissions-calculator.org/) to better visualise file permissions.
 
