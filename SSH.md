@@ -22,11 +22,17 @@ Installed on the VPS server to securely access it from your local computer.
 $ `sudo apt install openssh-client/openssh-server`  
 
 When installing openssh-server, the server's public and private keys are generated automatically.
-For the client, you'll have to do that on your own (i.e. with the `ssh-keygen` command, see ahead).
-When you, the client, connects with a server, public keys are exchanged. You'll receive the servers one,
-and the server yours. The first time you receive the server public key, you'll be asked to accept it.
+For the client, we'll have to do that on our own (i.e. with the `ssh-keygen` command, see ahead).
+When we, the client, connect with a server, public keys are exchanged. We'll receive the server's one,
+and the server ours. The first time we receive the server public key, we'll be asked to accept it.
 The public keys are stored in **~/.ssh/known_hosts** on the client, and in **~/.ssh/authorized_keys**
-on the server.
+on the server. Private keys are never exchanged, and should be kept secret at all times.
+When communicating to the server over SSH, all transactions are encrypted using the server's public key
+(which we have in 'known_hosts'), and they can only be decrypted using the corresponding private key
+of the server (which only the server has). When the server sends messages back, they are encrypted
+using our public key (which the server has access to in 'authorized_keys'), and these messages can
+only be decrypted using our private key (which only we have). This mechanism guarantees secure
+communication in both ways.
   
 ## SSH key pairs
 SSH key pairs are two cryptographically secure keys used to authenticate a client to an SSH server.
