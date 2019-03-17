@@ -267,20 +267,25 @@ The Debian command will work on Mac, but not the other way around.
 
 **Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
-* scp /path/to/local/file remote_username@remote_server:/path/to/destination   
-Securely copy a file over SSH.
+### $ `scp /path/to/local/file remote_username@remote_server:/path/to/remote/destination`   
+Securely copy a local file to a remote server over SSH.   
+For the reverse, copying a remote file to your local machine, log in to the remote server over SSH,
+and use the command with the paths reversed:   
+$ `scp remote_username@remote_server:/path/to/remote/file /path/to/local/destination`   
+**-r**: Recursively copy entire directories, e.g.:   
+$ `scp -r /path/to/local/directory remote_username@remote_server:/path/to/remote/destination`
 
-* ssh remote_username@remote_ipaddress (-i /path/to/privatekey)    
+### $ `ssh remote_username@remote_ipaddress (-i /path/to/privatekey)`    
 SSH into the server with IP address 'remote_ipaddress' as user 'remote_username'.  
 If your username is the same locally and on the server, you can leave it out:  
-$ ssh ipaddress  
+$ `ssh ipaddress`  
 -i: Only required when using a private key not named '~/.ssh/id_rsa'.  
 -p: Port to connect to on the remote host. Only required when it's a non-standard port number for ssh.   
 -vvv: verbosity, useful for debugging.   
 Enter `exit` or press **CTRL + D** to exit the remote server.   
-For more info on SSH, go [here](./SSH.md).
+See [SSH.md](./SSH.md) for a general introduction to SSH.
 
-* su - david  
+### $ `su - david`  
 Switch to the user 'david' (su = **s**witch **u**ser). You can also switch to the root user
 by invoking the command with no parameter. Unlike `sudo`, `su` asks you for the password of the user you switch to.   
 Note `su -` here:  
@@ -288,35 +293,35 @@ Note `su -` here:
 `su` just switches the user, providing a normal shell with an environment nearly the same as with the old user.   
 This means it's generally safest to use `su -`.
 
-* sudo 'command'   
+### $ `sudo [command]`   
 `sudo` is meant to run a single command with root privileges. 
 Unlike `su` it prompts you for the password of the current user. This user must be in the sudoers file (`/etc/sudoers`),
 or a group that is in the sudoers file. By default, Ubuntu "remembers" your password for 15 minutes,
 so that you don't have to type your password every time.
 
-* sudo cat /etc/sudoers   
+### $ `sudo cat /etc/sudoers`   
 Print out the sudoers file; this file contains the rules that users must follow when using the sudo command.
 You should never edit it directly, but use the `visudo` command (< vi + sudo):   
-$ visudo
+$ `visudo`   
 Check the man pages for extra info on the sudoers file / vi(m) / visudo:   
-$ man sudoers   
-$ man vi   
-$ man visudo
+$ `man sudoers`   
+$ `man vi`   
+$ `man visudo`
 
-* sudo apt -f install  
+### $ `sudo apt -f install`  
 -f: 'fix broken'  
 Fix broken dependencies.
 
-* sudo apt update  
+### $ `sudo apt update`  
 Update package lists (installed applications list).
 
-* sudo apt dist-upgrade  
+### $ `sudo apt dist-upgrade`  
 Upgrade your machine.
 
-* sudo apt update && time sudo apt dist-upgrade  
+### $ `sudo apt update && time sudo apt dist-upgrade`  
 Update package lists and upgrade your machine while timing it.
 
-* sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 'PUBKEY'  
+### $ `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys [PUBKEY]`  
 Fix the GPG error 'NO_PUBKEY', for example when adding a ppa to your system.  
 When you run `sudo apt update` with this ppa error, you will get;  
 `W: GPG error: http://ppa.launchpad.net trusty Release:  
@@ -324,27 +329,27 @@ The following signatures couldn't be verified because the public key
 is not available: NO_PUBKEY 93C4A3FD7BB9C367`,  
 where `93C4A3FD7BB9C367` is the 'PUBKEY' you need to use in the command.
 
-* sudo fs_usage | grep [path_to_file]  
+### $ `sudo fs_usage | grep [path_to_file]`  
 Find out which application is touching the file.
 
-* sudo lsof -i :8000  
+### $ `sudo lsof -i :8000`  
 Detect what process is listening to (and occupying) port 8000.
 
-* sudo kill -9 <PID>  
+### $ `sudo kill -9 [PID]`  
 Kill process with PID.
 
 
-* tail -f *.log  
+### $ `tail -f *.log`  
 Follows (-f) all log files, so you can troubleshoot.
 (tail = last 10 lines)
 
 More specific logs:  
-* tail -f /var/log/kern.log   
+* $ `tail -f /var/log/kern.log`   
 // kernel-only, i.e. dmesg output
 
-* tail -f /var/log/syslog     
+* $ `tail -f /var/log/syslog`     
 // kernel + programs
 
-* touch file.txt  
+### $ `touch file.txt`  
 Create an empty file called 'file.txt'.
 
