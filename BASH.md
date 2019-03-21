@@ -110,6 +110,21 @@ Change the bitrate (quality) to 1000000 bytes/sec.
 So, for a video of length 16:40 (1000 seconds), use a bitrate of 1000000 bytes/sec.)  
 Bitrate = video in bytes / length in seconds
 
+* $ `ffmpeg -i input.gif output.mp4`  
+$ `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
+$ `ffmpeg -i input.gif -c vp9 -b:v 0 -crf 41 output.webm`  
+Convert an animated gif to `.mp4` or `.webm`.  
+Video, especially `.webm`, is much more efficient to load on webpages than animated gifs.   
+To replace an animated gif with video in html:   
+  ```
+  <video autoplay loop muted playsinline>
+    <source src="oneDoesNotSimply.webm" type="video/webm">
+    <source src="oneDoesNotSimply.mp4" type="video/mp4">
+  </video>
+  ```
+  **Note:**  
+  Browsers don't speculate about which `<source>` is optimal, so the order of `<source>`s matters. So if you specify an `.mp4` video first and the browser supports `.webm`, browsers will skip the `.webm <source>` and use the `.mp4` instead. If you prefer a `.webm <source>` be used first, specify it first!
+
 ### $ `find`   
 Recursively finds all files/directories in the current directory and its subdirectories.   
 You can specify another path to find items in, like so:   
