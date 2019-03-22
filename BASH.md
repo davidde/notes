@@ -77,6 +77,11 @@ However, if you want newly created files/directories to inherit the group of its
 you can set the setgid bit on that parent directory:   
 $ `chmod g+s [directory]`    
 
+### $ `convert -background none -resize 64x64 g-logo.svg g-logo.ico`  
+Use Imagemagick's convert utility to convert an `.svg` image to an `.ico` image.  
+Drop the `-background none` if you want to modify the backgroundless `.svg` to white background `.ico`.  
+Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example.
+
 ### $ `curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create`  
 curl = see url; it returns the content at the requested url  
 -i: include http headers  
@@ -184,17 +189,17 @@ Or alternatively, use `adduser`:
 $ `sudo adduser david www-data`   
 $ `sudo deluser david www-data`
 
-* grep -r "StringToFind" .  
-Look for "StringToFind" in all files in the current directory (.)  
+### $ `grep -r [StringToFind] .`  
+Look for 'StringToFind' in all files in the current directory (.)  
 -r: look recursively (i.e. also look in subdirectories)
 
-* Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
-$ echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list  
-$ sudo apt-get update  
-$ sudo apt-get install -t stretch-backports git  
+### Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
+$ `echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list`  
+$ `sudo apt update`  
+$ `sudo apt install -t stretch-backports git`  
 => Backports will install the latest stable version of git instead of the one included in stretch.
 
-* ip a  
+### $ `ip a`  
 Find your IP address in the output:   
 ```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -212,48 +217,47 @@ Find your IP address in the output:
 ```
 '95.179.191.141' is the IP address of this machine.
 
-* java -jar briss-0.9.jar  
+### $ `java -jar briss-0.9.jar`  
 (in directory where briss-0.9.jar is located; requires java)  
 Start up briss, app to crop/resize/split pdfs.
 
-* ls -hal /path/to/directory/or/file  
+### $ `ls -hal [/path/to/directory/or/file]`  
 Show stats of the directory or file, including permissions (and which files for directories).  
 -h (human-readable): Files sizes are displayed in the human-readable format of kilobytes and megabytes.  
 -a (all): Display hidden files, including the directory itself, and its parent directory.  
 -l (list): Display more information in a well-ordered list.  
 => On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
 
-* mmv "long_name*.txt" "short_#1.txt"  
-Where the "#1" is replaced by whatever is matched by the first wildcard.
-Similarly #2 is replaced by the second, etc. Quotes are necessary!  
+### $ `mmv "long_name*.txt" "short_#1.txt"`  
+Bulk rename all files in the current working directory such that the `#1` is replaced by
+whatever is matched by the first wildcard `*`. Similarly `#2` is replaced by the second, etc. Quotes are necessary!  
 **Options**:  
 -n: no-execute mode; just print out the changes without actually making them.
 
-So you do something like:
+So you do something like:   
+$ `mmv "index*_type*.txt" "t#2_i#1.txt"`  
+To rename 'index4_type9.txt' to 't9_i4.txt'.
 
-* mmv "index*_type*.txt" "t#2_i#1.txt"  
-To rename index1_type9.txt to t9_i1.txt
+### $ `qpdf -decrypt InputFile OutputFile`  
+Remove protection/encryption from pdf files.
 
-* qpdf -decrypt InputFile OutputFile  
-Remove protection/encryption from pdf files
-
-* passwd   
+### $ `passwd`   
 Change the password for the current user.   
 To change the password of root:   
   - Login to root with either:   
-  $ su -   
-  $ sudo -i   
+  $ `su -`   
+  $ `sudo -i`   
   - Change the password:    
-  $ passwd
-  - Log back out using `exit`, `CTRL + D` or `su - username`.
+  $ `passwd`
+  - Log back out using **CTRL + D**, `exit` or `su - username`.
   - Test login using new password:   
-  $ su -
+  $ `su -`
 
 * rename -S .rar .cbr *.rar  
 (**Mac version** of rename by Aristotle Pagaltzis; this is a newer implementation of
 Debian's version by Larry Wall, which it is backwards compatible with, meaning the Mac version
 understands "rename 's/.rar/.cbr/' *.rar", but Debian's version does not have the -S flag.)  
-Batch rename all files in the current working directory from .rar to .cbr  
+Bulk rename all files in the current working directory from .rar to .cbr  
 -s, --subst: Perform a simple textual substitution of "from" to "to".
 The "from" and "to" parameters must immediately follow the argument.  
 -S, --subst-all: Same as "-s", but replaces every instance of the "from"
@@ -264,7 +268,7 @@ text by the "to" text.
 * rename -n 's/.rar/.cbr/' *.rar  
 (**Debian/Ubuntu Perl-based version** of rename by Larry Wall & Robin Barker,  
 named 'prename' on CentOS and Fedora!)  
-Batch rename all files in the current working directory from .rar to .cbr  
+Bulk rename all files in the current working directory from .rar to .cbr  
 -n, -nono: no-execute mode; just print out the changes without actually making them.  
 -v, -verbose: Print names of files successfully renamed.  
 
@@ -272,7 +276,7 @@ Batch rename all files in the current working directory from .rar to .cbr
 
 * rename -n 's/(?<=\w)(?=[A-Z])/ /g' *.txt  
 ~ rename -n 's/([A-Z])/ $1/g' *.txt  
-Batch rename all .txt files in current directory to have spaces before uppercase letters. The second command,
+Bulk rename all .txt files in current directory to have spaces before uppercase letters. The second command,
 although much simpler, will also add a space before the first letter of the filename if it is uppercase.
 
 * Remove the text 'useless_prefix_' from filenames/directories:  
