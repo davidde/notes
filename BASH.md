@@ -314,18 +314,16 @@ Unlike `su` it prompts you for the password of the current user. This user must 
 or a group that is in the sudoers file. By default, Ubuntu "remembers" your password for 15 minutes,
 so that you don't have to type your password every time.
 
-### $ `sudo cat /etc/sudoers`   
-Print out the sudoers file; this file contains the rules that users must follow when using the sudo command.
-You should never edit it directly, but use the `visudo` command (< vi + sudo):   
-$ `visudo`   
-Check the man pages for extra info on the sudoers file / vi(m) / visudo:   
-$ `man sudoers`   
-$ `man vi`   
-$ `man visudo`
-
 ### $ `sudo apt -f install`  
 -f: 'fix broken'  
 Fix broken dependencies.
+
+### $ `sudo apt remove [package-name]`  
+Remove a package from your system, but keep the configuration files, plugins and settings.
+This helps in keeping the same settings when you want to reinstall the software.
+
+### $ `sudo apt purge [package-name]`  
+Remove a package completely from your system, including any personalized configuration files and settings.
 
 ### $ `sudo apt update`  
 Update package lists (installed applications list).
@@ -344,14 +342,23 @@ The following signatures couldn't be verified because the public key
 is not available: NO_PUBKEY 93C4A3FD7BB9C367`,  
 where `93C4A3FD7BB9C367` is the 'PUBKEY' you need to use in the command.
 
+### $ `sudo cat /etc/sudoers`   
+Print out the sudoers file; this file contains the rules that users must follow when using the sudo command.
+You should never edit it directly, but use the `visudo` command (< vi + sudo):   
+$ `visudo`   
+Check the man pages for extra info on the sudoers file / vi(m) / visudo:   
+$ `man sudoers`   
+$ `man vi`   
+$ `man visudo`
+
 ### $ `sudo fs_usage | grep [path_to_file]`  
 Find out which application is touching the file.
 
-### $ `sudo lsof -i :8000`  
-Detect what process is listening to (and occupying) port 8000.
-
 ### $ `sudo kill -9 [PID]`  
 Kill process with PID.
+
+### $ `sudo lsof -i :8000`  
+Detect what process is listening to (and occupying) port 8000.
 
 
 ### $ `tail -f *.log`  
