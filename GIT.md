@@ -291,35 +291,43 @@ Show the third latest commit of main.go in the vi editor.
 * git status  
 Lists all new or modified files to be committed.
 
-* git stash  
+### $ `git stash`  
 Takes the dirty state of your working directory (uncommitted changes in tracked  
 files) and saves ('stashes') it on a stack of unfinished changes that you can reapply at any time.
 
-* git stash list  
+* $ `git stash list`  
 Lists the entire stash (each `git stash` command creates a new snapshot).
 
-* git stash apply  
+* $ `git stash apply`  
 Apply the most recent stash.
 
-* git stash apply stash@{2}  
+* $ `git stash apply stash@{2}`  
 Apply an older stash; git its id from `git stash list`.
 
-* git stash drop (stash@{2})  
+* $ `git stash drop (stash@{2})`  
 Remove a stash from your stack.
 
-* git stash pop (stash@{2})  
+* $ `git stash pop (stash@{2})`  
 Apply the stash and then immediately drop it from your stack.
 
-* git stash push -m 'Put counter in Status' src/app/status/status.js  
+* $ `git stash push -m 'Put counter in Status' src/app/status/status.js`  
 Stash a single file, by specifying a stash message and a path to the file.  
 (NOTE: git 2.13 and up ONLY!)
 
-* git stash show  
+* $ `git stash show`  
 Shows which files were changed in the latest stash.
 
-* git stash show -p   
+* $ `git stash show -p`   
 View the content of the most recent stash (-p: 'patch').
 
-* git stash show -p stash@{2}   
+* $ `git stash show -p stash@{2}`   
 View the content of a specific stash.
+If, however, you wish to view the content of a single file from a specific stash, you need to use the `git show` command:  
+$ `git show stash@{0}:src/app/app.js`   
+If you want to see the diff of a specific file in the stash, you have to use the `git diff` command:  
+$ `git diff stash@{0}^1 stash@{0} -- <filename>`
+The `stash@{0}^1` shortcut means the first parent of the given stash, which is the commit at which
+the changes were stashed away. We use this form of "git diff" (with two commits) because we have
+to tell git which parent we want to diff against. Equivalent, but more cryptic:   
+$ `git diff stash@{0}^! -- <filename>`
 
