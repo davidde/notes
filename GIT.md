@@ -325,7 +325,7 @@ View the content of a specific stash.
 If, however, you wish to view the content of a single file from a specific stash, you need to use the `git show` command:  
 $ `git show stash@{0}:src/app/app.js`   
 If you want to see the diff of a specific file in the stash, you have to use the `git diff` command:  
-$ `git diff stash@{0}^1 stash@{0} -- <filename>`
+$ `git diff stash@{0}^1 stash@{0} -- <filename>`   
 The `stash@{0}^1` shortcut means the first parent of the given stash, which is the commit at which
 the changes were stashed away. We use this form of "git diff" (with two commits) because we have
 to tell git which parent we want to diff against. Equivalent, but more cryptic:   
