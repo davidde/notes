@@ -271,26 +271,26 @@ Undo all commits that came after cffd76070aaebf82e4b!
 --hard: will also get rid of everything you've done since then;  
 all unpublished commits will be lost from your hard disk.  
 
-* git rm filename  
+### $ `git rm filename`  
 Remove a file from both git and working directory,  
 so it doesn't longer show up as an untracked file.
 
-* git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81  
+### $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81`  
 Compare a specific commit to its parent commit.
 
-* git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go  
+* $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go`  
 Look at a specific commit of the main.go file (path required) in less pager.
 
-* git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go | vi -  
+* $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go | vi -`  
 Look at a specific commit of the main.go file (path required) in vi editor.
 
-* git show HEAD:main.go  
+* $ `git show HEAD:main.go`  
 Show the head (most recent) commit of main.go
 
-* git show HEAD~2:main.go | vi -  
+* $ `git show HEAD~2:main.go | vi -`  
 Show the third latest commit of main.go in the vi editor.
 
-* git status  
+### $ `git status`  
 Lists all new or modified files to be committed.
 
 ### $ `git stash`  
@@ -332,4 +332,13 @@ The `stash@{0}^1` shortcut means the first parent of the given stash, which is t
 the changes were stashed away. We use this form of "git diff" (with two commits) because we have
 to tell git which parent we want to diff against. Equivalent, but more cryptic:   
 $ `git diff stash@{0}^! -- <filename>`
+
+### $ `git submodule add https://github.com/matcornic/hugo-theme-learn.git themes/hugo-theme-learn`   
+Add the project located at the github link as a submodule to the project in the working directory.
+This allows combining several git repos in a single project.  
+**Beware**:   
+When pulling a github project, its submodules are **NOT** automatically pulled along!   
+For that, you have to:   
+$ `git submodule init`   
+$ `git submodule update`   
 
