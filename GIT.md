@@ -214,12 +214,14 @@ the history of your repository. If you force push, people who have already clone
 your repository will have to manually fix their local history.
 For more information, see ["Recovering from upstream rebase"](https://git-scm.com/docs/git-rebase#_recovering_from_upstream_rebase) in the Git manual.
 
-* git remote add origin "remote repository URL"  
+### $ `git remote add origin [remote-repository-URL]`  
 Add your project to github by setting a remote first.  
 Afterwards, push or pull your project by running:  
 $ git push origin master  
 $ git pull origin master  
 (Run: "git remote -v" to check if remote was added correctly)  
+(To change the URL, for instance from `git` to `https`, use:  
+$ `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`)  
 upstream/master: this is the repository you forked, to which you're trying
 to contribute. When collaborating, it's often necessary to add this repository
 as a remote, in order to resolve merge conflicts between your fork and upstream:  
