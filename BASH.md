@@ -286,6 +286,11 @@ The Debian command will work on Mac, but not the other way around.
 
 **Note**: There is still another 'rename' in use on older Red Hat and CentOS distributions!
 
+### $ `rm -rf /path/to/directory`    
+Remove the directory **and** all its contents.   
+-f, --force: ignore nonexistent files and arguments, never prompt.   
+-r, -R, --recursive: remove directories and their contents recursively.
+
 ### $ `scp /path/to/local/file remote_username@remote_server:/path/to/remote/destination`   
 Securely copy a local file to a remote server over SSH.   
 For the reverse, copying a remote file to your local machine, log in to the remote server over SSH,
