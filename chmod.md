@@ -25,12 +25,20 @@ r‒‒ in symbolic = 100 in binary = 4+0+0 in octal = 4
 ‒w‒ in symbolic = 010 in binary = 0+2+0 in octal = 2   
 ‒‒x in symbolic = 001 in binary = 0+0+1 in octal = 1   
 
-Default permissions:   
+Standard permissions before `umask` is applied:   
+
+|    Filetype        |   symbolic   |   octal    |
+|--------------------|--------------|------------|
+|   **Files**        |  ‒rw‒rw‒rw‒  |   0666     |
+|   **Directories**  |  drwxrwxrwx  |   0777     |
+
+Default permissions (after the conventional `umask 022` is applied):   
 
 |    Filetype        |   symbolic   |   octal    |
 |--------------------|--------------|------------|
 |   **Files**        |  ‒rw‒r‒‒r‒‒  |   0644     |
 |   **Directories**  |  drwxr‒xr‒x  |   0755     |
+
 
 Use `ls -l` or `ll` to verify permissions.
 
