@@ -77,8 +77,9 @@ See [this](../bash.md#-find) for an explanation of the `find` command.
 Note that the only case where www-data needs write permissions is for directories storing uploads
 and other locations which needs to be written, so we do not assign any group write permissions.
 
-* Optionally, we can change the umask so all files created in the future will restrict access for 'other',
-by putting `umask 027` in `~/.bashrc` or `~/.zshrc`. Note that this is a global setting for the server.
+* Optionally, we can change the umask so all files created in the future will restrict access for 'other':  
+Put `umask 027` in `~/.bashrc` or `~/.zshrc`.  
+Note that this is a global setting for the server.
 
 * Install Nginx to serve our application:   
 $ `sudo apt install nginx`   
