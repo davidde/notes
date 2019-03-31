@@ -2,11 +2,11 @@
 SSH (Secure SHell) is a networking protocol, commonly used to 'log in' to a VPS or cloud server.  
 
 The `ssh` command is used like this:   
-$ ssh remote_username@remote_ipaddress (-i /path/to/privatekey)    
+$ `ssh remote_username@remote_ipaddress (-i /path/to/privatekey)`    
 SSH into the server with IP address 'remote_ipaddress' as user 'remote_username'.  
 If your username is the same locally and on the server, you can leave it out:  
-$ ssh ipaddress  
--i: Only required when using a private key not named '~/.ssh/id_rsa'.  
+$ `ssh ipaddress`  
+-i: Only required when using a private key not named `~/.ssh/id_rsa`.  
 -p: Port to connect to on the remote host. Only required when it's a non-standard port number for ssh.   
 -vvv: verbosity, useful for debugging.   
 Enter `exit` or press **CTRL + D** to exit the remote server.
@@ -49,7 +49,7 @@ a shell session is spawned or the requested command is executed.
 
 ## How-to
 The first step to configure SSH key authentication to your server is to generate an SSH key pair on your local computer:  
-$ ssh-keygen (-C `your_email@example.com`)  
+$ `ssh-keygen (-C your_email@example.com)`  
 (-C: comment; this can be any random string. This flag is not required, but exists so people can recognize
 what/who each key belongs to; in professional environments there are often multiple network techs, 
 and typical authorized_keys files can hold dozens of keys. The comment flag can be used however you like,
@@ -94,9 +94,9 @@ $ `ssh-keygen -R [hostname or IP address]`
 (Another name is required when you don't want a single ssh key pair for sshing into multiple servers.)  
 However, if they are not named `~/.ssh/id_rsa`, then you need to explicitly reference the key
 in the ssh command like so:  
-$ ssh user@server -i /path/to/mykey  
+$ `ssh user@server -i /path/to/mykey`  
 
-It is not uncommon to use multiple key pairs. Instead of running `$ ssh user@server -i /path/to/mykey`,
+It is not uncommon to use multiple key pairs. Instead of running $ `ssh user@server -i /path/to/mykey`,
 you can use a **configuration file, ~/.ssh/config**:  
 ```
 Host yourhost
@@ -105,7 +105,7 @@ Host yourhost
 ```
 Common settings are the IdentityFile (= the private keys) and Host. If you omit 'Host yourhost',
 the settings will apply to all SSH connections. This configuration will check "id_dsa" and "custom_key" only
-as private keys when connecting with `$ ssh youruser@yourhost`.
+as private keys when connecting with $ `ssh youruser@yourhost`.
 
 Example to tell git which private key to use:
 ```
@@ -114,7 +114,7 @@ host github.com
  IdentityFile ~/.ssh/github_rsa
  User git
 ```
-Now you can do `$ git clone git@github.com:username/repo.git`.
+Now you can do $ `git clone git@github.com:username/repo.git`.
 
 Another **~/.ssh/config** example for Vultr:  
 ```
@@ -125,15 +125,15 @@ Host vultr
  IdentityFile ~/.ssh/vultr_rsa
 ```
 Now you can simply type:   
-$ ssh vultr   
+$ `ssh vultr`   
 Which is equivalent to:   
-$ ssh root@198.13.59.103 -i ~/.ssh/vultr_rsa -p 22   
+$ `ssh root@198.13.59.103 -i ~/.ssh/vultr_rsa -p 22`   
 (It would find everything it needs in your  ~/.ssh/config, under the `Host vultr` entry.)
  
-**NOTE**: If the config file is new, don't forget to do `$ chmod 600 ~/.ssh/config`.  
+**NOTE**: If the config file is new, don't forget to do $ `chmod 600 ~/.ssh/config`.  
 Also verify that the permissions on IdentityFile are 400! SSH will reject, in a not clearly explicit manner,
 SSH keys that are too readable. It will just look like a credential rejection. The solution, in this case, is:  
-$ chmod 400 ~/.ssh/github_rsa
+$ `chmod 400 ~/.ssh/github_rsa`
 
 Generally speaking though, using a **single ssh key pair WITH a passphrase** holds a fair middle ground
 between security and convenience, especially with the help of `ssh-agent`. But on the other hand, reusing
@@ -143,12 +143,12 @@ a single key on too many services *will* make it inconvenient if you ever decide
 (This is only necessary when you have set a passphrase for your private key,
 and you don't want to specify it on every authentication)
 1. Start the ssh-agent in the background:  
-$ eval $(ssh-agent)
+$ `eval $(ssh-agent)`
 2. Add your SSH private key to the ssh-agent:
    - If it has the standard 'id_rsa' name, simply run:  
-   $ ssh-add  
+   $ `ssh-add`  
    - If you created your key with a different name/path, add the path to the command:  
-   $ ssh-add ~/.ssh/user1_host1  
+   $ `ssh-add ~/.ssh/user1_host1`  
    - Enter the passphrase for the specific private key
    
 ## Adding your public key to a remote server
@@ -164,22 +164,22 @@ $ eval $(ssh-agent)
 The recommended way to add your public key to a VPS is through the command line, since trying to do this through
 your hosting company's online UI often results in more trouble than it's worth.   
 In your local terminal, it's as simple as:   
-$ ssh-copy-id remote_username@remote_ip_address   
+$ `ssh-copy-id remote_username@remote_ip_address`   
 Use the -i flag for a non-default public key, e.g.:   
-$ ssh-copy-id remote_username@remote_ip_address -i ~/.ssh/github_rsa.pub
+$ `ssh-copy-id remote_username@remote_ip_address -i ~/.ssh/github_rsa.pub`
 
 Then check if everything went properly by logging in:  
-$ ssh remote_username@remote_ip_address  
+$ `ssh remote_username@remote_ip_address`  
 If everything went well, you will be logged in immediately.
 
 **Note**:   
 It's unsafe and considered bad practice to put your public key onto the remote machine's root user,
 since this allows SSHing straight into the root.   
 So do NOT execute:   
-$ ssh-copy-id root@remote_ip_address  
+$ `ssh-copy-id root@remote_ip_address`  
 
 Accessing the root user should be done by escalating privileges after SSHing
 into the non-root user with sudo privileges, using either:   
-$ su -   
-$ sudo -i   
-$ sudo 'command'
+$ `su -`   
+$ `sudo -i`   
+$ `sudo [command]`
