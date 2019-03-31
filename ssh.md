@@ -79,8 +79,9 @@ or perhaps a single instance of an application running on a single machine. The 
 **There are NO universally-applicable guidelines on how to run your security**; the more additional security you add,
 the more convenience you give up.   
 E.g. when using a passphrase you have to enter it every time you use this key,
-unless you are running `ssh-agent` software that stores the decrypted key.  
-However, **keeping your private key encrypted with a passphrase adds a significant amount of security**.
+unless you are running [ssh-agent](./ssh.md#setting-up-ssh-agent) software that stores the decrypted key.  
+However, **keeping your private key encrypted with a passphrase adds a significant amount of security**,
+and you can get rid of the inconvenience by using [ssh-agent](./ssh.md#setting-up-ssh-agent).
 
 You can change the passphrase for an existing private key without regenerating
 the keypair by typing the following command:  
