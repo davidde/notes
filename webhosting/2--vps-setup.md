@@ -55,7 +55,7 @@ $ `sudo apt install openssh-client`
     - $ `sudo systemctl status ssh`
 ---------------------------------------------------------------
 
-## Create a non-root User Account with sudo access on your VPS
+## Create a non-root user with sudo access on your VPS
 * For security reasons, it is not advisable to be performing daily computing tasks using the root account.
   Instead, it is recommended to create a standard user account that will be using sudo to gain administrative privileges:   
   $ `adduser david`   
