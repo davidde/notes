@@ -55,7 +55,7 @@ $ `sudo apt install openssh-client`
     - $ `sudo systemctl status ssh`
 ---------------------------------------------------------------
 
-## Create a non-root User Account on your VPS
+## Create a non-root User Account with sudo access on your VPS
 * For security reasons, it is not advisable to be performing daily computing tasks using the root account.
   Instead, it is recommended to create a standard user account that will be using sudo to gain administrative privileges:   
   $ `adduser david`   
@@ -88,7 +88,7 @@ Adding the user you created to the sudo group can be accomplished with several c
   - $ `adduser david sudo`   
   - $ `gpasswd -a david sudo`   
   - $ `usermod -aG sudo david`  
-On Debian/Ubuntu systems, `adduser` is the generally recommended command.
+On Debian/Ubuntu systems, [adduser](../bash.md#-sudo-adduser-david) is the generally recommended command.
 
 * Test the sudo access:
   - Switch to the newly created user:  
