@@ -89,7 +89,7 @@ curl = see url; it returns the content at the requested url
 -d: HTTP POST data
 
 ### $ `df -Th`  
-Report file system disk space usage. Also useful for finding the mount points of all currently mounted file systems.
+Report file system disk space usage. Also useful for finding the mount points of all currently mounted file systems.  
 You can also specify a path like so:   
 $ `df -Th .`
 
