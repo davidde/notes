@@ -88,6 +88,11 @@ curl = see url; it returns the content at the requested url
 -X: Specify request command to use (e.g. POST, default is GET)  
 -d: HTTP POST data
 
+### $ `df -Th`  
+Report file system disk space usage. Also useful for finding the mount points of all currently mounted file systems.
+You can also specify a path like so:   
+$ `df -Th .`
+
 ### $ `diff -u [old_file] [new_file]`  
 Check where the differences between 2 versions of a file are.  
 (-u = unified diff format => easier to read.)
