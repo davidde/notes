@@ -28,3 +28,17 @@ Typing .ico in the filename will automatically select the .ico format!
 Click `Export`; if everything is correct, you should be presented with the 4 png images we selected for the .ico.  
 Check the boxes for `Compressed`, so the .ico doesn't get too large and click `Export` again.  
 You should now have the favicon.ico available.
+
+## Converting a png image to svg
+* Open the png image with Inkscape. Choose `Link`, `From file` and `Smooth (optimizeQuality)` in the radio buttons.
+
+* Select the image. In the menu, go to `Path` > `Trace Bitmap...` >  In the `Multiple scans` section,
+select `Colors` and check `Remove background` if you want no background.
+
+* Click ok, and close the window. Now drag your image down, and you will see there is another one right below it;  
+the one you dragged away is the svg, and the bottom one is the png. Delete the png image.
+
+* In the menu, go to `File` > `Save As...` > and select `Optimized SVG (*.svg)` in the filetype dropdown.   
+This is important! Do not select any of the other svg types like 'Inkscape SVG'. Click `Save`.
+
+* All done. The saved svg image is identical to the png image but without background.
