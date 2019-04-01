@@ -29,6 +29,22 @@ Click `Export`; if everything is correct, you should be presented with the 4 png
 Check the boxes for `Compressed`, so the .ico doesn't get too large and click `Export` again.  
 You should now have the favicon.ico available.
 
+## Creating a new png image from selection
+* Open the image in GIMP, and use the `Rectangle Select Tool` to select the part you want to keep.  
+If you want a square selection, push and hold Shift after you started dragging.  
+Use the `Ellipse Select Tool` for an ellipse/circle.
+
+* Right-click the selection, and click `Edit` > `Copy`.
+
+* Create a new file by clicking `File` > `New...` and specifying your dimensions.
+
+* In the new file, right-click the canvas and click `Edit` > `Paste`.
+
+* In the layer section, right-click the pasted layer and click `To New Layer`.
+
+* With the layer selected, click `Layer` in the menu > `Scale Layer...`.
+Enter the dimensions you wish to scale the layer to (most likely the same as the file's dimensions).
+
 ## Converting a png image to svg
 * Open the png image with Inkscape. Choose `Link`, `From file` and `Smooth (optimizeQuality)` in the radio buttons.
 
