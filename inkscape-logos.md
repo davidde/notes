@@ -54,7 +54,11 @@ select `Colors` and check `Remove background` if you want no background.
 * Click ok, and close the window. Now drag your image down, and you will see there is another one right below it;  
 the one you dragged away is the svg, and the bottom one is the png. Delete the png image.
 
-* In the menu, go to `File` > `Save As...` > and select `Optimized SVG (*.svg)` in the filetype dropdown.   
-This is important! Do not select any of the other svg types like 'Inkscape SVG'. Click `Save`.
+* Edit the svg if you are not satisfied with the quality:  
+  - Use the eraser to erase paths that are too blurry.
+  - Renew the `Fill` color if a single-colored object is not evenly colored.
+
+* In the menu, go to `File` > `Save As...` > and select `Inkscape SVG (*.svg)` in the filetype dropdown.   
+Click `Save`.
 
 * All done. The saved svg image is identical to the png image but without background.
