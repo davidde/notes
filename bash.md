@@ -247,13 +247,14 @@ To rename 'index4_type9.txt' to 't9_i4.txt'.
 Node Version Manager: bash script used to manage multiple active Node.js versions.
 
 * $ `nvm install --lts`  
-Install the node LTS release. For a specific version, just replace the `--lts` with the version number.
+Install the node LTS release. For another version, just replace the `--lts` with the specific version number:  
+$ `nvm install 11.4.0`
 * $ `nvm alias default 10`  
 Set the default node version to 10 (2018's LTS).
 * $ `nvm ls`  
 List all installed node versions.
 * $ `nvm use 11.4.0`  
-Change the currently active Node version.
+Change the currently active node version to 11.4.0.
 
 ### $ `qpdf -decrypt InputFile OutputFile`  
 Remove protection/encryption from pdf files.
