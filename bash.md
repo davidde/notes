@@ -252,6 +252,8 @@ Install the node LTS release. For a specific version, just replace the `--lts` w
 Set the default node version to 10 (2018's LTS).
 * $ `nvm ls`  
 List all installed node versions.
+* $ `nvm use 11.4.0`  
+Change the currently active Node version.
 
 ### $ `qpdf -decrypt InputFile OutputFile`  
 Remove protection/encryption from pdf files.
