@@ -243,6 +243,16 @@ So you do something like:
 $ `mmv "index*_type*.txt" "t#2_i#1.txt"`  
 To rename 'index4_type9.txt' to 't9_i4.txt'.
 
+### $ `nvm`  
+Node Version Manager: bash script used to manage multiple active Node.js versions.
+
+* $ `nvm install --lts`  
+Install the node LTS release. For a specific version, just replace the `--lts` with the version number.
+* $ `nvm alias default 10`  
+Set the default node version to 10 (2018's LTS).
+* $ `nvm ls`  
+List all installed node versions.
+
 ### $ `qpdf -decrypt InputFile OutputFile`  
 Remove protection/encryption from pdf files.
 
