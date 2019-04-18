@@ -243,6 +243,10 @@ So you do something like:
 $ `mmv "index*_type*.txt" "t#2_i#1.txt"`  
 To rename 'index4_type9.txt' to 't9_i4.txt'.
 
+E.g.:  
+$ `mmv -n 'My.Awesome.Series.S01/Subs/My.Awesome.Series.S01E*/English.srt' 'My.Awesome.Series.S01/My.Awesome.Series.S01E#1-English.srt'`  
+To move all subtitles from their separate folders into the main series folder, with adjusted names.
+
 ### $ `nvm`  
 Node Version Manager: bash script used to manage multiple active Node.js versions.
 
