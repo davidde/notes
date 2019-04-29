@@ -194,9 +194,13 @@ Or alternatively, use `adduser`:
 $ `sudo adduser david www-data`   
 $ `sudo deluser david www-data`
 
-### $ `grep -r [StringToFind] .`  
-Look for 'StringToFind' in all files in the current directory (.)  
--r: look recursively (i.e. also look in subdirectories)
+### $ `grep -r 'StringToFind' .`  
+Search for 'StringToFind' in all files in the current directory (.)  
+-r, --recursive: Search recursively (i.e. also look in subdirectories)  
+-R: Search recursively **and** follow all symbolic links.  
+--exclude-dir: exclude the specified directories from being searched, e.g.:  
+$ `grep -R --exclude-dir=node_modules 'StringToFind' [/path/to/search]`  
+$ `grep -R --exclude-dir={node_modules,.cache} 'StringToFind' [/path/to/search]`
 
 ### Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
 $ `echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list`  
