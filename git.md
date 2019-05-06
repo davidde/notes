@@ -28,8 +28,11 @@ This is useful if you want to upload an existing project to Github.
 ### $ `git branch [new_branch]`  
 Create the branch 'new_branch'.
 
-### $ `git branch -u origin/[remote-branch]`
-### = `git branch --set-upstream-to=origin/[remote-branch]`  
+* $ `git branch -a`  
+Show all branches.
+
+* $ `git branch -u origin/[remote-branch]`  
+ = $ `git branch --set-upstream-to=origin/[remote-branch]`  
 This sets the default remote branch for the current local branch.  
 Any future git pull command (with the current local branch checked-out),
 will attempt to bring in commits from the 'remote-branch' into the current local branch.
@@ -38,41 +41,38 @@ One way to avoid having to explicitly do `--set-upstream-to` is to use the short
 $ `git push -u origin local-branch`  
 which sets the upstream association for any future push/pull attempts automatically.  
 
-* git branch -a  
-Show all branches.
-
-* git checkout cffd76070aaebf82e4b5eb330fe9a2df944c1b81  
+### $ `git checkout cffd76070aaebf82e4b5eb330fe9a2df944c1b81`  
 Checkout commit cffd76070aaebf82e4b5eb330fe9a2df944c1b81.
 
-* git checkout master (--force)  
+* $ `git checkout master (--force)`  
 Move back to the master/head commit.  
---force: When you've made changes that aren't committed,
-git won't let you checkout another branch. The "--force" flag
-forces git to checkout anyway, which will result in losing the changes.
+--force: When you've made changes that aren't committed, git won't let you checkout another branch.  
+The "--force" flag forces git to checkout anyway, which will result in losing the changes.
 
-* git checkout -b test_branch (cffd76070)  
+* $ `git checkout -b test_branch (cffd76070)`  
 = Shorthand for:  
-$ git branch test_branch (cffd76070)  
-$ git checkout test_branch (cffd76070)  
+$ `git branch test_branch (cffd76070)`  
+$ `git checkout test_branch (cffd76070)`  
 (cffd76070): Optionally specify a commit hash to base the branch on.
 When not specified, it is based on the currently checked out commit
 (current position of head) So when you're in detached head state
 (= after checkout of commit hash instead of branch), you can simply
 run 'git checkout -b test_branch' to turn that commit into a real branch.
 Afterwards, simply:  
-$ git checkout master  
-$ git branch -d test-branch  
+$ `git checkout master`  
+$ `git branch -d test-branch`  
 to checkout master, and delete the branch (locally) if you don't need it anymore.  
 To also delete the branch remotely (on Github):  
-$ git push origin --delete test_branch  
+$ `git push origin --delete test_branch`  
 
-* git commit (-a) -m "Description of changes"  
+### $ `git commit (-a) -m "Description of changes"`  
 Commit all staged files permanently to version history.  
+ 
+* $ `git commit -am "Description of changes"`  
 -a/--all: Automatically stage/add all tracked files that were modified; this means you don't
 have to manually stage/'git add' all files that are modified.  
-Shortcut: $ git commit -am "Description of changes"
 
-* git commit --amend  
+* $ `git commit --amend`  
 Rewrite the most recent commit message and/or commit content (if they have not yet been pushed online).  
 If you want to also edit the commit's content, you need to 'git add' the edited files before amending,  
 so you may or may not have to 'git stash' code that shouldn't be included.  
@@ -80,23 +80,29 @@ so you may or may not have to 'git stash' code that shouldn't be included.
 Changing the commit message will change the commit ID, i.e. the SHA1 checksum that names the commit.  
 Effectively, you are creating a new commit that replaces the old one, but keeps its date.)
 
-* git diff  
+### $ `git diff`  
 Shows all modifications that are NOT yet staged.  
 (= difference between working directory and staging area)
 
-* git diff --staged  
+* $ `git diff --staged`  
 Shows all modifications that are staged.  
 (= difference between staging area and last commit)
 
-* git diff cffd76070aaebf82e4b5eb330fe9 1e14e1134d7eabf136d6210a6d87a99  
-or: git diff cffd76070aaebf82e4b5eb330fe9 1e14e  
-or: git diff cffd 1e14  
-=   git diff old new!  
+* $ `git diff cffd76070aaebf82e4b5eb330fe9 1e14e1134d7eabf136d6210a6d87a99`  
+or: `git diff cffd76070aaebf82e4b5eb330fe9 1e14e`  
+or: `git diff cffd 1e14`  
+=   `git diff [old] [new]`!  
 (you may abbreviate commit hashes; the first 4 or more chars suffice)  
 Compare 2 specific commits (get commit hash from 'git log' command)
 
-* git log (--stat)  
-          (--oneline --graph master other_branch)  
+* To permanently exclude a specific file in your repository from the diff command:  
+$ `git config diff.nodiff.command /bin/true`  
+$ `cat >.git/info/attributes`  
+\> `package-lock.json    diff=nodiff`  
+From now onwards, `package-lock.json` will be excluded from any diff.  
+Use `--global` in the first command to accomplish this for all your repos.
+
+### $ `git log (--stat) (--oneline) (--graph master other_branch)`  
 Log of all git commits in less pager (q to exit).  
 --stat: shows additional data like the files that were changed,
 and insertions/deletions.  
@@ -104,19 +110,19 @@ and insertions/deletions.
 --graph master other_branch: show a graph of how the commits
 in both branches relate to each other.
 
-* git log --name-status  
+* $ `git log --name-status`  
 Adds the names and status of the changed files on every commit.
 
-* git log --format=fuller  
+* $ `git log --format=fuller`  
 Shows the difference between AuthorDate and CommitDate. They are usually the same,
 but can differ for example after a 'git rebase'. The CommitDate is taken into account
 when creating the commit hash, so a 'git rebase' without changes still modifies the hash.  
 Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
 
-* git log | cat  
+* $ `git log | cat`  
 Prints git log output on standard output/ terminal.
 
-* git ls-files  
+### $ `git ls-files`  
 Lists all the files that exist in the latest commit on the current branch.
 
 * git merge master other_branch  
