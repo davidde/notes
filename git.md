@@ -126,28 +126,16 @@ $ `cat >.git/info/attributes`
 From now onwards, `package-lock.json` will be excluded from any diff.  
 Use `--global` in the first command to accomplish this for all your repos.
 
-### $ `git log (--stat) (--oneline) (--graph master other_branch)`  
-Log of all git commits in the less pager (q to exit).  
+### $ `git log`  
+Returns a log of all git commits in the less pager (q to exit).  
 To search in the less pager, use `/` followed by the search term and press enter.  
 Use `n` and `N` to move forwards/backwards in the search results.  
---stat: shows additional data like the files that were changed,
-and insertions/deletions.  
---oneline: show only one line per commit.  
---graph master other_branch: show a graph of how the commits
-in both branches relate to each other.
-
-* $ `git log 0a6bb439280d77458f`  
-This will show a log with the specified commit hash at the top;
-in other words, its child commits are ommitted, while its parents commits are just below it.
-
-* $ `git log --format=fuller`  
-Shows the difference between AuthorDate and CommitDate. They are usually the same,
-but can differ for example after a 'git rebase'. The CommitDate is taken into account
-when creating the commit hash, so a 'git rebase' without changes still modifies the hash.  
-Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
-
-* $ `git log --name-status`  
-Adds the names and status of the changed files of each commit to the log.
+Alternatively, you can also specify a commit hash:  
+$ `git log 0a6bb439280d77458f`  
+This will show the specified commit hash at the top with its parent commits below it.
+In other words, its child commits (commits made afterwards) are ommitted.  
+To print the git log output to the terminal instead of viewing it in less, use:  
+$ `git log | cat`  
 
 * $ `git log -L 3,4:[path/to/file]`  
 This command will present you with a log of all commits that changed line **4** in the specified file.  
@@ -164,26 +152,34 @@ To find when a specific line of code was introduced in a specific file, use:
 $ `git log -S ['Full-Line-of-Code'] [path/to/file]`  
 This gives you the commit(s) in which this line of code was introduced.
 
-* $ `git log | cat`  
-Prints git log output on standard output/ terminal.
+* $ `git log --format=fuller`  
+Shows the difference between AuthorDate and CommitDate. They are usually the same,
+but can differ for example after a 'git rebase'. The CommitDate is taken into account
+when creating the commit hash, so a 'git rebase' without changes still modifies the hash.  
+Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
+
+* $ `git log --name-status`  
+Adds the names and status of the changed files of each commit to the log.
+
+* $ `git log --stat --oneline --graph master other_branch`  
+`--stat`: shows additional data like the files that were changed, and insertions/deletions.  
+`--oneline`: show only one line per commit (see other `--format` types above at `git log --format`).  
+`--graph master other_branch`: show a graph of how the commits in both branches relate to each other.
 
 ### $ `git ls-files`  
 Lists all the files that exist in the latest commit on the current branch.
 
-* git merge master other_branch  
-Merges the other_branch and the master branch into the
-currently checked out branch.
+### $ `git merge master other_branch`  
+Merges the other_branch and the master branch into the currently checked out branch.
 So the currently checked out branch is always included in a merge!
 To merge other_branch into master, do:  
-$ git checkout master  
-$ git merge other_branch  
-(Also, since the two branches are merged, the order in which they
-are typed into the command line does not matter. The key is to remember
-that "git merge" always merges all the specified branches
-**into the currently checked out branch**, creating a merge commit
-for that branch.)
+$ `git checkout master`  
+$ `git merge other_branch`  
+(Also, since the two branches are merged, the order in which they are typed into the command line
+does not matter. The key is to remember that `git merge` always merges all the specified branches
+**into the currently checked out branch**, creating a merge commit for that branch.)
 
-* git merge --abort  
+* $ `git merge --abort`  
 Restore your files to their state before you started the merge.
 
 * git mv old_filename new_filename  
