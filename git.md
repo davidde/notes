@@ -11,8 +11,14 @@
 | remote repository      | "Pull Request on Github" |
 | upstream repository    |     /                    |
 
-Git commands like log and diff show their output in the 'less' pager,
-which means 'q' to exit.
+Many git commands like `git log`, `git diff` and `git [command] --help` show their output  
+in the `less` pager, which means `q` to exit.  
+To search in the less pager, use `/` followed by the search term and press enter.  
+Use `n` and `N` to move forwards/backwards in the search results.  
+
+**Tip**:  
+$ `git [command] --help`  
+This gets you information on any git command.
 
 ## Basic git commands and usage, alphabetically:
 
@@ -24,6 +30,20 @@ Add main.go to be tracked by git, it is now said to be staged.
 Add all files in the directory.
 This is useful if you want to upload an existing project to Github.   
 (Use a .gitignore file that lists all exceptions)
+
+### $ `git blame [filepath]`  
+This will show you the commit hash, the time and the committer for each line.  
+Then you can use the commit hash in `git log [hash]` or `git show [hash]`  
+to find out more about it, like why it's done this way (if documented).  
+You can also use the -L flag to indicate the from-to line numbers you want info about:  
+$ `git blame -L 38,41 src/color/adjustHue.js`  
+Or for a single line, use:  
+$ `git blame -L 38,38 src/color/adjustHue.js`  
+**Note:**  
+`git blame` only reveals the last introduced changes to each line, not who or when the lines  
+were *first* introduced into the codebase. This can be rather annoying if the last change  
+was for example an indentation change.  
+Use `git log -S` to find the commits that first introduced a specific line of code.
 
 ### $ `git branch [new_branch]`  
 Create the branch 'new_branch'.
@@ -82,7 +102,11 @@ Effectively, you are creating a new commit that replaces the old one, but keeps 
 
 ### $ `git diff`  
 Shows all modifications that are NOT yet staged.  
-(= difference between working directory and staging area)
+(= difference between working directory and staging area)  
+Note:  
+`git diff` output is shown in the less pager (q to exit).  
+To search in the less pager, use `/` followed by the search term and press enter.  
+Use `n` and `N` to move forwards/backwards in the search results.  
 
 * $ `git diff --staged`  
 Shows all modifications that are staged.  
@@ -103,21 +127,35 @@ From now onwards, `package-lock.json` will be excluded from any diff.
 Use `--global` in the first command to accomplish this for all your repos.
 
 ### $ `git log (--stat) (--oneline) (--graph master other_branch)`  
-Log of all git commits in less pager (q to exit).  
+Log of all git commits in the less pager (q to exit).  
+To search in the less pager, use `/` followed by the search term and press enter.  
+Use `n` and `N` to move forwards/backwards in the search results.  
 --stat: shows additional data like the files that were changed,
 and insertions/deletions.  
 --oneline: show only one line per commit.  
 --graph master other_branch: show a graph of how the commits
 in both branches relate to each other.
 
-* $ `git log --name-status`  
-Adds the names and status of the changed files on every commit.
+* $ `git log 0a6bb439280d77458f`  
+This will show a log with the specified commit hash at the top;
+in other words, its child commits are ommitted, while its parents commits are just below it.
 
 * $ `git log --format=fuller`  
 Shows the difference between AuthorDate and CommitDate. They are usually the same,
 but can differ for example after a 'git rebase'. The CommitDate is taken into account
 when creating the commit hash, so a 'git rebase' without changes still modifies the hash.  
 Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
+
+* $ `git log --name-status`  
+Adds the names and status of the changed files of each commit to the log.
+
+* $ `git log -S 'search-string'`  
+This gives you the commits in which the 'search-string' was introduced.  
+Be aware that this command will return *every commit* in which this 'search-string'  
+was added to *any file*.  
+To find when a specific line of code was introduced in a specific file, use:  
+$ `git log -S ['Full-Line-of-Code'] [filepath]`  
+This gives you the commit(s) in which this line of code was introduced.
 
 * $ `git log | cat`  
 Prints git log output on standard output/ terminal.
