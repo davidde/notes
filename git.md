@@ -31,7 +31,7 @@ Add all files in the directory.
 This is useful if you want to upload an existing project to Github.   
 (Use a .gitignore file that lists all exceptions)
 
-### $ `git blame [filepath]`  
+### $ `git blame [path/to/file]`  
 This will show you the commit hash, the time and the committer for each line.  
 Then you can use the commit hash in `git log [hash]` or `git show [hash]`  
 to find out more about it, like why it's done this way (if documented).  
@@ -149,12 +149,19 @@ Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
 * $ `git log --name-status`  
 Adds the names and status of the changed files of each commit to the log.
 
+* $ `git log -L 3,4:[path/to/file]`  
+This command will present you with a log of all commits that changed line **4** in the specified file.  
+
+* $ `git log -p -- [path/to/file]`  
+This command allows you to efficiently view the change history of a single file.  
+It displays a log of all commits that changed the specific file, along with their diffs.
+
 * $ `git log -S 'search-string'`  
 This gives you the commits in which the 'search-string' was introduced.  
 Be aware that this command will return *every commit* in which this 'search-string'  
 was added to *any file*.  
 To find when a specific line of code was introduced in a specific file, use:  
-$ `git log -S ['Full-Line-of-Code'] [filepath]`  
+$ `git log -S ['Full-Line-of-Code'] [path/to/file]`  
 This gives you the commit(s) in which this line of code was introduced.
 
 * $ `git log | cat`  
