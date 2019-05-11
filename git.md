@@ -396,7 +396,7 @@ $ `git submodule update --remote --merge`
 Many applications allow user scripting. Usually the user's scripts are placed inside
 a specific directory that guarantees they can be accessed by the program.
 Since it is not possible to mix different git repos in one directory, manually updating
-them can be a chore. Even more so if the scripts are maintained elsewhere.  
+them can be a chore. Even more so if the scripts are maintained separately/elsewhere.  
 This approach gives us the best of both worlds: we keep git's version control,
 **and** we keep all the scripts neatly in a *single directory*!  
 This means updating all of them in one go is as simple as running
@@ -440,7 +440,7 @@ This means updating all of them in one go is as simple as running
   git submodule update
   ```
 
-* To update all submodules in one go:
+* To update all scripts/submodules in one go:
   ```
   git submodule update --remote --merge
   ```
