@@ -428,7 +428,8 @@ This means updating all of them in one go is as simple as running
       the linking will no longer be there.
     - To the contrary, symbolic links (`ln -s`) do preserve their linking in git.
       But the file contents will not be visible inside the links;
-      the file contents of the links will simply be the path to the linked file.
+      the file contents of the links will simply be the path to the linked file.  
+
   Regardlessly, symbolic links are more convenient since they won't break.
 
 * Then you can pull the meta-scripts repo wherever you need the scripts:
