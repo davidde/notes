@@ -424,9 +424,9 @@ This means updating all of them in one go is as simple as running
     - If you use hardlinks (`ln` without the `-s` flag) the advantage is that
       the file contents of the links will be visible to git.
       The disadvantage is that git does not preserve the linking.
-      To git they will be 2 separate files; when you clone the repo,
-      the linking will no longer be there.
-    - To the contrary, symbolic links (`ln -s`) do preserve their linking in git.
+      When you clone the repo, the link between the files will no longer be present;
+      both files will still be there, but without any relation between them.
+    - In contrast, symbolic links (`ln -s`) do preserve their linking in git.
       But the file contents will not be visible inside the links;
       the file contents of the links will simply be the path to the linked file.  
 
