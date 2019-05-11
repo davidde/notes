@@ -388,4 +388,58 @@ When pulling a github project, its submodules are **NOT** automatically pulled a
 For that, you have to:   
 $ `git submodule init`   
 $ `git submodule update`   
+If you want to update your submodules to their most recent upstream versions, use:  
+$ `git submodule update --remote --merge`  
 
+### Create a meta-repo that holds scripts from various other repos
+### A. Use case:
+Many applications allow user scripting. Usually the user's scripts are placed inside
+a specific directory that guarantees they can be accessed by the program.
+Since it is not possible to mix different git repos in one directory, manually updating
+them can be a chore. Even more so if the scripts are maintained elsewhere.  
+This approach gives us the best of both worlds: we keep git's version control,
+**and** we keep all the scripts neatly in a *single directory*!  
+This means updating all of them in one go is as simple as running
+`git submodule update --remote --merge`.
+
+### B. How to:
+* We create a `meta-scripts` directory as meta-repo with a `git` subdirectory inside.
+  This `git` subdirectory will hold the full repos from which we can then handpick
+  the relevant scripts, and link them to the main `meta-scripts` directory:
+  ```
+  mkdir meta-scripts meta-scripts/git
+  cd meta-scripts
+  git init
+  git submodule add https://github.com/user1/sub-project1.git git/sub-project1
+  git submodule add https://github.com/user2/sub-project2.git git/sub-project2
+  git commit -m 'Initial commit: add submodules'
+  ln (-s) git/sub-project1/script1.lua
+  ln (-s) git/sub-project2/script2.py
+  git add script1.lua script2.py
+  git commit -m 'Link scripts to main directory'
+  git remote add origin https://github.com/my-user/meta-scripts.git
+  git push -u origin master
+  ```
+  **Note on the links**:
+    - If you use hardlinks (`ln` without the `-s` flag) the advantage is that
+      the file contents of the links will be visible to git.
+      The disadvantage is that git does not preserve the linking.
+      To git they will be 2 separate files; when you clone the repo,
+      the linking will no longer be there.
+    - To the contrary, symbolic links (`ln -s`) do preserve their linking in git.
+      But the file contents will not be visible inside the links;
+      the file contents of the links will simply be the path to the linked file.
+  Regardlessly, symbolic links are more convenient since they won't break.
+
+* Then you can pull the meta-scripts repo wherever you need the scripts:
+  ```
+  cd /place/where/scripts/are/needed
+  git clone https://github.com/my-user/meta-scripts.git .
+  git submodule init
+  git submodule update
+  ```
+
+* To update all submodules in one go:
+  ```
+  git submodule update --remote --merge
+  ```
