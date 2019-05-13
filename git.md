@@ -427,8 +427,9 @@ This means updating all of them in one go is as simple as running
       When you clone the repo, the link between the files will no longer be present;
       both files will still be there, but without any relation between them.
     - In contrast, symbolic links (`ln -s`) do preserve their linking in git.
-      But the file contents will not be visible inside the links;
-      the file contents of the links will simply be the path to the linked file.  
+      However, the file contents of the links will not be visible to git;
+      when you look at the symbolically linked file through git/github you will
+      only see the path to the linked file (but the link will work on the filesystem).
 
   Regardlessly, symbolic links are more convenient since they won't break.
 
