@@ -395,10 +395,6 @@ Kill process with PID.
 ### $ `sudo lsof -i :8000`  
 Detect what process is listening to (and occupying) port 8000.
 
-### $ `tree -H . > contents.html`
-The `tree` command prints a tree diagram of the current directory structure to the terminal.  
-`> contents.html` pipes the output to the file contents.html.  
-`-H [href]`: print output in HTML form.
 
 ### $ `tail -f *.log`  
 Follows (-f) all log files, so you can troubleshoot.
@@ -414,3 +410,7 @@ More specific logs:
 ### $ `touch file.txt`  
 Create an empty file called 'file.txt'.
 
+### $ `tree -H . > contents.html`
+The `tree` command prints a tree diagram of the current directory structure to the terminal.  
+`> contents.html` pipes the output to the file contents.html.  
+`-H [href]`: print output in HTML form.
