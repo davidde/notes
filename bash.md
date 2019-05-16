@@ -52,7 +52,7 @@ Concatenate file2.txt to file1.txt and print output.
 * `cat <(head -n 100 'Version1.srt') <(tail -n +101 'Version2.srt') > Version3.srt`  
 Concatenate lines 101-end of Version2.srt to lines 1-100 of Version1.srt and store the result in Version3.srt.  
 This example uses process substitution (`<` and parentheses `()` around subcommands) to feed
-the stdout of the subcommands `head` and `tail` to the stdin of `cat`. It then redirects the stdout of `cat`
+the stdout of the subcommands [head](#-head-pathtofile) and [tail](#-tail-pathtofile) to the stdin of `cat`. It then redirects the stdout of `cat`
 to the file Version3.srt.
 
   **Note:** `Pipe |` vs `Redirect >` vs `Process substitution <()`  
@@ -64,7 +64,8 @@ to the file Version3.srt.
       $ `program1 | program2`
     - So a **pipe** is used to pass output to another **program or utility**.  
       E.g. $ `program1 | program2 | program3`
-    - However, what if you need to pipe the stdout of multiple commands? This is where **process substitution** comes in.
+    - However, what if you need to **pipe the stdout of multiple commands**?  
+      This is where **process substitution** comes in.  
       Process substitution can feed the stdout of multiple processes into the stdin of another process:  
       $ `program <(command1) <(command2)`  
       Even though they look similar with the < and >, they are functionally entirely different from redirects!  
