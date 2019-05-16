@@ -58,6 +58,8 @@ to the file Version3.srt.
   **Note:** `Pipe |` vs `Redirect >` vs `Process substitution <()`  
     - A **redirect** is used to pass output to either a **file or stream**.  
       E.g. $ `program > file.txt`  
+      If `file.txt` exists, it will be overwritten. If you want to append to it, use:  
+      $ `program >> file.txt`  
       If you want to pass the output from program1 to program2, you could do so with the following redirects:  
       $ `program1 > temp_file.txt && program2 < temp_file.txt`  
       But since this is so verbose, pipes were invented as a shortcut:  
