@@ -57,19 +57,20 @@ to the file Version3.srt.
 
   **Note:** `Pipe |` vs `Redirect >` vs `Process substitution <()`  
     - A **redirect** is used to pass output to either a **file or stream**.  
-      E.g. $ `program > file.txt`  
-      If `file.txt` exists, it will be overwritten. If you want to append to it, use:  
-      $ `program >> file.txt`  
+      E.g. `program > file.txt`  
+      If `file.txt` exists, it will be overwritten.   
+      If you want to append to `file.txt`, use:  
+      `program >> file.txt`   
       If you want to pass the output from program1 to program2, you could do so with the following redirects:  
-      $ `program1 > temp_file.txt && program2 < temp_file.txt`  
+      `program1 > temp_file.txt && program2 < temp_file.txt`  
       But since this is so verbose, pipes were invented as a shortcut:  
-      $ `program1 | program2`
+      `program1 | program2`
     - So a **pipe** is used to pass output to another **program or utility**.  
-      E.g. $ `program1 | program2 | program3`
+      E.g. `program1 | program2 | program3`
     - However, what if you need to **pipe the stdout of multiple commands**?  
       This is where **process substitution** comes in.  
       Process substitution can feed the stdout of multiple processes into the stdin of another process:  
-      $ `program <(command1) <(command2)`  
+      `program <(command1) <(command2)`  
       Even though they look similar with the < and >, they are functionally entirely different from redirects!  
       Also, process substitution does not allow spaces between the `<` and `()`.
 
