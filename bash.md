@@ -227,7 +227,7 @@ $ `grep -R --exclude-dir=node_modules 'StringToFind' [/path/to/search]`
 $ `grep -R --exclude-dir={node_modules,.cache} 'StringToFind' [/path/to/search]`
 
 ### $ `head path/to/file`  
-Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile-).  
+Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile).  
 `-n [(-)num]`: Print the first `num` lines of the file.  
 With the leading '-', print all but the last `num` lines of the file.
 
@@ -426,7 +426,7 @@ Detect what process is listening to (and occupying) port 8000.
 
 
 ### $ `tail path/to/file`  
-Print the last 10 lines of the file. Opposite of [head](#-head-pathtofile-).  
+Print the last 10 lines of the file. Opposite of [head](#-head-pathtofile).  
 `-n [(+)num]`: Print the last `num` lines of the file.  
 When you use `+num` it starts printing at line `num` to the end of the file. (Instead of num lines *from* the end)  
 `-f, --follow`: Follow the file interactively as it grows.  
