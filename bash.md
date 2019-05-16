@@ -46,6 +46,30 @@ Show the content of the 'package.json' file.
 Create package.json from command line. This command will await input from user;  
 after typing/copying text, press **CTRL+D** to exit.
 
+* `cat file1.txt file2.txt`  
+Concatenate file2.txt to file1.txt and print output.
+
+* `cat <(head -n 100 'Version1.srt') <(tail -n +101 'Version2.srt') > Version3.srt`  
+Concatenate lines 101-end of Version2.srt to lines 1-100 of Version1.srt and store the result in Version3.srt.  
+This example uses process substitution (`<` and parentheses `()` around subcommands) to feed
+the stdout of the subcommands `head` and `tail` to the stdin of `cat`. It then redirects the stdout of `cat`
+to the file Version3.srt.
+
+  **Note:** `Pipe |` vs `Redirect >` vs `Process substitution <()`  
+    - A **redirect** is used to pass output to either a **file or stream**.  
+      E.g. $ `program > file.txt`  
+      If you want to pass the output from program1 to program2, you could do so with the following redirects:  
+      $ `program1 > temp_file.txt && program2 < temp_file.txt`  
+      But since this is so verbose, pipes were invented as a shortcut:  
+      $ `program1 | program2`
+    - So a **pipe** is used to pass output to another **program or utility**.  
+      E.g. $ `program1 | program2 | program3`
+    - However, what if you need to pipe the stdout of multiple commands? This is where **process substitution** comes in.
+      Process substitution can feed the stdout of multiple processes into the stdin of another process:  
+      $ `program <(command1) <(command2)`  
+      Even though they look similar with the < and >, they are functionally entirely different from redirects!  
+      Also, process substitution does not allow spaces between the `<` and `()`.
+
 * `cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4`  
 Concatenate .vob dvd files, and then convert them to .mp4.
 
@@ -201,6 +225,11 @@ Search for 'StringToFind' in all files in the current directory (.)
 --exclude-dir: exclude the specified directories from being searched, e.g.:  
 $ `grep -R --exclude-dir=node_modules 'StringToFind' [/path/to/search]`  
 $ `grep -R --exclude-dir={node_modules,.cache} 'StringToFind' [/path/to/search]`
+
+### $ `head path/to/file`  
+Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile-).  
+`-n [(-)num]`: Print the first `num` lines of the file.  
+With the leading '-', print all but the last `num` lines of the file.
 
 ### Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
 $ `echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list`  
@@ -396,9 +425,15 @@ Kill process with PID.
 Detect what process is listening to (and occupying) port 8000.
 
 
-### $ `tail -f *.log`  
-Follows (-f) all log files, so you can troubleshoot.
-(tail = last 10 lines)
+### $ `tail path/to/file`  
+Print the last 10 lines of the file. Opposite of [head](#-head-pathtofile-).  
+`-n [(+)num]`: Print the last `num` lines of the file.  
+When you use `+num` it starts printing at line `num` to the end of the file. (Instead of num lines *from* the end)  
+`-f, --follow`: Follow the file interactively as it grows.  
+This is really useful for monitoring log files to troubleshoot:  
+
+* $ `tail -f *.log`  
+Follows (-f) all log files, so you can track potential issues.
 
 More specific logs:  
 * $ `tail -f /var/log/kern.log`   
