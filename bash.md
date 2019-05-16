@@ -229,8 +229,11 @@ $ `grep -R --exclude-dir={node_modules,.cache} 'StringToFind' [/path/to/search]`
 
 ### $ `head path/to/file`  
 Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile).  
-`-n [(-)num]`: Print the first `num` lines of the file.  
-With the leading '-', print all but the last `num` lines of the file.
+`-n [(-)num]`: Print the first `num` lines of the file.   
+    Head's output always starts at the start (head) of the file; the variable here is num:   
+    - Num by default measures from the head, i.e. start of the file.  
+    - Using `-` before the num lets num measure from the end of the file.   
+    This means the resulting output will be from the start of the file to `num` lines before the end of the file.
 
 ### Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
 $ `echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list`  
@@ -428,8 +431,11 @@ Detect what process is listening to (and occupying) port 8000.
 
 ### $ `tail path/to/file`  
 Print the last 10 lines of the file. Opposite of [head](#-head-pathtofile).  
-`-n [(+)num]`: Print the last `num` lines of the file.  
-When you use `+num` it starts printing at line `num` to the end of the file. (Instead of num lines *from* the end)  
+`-n [(+)num]`: Print the last `num` lines of the file.   
+    Tail's output always ends at the end (tail) of the file; the variable here is num:   
+    - Num by default measures from the tail, i.e. end of the file.  
+    - Using `+` before the num lets num measure from the start of the file.  
+    So when using `+num`, output starts at line `num` to the end of the file (instead of num lines *from* the end).   
 `-f, --follow`: Follow the file interactively as it grows.  
 This is really useful for monitoring log files to troubleshoot:  
 
