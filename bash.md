@@ -459,3 +459,14 @@ Create an empty file called 'file.txt'.
 The `tree` command prints a tree diagram of the current directory structure to the terminal.  
 `> contents.html` pipes the output to the file contents.html.  
 `-H [href]`: print output in HTML form.
+
+### Upgrade a single package using apt
+(Supposing you have added the package repository to your system)
+
+* $ `sudo apt update`  
+This will update your system's packages index. It will list all packages the index contains.  
+If updates are available for a package, it will be listed behind it as `[x kB]`.
+
+* $ `sudo apt install code`  
+This will install a new version of vscode from the packages index.
+
