@@ -31,34 +31,34 @@ $ `rename 'y/a-z/A-Z/' *.jpg`
 
 | regex symbol |        Meaning                 |             Examples                         |
 |--------------|--------------------------------|----------------------------------------------|
-|  .           | any character except newline   | ".a" matches two consecutive characters where the last one is "a" |
-|  ^           | - anchor for start of string   | "^a" matches "a" at the start of the string  |
-|              | - negation symbol              | "[^0-9]" matches any non digit               |
-|  $           | - anchor for end of string     | "b$" matches "b" at the end of a line        |
-|              |                                | "^$" matches the empty string                |
-|              | - backreference at sub-expression | A search for "(a)(b)" in the string "abc", followed by a replace "$2$1" results in "bac" |
+|  .           | any character except newline   | `.a` matches two consecutive characters where the last one is "a" |
+|  ^           | - anchor for start of string   | `^a` matches "a" at the start of the string  |
+|              | - negation symbol              | `[^0-9]` matches any non digit               |
+|  $           | - anchor for end of string     | `b$` matches "b" at the end of a line        |
+|              |                                | `^$` matches the empty string                |
+|              | - backreference at sub-expression | A search for `(a)(c)` in the string "abc", followed by a replace `$2$1` results in "cba" |
 |  < >         | anchors that specify a left or right word boundary |                          |
-|  *           | match-zero-or-more quantifier  | "^.*$" matches an entire line                |
+|  *           | match-zero-or-more quantifier  | `^.*$` matches an entire line                |
 |  +           | match-one-or-more quantifier   |                                              |
 |  ?           | match-zero-or-one quantifier   |                                              |
-|  \|          | separates a series of alternatives | "(a\|b\|c)a" matches "aa" or "ba" or "ca"  |
+|  \|          | separates a series of alternatives | `(a\|b\|c)a` matches "aa" or "ba" or "ca"  |
 |                                                                                              |
 |  \           | escape character               |                                              |
-|  \\. \\* \\\ | escaped special characters     | "\\." matches the literal dot "."            |
-|              |                                | "\\\\" matches the actual backslash "\\"     |
+|  \\. \\* \\\ | escaped special characters     | `\.` matches the literal dot "."            |
+|              |                                | `\\` matches the actual backslash "\\"     |
 |  \t \n \r    | tab, linefeed, carriage return |
 |  \w \d \s    | word, digit, whitespace        |
 |  \W \D \S    | not word, digit, whitespace    |	
 |                                                                                              |
-|  { }         | range quantifiers              | "a{2,3}" matches "aa" or "aaa"               |
-|  ( )         | used for grouping characters or other regexes |                               |
+|  { }         | range quantifiers              | `a{2,3}` matches "aa" or "aaa"               |
+|  ( )         | used for grouping characters or other regexes, creating a numbered capturing group. (It stores the part of the string matched by the capturing group for later retrieval.) | `Set(Value)?` matches "Set" or "SetValue". In the first case, the first (and only) capturing group remains empty. In the second case, the first capturing group matches "Value" |
 |  [ ]         | character class to match a single character |                                 |
 |  [abc]	     | any of a, b, or c              |
 |  [^abc]      | not a, b, or c                 |
 |  [a-g]	     | character between a & g        |
 |  [A-Z]	     | any uppercase letter           |
 |                                                                                              |
-|  (?=…)       | Positive lookahead	            | (?=\d{10})\d{5} matches	01234 in 0123456789  |
-|  (?<=…)      | Positive lookbehind	          | (?<=\d)cat matches	cat in 1cat              |
-|  (?!…)       | Negative lookahead             |	(?!theatre)the\w+	theme                      |
-|  (?<!…)      | Negative lookbehind            |	\w{3}(?<!mon)ster	Munster                    |
+|  (?=…)       | Positive lookahead	            | `(?=\d{10})\d{5}` matches	01234 in 0123456789  |
+|  (?<=…)      | Positive lookbehind	          | `(?<=\d)cat` matches	cat in 1cat              |
+|  (?!…)       | Negative lookahead             |	`(?!theatre)the\w+`	theme                      |
+|  (?<!…)      | Negative lookbehind            |	`\w{3}(?<!mon)ster`	Munster                    |
