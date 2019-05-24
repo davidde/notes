@@ -166,6 +166,9 @@ Adds the names and status of the changed files of each commit to the log.
 `--oneline`: show only one line per commit (see other `--format` types above at `git log --format`).  
 `--graph master other_branch`: show a graph of how the commits in both branches relate to each other.
 
+* $ `git log --reverse`  
+The first entry in the output will be the first commit, instead of the last one as usual.
+
 ### $ `git ls-files`  
 Lists all the files that exist in the latest commit on the current branch.
 
