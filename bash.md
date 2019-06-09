@@ -397,10 +397,17 @@ This helps in keeping the same settings when you want to reinstall the software.
 Remove a package completely from your system, including any personalized configuration files and settings.
 
 ### $ `sudo apt update`  
-Update package lists (installed applications list).
+This will update your system's packages index (located in `/etc/apt/sources.list` for sytem defaults,
+and `/etc/apt/sources.list.d/` for user-added sources). It will list all packages the index contains.  
+If updates are available for a package, it will be listed behind it as `[x kB]`.  
+You can then update any of these packages by simply reinstalling them, e.g.:  
+$ `sudo apt install code`  
+This will install a new version of vscode from the packages index.
 
 ### $ `sudo apt dist-upgrade`  
-Upgrade your machine.
+Upgrade your machine by installing the newest versions of all packages currently installed on
+the system from the sources enumerated in /etc/apt/sources.list.
+An update must be performed first so that apt knows that new versions of packages are available.
 
 ### $ `sudo apt update && time sudo apt dist-upgrade`  
 Update package lists and upgrade your machine while timing it.
@@ -459,14 +466,3 @@ Create an empty file called 'file.txt'.
 The `tree` command prints a tree diagram of the current directory structure to the terminal.  
 `> contents.html` pipes the output to the file contents.html.  
 `-H [href]`: print output in HTML form.
-
-### Upgrade a single package using apt
-(Supposing you have added the package repository to your system)
-
-* $ `sudo apt update`  
-This will update your system's packages index. It will list all packages the index contains.  
-If updates are available for a package, it will be listed behind it as `[x kB]`.
-
-* $ `sudo apt install code`  
-This will install a new version of vscode from the packages index.
-
