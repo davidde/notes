@@ -295,18 +295,17 @@ Resolve merge conflicts locally:
   $ git push origin master  
   (-> Udacity Git/Github Lesson 4, 33.)
 
-* git reset main.go  
+### $ `git reset (--hard)`  
+Unstages all staged files.  
+--hard: Also resets the working directory, so any uncommitted changes will be lost!
+
+* $ `git reset main.go`  
 Unstages main.go, but preserves its contents.
 
-* git reset 6f16fb26b3294 src/app/app.js  
+* $ `git reset 6f16fb26b3294 src/app/app.js`  
 Reset a specific file (app.js) to the state of a previous commit.
 
-* git reset (--hard)  
-Undo all changes.  
---hard: also modifies your working directory;
-so it is dangerous to lose uncommitted changes.
-
-* git reset HEAD~ (--hard)  
+* $ `git reset HEAD~ (--hard)`  
 Undo the latest commit, the staged/tracked files will no longer be staged/tracked.  
 (HEAD is a pointer to the most recent git commit in a specific branch;
 detached head means the head does not point to the most recent commit.
@@ -314,12 +313,15 @@ This happens when you move the head back in time by checking out a
 specific commit hash)  
 If the commit was already pushed to your remote, you will have to push the newly
 deleted version again with the --force flag to delete it from the remote:  
-$ git push origin master --force
+$ `git push origin master --force`
 
-* git reset cffd76070aaebf82e4b (--hard)  
+* $ `git reset cffd76070aaebf82e4b (--hard)`  
 Undo all commits that came after cffd76070aaebf82e4b!  
 --hard: will also get rid of everything you've done since then;  
 all unpublished commits will be lost from your hard disk.  
+
+### $ `git revert cffd76070aaebf82e4b`  
+Undo only the changes that happened in this specific commit.
 
 ### $ `git rm filename`  
 Remove a file from both git and working directory,  
