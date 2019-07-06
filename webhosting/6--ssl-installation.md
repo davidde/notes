@@ -8,6 +8,8 @@ The PEM format is the most widely used by Certificate authorities,
 and will usually have extensions of .pem, .cert, .crt, .cer or .key.  
 Your bundled certificate contains the domain certificate **and** intermediate certificate,
 and you can generate it by concatenating the intermediate certificate to the domain certificate:   
+(First append two newlines to the domain certificate so that they are properly separated:)  
+$ `echo '\n\n' >> domain.cert.pem`   
 $ `cat domain.cert.pem intermediate.cert.pem > [mydomain.com].bundled.cert`   
 The private key will look like `private.key.pem`. It's better to rename it for clarity:  
 $ `mv private.key.pem [mydomain.com].private.key`
