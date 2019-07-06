@@ -14,7 +14,14 @@ $ `cat domain.cert.pem intermediate.cert.pem > [mydomain.com].bundled.cert`
 The private key will look like `private.key.pem`. It's better to rename it for clarity:  
 $ `mv private.key.pem [mydomain.com].private.key`
 
-* Copy your bundled SSL certificate and your SSL private key to '/etc/nginx/ssl'.
+* Copy the bundled SSL certificate and SSL private key to the `/etc/nginx/ssl` directory of the server.  
+Since you cannot `scp` straight into a restricted directory like `/etc/nginx/ssl`,  
+first copy both to the server's home directory:  
+$ `scp [mydomain.com].bundled.crt remote_server:~/[mydomain.com].bundled.crt`  
+$ `scp [mydomain.com].private.key remote_server:~/[mydomain.com].private.key`  
+And then move them to the `/etc/nginx/ssl` directory:  
+$ `sudo mv ~/[mydomain.com].bundled.crt /etc/nginx/ssl/[mydomain.com].bundled.crt`  
+$ `sudo mv ~/[mydomain.com].private.key /etc/nginx/ssl/[mydomain.com].private.key`
 
 * Change the Nginx configuration to use ssl:   
 $ `sudo vi /etc/nginx/sites-available/default`   
