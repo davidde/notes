@@ -459,6 +459,14 @@ More specific logs:
 * $ `tail -f /var/log/syslog`     
 // kernel + programs
 
+### $ `tar xf file.tar.gz -C /path/to/directory`  
+Unpack a gunzip compressed tar file.  
+x: Extract the files.  
+f: Specify a filename to unpack.  
+(z: Uncompress the gzip file; usually no longer required.)  
+(v: `verbose`; lists all of the files one by one in the archive.)  
+-C: Specify the directory to unpack to (default is current directory).
+
 ### $ `touch file.txt`  
 Create an empty file called 'file.txt'.
 
