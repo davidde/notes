@@ -36,6 +36,16 @@ Debian/Ubuntu's `adduser` was written with the purpose of being a convenient fro
 `adduser` and co are somewhat distro-specific in nature, being frontend scripts.   
 Debian recommends that system administrators use `adduser`, `addgroup`, `deluser`, etc. over the more specific utilities.
 
+### Android emulator:
+* $ `~/Android/Sdk/emulator/emulator -list-avds`  
+List the available emulators created with [Android Virtual Device Manager](https://flutter.dev/docs/get-started/install/linux#set-up-the-android-emulator).
+
+* $ `~/Android/Sdk/emulator/emulator -avd @name-of-your-emulator`  
+Run one of the listed emulators.
+
+* $ `/opt/android-studio/bin/studio.sh`  
+Launch the full Android Studio IDE.
+
 ### $ `apt-cache search [searchterm]`   
 See which packages are available with 'searchterm'.
 
