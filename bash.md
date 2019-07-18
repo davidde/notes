@@ -59,33 +59,34 @@ after typing/copying text, press **CTRL+D** to exit.
 * `cat file1.txt file2.txt`  
 Concatenate file2.txt to file1.txt and print output.
 
+* `cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4`  
+Concatenate .vob dvd files, and then convert them to .mp4.
+
 * `cat <(head -n 100 'Version1.srt') <(tail -n +101 'Version2.srt') > Version3.srt`  
 Concatenate lines 101-end of Version2.srt to lines 1-100 of Version1.srt and store the result in Version3.srt.  
 This example uses process substitution (`<` and parentheses `()` around subcommands) to feed
-the stdout of the subcommands [head](#-head-pathtofile) and [tail](#-tail-pathtofile) to the stdin of `cat`. It then redirects the stdout of `cat`
-to the file Version3.srt.
+the stdout of the subcommands [head](#-head-pathtofile) and [tail](#-tail-pathtofile) to the stdin of `cat`.
+It then redirects the stdout of `cat` to the file Version3.srt.  
+See ahead for the specifics:
 
-  **Note:** `Pipe |` vs `Redirect >` vs `Process substitution <()`  
-    - A **redirect** is used to pass output to either a **file or stream**.  
-      E.g. `program > file.txt`  
-      If `file.txt` exists, it will be overwritten.   
-      If you want to append to `file.txt`, use:  
-      `program >> file.txt`   
-      If you want to pass the output from program1 to program2, you could do so with the following redirects:  
-      `program1 > temp_file.txt && program2 < temp_file.txt`  
-      But since this is so verbose, pipes were invented as a shortcut:  
-      `program1 | program2`
-    - So a **pipe** is used to pass output to another **program or utility**.  
-      E.g. `program1 | program2 | program3`
-    - However, what if you need to **pipe the stdout of multiple commands**?  
-      This is where **process substitution** comes in.  
-      Process substitution can feed the stdout of multiple processes into the stdin of another process:  
-      `program <(command1) <(command2)`  
-      Even though they look similar with the < and >, they are functionally entirely different from redirects!  
-      Also, process substitution does not allow spaces between the `<` and `()`.
-
-* `cat *.VOB > moviename.vob; ffmpeg -i moviename.vob -acodec libfaac -ac 2 -ab 128k -vcodec libx264 -vpre fast -crf 20 -threads 0 moviename.mp4`  
-Concatenate .vob dvd files, and then convert them to .mp4.
+### `Pipe |` vs `Redirect >` vs `Process substitution <()`  
+- A **redirect** is used to pass output to either a **file or stream**.  
+E.g. `program > file.txt`  
+If `file.txt` exists, it will be overwritten.   
+If you want to append to `file.txt`, use:  
+`program >> file.txt`   
+If you want to pass the output from program1 to program2, you could do so with the following redirects:  
+`program1 > temp_file.txt && program2 < temp_file.txt`  
+But since this is so verbose, pipes were invented as a shortcut:  
+`program1 | program2`
+- So a **pipe** is used to pass output to another **program or utility**.  
+E.g. `program1 | program2 | program3`
+- However, what if you need to **pipe the stdout of multiple commands**?  
+This is where **process substitution** comes in.  
+Process substitution can feed the stdout of multiple processes into the stdin of another process:  
+`program <(command1) <(command2)`  
+Even though they look similar with the < and >, they are functionally entirely different from redirects!  
+Also, process substitution does not allow spaces between the `<` and `()`.
 
 ### $ `chmod [permissions] [filepath]`   
 chmod = **ch**ange **mod**e:   
