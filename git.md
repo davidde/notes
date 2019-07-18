@@ -323,6 +323,9 @@ all unpublished commits will be lost from your hard disk.
 ### $ `git revert cffd76070aaebf82e4b`  
 Undo only the changes that happened in this specific commit.
 
+### $ `git rev-list --count HEAD`  
+Count the commits for the branch you are on.
+
 ### $ `git rm filename`  
 Remove a file from both git and working directory,  
 so it doesn't longer show up as an untracked file.
