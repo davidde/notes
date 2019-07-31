@@ -321,21 +321,22 @@ To change the password of root:
   $ `su -`
 
 ### $ `rename`   
-Rename is a powerful command that fully supports Perl [regular expressions](./regex.md).
+Rename is a powerful command that fully supports Perl [regular expressions](./regex.md).  
 If the full power of regexes is not required, the [mmv](#-mmv-long_nametxt-short_1txt) command
 might be considerably simpler.
 
 There are several versions of rename in circulation:  
 - **Debian/Ubuntu Perl-based version** of rename by Larry Wall & Robin Barker,
-named 'prename' on CentOS and Fedora!
+named `prename` on CentOS and Fedora.
 - **Mac version** of rename by Aristotle Pagaltzis; this is a newer implementation of
 Debian's version by Larry Wall, which it is backwards compatible with.  
 This means the Mac version understands e.g. `rename 's/.rar/.cbr/' *.rar`,
-but Debian's version does not have the Mac -S flag.
+but Debian's version does not have the newer Mac -S flag.
 - There is still another 'rename' in use on older Red Hat and CentOS distributions.
 
-#### Bulk rename all files in the current working directory from .rar to .cbr:
-The Debian commands will work on Mac, but not the other way around!
+Examples:  
+#### 1) Bulk rename all files in the current working directory from .rar to .cbr:
+These Debian commands will work on Mac, but not the other way around!
 * Debian:  
 $ `rename -n 's/.rar/.cbr/' *.rar`  
 -n, -nono: no-execute mode; just print out the changes without actually making them.  
@@ -358,14 +359,14 @@ text by the "to" text.
 			$ done
 	```
 
-#### Bulk rename all .txt files in current directory to have spaces before uppercase letters:
+#### 2) Bulk rename all .txt files in current directory to have spaces before uppercase letters:
 * Debian:   
 $ `rename -n 's/([A-Z])/ $1/g' *.txt`  
 $ `rename -n 's/(?<=\w)(?=[A-Z])/ /g' *.txt`  
 The second, more complex command will *not* add a space before the first letter of the filename if it is uppercase.
 
 
-#### Remove the text 'useless_prefix_' from filenames/directories:  
+#### 3) Remove the text 'useless_prefix_' from filenames/directories:  
 * Debian:  
 $ `rename -n 's/useless_prefix_//' *`  
 * Mac:  
