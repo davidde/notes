@@ -19,7 +19,7 @@ Since you cannot `scp` straight into a restricted directory like `/etc/nginx/ssl
 first copy both to the server's home directory:  
 $ `scp [mydomain.com].bundled.crt remote_server:~/[mydomain.com].bundled.crt`  
 $ `scp [mydomain.com].private.key remote_server:~/[mydomain.com].private.key`  
-And then move them to the `/etc/nginx/ssl` directory:  
+Then login to your server, and move them to the `/etc/nginx/ssl` directory:  
 $ `sudo mv ~/[mydomain.com].bundled.crt /etc/nginx/ssl/[mydomain.com].bundled.crt`  
 $ `sudo mv ~/[mydomain.com].private.key /etc/nginx/ssl/[mydomain.com].private.key`
 
