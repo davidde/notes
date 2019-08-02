@@ -17,10 +17,10 @@ $ `mv private.key.pem [mydomain.com].private.key`
 * Copy the bundled SSL certificate and SSL private key to the `/etc/nginx/ssl` directory of the server.  
 Since you cannot `scp` straight into a restricted directory like `/etc/nginx/ssl`,  
 first copy both to the server's home directory:  
-$ `scp [mydomain.com].bundled.crt remote_server:~/[mydomain.com].bundled.crt`  
+$ `scp [mydomain.com].bundled.cert remote_server:~/[mydomain.com].bundled.cert`  
 $ `scp [mydomain.com].private.key remote_server:~/[mydomain.com].private.key`  
 Then login to your server, and move them to the `/etc/nginx/ssl` directory:  
-$ `sudo mv ~/[mydomain.com].bundled.crt /etc/nginx/ssl/[mydomain.com].bundled.crt`  
+$ `sudo mv ~/[mydomain.com].bundled.cert /etc/nginx/ssl/[mydomain.com].bundled.cert`  
 $ `sudo mv ~/[mydomain.com].private.key /etc/nginx/ssl/[mydomain.com].private.key`
 
 * Change the Nginx configuration to use ssl:   
