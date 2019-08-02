@@ -379,8 +379,7 @@ Remove the directory **and** all its contents.
 
 ### $ `scp /path/to/local/file remote_username@remote_server:/path/to/remote/destination`   
 Securely copy a local file to a remote server over SSH.   
-For the reverse, copying a remote file to your local machine, log in to the remote server over SSH,
-and use the command with the paths reversed:   
+For the reverse, copying a remote file to your local machine, use the command with the paths reversed:   
 $ `scp remote_username@remote_server:/path/to/remote/file /path/to/local/destination`   
 **-r**: Recursively copy entire directories, e.g.:   
 $ `scp -r /path/to/local/directory remote_username@remote_server:/path/to/remote/destination`
