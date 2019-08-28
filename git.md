@@ -85,6 +85,13 @@ to checkout master, and delete the branch (locally) if you don't need it anymore
 To also delete the branch remotely (on Github):  
 $ `git push origin --delete test_branch`  
 
+### $ `git cherry-pick (-x) <HASH>`  
+Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
+This is in contrast with other ways such as [merge](#-git-merge-master-other_branch)
+and [rebase](#-git-rebase--i-head-3), which normally apply many commits onto another branch.  
+-x: This generates a standard commit message with mention where it was cherry-picked from.  
+    This is good practice when cherry-picking from a public branch.
+
 ### $ `git commit (-a) -m "Description of changes"`  
 Commit all staged files permanently to version history.  
  
@@ -185,10 +192,10 @@ does not matter. The key is to remember that `git merge` always merges all the s
 * $ `git merge --abort`  
 Restore your files to their state before you started the merge.
 
-* git mv old_filename new_filename  
+### $ `git mv old_filename new_filename`  
 Rename a tracked file.
 
-* git push REMOTENAME BRANCHNAME  
+### $ `git push REMOTENAME BRANCHNAME`  
 Pushes the specified branch to the specified remote.
 
 * git push --set-upstream origin --all  
@@ -197,7 +204,7 @@ Pushes all branches to the origin remote, and sets origin as 'upstream' for all 
 This means on next push you don't need to specify neither your branch, nor  
 your remote; simply run 'git push'.
 
-* git pull origin master  
+### $ `git pull origin master`  
 = git fetch origin  
 \+ git merge master origin/master  
 When you clone a git repository from github, you get separate pointers
@@ -240,9 +247,9 @@ when you are ready.
   - Push the changes to your fork:  
   $ git push
 
-* git rebase -i HEAD~3  
-  (or: git rebase -i `Commit-Hash-You-Want-To-Change`^  
-  with the ^ to refer to the parent of that commit; otherwise you'll be off-by-one)  
+### $ `git rebase -i HEAD~3`  
+(or: $ `git rebase -i 'Commit-Hash-You-Want-To-Change'^`  
+with the ^ to refer to the parent of that commit; otherwise you'll be off-by-one)  
 Change the commit messages or commit content for the last 3 commits.  
 This command will present you with your default editor;
 change 'pick' to 'reword' for the commit message(s) you want to change, then save and close.
@@ -250,7 +257,8 @@ A new editor window will appear for each commit message you wish to change.
 If you also want to change the commit content, change 'pick' to 'edit', then save and close.
 Back in your shell, you'll notice you're no longer on 'master', but on the specific commit
 hash you chose to modify; simply change the code you want, 'git add' the changes, and
-'git commit --amend' the commit. Enter 'git rebase --continue' to finish up the rebase.
+[git commit --amend](#-git-commit--a--m-description-of-changes)
+the commit. Enter 'git rebase --continue' to finish up the rebase.
 Most likely this will include fixing a merge conflict because git will have trouble
 auto-merging the succeeding commit with your change ...  
 **Note:**  
@@ -262,7 +270,16 @@ So if you have already pushed to GitHub, you will have to force push the amended
 However, **'force pushing' is strongly discouraged**, since this changes
 the history of your repository. If you force push, people who have already cloned
 your repository will have to manually fix their local history.
-For more information, see ["Recovering from upstream rebase"](https://git-scm.com/docs/git-rebase#_recovering_from_upstream_rebase) in the Git manual.
+For more information, see
+["Recovering from upstream rebase"](https://git-scm.com/docs/git-rebase#_recovering_from_upstream_rebase)
+in the Git manual.
+
+### $ `git reflog`  
+Show the *reference logs*. The *reflogs* record when the tips of branches are updated;  
+this means they contain all commits that are/were created in your local repository.  
+This is very useful **to restore commits** you lost after a reset; simply
+[checkout](#-git-checkout-cffd76070aaebf82e4b5eb330fe9a2df944c1b81)
+or [cherry-pick](#-git-cherry-pick--x-hash) the removed commit by its hash.
 
 ### $ `git remote add origin [remote-repository-URL]`  
 Add your project to github by setting a remote first.  
