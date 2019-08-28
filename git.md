@@ -88,7 +88,7 @@ $ `git push origin --delete test_branch`
 ### $ `git cherry-pick (-x) <HASH>`  
 Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
 This is in contrast with other ways such as [merge](#-git-merge-master-other_branch)
-and [rebase](#-git-rebase--i-head-3), which normally apply many commits onto another branch.  
+and [rebase](#-git-rebase--i-head3), which normally apply many commits onto another branch.  
 -x: This generates a standard commit message with mention where it was cherry-picked from.  
     This is good practice when cherry-picking from a public branch.
 
@@ -279,7 +279,7 @@ Show the *reference logs*. The *reflogs* record when the tips of branches are up
 this means they contain all commits that are/were created in your local repository.  
 This is very useful **to restore commits** you lost after a reset; simply
 [checkout](#-git-checkout-cffd76070aaebf82e4b5eb330fe9a2df944c1b81)
-or [cherry-pick](#-git-cherry-pick--x-hash) the removed commit by its hash.
+or [cherry-pick](#-git-cherry-pick--x-hash-) the removed commit by its hash.
 
 ### $ `git remote add origin [remote-repository-URL]`  
 Add your project to github by setting a remote first.  
