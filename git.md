@@ -87,8 +87,8 @@ $ `git push origin --delete test_branch`
 
 ### $ `git cherry-pick (-x) <HASH>`  
 Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
-This is in contrast with other ways such as [merge](#-git-merge-master-other_branch)
-and [rebase](#-git-rebase--i-head3), which normally apply many commits onto another branch.  
+This is in contrast with other ways such as [merge](#-git-merge-other_branch)
+and [rebase](#-git-rebase-other_branch), which normally apply many commits onto another branch.  
 -x: This generates a standard commit message with mention where it was cherry-picked from.  
     This is good practice when cherry-picking from a public branch.
 
@@ -179,15 +179,13 @@ The first entry in the output will be the first commit, instead of the last one 
 ### $ `git ls-files`  
 Lists all the files that exist in the latest commit on the current branch.
 
-### $ `git merge master other_branch`  
-Merges the other_branch and the master branch into the currently checked out branch.
-So the currently checked out branch is always included in a merge!
-To merge other_branch into master, do:  
+### $ `git merge other_branch`  
+Merge other_branch into the currently checked out branch.  
+To merge other_branch into master, simply check it out first:  
 $ `git checkout master`  
 $ `git merge other_branch`  
-(Also, since the two branches are merged, the order in which they are typed into the command line
-does not matter. The key is to remember that `git merge` always merges all the specified branches
-**into the currently checked out branch**, creating a merge commit for that branch.)
+The key is to remember that `git merge` always merges all the specified branches  
+**into the currently checked out branch**, creating a merge commit for that branch.
 
 * $ `git merge --abort`  
 Restore your files to their state before you started the merge.
@@ -247,9 +245,43 @@ when you are ready.
   - Push the changes to your fork:  
   $ git push
 
-### $ `git rebase -i HEAD~3`  
-(or: $ `git rebase -i 'Commit-Hash-You-Want-To-Change'^`  
-with the ^ to refer to the parent of that commit; otherwise you'll be off-by-one)  
+### $ `git rebase other_branch`  
+Rebase the **current branch** on the specified **other_branch**.  
+This means the current branch's new commits will be reapplied on top of `other_branch`;  
+only the current branch changes, while `other_branch` remains unchanged.  
+Similar to [git merge](#-git-merge-other_branch), `git rebase` integrates changes from one branch into another.  
+The big difference is that **merging preserves history whereas rebasing (potentially) rewrites it:**  
+* **Merge feature_branch into master**:
+  ```bash
+  git checkout master
+  git merge feature_branch
+  ```
+  - If there are no new commits in master, the merge is fast-forwarded, meaning no new commit is generated.
+  - If new commits are present in master, a merge commit will be generated, but no commit hashes will be changed.  
+  
+  **=>** This is what you should do when the feature is **finished**, and its ready to reintegrate with the master branch.
+  
+* **Rebase feature_branch on master**:
+  ```bash
+  git checkout feature_branch
+  git rebase master
+  ```
+  - If there are no new commits in master, the rebase will have no effect whatsoever.
+  - If new commits are present in master, the commits from feature_branch will be reapplied on top of them,
+    rewriting the feature_branch commit hashes.  
+    
+  **=>** This is what you should do if the feature is not finished, but relevant changes have happened to master:  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; By rebasing you can simply continue working on the feature on top of the new master changes.
+
+Both options preserve the original `feature_branch`.
+
+* $ `git rebase -i`  
+An interactive rebase allows rewriting history; unlike [git commit --amend](#-git-commit--a--m-description-of-changes)
+it can also modify commit messages further back than the last one.  
+Examples:  
+$ `git rebase -i 'Commit-Hash-You-Want-To-Change'^`  
+Note the `^` is necessary to refer to the parent of that commit; otherwise you'll be off-by-one!  
+$ `git rebase -i HEAD~3`  
 Change the commit messages or commit content for the last 3 commits.  
 This command will present you with your default editor;
 change 'pick' to 'reword' for the commit message(s) you want to change, then save and close.
