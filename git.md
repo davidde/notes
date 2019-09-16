@@ -284,7 +284,7 @@ The big difference is that **merging preserves history whereas rebasing (potenti
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by rebasing you can simply continue working on the feature on top of the new master changes.
 
 The easiest way to undo a rebase is to find the commit hash of the branch as it was before the rebase started  
-and [cherry-pick](#-git-cherry-pick--x-hash-) it. Use `git log` or `git reflog` to find it.
+and [reset](#-git-reset---hard) to it. Use `git log` or `git reflog` to find it.
 
 * $ `git rebase -i <HASH>`  
 -i, --interactive: Interactive rebasing can rewrite git history; unlike
