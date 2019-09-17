@@ -16,7 +16,7 @@ To search in the less pager, use `/` followed by the search term and press enter
 Use `n` and `N` to move forwards/backwards in the search results.  
 
 **Tip**:  
-$ `git [command] --help`  
+`git [command] --help`  
 This gets you information on any git command.
 
 ## Basic git commands and usage, alphabetically:
@@ -245,11 +245,13 @@ when you are ready.
 * Keeping a Github fork up to date:
   - Clone your fork:  
   `git clone https://github.com/YOUR-USERNAME/YOUR-FORKED-REPO.git`
-  - Add remote from original repository in your forked repository:  
-  `cd into/cloned/fork-repo`  
-  `git remote add upstream https://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git`  
-  `git fetch upstream`  
-  - Updating your fork from original repo to keep up with their changes:  
+  - Add remote from original repository to your forked repository:  
+    ```
+    cd into/cloned/fork-repo  
+    git remote add upstream https://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git  
+    git fetch upstream
+    ```
+  - Update your fork from original repo to keep up with their changes:  
   `git pull upstream master`  
   - Push the changes to your fork:  
   `git push`
@@ -287,14 +289,14 @@ The big difference is that **merging preserves history whereas rebasing (potenti
 The easiest way to undo a rebase is to find the commit hash of the branch as it was before the rebase started  
 and [reset](#-git-reset---hard) to it. Use `git log` or `git reflog` to find it.
 
-* $ `git rebase -i <HASH>`  
+* `git rebase -i <HASH>`  
 -i, --interactive: Interactive rebasing can rewrite git history; unlike
 [git commit --amend](#-git-commit--a--m-description-of-changes)
 it also allows modifying commit messages further back than the last one.  
 **Examples:**  
-$ `git rebase -i 'Commit-Hash-You-Want-To-Change'^`  
+`git rebase -i 'Commit-Hash-You-Want-To-Change'^`  
 Note the `^` is necessary to refer to the parent of that commit; otherwise you'll be off-by-one!  
-$ `git rebase -i HEAD~3`  
+`git rebase -i HEAD~3`  
 Change the commit messages or commit content for the last 3 commits.  
 This command will present you with your default editor;
 change 'pick' to 'reword' for the commit message(s) you want to change, then save and close.
@@ -329,45 +331,45 @@ or [cherry-pick](#-git-cherry-pick--x-hash-) the removed commit by its hash.
 ### $ `git remote add origin [remote-repository-URL]`  
 Add your project to github by setting a remote first.  
 Afterwards, push or pull your project by running:  
-$ git push origin master  
-$ git pull origin master  
-(Run: "git remote -v" to check if remote was added correctly)  
+`git push origin master`  
+`git pull origin master`  
+(Run `git remote -v` to check if the remote was added correctly)  
 (To change the URL, for instance from `git` to `https`, use:  
-$ `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`)  
+`git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`)  
 upstream/master: this is the repository you forked, to which you're trying
 to contribute. When collaborating, it's often necessary to add this repository
 as a remote, in order to resolve merge conflicts between your fork and upstream:  
-$ git remote add upstream "remote repository URL"  
+`git remote add upstream [REMOTE-REPO-URL]`  
 then you can pull in the conflicting changes from upstream/master:  
-$ git pull upstream master  
+`git pull upstream master`  
 and merge the master branch into your 'change' branch:  
-$ git checkout change  
-$ git merge master  
+`git checkout change`  
+`git merge master`  
 (git merge merges all specified branches into the currently checked out branch)  
 Resolve merge conflicts locally:
-  - update 'file.txt'
-  - git add 'file.txt'
-  - git commit   (-> the 'merge commit')
+  - Update 'file.txt'
+  - `git add file.txt`
+  - `git commit`   (-> the 'merge commit')
 
   Then push your 'change' branch to your fork (NOT upstream):  
   (this will automatically update your pull request)  
-  $ git push origin change  
+  `git push origin change`  
   Finally, just update the master branch on your fork:  
-  $ git checkout master  
-  $ git push origin master  
+  `git checkout master`  
+  `git push origin master`  
   (-> Udacity Git/Github Lesson 4, 33.)
 
 ### $ `git reset (--hard)`  
 Unstages all staged files.  
 --hard: Also resets the working directory, so any uncommitted changes will be lost!
 
-* $ `git reset main.go`  
+* `git reset main.go`  
 Unstages main.go, but preserves its contents.
 
-* $ `git reset 6f16fb26b3294 src/app/app.js`  
+* `git reset 6f16fb26b3294 src/app/app.js`  
 Reset a specific file (app.js) to the state of a previous commit.
 
-* $ `git reset HEAD~ (--hard)`  
+* `git reset HEAD~ (--hard)`  
 Undo the latest commit, the staged/tracked files will no longer be staged/tracked.  
 (HEAD is a pointer to the most recent git commit in a specific branch;
 detached head means the head does not point to the most recent commit.
@@ -375,9 +377,9 @@ This happens when you move the head back in time by checking out a
 specific commit hash)  
 If the commit was already pushed to your remote, you will have to push the newly
 deleted version again with the --force flag to delete it from the remote:  
-$ `git push origin master --force`
+`git push origin master --force`
 
-* $ `git reset cffd76070aaebf82e4b (--hard)`  
+* `git reset cffd76070aaebf82e4b (--hard)`  
 Undo all commits that came after cffd76070aaebf82e4b!  
 --hard: will also get rid of everything you've done since then;  
 all unpublished commits will be lost from your hard disk.  
@@ -395,16 +397,16 @@ so it doesn't longer show up as an untracked file.
 ### $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81`  
 Compare a specific commit to its parent commit.
 
-* $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go`  
+* `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go`  
 Look at a specific commit of the main.go file (path required) in less pager.
 
-* $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go | vi -`  
+* `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go | vi -`  
 Look at a specific commit of the main.go file (path required) in vi editor.
 
-* $ `git show HEAD:main.go`  
+* `git show HEAD:main.go`  
 Show the head (most recent) commit of main.go
 
-* $ `git show HEAD~2:main.go | vi -`  
+* `git show HEAD~2:main.go | vi -`  
 Show the third latest commit of main.go in the vi editor.
 
 ### $ `git status`  
@@ -414,44 +416,44 @@ Lists all new or modified files to be committed.
 Takes the dirty state of your working directory (uncommitted changes in tracked  
 files) and saves ('stashes') it on a stack of unfinished changes that you can reapply at any time.
 
-* $ `git stash list`  
+* `git stash list`  
 Lists the entire stash (each `git stash` command creates a new snapshot).
 
-* $ `git stash apply`  
+* `git stash apply`  
 Apply the most recent stash.
 
-* $ `git stash apply stash@{2}`  
+* `git stash apply stash@{2}`  
 Apply an older stash; get its id from `git stash list`.  
 stash@{0} = the most recent stash  
 stash@{1} = the stash before the most recent one  
 Etc.
 
-* $ `git stash drop (stash@{2})`  
+* `git stash drop (stash@{2})`  
 Remove a stash from your stack.
 
-* $ `git stash pop (stash@{2})`  
+* `git stash pop (stash@{2})`  
 Apply the stash and then immediately drop it from your stack.
 
-* $ `git stash push -m 'Put counter in Status' src/app/status/status.js`  
+* `git stash push -m 'Put counter in Status' src/app/status/status.js`  
 Stash a single file, by specifying a stash message and a path to the file.  
 (NOTE: git 2.13 and up ONLY!)
 
-* $ `git stash show`  
+* `git stash show`  
 Shows which files were changed in the latest stash.
 
-* $ `git stash show -p`   
+* `git stash show -p`   
 View the content of the most recent stash (-p: 'patch').
 
-* $ `git stash show -p stash@{2}`   
+* `git stash show -p stash@{2}`   
 View the content of a specific stash.
 If, however, you wish to view the content of a single file from a specific stash, you need to use the `git show` command:  
-$ `git show stash@{0}:src/app/app.js`   
+`git show stash@{0}:src/app/app.js`   
 If you want to see the diff of a specific file in the stash, you have to use the `git diff` command:  
-$ `git diff stash@{0}^1 stash@{0} -- <filename>`   
+`git diff stash@{0}^1 stash@{0} -- <filename>`   
 The `stash@{0}^1` shortcut means the first parent of the given stash, which is the commit at which
 the changes were stashed away. We use this form of "git diff" (with two commits) because we have
 to tell git which parent we want to diff against. Equivalent, but more cryptic:   
-$ `git diff stash@{0}^! -- <filename>`
+`git diff stash@{0}^! -- <filename>`
 
 ### $ `git submodule add https://github.com/matcornic/hugo-theme-learn.git themes/hugo-theme-learn`   
 Add the project located at the github link as a submodule to the project in the working directory.
@@ -459,10 +461,10 @@ This allows combining several git repos in a single project.
 **Beware**:   
 When pulling a github project, its submodules are **NOT** automatically pulled along!   
 For that, you have to:   
-$ `git submodule init`   
-$ `git submodule update`   
+`git submodule init`   
+`git submodule update`   
 If you want to update your submodules to their most recent upstream versions, use:  
-$ `git submodule update --remote --merge`  
+`git submodule update --remote --merge`  
 
 ### Create a meta-repo that holds scripts from various other repos
 ### A. Use case:
