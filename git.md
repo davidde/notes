@@ -25,7 +25,7 @@ This gets you information on any git command.
 Add a file to be tracked by git; it is now said to be staged.   
 (It still needs to be committed to actually be included in version control)
 
-* $ `git add .`  
+* `git add .`  
 Add all files in the directory.
 This is useful if you want to upload an existing project to Github.   
 (Use a .gitignore file that lists all exceptions)
@@ -35,9 +35,9 @@ This will show you the commit hash, the time and the committer for each line.
 Then you can use the commit hash in `git log [hash]` or `git show [hash]`  
 to find out more about it, like why it's done this way (if documented).  
 You can also use the -L flag to indicate the from-to line numbers you want info about:  
-$ `git blame -L 38,41 src/color/adjustHue.js`  
+`git blame -L 38,41 src/color/adjustHue.js`  
 Or for a single line, use:  
-$ `git blame -L 38,38 src/color/adjustHue.js`  
+`git blame -L 38,38 src/color/adjustHue.js`  
 **Note:**  
 `git blame` only reveals the last introduced changes to each line, not who or when the lines  
 were *first* introduced into the codebase. This can be rather annoying if the last change  
@@ -47,42 +47,42 @@ Use `git log -S` to find the commits that first introduced a specific line of co
 ### $ `git branch [branch-name]`  
 Create a new branch.
 
-* $ `git branch -a`  
+* `git branch -a`  
 Show all branches.
 
-* $ `git branch -u origin/[remote-branch]`  
- = $ `git branch --set-upstream-to=origin/[remote-branch]`  
+* `git branch -u origin/[remote-branch]`  
+= `git branch --set-upstream-to=origin/[remote-branch]`  
 This sets the default remote branch for the current local branch.  
 Any future git pull command (with the current local branch checked-out),
 will attempt to bring in commits from the 'remote-branch' into the current local branch.
 One way to avoid having to explicitly do `--set-upstream-to` is to use the shorthand flag
 `-u` along with the very first `git push` as follows:  
-$ `git push -u origin local-branch`  
+`git push -u origin local-branch`  
 which sets the upstream association for any future push/pull attempts automatically.  
 
 ### $ `git checkout cffd76070aaebf82e4b5eb330fe9a2df944c1b81`  
 Checkout commit cffd76070aaebf82e4b5eb330fe9a2df944c1b81.
 
-* $ `git checkout master (--force)`  
+* `git checkout master (--force)`  
 Move back to the master/head commit.  
 --force: When you've made changes that aren't committed, git won't let you checkout another branch.  
 The "--force" flag forces git to checkout anyway, which will result in losing the changes.
 
-* $ `git checkout -b test_branch (cffd76070)`  
+* `git checkout -b test_branch (cffd76070)`  
 = Shorthand for:  
-$ `git branch test_branch (cffd76070)`  
-$ `git checkout test_branch (cffd76070)`  
+`git branch test_branch (cffd76070)`  
+`git checkout test_branch (cffd76070)`  
 (cffd76070): Optionally specify a commit hash to base the branch on.
 When not specified, it is based on the currently checked out commit
 (current position of head) So when you're in detached head state
 (= after checkout of commit hash instead of branch), you can simply
 run 'git checkout -b test_branch' to turn that commit into a real branch.
 Afterwards, simply:  
-$ `git checkout master`  
-$ `git branch -d test-branch`  
+`git checkout master`  
+`git branch -d test-branch`  
 to checkout master, and delete the branch (locally) if you don't need it anymore.  
 To also delete the branch remotely (on Github):  
-$ `git push origin --delete test_branch`  
+`git push origin --delete test_branch`  
 
 ### $ `git cherry-pick (-x) <HASH>`  
 Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
@@ -91,23 +91,23 @@ and [rebase](#-git-rebase-other_branch), which normally apply many commits onto 
 -x: This generates a standard commit message with mention where it was cherry-picked from.  
     This is good practice when cherry-picking from a public branch.  
 
-*  $ `git cherry-pick -x 0379e861ca82^..bb2197f0845d`  
-   Cherry-pick a range of commits to include in the current branch.  
-   **Note:**  
-    - Both hashes should be from the same branch, with the oldest specified first.
-    - Include `^` at the end of the first hash if that commit itself should be included;  
-    without it, the range will start at the commit following the specified one:  
-    `0379e861ca82^..bb2197f0845d` = [0379e861ca82, bb2197f0845d]  
-    `0379e861ca82..bb2197f0845d `&nbsp;= ]0379e861ca82, bb2197f0845d]
+* `git cherry-pick -x 0379e861ca82^..bb2197f0845d`  
+  Cherry-pick a range of commits to include in the current branch.  
+  **Note:**  
+  - Both hashes should be from the same branch, with the oldest specified first.
+  - Include `^` at the end of the first hash if that commit itself should be included;  
+  without it, the range will start at the commit following the specified one:  
+  `0379e861ca82^..bb2197f0845d` = [0379e861ca82, bb2197f0845d]  
+  `0379e861ca82..bb2197f0845d `&nbsp;= ]0379e861ca82, bb2197f0845d]
 
 ### $ `git commit (-a) -m "Description of changes"`  
 Commit all staged files permanently to version history.  
  
-* $ `git commit -am "Description of changes"`  
+* `git commit -am "Description of changes"`  
 -a/--all: Automatically stage/add all tracked files that were modified; this means you don't
 have to manually stage/'git add' all files that are modified.  
 
-* $ `git commit --amend`  
+* `git commit --amend`  
 Rewrite the most recent commit message and/or commit content (if they have not yet been pushed online).  
 If you want to also edit the commit's content, you need to 'git add' the edited files before amending,  
 so you may or may not have to 'git stash' code that shouldn't be included.  
@@ -123,11 +123,11 @@ Note:
 To search in the less pager, use `/` followed by the search term and press enter.  
 Use `n` and `N` to move forwards/backwards in the search results.  
 
-* $ `git diff --staged`  
+* `git diff --staged`  
 Shows all modifications that are staged.  
 (= difference between staging area and last commit)
 
-* $ `git diff cffd76070aaebf82e4b5eb330fe9 1e14e1134d7eabf136d6210a6d87a99`  
+* `git diff cffd76070aaebf82e4b5eb330fe9 1e14e1134d7eabf136d6210a6d87a99`  
 or: `git diff cffd76070aaebf82e4b5eb330fe9 1e14e`  
 or: `git diff cffd 1e14`  
 =   `git diff [old] [new]`!  
@@ -135,8 +135,8 @@ or: `git diff cffd 1e14`
 Compare 2 specific commits (get commit hash from 'git log' command)
 
 * To permanently exclude a specific file in your repository from the diff command:  
-$ `git config diff.nodiff.command /bin/true`  
-$ `cat >.git/info/attributes`  
+`git config diff.nodiff.command /bin/true`  
+`cat >.git/info/attributes`  
 \> `package-lock.json    diff=nodiff`  
 From now onwards, `package-lock.json` will be excluded from any diff.  
 Use `--global` in the first command to accomplish this for all your repos.
@@ -146,42 +146,42 @@ Returns a log of all git commits in the less pager (q to exit).
 To search in the less pager, use `/` followed by the search term and press enter.  
 Use `n` and `N` to move forwards/backwards in the search results.  
 Alternatively, you can also specify a commit hash:  
-$ `git log 0a6bb439280d77458f`  
+`git log 0a6bb439280d77458f`  
 This will show the specified commit hash at the top with its parent commits below it.
 In other words, its child commits (commits made afterwards) are ommitted.  
 To print the git log output to the terminal instead of viewing it in less, use:  
-$ `git log | cat`  
+`git log | cat`  
 
-* $ `git log -L 3,4:[path/to/file]`  
+* `git log -L 3,4:[path/to/file]`  
 This command will present you with a log of all commits that changed line **4** in the specified file.  
 
-* $ `git log -p -- [path/to/file]`  
+* `git log -p -- [path/to/file]`  
 This command allows you to efficiently view the change history of a single file.  
 It displays a log of all commits that changed the specific file, along with their diffs.
 
-* $ `git log -S 'search-string'`  
+* `git log -S 'search-string'`  
 This gives you the commits in which the 'search-string' was introduced.  
 Be aware that this command will return *every commit* in which this 'search-string'  
 was added to *any file*.  
 To find when a specific line of code was introduced in a specific file, use:  
-$ `git log -S ['Full-Line-of-Code'] [path/to/file]`  
+`git log -S ['Full-Line-of-Code'] [path/to/file]`  
 This gives you the commit(s) in which this line of code was introduced.
 
-* $ `git log --format=fuller`  
+* `git log --format=fuller`  
 Shows the difference between AuthorDate and CommitDate. They are usually the same,
 but can differ for example after a 'git rebase'. The CommitDate is taken into account
 when creating the commit hash, so a 'git rebase' without changes still modifies the hash.  
 Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
 
-* $ `git log --name-status`  
+* `git log --name-status`  
 Adds the names and status of the changed files of each commit to the log.
 
-* $ `git log --stat --oneline --graph master other_branch`  
+* `git log --stat --oneline --graph master other_branch`  
 `--stat`: shows additional data like the files that were changed, and insertions/deletions.  
 `--oneline`: show only one line per commit (see other `--format` types above at `git log --format`).  
 `--graph master other_branch`: show a graph of how the commits in both branches relate to each other.
 
-* $ `git log --reverse`  
+* `git log --reverse`  
 The first entry in the output will be the first commit, instead of the last one as usual.
 
 ### $ `git ls-files`  
@@ -190,29 +190,30 @@ Lists all the files that exist in the latest commit on the current branch.
 ### $ `git merge other_branch`  
 Merge `other_branch` into the currently checked out branch.  
 To merge `other_branch` into master, simply check it out first:  
-$ `git checkout master`  
-$ `git merge other_branch`  
-The key is to remember that `git merge` always merges all the specified branches  
-**into the currently checked out branch**, creating a merge commit for that branch.
+`git checkout master`  
+`git merge other_branch`  
+The key is to remember that `git merge` always merges *all* the specified branches  
+*into the currently checked out branch*, creating a merge commit for that branch.  
+This means **the current branch is always included in a merge!**
 
-* $ `git merge --abort`  
+* `git merge --abort`  
 Restore your files to their state before you started the merge.
 
 ### $ `git mv old_filename new_filename`  
 Rename a tracked file.
 
-### $ `git push REMOTENAME BRANCHNAME`  
+### $ `git push [REMOTENAME] [BRANCHNAME]`  
 Pushes the specified branch to the specified remote.
 
-* git push --set-upstream origin --all  
-= git push -u origin --all  
+* `git push --set-upstream origin --all`  
+= `git push -u origin --all`  
 Pushes all branches to the origin remote, and sets origin as 'upstream' for all of them.  
 This means on next push you don't need to specify neither your branch, nor  
 your remote; simply run 'git push'.
 
 ### $ `git pull origin master`  
-= git fetch origin  
-\+ git merge master origin/master  
+= `git fetch origin`  
+\+ `git merge master origin/master`  
 When you clone a git repository from github, you get separate pointers
 to master (= latest commit in local master branch) and to origin/master
 (= latest commit in githubs master branch). When you commit locally,
@@ -243,15 +244,15 @@ when you are ready.
 
 * Keeping a Github fork up to date:
   - Clone your fork:  
-  $ git clone `https://github.com/YOUR-USERNAME/YOUR-FORKED-REPO.git`
+  `git clone https://github.com/YOUR-USERNAME/YOUR-FORKED-REPO.git`
   - Add remote from original repository in your forked repository:  
-  $ cd into/cloned/fork-repo  
-  $ git remote add upstream `https://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git`  
-  $ git fetch upstream  
+  `cd into/cloned/fork-repo`  
+  `git remote add upstream https://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git`  
+  `git fetch upstream`  
   - Updating your fork from original repo to keep up with their changes:  
-  $ git pull upstream master  
+  `git pull upstream master`  
   - Push the changes to your fork:  
-  $ git push
+  `git push`
 
 ### $ `git rebase other_branch`  
 Rebase the **current branch** on the specified **other_branch**.  
