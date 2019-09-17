@@ -420,7 +420,10 @@ Lists the entire stash (each `git stash` command creates a new snapshot).
 Apply the most recent stash.
 
 * $ `git stash apply stash@{2}`  
-Apply an older stash; git its id from `git stash list`.
+Apply an older stash; get its id from `git stash list`.  
+stash@{0} = the most recent stash  
+stash@{1} = the stash before the most recent one  
+Etc.
 
 * $ `git stash drop (stash@{2})`  
 Remove a stash from your stack.
