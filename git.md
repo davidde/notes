@@ -21,11 +21,11 @@ This gets you information on any git command.
 
 ## Basic git commands and usage, alphabetically:
 
-### $ `git add main.go`  
-Add main.go to be tracked by git, it is now said to be staged.   
+### $ `git add [filename]`  
+Add a file to be tracked by git; it is now said to be staged.   
 (It still needs to be committed to actually be included in version control)
 
-### $ `git add .`  
+* $ `git add .`  
 Add all files in the directory.
 This is useful if you want to upload an existing project to Github.   
 (Use a .gitignore file that lists all exceptions)
@@ -44,8 +44,8 @@ were *first* introduced into the codebase. This can be rather annoying if the la
 was for example an indentation change.  
 Use `git log -S` to find the commits that first introduced a specific line of code.
 
-### $ `git branch [new_branch]`  
-Create the branch 'new_branch'.
+### $ `git branch [branch-name]`  
+Create a new branch.
 
 * $ `git branch -a`  
 Show all branches.
