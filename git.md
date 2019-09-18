@@ -100,9 +100,11 @@ and [rebase](#-git-rebase-other_branch), which normally apply many commits onto 
   **Note:**  
   - Both hashes should be from the same branch, with the oldest specified first.
   - Include `^` at the end of the first hash if that commit itself should be included;  
-  without it, the range will start at the commit following the specified one:  
-  `0379e861ca82^..bb2197f0845d` = [0379e861ca82, bb2197f0845d]  
-  `0379e861ca82..bb2197f0845d `&nbsp;= ]0379e861ca82, bb2197f0845d]
+    without it, the range will start at the commit following the specified one:  
+    ```
+    0379e861ca82^..bb2197f0845d = [0379e861ca82, bb2197f0845d]  
+    0379e861ca82..bb2197f0845d  = ]0379e861ca82, bb2197f0845d]
+    ```
 
 ### $ `git commit (-a) -m "Description of changes"`  
 Commit all staged files permanently to version history.  
