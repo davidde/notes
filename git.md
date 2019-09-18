@@ -69,20 +69,24 @@ Move back to the master/head commit.
 The "--force" flag forces git to checkout anyway, which will result in losing the changes.
 
 * `git checkout -b test_branch (cffd76070)`  
-= Shorthand for:  
-`git branch test_branch (cffd76070)`  
-`git checkout test_branch (cffd76070)`  
-(cffd76070): Optionally specify a commit hash to base the branch on.
-When not specified, it is based on the currently checked out commit
-(current position of head) So when you're in detached head state
-(= after checkout of commit hash instead of branch), you can simply
-run 'git checkout -b test_branch' to turn that commit into a real branch.
-Afterwards, simply:  
-`git checkout master`  
-`git branch -d test-branch`  
-to checkout master, and delete the branch (locally) if you don't need it anymore.  
-To also delete the branch remotely (on Github):  
-`git push origin --delete test_branch`  
+  = Shorthand for:  
+  ```
+  git branch test_branch (cffd76070)  
+  git checkout test_branch
+  ```
+  (cffd76070): Optionally specify a commit hash to base the branch on.
+  When not specified, it is based on the currently checked out commit
+  (current position of head) So when you're in detached head state
+  (= after checkout of commit hash instead of branch), you can simply
+  run 'git checkout -b test_branch' to turn that commit into a real branch.
+  Afterwards, simply:  
+  ```
+  git checkout master
+  git branch -d test-branch
+  ```
+  to checkout master, and delete the branch (locally) if you don't need it anymore.  
+  To also delete the branch remotely (on Github):  
+  `git push origin --delete test_branch`  
 
 ### $ `git cherry-pick (-x) <HASH>`  
 Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
@@ -141,6 +145,15 @@ Compare 2 specific commits (get commit hash from 'git log' command)
 From now onwards, `package-lock.json` will be excluded from any diff.  
 Use `--global` in the first command to accomplish this for all your repos.
 
+### $ `git fetch origin`  
+Get the entire repo from the origin remote, including *all* branches, without actually
+committing them to your local repository. Instead, `git fetch` stores the fetched files
+in `.git/refs/remotes`. You can now either [merge](#-git-merge-other_branch)
+or [rebase](#-git-rebase-other_branch) your local branch.  
+In git, a `ref` or reference is simply a file stored in `.git/refs`, containing the hash
+of a commit object, e.g. a branch or tag. They allow us to refer to branches with convenient
+names instead of commit hashes.
+
 ### $ `git log`  
 Returns a log of all git commits in the less pager (q to exit).  
 To search in the less pager, use `/` followed by the search term and press enter.  
@@ -190,8 +203,10 @@ Lists all the files that exist in the latest commit on the current branch.
 ### $ `git merge other_branch`  
 Merge `other_branch` into the currently checked out branch.  
 To merge `other_branch` into master, simply check it out first:  
-`git checkout master`  
-`git merge other_branch`  
+```
+git checkout master
+git merge other_branch
+```
 The key is to remember that `git merge` always merges *all* the specified branches  
 *into the currently checked out branch*, creating a merge commit for that branch.  
 This means **the current branch is always included in a merge!**
@@ -212,8 +227,12 @@ This means on next push you don't need to specify neither your branch, nor
 your remote; simply run 'git push'.
 
 ### $ `git pull origin master`  
-= `git fetch origin`  
-\+ `git merge master origin/master`  
+= Shorthand for:  
+```
+git fetch origin
+git checkout master
+git merge origin/master
+```
 When you clone a git repository from github, you get separate pointers
 to master (= latest commit in local master branch) and to origin/master
 (= latest commit in githubs master branch). When you commit locally,
