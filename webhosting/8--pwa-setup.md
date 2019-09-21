@@ -54,3 +54,15 @@ If you want to delete cookies from a single site, go to 'Settings' > 'Advanced' 
 at the bottom of the section: 'Content settings' > 'Cookies' > 'See all cookies and site data' >
 Find the specific site in the list and remove its data.
 
+* Obsolete serviceworkers often have a nasty habit of sticking around, resulting in the error:
+  ```
+  ￼A bad HTTP response code (404) was received when fetching the script.
+  Failed to load resource: net::ERR_INVALID_RESPONSE
+  ```
+  To fix this, the serviceworker should be removed, which can be tricky since it's hard to track where it was added.  
+  To conveniently remove it, run this in the browser's console:
+  ```
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for(let registration of registrations) { registration.unregister() }
+  })
+  ```
