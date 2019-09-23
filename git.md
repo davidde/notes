@@ -380,6 +380,9 @@ Resolve merge conflicts locally:
   `git push origin master`  
   (-> Udacity Git/Github Lesson 4, 33.)
 
+* `git remote show origin`  
+Display complete info on both 'push' and 'pull' configurations per branch.
+
 ### $ `git reset (--hard)`  
 Unstages all staged files.  
 --hard: Also resets the working directory, so any uncommitted changes will be lost!
