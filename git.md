@@ -489,6 +489,8 @@ For that, you have to:
 `git submodule update`   
 If you want to update your submodules to their most recent upstream versions, use:  
 `git submodule update --remote --merge`  
+or  
+`git submodule foreach git pull origin master`  
 
 ### Create a meta-repo that holds scripts from various other repos
 ### A. Use case:
