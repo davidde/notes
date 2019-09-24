@@ -88,6 +88,16 @@ The "--force" flag forces git to checkout anyway, which will result in losing th
   To also delete the branch remotely (on Github):  
   `git push origin --delete test_branch`  
 
+* `git checkout --orphan [branch-name]`  
+  Create a completely empty branch, e.g.:  
+  ```
+  git checkout --orphan gh-pages
+  git reset --hard
+  git commit --allow-empty -m "Initialize gh-pages branch"
+  git push origin gh-pages
+  git checkout master
+  ```
+
 ### $ `git cherry-pick (-x) <HASH>`  
 Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
 This is in contrast with other ways such as [merge](#-git-merge-other_branch)
