@@ -556,3 +556,45 @@ This means updating all of them in one go is as simple as running
   ```
   git submodule update --remote --merge
   ```
+
+### $ `git tag`  
+List the existing tags in git's version control.  
+
+* There are 2 types of tags in git:  
+  * **Lightweight tags**:  
+    A lightweight tag is very much like a branch that doesn’t change;  it's just a commit with a tag name.  
+    (It’s generally recommended to create annotated tags for the added information.)  
+    Create a lightweight tag with:  
+    ```
+    $ git tag v1.0.0
+    $ git show v1.0.0
+    commit ca82a6dff817ec66f44342007202690a93763949 (HEAD -> master, tag: v1.0.0)
+    Author: Scott Chacon <schacon@gee-mail.com>
+    Date:   Mon Mar 17 21:52:11 2008 -0700
+
+        Changed the version number
+    ```  
+    
+  * **Annotated tags**:  
+    An annotated tag is stored as a full object in the Git database; it is checksummed,
+    contains the tagger name, email, date and tagging message.
+    It is also the type that [npm version](./bash.md#-npm-) creates.  
+    Create an annotated tag with:
+    ```
+    $ git tag -a v1.0.0 -m "Bump release to v1.0.0"
+    $ git show v1.0.0
+    tag v1.0.0
+    Tagger: Ben Straub <ben@straub.cc>
+    Date:   Sat May 3 20:19:12 2014 -0700
+
+    Bump release to v1.0.0
+
+    commit ca82a6dff817ec66f44342007202690a93763949  (tag: v1.0.0)
+    Author: Scott Chacon <schacon@gee-mail.com>
+    Date:   Mon Mar 17 21:52:11 2008 -0700
+
+        Changed the version number
+    ```  
+
+* `git tag -d v1.0.0`  
+Delete the `v1.0.0` tag.
