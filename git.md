@@ -595,6 +595,12 @@ List the existing tags in git's version control.
 
         Changed the version number
     ```  
+    
+  **NOTE:**  
+	Tags are *not* automatically pushed to the remote, so it's recommended to explicitly push them if necessary:  
+	`git push --tags (origin master)`  
+	Or, if you only want to push a single tag:  
+	`git push origin v1.0.0`  
 
 * `git tag -d v1.0.0`  
 Delete the `v1.0.0` tag.
