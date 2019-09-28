@@ -16,11 +16,11 @@ Then it will prompt you to set the new user’s information. If you want to leav
 ```
 Changing the user information for david
 Enter the new value, or press ENTER for the default
-	Full Name []:
-	Room Number []:
-	Work Phone []:
-	Home Phone []:
-	Other []:
+  Full Name []:
+  Room Number []:
+  Work Phone []:
+  Home Phone []:
+  Other []:
 Is the information correct? [Y/n] y
 ```
 If you want to add an existing user to an existing group, use:   
@@ -51,7 +51,7 @@ See which packages are available with 'searchterm'.
 
 ### $ `cat package.json`  
 Show the content of the 'package.json' file.
- 
+
 * `cat >package.json`  
 Create package.json from command line. This command will await input from user;  
 after typing/copying text, press **CTRL+D** to exit.
@@ -310,24 +310,24 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 [npmjs.com](https://www.npmjs.com/).
 
 * `npm version [1.0.0]`  
-	Set the version in `package.json` to 1.0.0, and create the corresponding
-	[git commit](./git.md#-git-commit--a--m-description-of-changes)
-	and **v1.0.0** [annotated tag](./git.md#-git-tag).  
-	Rather than explicitly specifying a version number like above, it's better practice to use
-	either of `patch`, `minor` or `major` to upgrade the relevant part:   
+  Set the version in `package.json` to 1.0.0, and create the corresponding
+  [git commit](./git.md#-git-commit--a--m-description-of-changes)
+  and **v1.0.0** [annotated tag](./git.md#-git-tag).  
+  Rather than explicitly specifying a version number like above, it's better practice to use
+  either of `patch`, `minor` or `major` to upgrade the relevant part:   
 
-	* `npm version patch -m "Upgrade to %s for reasons"`   
-		Upgrade 1.0.0 to 1.0.1 and specify a commit message; `%s` indicates the resulting version number 1.0.1.
-	* `npm version minor -m "Upgrade to %s for reasons"`   
-		Upgrade 1.0.0 to 1.1.0 and specify a commit message; `%s` indicates the resulting version number 1.1.0.
-	* `npm version major -m "Upgrade to %s for reasons"`   
-		Upgrade 1.0.0 to 2.0.0 and specify a commit message; `%s` indicates the resulting version number 2.0.0.
+  * `npm version patch -m "Upgrade to %s for reasons"`   
+    Upgrade 1.0.0 to 1.0.1 and specify a commit message; `%s` indicates the resulting version number 1.0.1.
+  * `npm version minor -m "Upgrade to %s for reasons"`   
+    Upgrade 1.0.0 to 1.1.0 and specify a commit message; `%s` indicates the resulting version number 1.1.0.
+  * `npm version major -m "Upgrade to %s for reasons"`   
+    Upgrade 1.0.0 to 2.0.0 and specify a commit message; `%s` indicates the resulting version number 2.0.0.
 
-	**NOTE:**  
-	Since tags are *not* automatically pushed to the remote, it's recommended to explicitly push them:  
-	`git push --tags (origin master)`  
-	Or, if you only want to push a single tag:  
-	`git push origin v1.0.0`  
+  **NOTE:**  
+  Since tags are *not* automatically pushed to the remote, it's recommended to explicitly push them:  
+  `git push --tags (origin master)`  
+  Or, if you only want to push a single tag:  
+  `git push origin v1.0.0`  
 
 * `npm publish`   
 Publish the package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
@@ -375,12 +375,12 @@ text by the "to" text.
 -v, --verbose: Print additional information about the operations (not) executed.
 
 * BASH:  
-	```
-	$ for file in *.rar  
-			$ do  
-			$ mv "$file" "${file%.rar}.cbr"  
-			$ done
-	```
+  ```
+  $ for file in *.rar
+    $ do
+    $ mv "$file" "${file%.rar}.cbr"
+    $ done
+  ```
 
 #### 2) Bulk rename all .txt files in current directory to have spaces before uppercase letters:
 * Debian:   
