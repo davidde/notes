@@ -305,6 +305,24 @@ List all installed node versions.
 * $ `nvm use 11.4.0`  
 Change the currently active node version to 11.4.0.
 
+### $ `npm`  
+Node Package Manager: the npm command line tool is used to manage and publish javascript packages to
+[npmjs.com](https://www.npmjs.com/).
+
+* `npm version [1.0.0]`  
+Set the package's version in `package.json`, and create a `git tag` and `commit`.  
+Rather than explicitly specifying a version number like above, it's better practice to use
+either of `patch`, `minor` or `major` to upgrade the relevant part:  
+  * `npm version patch -m "Upgrade to %s for reasons"`   
+    Will upgrade 1.0.0 to 1.0.1 and use the message for the commit message.
+  * `npm version minor -m "Upgrade to %s for reasons"`   
+    Will upgrade 1.0.0 to 1.1.0 and use the message for the commit message.
+  * `npm version major -m "Upgrade to %s for reasons"`   
+    Will upgrade 1.0.0 to 2.0.0 and use the message for the commit message.
+
+* `npm publish`   
+Publish to package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
+
 ### $ `qpdf -decrypt InputFile OutputFile`  
 Remove protection/encryption from pdf files.
 
