@@ -317,11 +317,11 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 	either of `patch`, `minor` or `major` to upgrade the relevant part:   
 
 	* `npm version patch -m "Upgrade to %s for reasons"`   
-		Upgrade 1.0.0 to 1.0.1 and specify a commit message. `%s` indicates the resulting version number 1.0.1.
+		Upgrade 1.0.0 to 1.0.1 and specify a commit message; `%s` indicates the resulting version number 1.0.1.
 	* `npm version minor -m "Upgrade to %s for reasons"`   
-		Upgrade 1.0.0 to 1.1.0 and specify a commit message. `%s` indicates the resulting version number 1.1.0.
+		Upgrade 1.0.0 to 1.1.0 and specify a commit message; `%s` indicates the resulting version number 1.1.0.
 	* `npm version major -m "Upgrade to %s for reasons"`   
-		Upgrade 1.0.0 to 2.0.0 and specify a commit message. `%s` indicates the resulting version number 2.0.0.
+		Upgrade 1.0.0 to 2.0.0 and specify a commit message; `%s` indicates the resulting version number 2.0.0.
 
 	**NOTE:**  
 	Since tags are *not* automatically pushed to the remote, it's recommended to explicitly push them:  
