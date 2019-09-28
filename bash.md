@@ -295,14 +295,14 @@ To move all subtitles from their separate folders into the main series folder, w
 ### $ `nvm`  
 Node Version Manager: bash script used to manage multiple active Node.js versions.
 
-* $ `nvm install --lts`  
+* `nvm install --lts`  
 Install the node LTS release. For another version, just replace the `--lts` with the specific version number:  
-$ `nvm install 11.4.0`
-* $ `nvm alias default 10`  
+`nvm install 11.4.0`
+* `nvm alias default 10`  
 Set the default node version to 10 (2018's LTS).
-* $ `nvm ls`  
+* `nvm ls`  
 List all installed node versions.
-* $ `nvm use 11.4.0`  
+* `nvm use 11.4.0`  
 Change the currently active node version to 11.4.0.
 
 ### $ `npm`  
@@ -310,15 +310,22 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 [npmjs.com](https://www.npmjs.com/).
 
 * `npm version [1.0.0]`  
-Set the package's version in `package.json`, and create a `git tag` and `commit`.  
-Rather than explicitly specifying a version number like above, it's better practice to use
-either of `patch`, `minor` or `major` to upgrade the relevant part:  
-  * `npm version patch -m "Upgrade to %s for reasons"`   
-    Will upgrade 1.0.0 to 1.0.1 and use the message for the commit message.
-  * `npm version minor -m "Upgrade to %s for reasons"`   
-    Will upgrade 1.0.0 to 1.1.0 and use the message for the commit message.
-  * `npm version major -m "Upgrade to %s for reasons"`   
-    Will upgrade 1.0.0 to 2.0.0 and use the message for the commit message.
+	Set the package's version in `package.json` to 1.0.0, and create the corresponding **v1.0.0** `git tag` and `commit`.
+	Rather than explicitly specifying a version number like above, it's better practice to use
+	either of `patch`, `minor` or `major` to upgrade the relevant part:   
+	
+	* `npm version patch -m "Upgrade to %s for reasons"`   
+		Will upgrade 1.0.0 to 1.0.1 and use the message for the commit message.
+	* `npm version minor -m "Upgrade to %s for reasons"`   
+		Will upgrade 1.0.0 to 1.1.0 and use the message for the commit message.
+	* `npm version major -m "Upgrade to %s for reasons"`   
+		Will upgrade 1.0.0 to 2.0.0 and use the message for the commit message.  
+
+	**NOTE:**  
+	Since tags are *not* automatically pushed to the remote, it's recommended to explicitly push them:  
+	`git push --tags (origin master)`  
+	Or, if you only want to push a single tag:  
+	`git push origin v1.0.0`  
 
 * `npm publish`   
 Publish the package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
@@ -329,14 +336,10 @@ Remove protection/encryption from pdf files.
 ### $ `passwd`   
 Change the password for the current user.   
 To change the password of root:   
-  - Login to root with either:   
-  $ `su -`   
-  $ `sudo -i`   
-  - Change the password:    
-  $ `passwd`
+  - Login to root with either `su -` or `sudo -i`.   
+  - Change the password with `passwd`.
   - Log back out using **CTRL + D**, `exit` or `su - username`.
-  - Test login using new password:   
-  $ `su -`
+  - Test logging in with new password: `su -` or `sudo -i`.   
 
 ### $ `rename`   
 Rename is a powerful command that fully supports Perl [regular expressions](./regex.md).  
@@ -356,12 +359,12 @@ Examples:
 #### 1) Bulk rename all files in the current working directory from .rar to .cbr:
 These Debian commands will work on Mac, but not the other way around!
 * Debian:  
-$ `rename -n 's/.rar/.cbr/' *.rar`  
+`rename -n 's/.rar/.cbr/' *.rar`  
 -n, -nono: no-execute mode; just print out the changes without actually making them.  
 -v, -verbose: Print names of files successfully renamed.  
 
 * Mac:  
-$ `rename -S .rar .cbr *.rar`  
+`rename -S .rar .cbr *.rar`  
 -s, --subst: Perform a simple textual substitution of "from" to "to".
 The "from" and "to" parameters must immediately follow the argument.  
 -S, --subst-all: Same as "-s", but replaces every instance of the "from"
@@ -379,16 +382,16 @@ text by the "to" text.
 
 #### 2) Bulk rename all .txt files in current directory to have spaces before uppercase letters:
 * Debian:   
-$ `rename -n 's/([A-Z])/ $1/g' *.txt`  
-$ `rename -n 's/(?<=\w)(?=[A-Z])/ /g' *.txt`  
+`rename -n 's/([A-Z])/ $1/g' *.txt`  
+`rename -n 's/(?<=\w)(?=[A-Z])/ /g' *.txt`  
 The second, more complex command will *not* add a space before the first letter of the filename if it is uppercase.
 
 
 #### 3) Remove the text 'useless_prefix_' from filenames/directories:  
 * Debian:  
-$ `rename -n 's/useless_prefix_//' *`  
+`rename -n 's/useless_prefix_//' *`  
 * Mac:  
-$ `rename -nS useless_prefix_ '' *`  
+`rename -nS useless_prefix_ '' *`  
 
 ### $ `rm -rf /path/to/directory`    
 Remove the directory **and** all its contents.   
@@ -398,14 +401,14 @@ Remove the directory **and** all its contents.
 ### $ `scp /path/to/local/file remote_username@remote_server:/path/to/remote/destination`   
 Securely copy a local file to a remote server over SSH.   
 For the reverse, copying a remote file to your local machine, use the command with the paths reversed:   
-$ `scp remote_username@remote_server:/path/to/remote/file /path/to/local/destination`   
+`scp remote_username@remote_server:/path/to/remote/file /path/to/local/destination`   
 **-r**: Recursively copy entire directories, e.g.:   
-$ `scp -r /path/to/local/directory remote_username@remote_server:/path/to/remote/destination`
+`scp -r /path/to/local/directory remote_username@remote_server:/path/to/remote/destination`
 
 ### $ `ssh remote_username@remote_ipaddress (-i /path/to/privatekey)`    
 SSH into the server with IP address 'remote_ipaddress' as user 'remote_username'.  
 If your username is the same locally and on the server, you can leave it out:  
-$ `ssh ipaddress`  
+`ssh ipaddress`  
 -i: Only required when using a private key not named '~/.ssh/id_rsa'.  
 -p: Port to connect to on the remote host. Only required when it's a non-standard port number for ssh.   
 -vvv: verbosity, useful for debugging.   
@@ -442,7 +445,7 @@ This will update your system's packages index (located in `/etc/apt/sources.list
 and `/etc/apt/sources.list.d/` for user-added sources). It will list all packages the index contains.  
 If updates are available for a package, it will be listed behind it as `[x kB]`.  
 You can then update any of these packages by simply reinstalling them, e.g.:  
-$ `sudo apt install code`  
+`sudo apt install code`  
 This will install a new version of vscode from the packages index.
 
 ### $ `sudo apt dist-upgrade`  
@@ -464,11 +467,11 @@ where `93C4A3FD7BB9C367` is the 'PUBKEY' you need to use in the command.
 ### $ `sudo cat /etc/sudoers`   
 Print out the sudoers file; this file contains the rules that users must follow when using the sudo command.
 You should never edit it directly, but use the `visudo` command (< vi + sudo):   
-$ `visudo`   
+`visudo`   
 Check the man pages for extra info on the sudoers file / vi(m) / visudo:   
-$ `man sudoers`   
-$ `man vi`   
-$ `man visudo`
+`man sudoers`   
+`man vi`   
+`man visudo`
 
 ### $ `sudo fs_usage | grep [path_to_file]`  
 Find out which application is touching the file.
@@ -491,14 +494,14 @@ So when using `+num`, output starts at line `num` to the end of the file (instea
 `-f, --follow`: Follow the file interactively as it grows.  
 This is really useful for monitoring log files to troubleshoot:  
 
-* $ `tail -f *.log`  
+* `tail -f *.log`  
 Follows (-f) all log files, so you can track potential issues.
 
 More specific logs:  
-* $ `tail -f /var/log/kern.log`   
+* `tail -f /var/log/kern.log`   
 // kernel-only, i.e. dmesg output
 
-* $ `tail -f /var/log/syslog`     
+* `tail -f /var/log/syslog`     
 // kernel + programs
 
 ### $ `tar xf file.tar.gz -C /path/to/directory`  
