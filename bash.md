@@ -321,7 +321,7 @@ either of `patch`, `minor` or `major` to upgrade the relevant part:
     Will upgrade 1.0.0 to 2.0.0 and use the message for the commit message.
 
 * `npm publish`   
-Publish to package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
+Publish the package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
 
 ### $ `qpdf -decrypt InputFile OutputFile`  
 Remove protection/encryption from pdf files.
