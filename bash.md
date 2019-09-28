@@ -310,9 +310,9 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 [npmjs.com](https://www.npmjs.com/).
 
 * `npm version [1.0.0]`  
-	Set `package.json`'s version to 1.0.0, and create the corresponding
+	Set the version in `package.json` to 1.0.0, and create the corresponding
 	[git commit](./git.md#-git-commit--a--m-description-of-changes)
-	and **v1.0.0** [annotated tag](./git.md#-git-tag).
+	and **v1.0.0** [annotated tag](./git.md#-git-tag).  
 	Rather than explicitly specifying a version number like above, it's better practice to use
 	either of `patch`, `minor` or `major` to upgrade the relevant part:   
 	
