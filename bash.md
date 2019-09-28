@@ -315,13 +315,13 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 	and **v1.0.0** [annotated tag](./git.md#-git-tag).  
 	Rather than explicitly specifying a version number like above, it's better practice to use
 	either of `patch`, `minor` or `major` to upgrade the relevant part:   
-	
+
 	* `npm version patch -m "Upgrade to %s for reasons"`   
-		Will upgrade 1.0.0 to 1.0.1 and use the message for the commit message.
+		Upgrade 1.0.0 to 1.0.1 and specify a commit message. `%s` indicates the resulting version number 1.0.1.
 	* `npm version minor -m "Upgrade to %s for reasons"`   
-		Will upgrade 1.0.0 to 1.1.0 and use the message for the commit message.
+		Upgrade 1.0.0 to 1.1.0 and specify a commit message. `%s` indicates the resulting version number 1.1.0.
 	* `npm version major -m "Upgrade to %s for reasons"`   
-		Will upgrade 1.0.0 to 2.0.0 and use the message for the commit message.  
+		Upgrade 1.0.0 to 2.0.0 and specify a commit message. `%s` indicates the resulting version number 2.0.0.
 
 	**NOTE:**  
 	Since tags are *not* automatically pushed to the remote, it's recommended to explicitly push them:  
