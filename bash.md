@@ -251,7 +251,8 @@ This means the resulting output will be from the start of the file to `num` line
 
 ### Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
 ```
-echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list  
+echo "deb http://ftp.debian.org/debian stretch-backports main" |
+    sudo tee /etc/apt/sources.list.d/stretch-backports.list  
 sudo apt update  
 sudo apt install -t stretch-backports git
 ```  
@@ -297,7 +298,7 @@ So you do something like:
 To rename 'index4_type9.txt' to 't9_i4.txt'.
 
 E.g.:  
-`mmv -n 'My.Awesome.Series.S01/Subs/My.Awesome.Series.S01E*/English.srt' 'My.Awesome.Series.S01/My.Awesome.Series.S01E#1-English.srt'`  
+`mmv -n 'Dexter-S01/Subs/Dexter-S01E*/English.srt' 'Dexter-S01/Dexter-S01E#1-en.srt'`  
 To move all subtitles from their separate folders into the main series folder, with adjusted names.
 
 ### $ `nvm`  
