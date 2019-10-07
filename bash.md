@@ -150,9 +150,6 @@ Execute dropbox-daemon on Linux.
 ### $ `ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4`  
 Convert the video 'input.mov' to 'output.mp4'.
 
-* `ffmpeg -i concat:"1.mkv|2.mkv|3.mkv" -c copy out.mkv`  
-Concatenate multipe video files into one.
-
 * `ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4`  
 Compress 'input.mov' with a constant rate factor of 24, and convert it to 'output.mp4'.
 
@@ -286,6 +283,11 @@ Show stats of the directory or file, including permissions (and which files for 
 -a (all): Display hidden files, including the directory itself, and its parent directory.  
 -l (list): Display more information in a well-ordered list.  
 => On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
+
+### $ `mkvmerge 1.mp4 \+ 2.mp4 \+ 3.mp4 -o out.mkv`  
+Concatenate multipe video files into one mkv file.  
+This command can be installed with:  
+`sudo apt install mkvtoolnix`
 
 ### $ `mmv "long_name*.txt" "short_#1.txt"`  
 Bulk rename all files in the current working directory such that the `#1` is replaced by
