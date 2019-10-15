@@ -391,14 +391,13 @@ Resolve merge conflicts locally:
   Finally, just update the master branch on your fork:  
   `git checkout master`  
   `git push origin master`  
-  (-> Udacity Git/Github Lesson 4, 33.)
 
 * `git remote show origin`  
 Display complete info on both 'push' and 'pull' configurations per branch.
 
 ### $ `git reset (--hard)`  
 Unstages all staged files.  
---hard: Also resets the working directory, so any uncommitted changes will be lost!
+--hard: Also resets the working directory, so any uncommitted changes will be lost!  
 
 * `git reset main.go`  
 Unstages main.go, but preserves its contents.
@@ -406,20 +405,29 @@ Unstages main.go, but preserves its contents.
 * `git reset 6f16fb26b3294 src/app/app.js`  
 Reset a specific file (app.js) to the state of a previous commit.
 
-* `git reset HEAD~ (--hard)`  
-Undo the latest commit, the staged/tracked files will no longer be staged/tracked.  
-(HEAD is a pointer to the most recent git commit in a specific branch;
-detached head means the head does not point to the most recent commit.
-This happens when you move the head back in time by checking out a
-specific commit hash)  
-If the commit was already pushed to your remote, you will have to push the newly
-deleted version again with the --force flag to delete it from the remote:  
-`git push origin master --force`
+* `git reset 6f16fb26b3294 (--hard)`  
+Undo all commits that came after 6f16fb26b3294!  
+--hard: will also get rid of everything you've done since then; all these commits will be lost from the working directory.  
+In this case, since they were previously committed, you could still retrieve them using [git reflog](#-git-reflog).
 
-* `git reset cffd76070aaebf82e4b (--hard)`  
-Undo all commits that came after cffd76070aaebf82e4b!  
---hard: will also get rid of everything you've done since then;  
-all unpublished commits will be lost from your hard disk.  
+* `git reset HEAD~ (--soft/--mixed/--hard/--keep)`  
+  Undo the last commit from the current branch.  
+  (HEAD is a pointer to the most recent git commit in a specific branch;
+  detached head means the head does not point to the most recent commit.
+  This happens when you move the head back in time by checking out a
+  specific commit hash)  
+  * `--soft`: The file changes remain in your working directory and are still staged.  
+  * `--mixed`: Default mode; the file changes remain in your working directory but are no longer staged.  
+  * `--hard`: Also reset the working directory, so any uncommitted changes will be lost. Note that it is impossible
+  for git to restore files that were never committed in the first place, so be careful using this command!  
+  * `--keep`: Basically a safer version of --hard; only reset the files for which the specified commit (in this case `HEAD~`)
+  differs from the current HEAD. It aborts the reset if any of these files have uncommitted changes.  
+
+  **Note:**  
+  If the commit was already pushed to your remote, you will have to push the newly
+  deleted version again with the --force flag to delete it from the remote:  
+  `git push origin master --force`  
+  Be aware this is a bad practice for public repos, since they might already have been cloned by other people.
 
 ### $ `git revert cffd76070aaebf82e4b`  
 Undo only the changes that happened in this specific commit.
