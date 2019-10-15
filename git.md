@@ -150,6 +150,9 @@ or: `git diff cffd 1e14`
 (you may abbreviate commit hashes; the first 4 or more chars suffice)  
 Compare 2 specific commits (get commit hash from 'git log' command)
 
+* `git diff HEAD~ HEAD`  
+Show the difference between the head commit and the one before.
+
 * To permanently exclude a specific file in your repository from the diff command:  
 `git config diff.nodiff.command /bin/true`  
 `cat >.git/info/attributes`  
