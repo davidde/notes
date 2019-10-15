@@ -204,6 +204,9 @@ Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
 * `git log --name-status`  
 Adds the names and status of the changed files of each commit to the log.
 
+* `git log -5 --name-status --oneline | cat`  
+Produces a short printed log of the last 5 commits.
+
 * `git log --stat --oneline --graph master other_branch`  
 `--stat`: shows additional data like the files that were changed, and insertions/deletions.  
 `--oneline`: show only one line per commit (see other `--format` types above at `git log --format`).  
