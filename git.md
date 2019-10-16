@@ -419,12 +419,15 @@ In this case, since they were previously committed, you could still retrieve the
   detached head means the head does not point to the most recent commit.
   This happens when you move the head back in time by checking out a
   specific commit hash)  
-  * `--soft`: The file changes remain in your working directory and are still staged.  
-  * `--mixed`: Default mode; the file changes remain in your working directory but are no longer staged.  
-  * `--hard`: Also reset the working directory, so any uncommitted changes will be lost. Note that it is impossible
-  for git to restore files that were never committed in the first place, so be careful using this command!  
-  * `--keep`: Basically a safer version of --hard; only reset the files for which the specified commit (in this case `HEAD~`)
-  differs from the current HEAD. It aborts the reset if any of these files have uncommitted changes.  
+  * `--soft`: The modifications from the last commit remain in the working directory and are still staged.  
+  * `--mixed`: The modifications from the last commit remain in the working directory but are no longer staged.  
+  This is the *default mode*.
+  * `--hard`: The modifications from the last commit are deleted from the working directory, as well as
+  any uncommitted changes. Note that it is impossible for git to restore modifications that were never committed
+  in the first place, so be careful using this command!  
+  * `--keep`: Basically a safer version of --hard; only updates 'change-positive' files (= files that are different
+  between the specified `<commit>` (= `HEAD~` = `HEAD~1`) and the current HEAD (= `HEAD~0`)). It does this
+  by performing a merge. Local changes are kept, but if a 'change-positive' file has local changes, the reset is aborted.
 
   **Note:**  
   If the commit was already pushed to your remote, you will have to push the newly
