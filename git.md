@@ -621,3 +621,55 @@ List the existing tags in git's version control.
 
 * `git tag -d v1.0.0`  
 Delete the `v1.0.0` tag.
+
+
+## Custom git commands
+## a) git aliases
+In `~/.gitconfig`:
+```
+[alias]
+    cm = commit -m
+    cam = commit -am
+    diffh = diff HEAD~ HEAD
+    logs = log --name-status
+    prev = checkout HEAD^1
+    next = "!sh -c 'git log --reverse --pretty=%H master |\
+        awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
+
+    # Print essential info from both git log and git status:
+    print = "!sh -c 'git status -s && git log -5 --oneline | cat'"
+
+    # Undo the last commit, but keep its changes staged, so recommitting is easy:
+    undo = "!sh -c 'git reset HEAD~ --soft ; echo -n \"HEAD is now at \" ;\
+        git log -1 --oneline | cat ; git status -s'"
+```
+Even though we can put shell scripts inline inside .gitconfig, is is not advisable for anything but the most basic scripts.  
+By using the below method for custom scripts, we gain more control and maintainability over the scripts.
+
+## b) Custom shell scripts
+* Procedure:  
+  * Create a shell script named `git-command`
+  * Place it somewhere in your system's path, e.g. `/usr/local/bin/git-command`
+  * Give it executable permissions: `sudo chmod +x /usr/local/bin/git-command`
+  * It is now available in the shell by running `git command`
+
+### $ `git delete`
+```sh
+#!/bin/sh
+
+# Delete the last commit from both git as well as the working directory, and display status.
+# Place this script somewhere in your path, e.g. /usr/local/bin/git-delete
+
+delete=$(git reset HEAD~ --keep)
+if [ $? != 0 ]; then
+    # Failure case:
+    echo -n "HEAD remains at "
+    git log -1 --oneline | cat
+    exit 1
+else # Success case:
+    echo -n "HEAD is now at "
+    git log -1 --oneline | cat
+    git status -s
+    exit 0
+fi
+```
