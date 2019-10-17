@@ -645,15 +645,15 @@ In `~/.gitconfig`:
     undo = "!sh -c 'git reset HEAD~ --soft ; echo -n \"HEAD is now at \" ;\
         git log -1 --oneline | cat ; git status -s'"
 ```
-Even though we can put shell scripts inline inside .gitconfig, is is not advisable for anything but the most basic scripts.  
-By using the below method for custom scripts, we gain more control and maintainability over the scripts.
+Even though we can put shell scripts inline inside .gitconfig, this is not advisable for anything but the most basic scripts.  
+By using the below method for separate `git-subcommand` scripts, we gain control and maintainability:
 
-## b) Custom shell scripts
+## b) `git-subcommand` shell scripts
 * Procedure:  
-  * Create a shell script named `git-command`
-  * Place it somewhere in your system's path, e.g. `/usr/local/bin/git-command`
-  * Give it executable permissions: `sudo chmod +x /usr/local/bin/git-command`
-  * It is now available in the shell by running `git command`
+  * Create a shell script named `git-subcommand`
+  * Place it somewhere in your system's path, e.g. `/usr/local/bin/git-subcommand`
+  * Give it executable permissions: `sudo chmod +x /usr/local/bin/git-subcommand`
+  * It is now available in the shell by running `git subcommand`
 
 ### $ `git delete`
 ```sh
