@@ -633,6 +633,7 @@ In `~/.gitconfig`:
     difh = diff HEAD~ HEAD
     difs = diff --staged
     logs = log --name-status
+    masta = checkout master
     prev = checkout HEAD^1
     next = "!sh -c 'git log --reverse --pretty=%H master |\
         awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
