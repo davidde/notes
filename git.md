@@ -630,7 +630,8 @@ In `~/.gitconfig`:
 [alias]
     cm = commit -m
     cam = commit -am
-    diffh = diff HEAD~ HEAD
+    difh = diff HEAD~ HEAD
+    difs = diff --staged
     logs = log --name-status
     prev = checkout HEAD^1
     next = "!sh -c 'git log --reverse --pretty=%H master |\
