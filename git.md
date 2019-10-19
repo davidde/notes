@@ -629,7 +629,7 @@ In `~/.gitconfig`:
 ```
 [alias]
     cm = commit -m
-    cam = commit -am
+    cma = commit -am
     difh = diff HEAD~ HEAD
     difs = diff --staged
     logs = log --name-status
