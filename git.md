@@ -625,11 +625,15 @@ Delete the `v1.0.0` tag.
 
 ## Custom git commands
 ## a) git aliases
+> **NOTE:**  
+> When using zshell with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you already have access to the default
+> [zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh).
+
 In `~/.gitconfig`:
 ```
 [alias]
     cm = commit -m
-    cma = commit -am
+    cam = commit -am
     difh = diff HEAD~ HEAD
     difs = diff --staged
     logs = log --name-status
