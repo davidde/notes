@@ -152,6 +152,7 @@ Compare 2 specific commits (get commit hash from 'git log' command)
 
 * `git diff HEAD~ HEAD`  
 Show the difference between the head commit (= `HEAD` = `HEAD~0`) and the one before (= `HEAD~` = `HEAD~1`).
+In other words, check which modifications were added in the last commit.
 
 * To permanently exclude a specific file in your repository from the diff command:  
 `git config diff.nodiff.command /bin/true`  
@@ -627,7 +628,7 @@ Delete the `v1.0.0` tag.
 ## a) git aliases
 > **NOTE:**  
 > When using zshell with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you already have access to the default
-> [zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh).
+> [zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git).
 
 In `~/.gitconfig`:
 ```
