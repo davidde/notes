@@ -10,14 +10,13 @@
 | remote repository      | "Pull Request on Github" |
 | upstream repository    |     /                    |
 
-Many git commands like `git log`, `git diff` and `git [command] --help` show their output  
-in the `less` pager, which means `q` to exit.  
-To search in the less pager, use `/` followed by the search term and press enter.  
-Use `n` and `N` to move forwards/backwards in the search results.  
+Many git commands (e.g. [git diff](#-git-diff), [git log](#-git-log), [git show](#-git-show), etc.)
+show their output in the less pager, which is exited with the `q` hotkey.
+To search in the less pager, use `/` followed by the search term and press enter;  
+use `n` and `N` to move forwards/backwards in the search results.  
 
-**Tip**:  
-`git [command] --help`  
-This gets you information on any git command.
+> **Tip**:  
+> `git [command] --help` will give you information on any git command.
 
 ## Basic git commands and usage, alphabetically:
 
@@ -152,7 +151,8 @@ Compare 2 specific commits (get commit hash from 'git log' command)
 
 * `git diff HEAD~ HEAD`  
 Show the difference between the head commit (= `HEAD` = `HEAD~0`) and the one before (= `HEAD~` = `HEAD~1`).  
-In other words, check which modifications were added in the last commit.
+In other words, check which modifications were added in the last commit; this is identical to the much simpler
+`git show` command.
 
 * To permanently exclude a specific file in your repository from the diff command:  
 `git config diff.nodiff.command /bin/true`  
@@ -446,20 +446,24 @@ Count the commits for the branch you are on.
 Remove a file from both git and working directory,  
 so it doesn't longer show up as an untracked file.
 
-### $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81`  
-Compare a specific commit to its parent commit.
+### $ `git show`  
+Show various types of objects, highlighting the most recent modifications.  
+Without any other options, it defaults to HEAD and shows the last commit:  
+```
+git show = git show HEAD  = git show HEAD~0 = show the last commit.  
+           git show HEAD~ = git show HEAD~1 = show the commit before the last.  
+                            git show HEAD~2 = show the third latest commit.  
+                            Etc.
+```
 
-* `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go`  
-Look at a specific commit of the main.go file (path required) in less pager.
+* `git show cffd76070`  
+Show commit cffd76070.  
 
-* `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go | vi -`  
-Look at a specific commit of the main.go file (path required) in vi editor.
+* `git show src/app/app.js`  
+Show only the file 'src/app/app.js' of the last commit (HEAD).  
 
-* `git show HEAD:main.go`  
-Show the head (most recent) commit of main.go
-
-* `git show HEAD~2:main.go | vi -`  
-Show the third latest commit of main.go in the vi editor.
+* `git show cffd76070:src/app/app.js`  
+Show only the file 'src/app/app.js' of commit cffd76070, highlighting the modifications this commit added to this file.  
 
 ### $ `git status`  
 Lists all new or modified files to be committed.
