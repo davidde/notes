@@ -11,9 +11,9 @@
 | upstream repository    |     /                    |
 
 Many git commands (e.g. [git diff](#-git-diff), [git log](#-git-log), [git show](#-git-show), etc.)
-show their output in the less pager, which is exited with the `q` hotkey.
-To search in the less pager, use `/` followed by the search term and press enter;  
-use `n` and `N` to move forwards/backwards in the search results.  
+show their output in the **less pager**.  
+You can exit *less* with the `q` hotkey, and search it using `/` followed by the search term;  
+`n` and `N` move forwards/backwards in the search results.  
 
 > **Tip**:  
 > `git [command] --help` will give you information on any git command.
@@ -151,8 +151,7 @@ Compare 2 specific commits (get commit hash from 'git log' command)
 
 * `git diff HEAD~ HEAD`  
 Show the difference between the head commit (= `HEAD` = `HEAD~0`) and the one before (= `HEAD~` = `HEAD~1`).  
-In other words, check which modifications were added in the last commit; this is identical to the much simpler
-`git show` command.
+In other words, it is identical to the simpler [git show](#-git-show) command.
 
 * To permanently exclude a specific file in your repository from the diff command:  
 `git config diff.nodiff.command /bin/true`  
