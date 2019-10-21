@@ -633,12 +633,12 @@ Delete the `v1.0.0` tag.
 In `~/.gitconfig`:
 ```
 [alias]
-    cm = commit -m
-    cam = commit -am
-    difh = diff HEAD~ HEAD
-    difs = diff --staged
+    cm = commit -m              # zsh: gcmsg  (msg = message)
+    cam = commit -am            # zsh: gcam
+    difh = diff HEAD~ HEAD      # zsh: git diff = gd
+    difs = diff --staged        # zsh: gds
     logs = log --name-status
-    masta = checkout master
+    masta = checkout master     # zsh: gcm
     prev = checkout HEAD^1
     next = "!sh -c 'git log --reverse --pretty=%H master |\
         awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
