@@ -635,7 +635,6 @@ To do so, add them in `~/.gitconfig`:
 [alias]
     cm = commit -m              # zsh: gcmsg  (msg = message)
     cam = commit -am            # zsh: gcam
-    difh = diff HEAD~ HEAD      # zsh: git diff = gd
     difs = diff --staged        # zsh: gds
     logs = log --name-status
     masta = checkout master     # zsh: gcm
@@ -643,12 +642,22 @@ To do so, add them in `~/.gitconfig`:
     next = "!sh -c 'git log --reverse --pretty=%H master |\
         awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
 
+    # Count the commits for the branch you are on:
+    count = "!echo \"$(git rev-list --count HEAD) commits total\""
+
+    # Count the commits for the branch you are on per user:
+    countall = "!git shortlog -sn | cat; \
+                 echo -n ' +  __________________________\n\n    '; \
+                 echo \"$(git rev-list --count HEAD) commits total\""
+
     # Print essential info from both git log and git status:
-    print = "!sh -c 'git status -s && git log -5 --oneline | cat'"
+    print = "!git status -s && git log -5 --oneline | cat"
 
     # Undo the last commit, but keep its changes staged, so recommitting is easy:
-    undo = "!sh -c 'git reset HEAD~ --soft ; echo -n \"HEAD is now at \" ;\
-        git log -1 --oneline | cat ; git status -s'"
+    undo = "!git reset HEAD~ --soft; \
+             echo -n 'HEAD is now at '; \
+             git log -1 --oneline | cat; \
+             git status -s"
 ```
 Even though we can put shell scripts inline inside .gitconfig, this is not advisable for anything but the most basic scripts.  
 By using the below method for [separate git-subcommand scripts](#b-Separate-git-subcommand-scripts),
@@ -674,7 +683,6 @@ we gain control and maintainability.
 > alias gcob='git checkout -b'
 > alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
 > alias gpl='git pull'
-> alias gdh='git diff HEAD~ HEAD'
 > ```
 
 ## b) Separate `git-subcommand` scripts
