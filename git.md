@@ -684,6 +684,25 @@ we gain control and maintainability.
 > alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
 > alias gpl='git pull'
 > ```
+> 
+> Other useful oh-my-zsh defaults:
+> 
+> | Alias         | Command                                     |
+> |---------------|---------------------------------------------|
+> | g             | git                                         |
+> | ga            | git add                                     |
+> | gb	          | git branch                                  |
+> | gba	          | git branch -a                               |
+> | gbd	          | git branch -d                               |
+> | gcam          | git commit -am                              |
+> | gco           | git checkout                                |
+> | gcp           | git cherry-pick                             |
+> | gd            | git diff                                    |
+> | gds           | git diff --staged                           |
+> | gp            | git push                                    |
+> | gpf!          | git push --force                            |
+> | gsh           | git show                                    |
+> | gst           | git status                                  |
 
 ## b) Separate `git-subcommand` scripts
 * Procedure:  
