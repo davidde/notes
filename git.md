@@ -637,7 +637,6 @@ To do so, add them in `~/.gitconfig`:
     cam = commit -am            # zsh: gcam
     difs = diff --staged        # zsh: gds
     logs = log --name-status
-    masta = checkout master     # zsh: gcm
     prev = checkout HEAD^1
     next = "!sh -c 'git log --reverse --pretty=%H master |\
         awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
@@ -677,33 +676,45 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Aliases overwriting some inconsistent omz git defaults:
+alias gba='git branch -a | cat'
 alias gcm='git commit -m'    # omz has gcm='git checkout master', but gco='git checkout'
 alias gcom='git checkout master'
 alias gcod='git checkout develop'
 alias gcob='git checkout -b'
 alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
+alias gp='git status -s && git log -5 --oneline | cat'
+alias gph='git push'
 alias gpl='git pull'
 alias gs='git status'
 alias gst='git stash'
+alias gsta='git stash apply'
 alias gsh='git show'
 ```
 
-Other useful oh-my-zsh defaults:
+With these changes, the most useful shortcuts are:
 
 | Alias         | Command                                     |
 |---------------|---------------------------------------------|
 | g             | git                                         |
 | ga            | git add                                     |
 | gb            | git branch                                  |
-| gba           | git branch -a                               |
+| gba           | git branch -a | cat                         |
 | gbd           | git branch -d                               |
-| gcam          | git commit -am                              |
+| gcam          | git commit -am                              |
+| gcm           | git commit -m                               |
 | gco           | git checkout                                |
+| gcob          | git checkout -b                             |
+| gcom          | git checkout master                         |
 | gcp           | git cherry-pick                             |
 | gd            | git diff                                    |
 | gds           | git diff --staged                           |
-| gp            | git push                                    |
-| gsh           | git show                                    |
+| gl            | git log --name-status                       |
+| gp            | git status -s && git log -5 --oneline | cat |
+| gph           | git push                                    |
+| gpl           | git pull                                    |
+| gs            | git status                                  |
+| gsh           | git show                                    |
+| gst           | git stash                                   |
 
 ## b) Separate `git-subcommand` scripts
 * Procedure:  
