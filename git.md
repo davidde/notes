@@ -683,6 +683,9 @@ we gain control and maintainability.
 > alias gcob='git checkout -b'
 > alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
 > alias gpl='git pull'
+> alias gs='git status'
+> alias gst='git stash'
+> alias gsh='git show'
 > ```
 > 
 > Other useful oh-my-zsh defaults:
@@ -700,9 +703,7 @@ we gain control and maintainability.
 > | gd            | git diff                                    |
 > | gds           | git diff --staged                           |
 > | gp            | git push                                    |
-> | gpf!          | git push --force                            |
 > | gsh           | git show                                    |
-> | gst           | git status                                  |
 
 ## b) Separate `git-subcommand` scripts
 * Procedure:  
