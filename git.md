@@ -662,48 +662,48 @@ To do so, add them in `~/.gitconfig`:
 Even though we can put shell scripts inline inside .gitconfig, this is not advisable for anything but the most basic scripts.  
 By using the below method for [separate git-subcommand scripts](#b-Separate-git-subcommand-scripts),
 we gain control and maintainability.
+    
+**NOTE:**  
+When using zshell with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you already have access to the default
+[zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git).
 
-> **NOTE:**  
-> When using zshell with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you already have access to the default
-> [zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git).
-> 
-> However, there are some unfortunate inconsistencies in these defaults, which you can rectify by overwriting
-> them in `~/.zshrc` **after** oh-my-zsh was loaded:
-> ```
-> # Plugins to load:
-> plugins=(git)
-> 
-> # Load oh-my-zsh (omz):
-> source $ZSH/oh-my-zsh.sh
-> 
-> # Aliases overwriting some inconsistent omz git defaults:
-> alias gcm='git commit -m'    # omz has gcm='git checkout master', but gco='git checkout'
-> alias gcom='git checkout master'
-> alias gcod='git checkout develop'
-> alias gcob='git checkout -b'
-> alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
-> alias gpl='git pull'
-> alias gs='git status'
-> alias gst='git stash'
-> alias gsh='git show'
-> ```
-> 
-> Other useful oh-my-zsh defaults:
-> 
-> | Alias         | Command                                     |
-> |---------------|---------------------------------------------|
-> | g             | git                                         |
-> | ga            | git add                                     |
-> | gb	          | git branch                                  |
-> | gba	          | git branch -a                               |
-> | gbd	          | git branch -d                               |
-> | gcam          | git commit -am                              |
-> | gco           | git checkout                                |
-> | gcp           | git cherry-pick                             |
-> | gd            | git diff                                    |
-> | gds           | git diff --staged                           |
-> | gp            | git push                                    |
-> | gsh           | git show                                    |
+However, there are some unfortunate inconsistencies in these defaults, which you can rectify by overwriting
+them in `~/.zshrc` **after** oh-my-zsh was loaded:
+```
+# Plugins to load:
+plugins=(git)
+
+# Load oh-my-zsh (omz):
+source $ZSH/oh-my-zsh.sh
+
+# Aliases overwriting some inconsistent omz git defaults:
+alias gcm='git commit -m'    # omz has gcm='git checkout master', but gco='git checkout'
+alias gcom='git checkout master'
+alias gcod='git checkout develop'
+alias gcob='git checkout -b'
+alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
+alias gpl='git pull'
+alias gs='git status'
+alias gst='git stash'
+alias gsh='git show'
+```
+
+Other useful oh-my-zsh defaults:
+
+| Alias         | Command                                     |
+|---------------|---------------------------------------------|
+| g             | git                                         |
+| ga            | git add                                     |
+| gb            | git branch                                  |
+| gba           | git branch -a                               |
+| gbd           | git branch -d                               |
+| gcam          | git commit -am                              |
+| gco           | git checkout                                |
+| gcp           | git cherry-pick                             |
+| gd            | git diff                                    |
+| gds           | git diff --staged                           |
+| gp            | git push                                    |
+| gsh           | git show                                    |
 
 ## b) Separate `git-subcommand` scripts
 * Procedure:  
