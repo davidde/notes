@@ -642,12 +642,12 @@ To do so, add them in `~/.gitconfig`:
         awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
 
     # Count the commits for the branch you are on:
-    count = "!echo \"$(git rev-list --count HEAD) commits total\""
+    count = "!echo \"$(git rev-list --count HEAD) commits total on this branch\""
 
     # Count the commits for the branch you are on per user:
     countall = "!git shortlog -sn | cat; \
                  echo -n ' +  __________________________\n\n    '; \
-                 echo \"$(git rev-list --count HEAD) commits total\""
+                 echo \"$(git rev-list --count HEAD) commits total on this branch\""
 
     # Print essential info from both git log and git status:
     print = "!git status -s && git log -5 --oneline | cat"
@@ -681,7 +681,7 @@ alias gcom='git checkout master'
 alias gcod='git checkout develop'
 alias gcob='git checkout -b'
 alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
-alias gp='git status -s && git log -5 --oneline | cat'
+alias gp='git status -s && git log -5 --oneline | cat' # git print
 alias gph='git push'
 alias gpl='git pull'
 alias gs='git status'
