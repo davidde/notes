@@ -663,9 +663,8 @@ By using the below method for [separate git-subcommand scripts](#b-Separate-git-
 we gain control and maintainability.
     
 **NOTE:**  
-When using zshell with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you already have access to the default
-[zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git).
-
+When using zshell with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you have access to the default
+[zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git).  
 However, there are some unfortunate inconsistencies in these defaults, which you can rectify by overwriting
 them in `~/.zshrc` **after** oh-my-zsh was loaded:
 ```
@@ -693,28 +692,28 @@ alias gsh='git show'
 
 With these changes, the most useful shortcuts are:
 
-| Alias         | Command                                     |
-|---------------|---------------------------------------------|
-| g             | git                                         |
-| ga            | git add                                     |
-| gb            | git branch                                  |
-| gba           | git branch -a | cat                         |
-| gbd           | git branch -d                               |
-| gcam          | git commit -am                              |
-| gcm           | git commit -m                               |
-| gco           | git checkout                                |
-| gcob          | git checkout -b                             |
-| gcom          | git checkout master                         |
-| gcp           | git cherry-pick                             |
-| gd            | git diff                                    |
-| gds           | git diff --staged                           |
-| gl            | git log --name-status                       |
-| gp            | git status -s && git log -5 --oneline | cat |
-| gph           | git push                                    |
-| gpl           | git pull                                    |
-| gs            | git status                                  |
-| gsh           | git show                                    |
-| gst           | git stash                                   |
+| Alias               | Command                                           |
+|---------------------|---------------------------------------------------|
+| g                   | git                                               |
+| ga                  | git add                                           |
+| gb                  | git branch                                        |
+| gba                 | git branch -a \| cat                              |
+| gbd                 | git branch -d                                     |
+| gcam                | git commit -am                                    |
+| gcm                 | git commit -m                                     |
+| gco                 | git checkout                                      |
+| gcob                | git checkout -b                                   |
+| gcom                | git checkout master                               |
+| gcp                 | git cherry-pick                                   |
+| gd                  | git diff                                          |
+| gds                 | git diff --staged                                 |
+| gl                  | git log --name-status                             |   
+| gp (= git print)    | git status -s && git log -5 --oneline \| cat      |
+| gph                 | git push                                          |
+| gpl                 | git pull                                          |
+| gs                  | git status                                        |
+| gsh                 | git show                                          |
+| gst                 | git stash                                         |
 
 ## b) Separate `git-subcommand` scripts
 * Procedure:  
