@@ -1,10 +1,12 @@
 # Deploying a static site to Github Pages
 There are 2 types of GitHub Pages:
 
-* Project Pages: A separate website for each repo/project you wish to demo,
-  hosted at `https://<USERNAME|ORGANIZATION>.github.io/<PROJECT>/`.
-* User/Organization Pages: A single website per user/organization,
-  hosted at `https://<USERNAME|ORGANIZATION>.github.io/`.
+* **Project Pages:**  
+  A separate website for each repo/project you wish to demo.  
+  Hosted at `https://<USERNAME|ORGANIZATION>.github.io/<PROJECT>/`.
+* **User/Organization Pages:**  
+  A single website per user/organization.  
+  Hosted at `https://<USERNAME|ORGANIZATION>.github.io/`.
 
 We will be using the **Project Pages** method in this tutorial.
 
@@ -13,12 +15,14 @@ Check out the complete
 [Hugo documentation for Github Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
 if you run into trouble.
 
-## Deploy from `gh-pages` branch
-We will be deploying our Project Pages from a separate `gh-pages` branch,
-so that our source code and generated website are kept in different branches:
-* `master` branch: source code
-* `gh-pages` branch: website built from master branch with the `hugo` command
-This way is recommended because we maintain separate version control history for both source and 'final' website.
+## Deploying from a gh-pages branch
+We will be deploying our Project Pages from a separate `gh-pages` branch.  
+This means source code and generated website are kept in different branches:
+
+  * `master branch`: source code
+  * `gh-pages branch`: website built from master branch with the `hugo` command  
+
+In this way we maintain separate version control history for both the source and the 'final' website.
 
 **Steps:**  
 * Make sure the public folder is added to your `.gitignore` file:  
@@ -59,17 +63,17 @@ This way is recommended because we maintain separate version control history for
   ```
 
 * If your site does not appear at `https://<USERNAME>.github.io/<PROJECT>/`,
-  check if your project's settings are properly configured.  
-  You can find these at your project's url, `https://github.com/<USERNAME>/<PROJECT>`,  
-  on the top row (the same one as 'Code', 'Issues' and 'Pull requests').  
+  check if your project's settings are properly configured.
+  You can find these at the top of your project's url, `https://github.com/<USERNAME>/<PROJECT>`.
+  (In the same row as 'Code', 'Issues' and 'Pull requests').  
   Scroll down in the Settings tab until you encounter the 'Github Pages' section.  
-  Make sure the source is properly configured as the `gh-pages branch`.
+  Make sure the source is properly configured as the `gh-pages branch`.  
   When everything is set up right, it should say:  
   `Your site is published at https://<USERNAME>.github.io/<PROJECT>/`  
 
 ## Put it all in a shell script
 To automate all of this for new commits, you can create a publish.sh script:  
-`cat > publish.sh`  
+`$ cat > publish.sh`  
 ```bash
 #!/bin/sh
 
@@ -109,12 +113,12 @@ git push --all
 After committing your changes, you can now simply run `./publish.sh` to publish to Github Pages.
 
 ## Turn the static site into a PWA
-* Add a `/static/images/icons-192.png` and `/static/images/icons-512.png` image,
-  since they are required for the PWA 'Add to Homescreen' prompt.
+* Add a `/static/images/icons-192.png` and `/static/images/icons-512.png` image,  
+  since they are required for the PWA "Add to Homescreen" prompt.
 
 * Create a manifest file at `static/manifest.json`, and add the before-mentioned icons.  
   Make sure that the `src` attribute does not start with a `/`:
-  ```json
+  ```
     {
     ￼  "short_name": "site",
     ￼  "name": "Full website name and function",
@@ -152,7 +156,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
   ```
   cp themes/<theme-name>/layouts/partials/header.html layouts/partials/header.html
   ```
-  Now you have your own version of header.html to modify, without polluting the theme's git history.
+  Now you have your own version of header.html to modify, without polluting the theme's git history.  
   This is the file to add the before-mentioned link to.
 
 * Create the serviceworker that will do the actual work:  
@@ -162,7 +166,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
   ```  
   It should be located right next to the `manifest.json` file in the `static` directory.
 
-* Register the serviceworker at your site's root by adding a registration script.
+* Register the serviceworker at your site's root by adding a registration script.  
   Again, if you're using a theme, you should probably copy the theme's index.html layout to
   your own layouts folder:  
   ```
@@ -242,12 +246,13 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
   ￼      });
   ￼    }
   ￼</script>
+
   {{ partial "footer.html" . }}
   ```
 
 * Your static site should now also be a PWA.  
-  If you do not get the 'Add to Homescreen' prompt, here's how to troubleshoot:  
-  - Open Chrome Devtools and click the Audits tab.
+  If you do not get the "Add to Homescreen" prompt, here's how to troubleshoot:  
+  - Open Chrome Devtools and click the `Audits` tab.
   - Uncheck everything except 'Progressive Web App', and click `Run Audits`.
   - You will be presented with the PWA requirements you do not fulfill yet.
 
