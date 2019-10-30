@@ -24,11 +24,11 @@ Enter the new value, or press ENTER for the default
 Is the information correct? [Y/n] y
 ```
 If you want to add an existing user to an existing group, use:   
-$ `sudo adduser [USER] [GROUP]`   
+`sudo adduser [USER] [GROUP]`   
 For example, to grant the previously created user sudo privileges:   
-$ `sudo adduser david sudo`   
+`sudo adduser david sudo`   
 To revoke the sudo privileges:   
-$ `sudo deluser david sudo`   
+`sudo deluser david sudo`   
 
 **Note:**   
 Debian/Ubuntu's `adduser` was written with the purpose of being a convenient frontend to a range of utilities
@@ -37,13 +37,13 @@ Debian/Ubuntu's `adduser` was written with the purpose of being a convenient fro
 Debian recommends that system administrators use `adduser`, `addgroup`, `deluser`, etc. over the more specific utilities.
 
 ### Android emulator:
-* $ `~/Android/Sdk/emulator/emulator -list-avds`  
+* `~/Android/Sdk/emulator/emulator -list-avds`  
 List the available emulators created with [Android Virtual Device Manager](https://flutter.dev/docs/get-started/install/linux#set-up-the-android-emulator).
 
-* $ `~/Android/Sdk/emulator/emulator -avd @name-of-your-emulator`  
+* `~/Android/Sdk/emulator/emulator -avd @name-of-your-emulator`  
 Run one of the listed emulators.
 
-* $ `/opt/android-studio/bin/studio.sh`  
+* `/opt/android-studio/bin/studio.sh`  
 Launch the full Android Studio IDE.
 
 ### $ `apt-cache search [searchterm]`   
@@ -93,7 +93,7 @@ chmod = **ch**ange **mod**e:
 Change the file mode / permissions for the file specified by 'filepath'.   
 -R, --recursive: Also change permissions of files/directories inside the specified directory **and** its subdirectories.   
 Example:   
-$ `chmod -R 750 ~/projects/app`   
+`chmod -R 750 ~/projects/app`   
 However, use the -R flag with care, since the default permissions for files and directories are not the same ...   
 (You can use [find](./BASH.md#-find) combined with `chmod` to set different permissions for each.)   
 See [chmod.md](./chmod.md) for a general introduction to linux file permissions.
@@ -109,12 +109,12 @@ If you want to change only the group, you can use `chown :[groupname]`(note the 
 (Files/directories created in the future will not inherit the newly set 'username' or 'groupname',
 but resort to the old ones specified by the system.)   
 Example:   
-$ `sudo chown -R david /www`   
+`sudo chown -R david /www`   
 This changes the ownership of /www (and its content) from the root user to david.   
 If the directory is empty, the -R flag is pointless; it will not do anything for files yet to be created ...   
 However, if you want newly created files/directories to inherit the group of its parent directory,
 you can set the setgid bit on that parent directory:   
-$ `chmod g+s [directory]`    
+`chmod g+s [directory]`    
 
 ### $ `convert -background none -resize 64x64 g-logo.svg g-logo.ico`  
 Use Imagemagick's convert utility to convert an `.svg` image to an `.ico` image.  
@@ -130,7 +130,7 @@ curl = see url; it returns the content at the requested url
 ### $ `df -Th`  
 Report file system disk space usage. Also useful for finding the mount points of all currently mounted file systems.  
 You can also specify a path like so:   
-$ `df -Th .`
+`df -Th .`
 
 ### $ `diff -u [old_file] [new_file]`  
 Check where the differences between 2 versions of a file are.  
@@ -140,7 +140,7 @@ Check where the differences between 2 versions of a file are.
 dpkg: Debian Package Manager   
 Check the status (-s, --status) of the package named "packagename", i.e. is it installed, what does it do, etc.   
 Make sure to use the official packagename, or it won't work. If not sure about the name, use:   
-$ `apt-cache search [packagename]`   
+`apt-cache search [packagename]`   
 This will list either the official name of your package or the official names of similar packages
 if the packagename doesn't exist.
 
@@ -150,18 +150,18 @@ Execute dropbox-daemon on Linux.
 ### $ `ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4`  
 Convert the video 'input.mov' to 'output.mp4'.
 
-* $ `ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4`  
+* `ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4`  
 Compress 'input.mov' with a constant rate factor of 24, and convert it to 'output.mp4'.
 
-* $ `ffmpeg -i input.mp4 -b 1000000 output.mp4`  
+* `ffmpeg -i input.mp4 -b 1000000 output.mp4`  
 Change the bitrate (quality) to 1000000 bytes/sec.
 (Calculate the bitrate you need by dividing 1 GB by the video length in seconds.
 So, for a video of length 16:40 (1000 seconds), use a bitrate of 1000000 bytes/sec.)  
 Bitrate = video in bytes / length in seconds
 
-* $ `ffmpeg -i input.gif output.mp4`  
-$ `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
-$ `ffmpeg -i input.gif -c vp9 -b:v 0 -crf 41 output.webm`  
+* `ffmpeg -i input.gif output.mp4`  
+`ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
+`ffmpeg -i input.gif -c vp9 -b:v 0 -crf 41 output.webm`  
 Convert an animated gif to `.mp4` or `.webm`.  
 Video, especially `.webm`, is much more efficient to load on webpages than animated gifs.   
 To replace an animated gif with video in html:   
@@ -172,26 +172,29 @@ To replace an animated gif with video in html:
   </video>
   ```
   **Note:**  
-  Browsers don't speculate about which `<source>` is optimal, so the order of `<source>`s matters. So if you specify an `.mp4` video first and the browser supports `.webm`, browsers will skip the `.webm <source>` and use the `.mp4` instead. If you prefer a `.webm <source>` be used first, specify it first!
+  Browsers don't speculate about which `<source>` is optimal, so the order of `<source>`s matters.
+  So if you specify an `.mp4` video first and the browser supports `.webm`, browsers will skip
+  the `.webm <source>` and use the `.mp4` instead. If you prefer a `.webm <source>` be used first,
+  specify it first!
 
 ### $ `find`   
 Recursively finds all files/directories in the current directory and its subdirectories.   
 You can specify another path to find items in, like so:   
-$ `find app`   
-This will return everything contained in the app directory (which should itself be in the current directory;
-otherwise specify an absolute path).    
+`find app`   
+This will return everything contained in the app directory
+(which should itself be in the current directory, otherwise specify an absolute path).    
 Some of find’s power comes from it’s ability to filter which files or directories it selects
 with **'tests'**, and directly performing **'actions'** on the results:   
 
 **Tests:**   
 * -type: f (file) or d (directory)   
-$ `find app -type f`   
+`find app -type f`   
 Find all files in the app directory, including files in its subdirectories.   
 * -maxdepth 1: Do not recurse into subdirectories.   
-$ `find -type f -maxdepth 1`   
+`find -type f -maxdepth 1`   
 Find all files in the current directory, excluding files in its subdirectories.   
 * -name: Takes a glob that will be matched against the base of the filename (filepath without leading directories).   
-$ `find -name '*.ntl'`   
+`find -name '*.ntl'`   
 Find all files with the extension '.ntl' in the current working directory and its subdirectories.   
 * -path: Same as -name, but applies to the whole filepath (including leading directories).   
 * -regex: takes a regex pattern.   
@@ -206,8 +209,8 @@ Find all files with the extension '.ntl' in the current working directory and it
 * -delete: Deletes the files that were found. Be careful!   
 First run without the -delete flag, so you see which files will be deleted.   
 * -exec 'command': Executes 'command' on the files that were found.   
-$ `find /www -type d -exec chmod 2750 {} \;`   
-$ `find /www -type f -exec chmod 0640 {} \;`   
+`find /www -type d -exec chmod 2750 {} \;`   
+`find /www -type f -exec chmod 0640 {} \;`   
 These examples combine find with the chmod command to set different permissions on the files vs directories
 in the /www directory. `{}` is replaced by the file paths generated by find.
 The semicolon `;` denotes the end of the command, but needs to be escaped with `\`,
@@ -219,21 +222,21 @@ Run gatsby develop from Local LAN.
 ### $ `gpasswd -a [USER] [GROUP]`   
 Add the user 'USER' to the group 'GROUP' (~file permissions).   
 To remove a user from a group, use:   
-$ `sudo gpasswd -d [USER] [group]`   
+`sudo gpasswd -d [USER] [group]`   
 Example:   
-$ `sudo gpasswd -a david www-data`   
-$ `sudo gpasswd -d david www-data`   
+`sudo gpasswd -a david www-data`   
+`sudo gpasswd -d david www-data`   
 Or alternatively, use `adduser`:   
-$ `sudo adduser david www-data`   
-$ `sudo deluser david www-data`
+`sudo adduser david www-data`   
+`sudo deluser david www-data`
 
 ### $ `grep -r 'StringToFind' .`  
 Search for 'StringToFind' in all files in the current directory (.)  
 -r, --recursive: Search recursively (i.e. also look in subdirectories)  
 -R: Search recursively **and** follow all symbolic links.  
 --exclude-dir: exclude the specified directories from being searched, e.g.:  
-$ `grep -R --exclude-dir=node_modules 'StringToFind' [/path/to/search]`  
-$ `grep -R --exclude-dir={node_modules,.cache} 'StringToFind' [/path/to/search]`
+`grep -R --exclude-dir=node_modules 'StringToFind' [/path/to/search]`  
+`grep -R --exclude-dir={node_modules,.cache} 'StringToFind' [/path/to/search]`
 
 ### $ `head path/to/file`  
 Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile).  
@@ -244,9 +247,12 @@ Head's output always starts at the start (head) of the file; the variable here i
 This means the resulting output will be from the start of the file to `num` lines before the end of the file.
 
 ### Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
-$ `echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/stretch-backports.list`  
-$ `sudo apt update`  
-$ `sudo apt install -t stretch-backports git`  
+```
+echo "deb http://ftp.debian.org/debian stretch-backports main" |
+    sudo tee /etc/apt/sources.list.d/stretch-backports.list  
+sudo apt update  
+sudo apt install -t stretch-backports git
+```  
 => Backports will install the latest stable version of git instead of the one included in stretch.
 
 ### $ `ip a`  
@@ -278,6 +284,11 @@ Show stats of the directory or file, including permissions (and which files for 
 -l (list): Display more information in a well-ordered list.  
 => On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
 
+### $ `mkvmerge 1.mp4 \+ 2.mp4 \+ 3.mp4 -o out.mkv`  
+Concatenate multipe video files into one mkv file.  
+This command can be installed with:  
+`sudo apt install mkvtoolnix`
+
 ### $ `mmv "long_name*.txt" "short_#1.txt"`  
 Bulk rename all files in the current working directory such that the `#1` is replaced by
 whatever is matched by the first wildcard `*`. Similarly `#2` is replaced by the second, etc. Quotes are necessary!  
@@ -285,11 +296,11 @@ whatever is matched by the first wildcard `*`. Similarly `#2` is replaced by the
 -n: no-execute mode; just print out the changes without actually making them.
 
 So you do something like:   
-$ `mmv "index*_type*.txt" "t#2_i#1.txt"`  
+`mmv "index*_type*.txt" "t#2_i#1.txt"`  
 To rename 'index4_type9.txt' to 't9_i4.txt'.
 
 E.g.:  
-$ `mmv -n 'My.Awesome.Series.S01/Subs/My.Awesome.Series.S01E*/English.srt' 'My.Awesome.Series.S01/My.Awesome.Series.S01E#1-English.srt'`  
+`mmv -n 'Dexter-S01/Subs/Dexter-S01E*/English.srt' 'Dexter-S01/Dexter-S01E#1-en.srt'`  
 To move all subtitles from their separate folders into the main series folder, with adjusted names.
 
 ### $ `nvm`  

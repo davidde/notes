@@ -10,14 +10,13 @@
 | remote repository      | "Pull Request on Github" |
 | upstream repository    |     /                    |
 
-Many git commands like `git log`, `git diff` and `git [command] --help` show their output  
-in the `less` pager, which means `q` to exit.  
-To search in the less pager, use `/` followed by the search term and press enter.  
-Use `n` and `N` to move forwards/backwards in the search results.  
+Many git commands (e.g. [git diff](#-git-diff), [git log](#-git-log), [git show](#-git-show), etc.)
+show their output in the **less pager**.  
+You can exit *less* with the `q` hotkey, and search it using `/` followed by the search term;  
+`n` and `N` move forwards/backwards in the search results.  
 
-**Tip**:  
-`git [command] --help`  
-This gets you information on any git command.
+> **Tip**:  
+> `git [command] --help` will give you information on any git command.
 
 ## Basic git commands and usage, alphabetically:
 
@@ -150,6 +149,10 @@ or: `git diff cffd 1e14`
 (you may abbreviate commit hashes; the first 4 or more chars suffice)  
 Compare 2 specific commits (get commit hash from 'git log' command)
 
+* `git diff HEAD~ HEAD`  
+Show the difference between the head commit (= `HEAD` = `HEAD~0`) and the one before (= `HEAD~` = `HEAD~1`).  
+In other words, it is identical to the simpler [git show](#-git-show) command.
+
 * To permanently exclude a specific file in your repository from the diff command:  
 `git config diff.nodiff.command /bin/true`  
 `cat >.git/info/attributes`  
@@ -200,6 +203,9 @@ Other 'git log'-formats: oneline, short, medium, full, fuller, email, raw, ...
 
 * `git log --name-status`  
 Adds the names and status of the changed files of each commit to the log.
+
+* `git log -5 --name-status --oneline | cat`  
+Produces a short printed log of the last 5 commits.
 
 * `git log --stat --oneline --graph master other_branch`  
 `--stat`: shows additional data like the files that were changed, and insertions/deletions.  
@@ -388,14 +394,13 @@ Resolve merge conflicts locally:
   Finally, just update the master branch on your fork:  
   `git checkout master`  
   `git push origin master`  
-  (-> Udacity Git/Github Lesson 4, 33.)
 
 * `git remote show origin`  
 Display complete info on both 'push' and 'pull' configurations per branch.
 
 ### $ `git reset (--hard)`  
 Unstages all staged files.  
---hard: Also resets the working directory, so any uncommitted changes will be lost!
+--hard: Also resets the working directory, so any uncommitted changes will be lost!  
 
 * `git reset main.go`  
 Unstages main.go, but preserves its contents.
@@ -403,20 +408,32 @@ Unstages main.go, but preserves its contents.
 * `git reset 6f16fb26b3294 src/app/app.js`  
 Reset a specific file (app.js) to the state of a previous commit.
 
-* `git reset HEAD~ (--hard)`  
-Undo the latest commit, the staged/tracked files will no longer be staged/tracked.  
-(HEAD is a pointer to the most recent git commit in a specific branch;
-detached head means the head does not point to the most recent commit.
-This happens when you move the head back in time by checking out a
-specific commit hash)  
-If the commit was already pushed to your remote, you will have to push the newly
-deleted version again with the --force flag to delete it from the remote:  
-`git push origin master --force`
+* `git reset 6f16fb26b3294 (--hard)`  
+Undo all commits that came after 6f16fb26b3294!  
+--hard: will also get rid of everything you've done since then; all these commits will be lost from the working directory.  
+In this case, since they were previously committed, you could still retrieve them using [git reflog](#-git-reflog).
 
-* `git reset cffd76070aaebf82e4b (--hard)`  
-Undo all commits that came after cffd76070aaebf82e4b!  
---hard: will also get rid of everything you've done since then;  
-all unpublished commits will be lost from your hard disk.  
+* `git reset HEAD~ (--soft/--mixed/--hard/--keep)`  
+  Undo the last commit from the current branch.  
+  (HEAD is a pointer to the most recent git commit in a specific branch;
+  detached head means the head does not point to the most recent commit.
+  This happens when you move the head back in time by checking out a
+  specific commit hash)  
+  * `--soft`: The modifications from the last commit remain in the working directory and are still staged.  
+  * `--mixed`: The modifications from the last commit remain in the working directory but are no longer staged.  
+  This is the *default mode*.
+  * `--hard`: The modifications from the last commit are deleted from the working directory, as well as
+  any uncommitted changes. Note that it is impossible for git to restore modifications that were never committed
+  in the first place, so be careful using this command!  
+  * `--keep`: Basically a safer version of --hard; only updates 'change-positive' files (= files that are different
+  between the specified `<commit>` (= `HEAD~` = `HEAD~1`) and the current HEAD (= `HEAD~0`)). It does this
+  by performing a merge. Local changes are kept, but if a 'change-positive' file has local changes, the reset is aborted.
+
+  **Note:**  
+  If the commit was already pushed to your remote, you will have to push the newly
+  deleted version again with the --force flag to delete it from the remote:  
+  `git push origin master --force`  
+  Be aware this is a bad practice for public repos, since they might already have been cloned by other people.
 
 ### $ `git revert cffd76070aaebf82e4b`  
 Undo only the changes that happened in this specific commit.
@@ -428,20 +445,24 @@ Count the commits for the branch you are on.
 Remove a file from both git and working directory,  
 so it doesn't longer show up as an untracked file.
 
-### $ `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81`  
-Compare a specific commit to its parent commit.
+### $ `git show`  
+Show various types of objects, highlighting the most recent modifications.  
+Without any other options, it defaults to HEAD and shows the last commit:  
+```
+git show = git show HEAD  = git show HEAD~0 = show the last commit.  
+           git show HEAD~ = git show HEAD~1 = show the commit before the last.  
+                            git show HEAD~2 = show the third latest commit.  
+                            Etc.
+```
 
-* `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go`  
-Look at a specific commit of the main.go file (path required) in less pager.
+* `git show cffd76070`  
+Show commit cffd76070.  
 
-* `git show cffd76070aaebf82e4b5eb330fe9a2df944c1b81:main.go | vi -`  
-Look at a specific commit of the main.go file (path required) in vi editor.
+* `git show src/app/app.js`  
+Show only the file 'src/app/app.js' of the last commit (HEAD).  
 
-* `git show HEAD:main.go`  
-Show the head (most recent) commit of main.go
-
-* `git show HEAD~2:main.go | vi -`  
-Show the third latest commit of main.go in the vi editor.
+* `git show cffd76070:src/app/app.js`  
+Show only the file 'src/app/app.js' of commit cffd76070, highlighting the modifications this commit added to this file.  
 
 ### $ `git status`  
 Lists all new or modified files to be committed.
@@ -604,3 +625,120 @@ List the existing tags in git's version control.
 
 * `git tag -d v1.0.0`  
 Delete the `v1.0.0` tag.
+
+
+## Custom git commands
+## a) git aliases
+It is possible to create new git commands by aliasing existing command(s) to a shorter word.  
+To do so, add them in `~/.gitconfig`:
+```
+[alias]
+    cm = commit -m              # zsh: gcmsg  (msg = message)
+    cam = commit -am            # zsh: gcam
+    difs = diff --staged        # zsh: gds
+    logs = log --name-status
+    prev = checkout HEAD^1
+    next = "!sh -c 'git log --reverse --pretty=%H master |\
+        awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
+
+    # Count the commits for the branch you are on:
+    count = "!echo \"$(git rev-list --count HEAD) commits total on this branch\""
+
+    # Count the commits for the branch you are on per user:
+    countall = "!git shortlog -sn | cat; \
+                 echo -n ' +  __________________________\n\n    '; \
+                 echo \"$(git rev-list --count HEAD) commits total on this branch\""
+
+    # Print essential info from both git log and git status:
+    print = "!git status -s && git log -5 --oneline | cat"
+
+    # Undo the last commit, but keep its changes staged, so recommitting is easy:
+    undo = "!git reset HEAD~ --soft; \
+             echo -n 'HEAD is now at '; \
+             git log -1 --oneline | cat; \
+             git status -s"
+```
+Even though we can put shell scripts inline inside .gitconfig, this is not advisable for anything but the most basic scripts.  
+By using the below method for [separate git-subcommand scripts](#b-Separate-git-subcommand-scripts),
+we gain control and maintainability.
+    
+**NOTE:**  
+When using zshell with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you have access to the default
+[zshell git aliases](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git).  
+However, there are some unfortunate inconsistencies in these defaults, which you can rectify by overwriting
+them in `~/.zshrc` **after** oh-my-zsh was loaded:
+```
+# Plugins to load:
+plugins=(git)
+
+# Load oh-my-zsh (omz):
+source $ZSH/oh-my-zsh.sh
+
+# Aliases overwriting some inconsistent omz git defaults:
+alias gba='git branch -a | cat'
+alias gcm='git commit -m'    # omz has gcm='git checkout master', but gco='git checkout'
+alias gcom='git checkout master'
+alias gcod='git checkout develop'
+alias gcob='git checkout -b'
+alias gl='git log --name-status'  # omz has gl='git pull', and glg='git log --stat'
+alias gp='git status -s && git log -5 --oneline | cat' # git print
+alias gph='git push'
+alias gpl='git pull'
+alias gs='git status'
+alias gst='git stash'
+alias gsta='git stash apply'
+alias gsh='git show'
+```
+
+With these changes, the most useful shortcuts are:
+
+| Alias               | Command                                           |
+|---------------------|---------------------------------------------------|
+| g                   | git                                               |
+| ga                  | git add                                           |
+| gb                  | git branch                                        |
+| gba                 | git branch -a \| cat                              |
+| gbd                 | git branch -d                                     |
+| gcam                | git commit -am                                    |
+| gcm                 | git commit -m                                     |
+| gco                 | git checkout                                      |
+| gcob                | git checkout -b                                   |
+| gcom                | git checkout master                               |
+| gcp                 | git cherry-pick                                   |
+| gd                  | git diff                                          |
+| gds                 | git diff --staged                                 |
+| gl                  | git log --name-status                             |   
+| gp (= git print)    | git status -s && git log -5 --oneline \| cat      |
+| gph                 | git push                                          |
+| gpl                 | git pull                                          |
+| gs                  | git status                                        |
+| gsh                 | git show                                          |
+| gst                 | git stash                                         |
+
+## b) Separate `git-subcommand` scripts
+* Procedure:  
+  * Create a shell script named `git-subcommand`
+  * Place it somewhere in your system's path, e.g. `/usr/local/bin/git-subcommand`
+  * Give it executable permissions: `sudo chmod +x /usr/local/bin/git-subcommand`
+  * It is now available in the shell by running `git subcommand`
+
+### $ `git delete`
+```sh
+#!/bin/sh
+
+# Delete the last commit from both git as well as the working directory, and display status.
+# Place this script somewhere in your path, e.g. /usr/local/bin/git-delete
+
+delete=$(git reset HEAD~ --keep)
+if [ $? != 0 ]; then
+    # Failure case:
+    echo -n "HEAD remains at "
+    git log -1 --oneline | cat
+    exit 1
+else # Success case:
+    echo -n "HEAD is now at "
+    git log -1 --oneline | cat
+    git status -s
+    exit 0
+fi
+```
