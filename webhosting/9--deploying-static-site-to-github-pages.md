@@ -112,6 +112,74 @@ git push --all
 ```
 After committing your changes, you can now simply run `./publish.sh` to publish to Github Pages.
 
+## Use Github Actions to publish automatically
+> **NOTE:**  
+> This method obsoletes the publish.sh script, by redeploying
+> automatically whenever the master branch is modified.
+
+* If Github Actions is still in beta, do not forget to
+[sign up for the beta](https://github.com/features/actions).
+
+* Add an SSH deploy key:  
+  * Generate it with the following command:  
+    ```
+    ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f gh-pages -N ""
+    ```
+  * This will get you 2 files:
+    - *gh-pages.pub*: the public key
+    - *gh-pages*: the private key
+  * Next, go to your repository's **Settings**:
+    - Go to **Deploy Keys**, and add the public key with `Allow write access` checked.
+    - Go to **Secrets** and add the private key as `ACTIONS_DEPLOY_KEY`.  
+      (Note that the **Secrets** tab will not be available if Github Actions is still
+      in beta and you haven't signed up!)
+
+* Create your workflow:  
+  * Create a `.github/workflows/gh-pages.yml` file for configuring the workflow:  
+    ```
+    mkdir -p .github/workflows
+    touch .github/workflows/gh-pages.yml
+    ```
+  * Inside `.github/workflows/gh-pages.yml`:  
+    ```yml
+    name: github pages
+
+    on:
+      push:
+        branches:
+        - master
+
+    jobs:
+      build-deploy:
+        runs-on: ubuntu-18.04
+        steps:
+        - uses: actions/checkout@master
+          with:
+            submodules: true
+
+        - name: Setup Hugo
+          uses: peaceiris/actions-hugo@v2.2.3
+          with:
+            hugo-version: '0.59.0'
+
+        - name: Build
+          run: hugo --minify
+
+        - name: Deploy
+          uses: peaceiris/actions-gh-pages@v2.5.1
+          env:
+            ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+            PUBLISH_BRANCH: gh-pages
+            PUBLISH_DIR: ./public
+    ```
+    Make sure that submodules are activated (2 lines below `- uses: actions/checkout@master`),  
+    since the build command would fail if the submodule was not present.
+
+  * See [actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) and
+    [actions-hugo](https://github.com/peaceiris/actions-hugo) for more information or troubleshooting.
+
+* From now on, every push to master should automatically redeploy Github Pages.
+
 ## Turn the static site into a PWA
 * Add a `/static/images/icons-192.png` and `/static/images/icons-512.png` image,  
   since they are required for the PWA "Add to Homescreen" prompt.
