@@ -11,5 +11,6 @@ What it covers:
 4. [Configuring DNS records](./4--dns-setup.md)
 5. [Deploying a React/Javascript app](./5--deploying-reactjs.md)
 6. [Installing SSL Certificates](./6--ssl-installation.md)
-7. [Deploying a static site to a subdomain](./7--deploying-static-site-to-subdomain.md)
-8. [Converting web apps to 'Progressive Web Apps' (PWA's)](./8--pwa-setup.md)
+7. [Converting web apps to 'Progressive Web Apps' (PWA's)](./7--pwa-setup.md)
+8. [Deploying a static site to a subdomain](./8--deploying-static-site-to-subdomain.md)
+9. [Deploying a static site to Github Pages](./9--deploying-static-site-to-github-pages.md)
