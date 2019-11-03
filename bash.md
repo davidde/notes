@@ -217,7 +217,7 @@ The semicolon `;` denotes the end of the command, but needs to be escaped with `
 otherwise it would be interpreted by the shell itself instead of find.
 
 ### $ `gatsby develop -H 0.0.0.0`  
-Run gatsby develop from Local LAN.
+Run gatsby develop on local network.
 
 ### $ `gpasswd -a [USER] [GROUP]`   
 Add the user 'USER' to the group 'GROUP' (~file permissions).   
@@ -245,6 +245,9 @@ Head's output always starts at the start (head) of the file; the variable here i
 * Num by default measures from the head, i.e. start of the file.  
 * Using `-` before the num lets num measure from the end of the file.   
 This means the resulting output will be from the start of the file to `num` lines before the end of the file.
+
+### $ `hugo server --bind 0.0.0.0 (--baseURL http://<your-host-ip>:1313)`  
+Run hugo server on local network.
 
 ### Install more recent versions of software than what Debian 9 (stretch) provides by default, e.g. for newer git:  
 ```
