@@ -572,7 +572,8 @@ wget https://example.com \
 ```
 **Parameters explained:**  
 * `--wait=2`  
-Wait the specified number of seconds between the retrievals. In this case 2 seconds.
+Wait the specified number of seconds between the retrievals, in this case 2 seconds.  
+Use of this option is recommended, as it lightens the server load by making the requests less frequent.
 * `--level`  
 Specify recursion maximum depth level depth. Use inf as the value for infinite.
 * `--limit-rate=20K`  
@@ -595,6 +596,7 @@ with the regexp `\.[Hh][Tt][Mm][Ll]?`, this option will cause the suffix `.html`
 * `--no-clobber`  
 When running Wget with `--recursive`/`-r`, re-downloading a file will result in the new copy simply overwriting the old.
 Adding `--no-clobber`/`-nc` will prevent this behavior, instead causing the original version to be preserved,
-and any newer copies on the server to be ignored. However, `--no-clobber` is ignored when combined with `--convert-links`.
+and any newer copies on the server to be ignored. However, `--no-clobber` will be ignored when combined with `--convert-links`,
+and the files have been downloaded before.
 * `-e robots=off`  
 Turn off the robot exclusion.
