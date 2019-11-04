@@ -535,3 +535,50 @@ Create an empty file called 'file.txt'.
 The `tree` command prints a tree diagram of the current directory structure to the terminal.  
 `> contents.html` pipes the output to the file contents.html.  
 `-H [href]`: print output in HTML form.
+
+### $ `wget https://example.com`  
+Download the url `https://example.com`.  
+However, to download a complete site, with relative links so you can view it locally,  
+the command is slightly more complex:
+```bash
+wget https://example.com \
+	--wait=2 \
+	--level=inf \
+	--limit-rate=20K \
+	--recursive \
+	--page-requisites \
+	--user-agent=Mozilla \
+	--no-parent \
+	--convert-links \
+	--adjust-extension \
+	--no-clobber \
+	-e robots=off
+```
+**Parameters explained:**  
+* `--wait=2`  
+Wait the specified number of seconds between the retrievals. In this case 2 seconds.
+* `--level`  
+Specify recursion maximum depth level depth. Use inf as the value for infinite.
+* `--limit-rate=20K`  
+Limit the download speed to amount bytes per second.
+* `--recursive`  
+Turn on recursive retrieving. The default maximum depth is 5.  
+If the website has more levels than 5, then you can specify it with `--level=depth`.
+* `--page-requisites`  
+Download all the files that are necessary to properly display a given HTML page.  
+This includes such things as inlined images, sounds, and referenced stylesheets.
+* `--user-agent=Mozilla`  
+Identify as Mozilla to the HTTP server.
+* `--no-parent`  
+Do not ever ascend to the parent directory when retrieving recursively.
+* `--convert-links`  
+After the download is complete, convert the links in the document to make them suitable for local viewing.
+* `--adjust-extension`  
+If a file of type `application/xhtml+xml` or `text/html` is downloaded and the URL does not end  
+with the regexp `\.[Hh][Tt][Mm][Ll]?`, this option will cause the suffix `.html` to be appended to the local filename.
+* `--no-clobber`  
+When running Wget with `-r`, re-downloading a file will result in the new copy simply overwriting the old.  
+Adding `-nc` will prevent this behavior, instead causing the original version to be preserved,  
+and any newer copies on the server to be ignored.
+* `-e robots=off`  
+Turn off the robot exclusion.
