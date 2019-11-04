@@ -580,7 +580,8 @@ Use of this option is recommended, as it lightens the server load by making the 
 * `--level`  
 Specify recursion maximum depth level depth. Use inf as the value for infinite.
 * `--limit-rate=20K`  
-Limit the download speed to amount bytes per second.
+Limit the download speed to 20KB/s.  
+This is useful when, for whatever reason, you don't want Wget to consume the entire available bandwidth.
 * `--recursive`  
 Turn on recursive retrieving. The default maximum depth is 5.  
 If the website has more levels than 5, then you can specify it with `--level=depth`.
