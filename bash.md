@@ -150,9 +150,8 @@ Execute dropbox-daemon on Linux.
 ### $ `exec <BINARY>`  
 Replace the current process image of the specified executable with a new process image.  
 
-* Replace the current shell with a new one:  
-  `exec zsh`  
-  The new shell process will have updated aliases/variables.
+* `exec zsh`  
+  Replace the current shell process with a new one with updated aliases/variables.
 
 ### $ `ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4`  
 Convert the video 'input.mov' to 'output.mp4'.
@@ -434,8 +433,9 @@ Read and execute commands from the specified file in the current shell context.
 Source is a synonym for the POSIX dot operator `.` in bash and zsh.  
 Since `source` itself is non-POSIX, use the dot operator for maximum compatibility.
 
-* Reload zsh settings, e.g. aliases:  
-`. ~/.zshrc`
+* `. ~/.zshrc`  
+  Reload zsh settings (e.g. aliases).
+
 
 ### $ `ssh remote_username@remote_ipaddress (-i /path/to/privatekey)`    
 SSH into the server with IP address 'remote_ipaddress' as user 'remote_username'.  
