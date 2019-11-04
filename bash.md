@@ -596,7 +596,7 @@ with the regexp `\.[Hh][Tt][Mm][Ll]?`, this option will cause the suffix `.html`
 * `--no-clobber`  
 When running Wget with `--recursive`/`-r`, re-downloading a file will result in the new copy simply overwriting the old.
 Adding `--no-clobber`/`-nc` will prevent this behavior, instead causing the original version to be preserved,
-and any newer copies on the server to be ignored. However, `--no-clobber` will be ignored when combined with `--convert-links`,
-and the files have been downloaded before.
+and any newer copies on the server to be ignored. However, when the files have been downloaded before,
+`--no-clobber` will be ignored when combined with `--convert-links`.
 * `-e robots=off`  
 Turn off the robot exclusion.
