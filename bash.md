@@ -147,6 +147,14 @@ if the packagename doesn't exist.
 ### $ `~/.dropbox-dist/dropboxd`  
 Execute dropbox-daemon on Linux.
 
+### $ `exec <BINARY>`  
+Replace the current process image of the specified executable with a new process image.  
+E.g. to replace the current shell with a new one:  
+```bash
+exec zsh
+```
+The new shell process will have updated aliases/variables.
+
 ### $ `ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4`  
 Convert the video 'input.mov' to 'output.mp4'.
 
@@ -542,17 +550,17 @@ However, to download a complete site, with relative links so you can view it loc
 the command is slightly more complex:
 ```bash
 wget https://example.com \
-	--wait=2 \
-	--level=inf \
-	--limit-rate=20K \
-	--recursive \
-	--page-requisites \
-	--user-agent=Mozilla \
-	--no-parent \
-	--convert-links \
-	--adjust-extension \
-	--no-clobber \
-	-e robots=off
+   --wait=2 \
+   --level=inf \
+   --limit-rate=20K \
+   --recursive \
+   --page-requisites \
+   --user-agent=Mozilla \
+   --no-parent \
+   --convert-links \
+   --adjust-extension \
+   --no-clobber \
+   -e robots=off
 ```
 **Parameters explained:**  
 * `--wait=2`  
