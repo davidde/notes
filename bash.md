@@ -570,6 +570,9 @@ wget https://example.com \
    --no-clobber \
    -e robots=off
 ```
+> **If you need the full website, make sure you specify the root URL,  
+> and not an index page (like e.g. `https://example.com/index.php`).**
+
 **Parameters explained:**  
 * `--wait=2`  
 Wait the specified number of seconds between the retrievals, in this case 2 seconds.  
