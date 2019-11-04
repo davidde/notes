@@ -593,7 +593,7 @@ After the download is complete, convert the links in the document to make them s
 If a file of type `application/xhtml+xml` or `text/html` is downloaded and the URL does not end  
 with the regexp `\.[Hh][Tt][Mm][Ll]?`, this option will cause the suffix `.html` to be appended to the local filename.
 * `--no-clobber`  
-When running Wget with `--recursive`/`-r`, re-downloading a file will result in the new copy simply overwriting the old.  
+When running Wget with `--recursive`/`-r`, re-downloading a file will result in the new copy simply overwriting the old.
 Adding `--no-clobber`/`-nc` will prevent this behavior, instead causing the original version to be preserved,
 and any newer copies on the server to be ignored. However, `--no-clobber` is ignored when combined with `--convert-links`.
 * `-e robots=off`  
