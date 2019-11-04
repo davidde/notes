@@ -29,7 +29,7 @@ Add all files in the directory.
 This is useful if you want to upload an existing project to Github.   
 (Use a .gitignore file that lists all exceptions)
 
-### $ `git blame [path/to/file]`  
+### $ `git blame [path/to/file]`  
 This will show you the commit hash, the time and the committer for each line.  
 Then you can use the commit hash in `git log [hash]` or `git show [hash]`  
 to find out more about it, like why it's done this way (if documented).  
@@ -97,7 +97,7 @@ The "--force" flag forces git to checkout anyway, which will result in losing th
   git checkout master
   ```
 
-### $ `git cherry-pick (-x) <HASH>`  
+### $ `git cherry-pick (-x) <HASH>`  
 Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
 This is in contrast with other ways such as [merge](#-git-merge-other_branch)
 and [rebase](#-git-rebase-other_branch), which normally apply many commits onto another branch.  
@@ -160,7 +160,7 @@ In other words, it is identical to the simpler [git show](#-git-show) command.
 From now onwards, `package-lock.json` will be excluded from any diff.  
 Use `--global` in the first command to accomplish this for all your repos.
 
-### $ `git fetch origin`  
+### $ `git fetch origin`  
 Get the entire repo from the origin remote, including *all* branches, without actually
 committing them to your local repository. Instead, `git fetch` stores the fetched files
 in `.git/refs/remotes`. You can now either [merge](#-git-merge-other_branch)
@@ -435,7 +435,7 @@ In this case, since they were previously committed, you could still retrieve the
   `git push origin master --force`  
   Be aware this is a bad practice for public repos, since they might already have been cloned by other people.
 
-### $ `git revert cffd76070aaebf82e4b`  
+### $ `git revert cffd76070aaebf82e4b`  
 Undo only the changes that happened in this specific commit.
 
 ### $ `git rev-list --count HEAD`  
@@ -451,15 +451,15 @@ Without any other options, it defaults to HEAD and shows the last commit:
 ```
 git show = git show HEAD  = git show HEAD~0 = show the last commit.  
            git show HEAD~ = git show HEAD~1 = show the commit before the last.  
-                            git show HEAD~2 = show the third latest commit.  
+                            git show HEAD~2 = show the third latest commit.  
                             Etc.
 ```
 
 * `git show cffd76070`  
-Show commit cffd76070.  
+Show commit cffd76070.  
 
 * `git show src/app/app.js`  
-Show only the file 'src/app/app.js' of the last commit (HEAD).  
+Show only the file 'src/app/app.js' of the last commit (HEAD).  
 
 * `git show cffd76070:src/app/app.js`  
 Show only the file 'src/app/app.js' of commit cffd76070, highlighting the modifications this commit added to this file.  
@@ -692,28 +692,28 @@ alias gsh='git show'
 
 With these changes, the most useful shortcuts are:
 
-| Alias               | Command                                           |
+| Alias               | Command                                           |
 |---------------------|---------------------------------------------------|
-| g                   | git                                               |
-| ga                  | git add                                           |
-| gb                  | git branch                                        |
-| gba                 | git branch -a \| cat                              |
-| gbd                 | git branch -d                                     |
-| gcam                | git commit -am                                    |
-| gcm                 | git commit -m                                     |
-| gco                 | git checkout                                      |
-| gcob                | git checkout -b                                   |
-| gcom                | git checkout master                               |
-| gcp                 | git cherry-pick                                   |
-| gd                  | git diff                                          |
-| gds                 | git diff --staged                                 |
-| gl                  | git log --name-status                             |   
+| g                   | git                                               |
+| ga                  | git add                                           |
+| gb                  | git branch                                        |
+| gba                 | git branch -a \| cat                              |
+| gbd                 | git branch -d                                     |
+| gcam                | git commit -am                                    |
+| gcm                 | git commit -m                                     |
+| gco                 | git checkout                                      |
+| gcob                | git checkout -b                                   |
+| gcom                | git checkout master                               |
+| gcp                 | git cherry-pick                                   |
+| gd                  | git diff                                          |
+| gds                 | git diff --staged                                 |
+| gl                  | git log --name-status                             |
 | gp (= git print)    | git status -s && git log -5 --oneline \| cat      |
-| gph                 | git push                                          |
-| gpl                 | git pull                                          |
-| gs                  | git status                                        |
-| gsh                 | git show                                          |
-| gst                 | git stash                                         |
+| gph                 | git push                                          |
+| gpl                 | git pull                                          |
+| gs                  | git status                                        |
+| gsh                 | git show                                          |
+| gst                 | git stash                                         |
 
 ## b) Separate `git-subcommand` scripts
 * Procedure:  
