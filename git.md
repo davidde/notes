@@ -449,9 +449,12 @@ so it doesn't longer show up as an untracked file.
 Show various types of objects, highlighting the most recent modifications.  
 Without any other options, it defaults to HEAD and shows the last commit:  
 ```
-git show = git show HEAD  = git show HEAD~0 = show the last commit.  
-           git show HEAD~ = git show HEAD~1 = show the commit before the last.  
-                            git show HEAD~2 = show the third latest commit.  
+git show = git show HEAD  = git show HEAD~0 = show the head commit 
+                                            = most recent commit of the current branch.  
+           git show HEAD~ = git show HEAD~1 = show the commit before the head commit.  
+
+                            git show HEAD~2 = show the commit 2 commits before the head commit 
+                                            = third latest commit overall.  
                             Etc.
 ```
 
