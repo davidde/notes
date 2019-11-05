@@ -610,6 +610,22 @@ Turn off the robot exclusion.
   ```
   wget --recursive --page-requisites --convert-links --adjust-extension \
        --no-parent --level=inf --user-agent=Mozilla -e robots=off \
+       --limit-rate=20K --wait=2 \
+       https://www.golden-dream-safaris.com/
+  ```
+
+  * **with** `--limit-rate=20K`
+  * **with** `--wait=2`
+
+  * **Result:**  
+    Total wall clock time: 21m 10s  
+    Downloaded: 41 files, 23M in 19m 46s (20.0 KB/s)  
+    Converted links in 40 files in 0.4 seconds.
+
+* Command:
+  ```
+  wget --recursive --page-requisites --convert-links --adjust-extension \
+       --no-parent --level=inf --user-agent=Mozilla -e robots=off \
        --limit-rate=20K \
        https://www.golden-dream-safaris.com/
   ```
@@ -652,3 +668,8 @@ Turn off the robot exclusion.
     Total wall clock time: 8.6s  
     Downloaded: 41 files, 23M in 5.0s (4.63 MB/s)  
     Converted links in 40 files in 0.4 seconds.
+
+> **Note:**  
+> It appears that executing these commands in quick succession  
+> (especially without a `--limit-rate` or `--wait` period),  
+> temporarily restricts your internet access.
