@@ -573,7 +573,7 @@ wget https://example.com \
 > **If you need the full website, make sure you specify the root URL,  
 > and not an index page (like e.g. `https://example.com/index.php`).**
 
-**Parameters explained:**  
+#### Parameters explained:
 * `--wait=2`  
 Wait the specified number of seconds between the retrievals, in this case 2 seconds.  
 Use of this option is recommended, as it lightens the server load by making the requests less frequent.
@@ -604,3 +604,51 @@ and any newer copies on the server to be ignored. However, when the files have b
 `--no-clobber` will be ignored when combined with `--convert-links`.
 * `-e robots=off`  
 Turn off the robot exclusion.
+
+#### Some performance comparisons:
+* Command:
+  ```
+  wget --recursive --page-requisites --convert-links --adjust-extension \
+       --no-parent --level=inf --user-agent=Mozilla -e robots=off \
+       --limit-rate=20K \
+       https://www.golden-dream-safaris.com/
+  ```
+
+  * **with** `--limit-rate=20K`
+  * **without** `--wait=2`
+
+  * **Result:**  
+    Total wall clock time: 19m 48s  
+    Downloaded: 41 files, 23M in 19m 40s (20.0 KB/s)  
+    Converted links in 40 files in 0.4 seconds.
+
+* Command:
+  ```
+  wget --recursive --page-requisites --convert-links --adjust-extension \
+       --no-parent --level=inf --user-agent=Mozilla -e robots=off \
+       --wait=2 \
+       https://www.golden-dream-safaris.com/
+  ```
+
+  * **with** `--wait=2`
+  * **without** `--limit-rate=20K`
+
+  * **Result:**  
+    Total wall clock time: 1m 34s  
+    Downloaded: 41 files, 23M in 8.5s (2.74 MB/s)  
+    Converted links in 40 files in 0.4 seconds.
+
+* Command:
+  ```
+  wget --recursive --page-requisites --convert-links --adjust-extension \
+       --no-parent --level=inf --user-agent=Mozilla -e robots=off \
+       https://www.golden-dream-safaris.com/
+  ```
+
+  * **without** `--wait=2`
+  * **without** `--limit-rate=20K`
+
+  * **Result:**  
+    Total wall clock time: 8.6s  
+    Downloaded: 41 files, 23M in 5.0s (4.63 MB/s)  
+    Converted links in 40 files in 0.4 seconds.
