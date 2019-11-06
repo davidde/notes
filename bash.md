@@ -570,8 +570,8 @@ wget https://example.com \
    --no-clobber \
    -e robots=off
 ```
-> **If you need the full website, make sure you specify the root URL,  
-> and not an index page (like e.g. `https://example.com/index.php`).**
+| :warning: | If you need the full website, make sure to specify the root URL, <br/> and not an index page (like e.g. `https://example.com/index.php`).          |
+|-----------|:------------|
 
 #### Parameters explained:
 * `--wait=2`  
