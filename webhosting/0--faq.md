@@ -5,17 +5,17 @@
   - Namesilo
   - Porkbun
   
-  => Since at the time of writing, .app domains were not yet available from Cloudflare and Namesilo,
-  I ended up going with Porkbun. No regrets, they're great on all counts.
+  => Since at the time of writing, `.app` domains were not yet available from Cloudflare and Namesilo,  
+     we ended up going for Porkbun. No regrets, they're great on all counts.
 
 * \[Subjective] What are the best VPS hosting providers, considering pricing vs quality (and ease of use)?  
   - Digital Ocean
   - Vultr
   - Linode
   
-  => I ended up going for Vultr because of the great UI and their $2.5/month plan,
-  **but** this plan seems permanently sold out ...  
-  Might try Digital Ocean next time since they have other advantages.
+  => We ended up going for Vultr because of the great UI and an $2.5/month plan
+     that is ideal for small test projects. **But** since this plan seems to be permanently sold out,
+     we might as well try Digital Ocean next time since they have other advantages.
 
 * What is a subdomain?  
   Domain: `www.mydomain.com`  

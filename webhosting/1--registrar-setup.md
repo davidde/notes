@@ -2,10 +2,10 @@
 We have chosen [Porkbun](https://porkbun.com/) as our domain name registrar.
 Porkbun is not a well-known registrar, but it is synonymous with quality at a good price, unlike most big registrars
 with lots of name recognition. It also provides free wildcard SSL certificates, so you can set up encryption
-to enable `https` on your entire domain (and all its subdomains!). So go ahead and create a Porkbun account.
+to enable `https` on your entire domain (and all its subdomains!).
 
 ## Porkbun domain registration
-* Once logged in, register your credit card, verify your email address and set up two-factor authentication for security.
+* Log in, register a credit card, verify your email address and set up two-factor authentication for security.
 * When the administration is done, use the Porkbun search bar to find the domain you want to buy, and click the `+` button.
 * Click `Checkout`, and choose for how many years you want to buy the domain.
 Remember you can always renew when it expires, so you don't need to go crazy; 1 or 2 years is fine.

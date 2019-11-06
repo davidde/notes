@@ -7,9 +7,9 @@ When you stick around long enough to spend your own $25, I will earn $25 as well
 So let's both do our best and make this work!
 
 ## Vultr account and server setup
-* Once logged in, fund your account through credit card, Paypal or crypto and verify your email address.
-* Deploy a new server by clicking the blue plus ( + ) button:
-  - Choose Vultr Cloud Compute for hosting websites.
+* Log in, fund your account through credit card, Paypal or crypto and verify your email address.
+* Deploy a new server by clicking the blue **+** button:
+  - Choose **Vultr Cloud Compute** for hosting websites.
   - Next Choose your preferred server location; the one closest to where your web visitors are located is usually best.
   - Scroll down and choose the server type; 64 bit Ubuntu is generally your safest bet. Be sure to pick a LTS (Long Term Support) release like 16.04, 18.04, 20.04, etc.
   - Choose a server size. The $2.5/month server is permanently 'sold out', which is a rather dubious practice since it *is* marketed heavily. This means you'll need to pay up at least $5/month. You can always upgrade later if you need more resources.
