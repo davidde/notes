@@ -3,7 +3,7 @@ There are 2 types of GitHub Pages:
 
 * **Project Pages:**  
   A separate website for each repo/project you wish to demo.  
-  Hosted at `https://<USERNAME|ORGANIZATION>.github.io/<PROJECT>/`.
+  Hosted at `https://<USERNAME|ORGANIZATION>.github.io/<REPO>/`.
 * **User/Organization Pages:**  
   A single website per user/organization.  
   Hosted at `https://<USERNAME|ORGANIZATION>.github.io/`.
@@ -30,7 +30,7 @@ In this way we maintain separate version control history for both the source and
 
 * Add the correct Project Pages url in your `config.toml` file:
   ```
-  baseURL = "https://<USERNAME>.github.io/<PROJECT>/"
+  baseURL = "https://<USERNAME>.github.io/<REPO>/"
   ```
 
 * Initialize the gh-pages branch as an empty
@@ -62,14 +62,14 @@ In this way we maintain separate version control history for both the source and
   git push origin gh-pages
   ```
 
-* If your site does not appear at `https://<USERNAME>.github.io/<PROJECT>/`,
+* If your site does not appear at `https://<USERNAME>.github.io/<REPO>/`,
   check if your project's settings are properly configured.
-  You can find these at the top of your project's url, `https://github.com/<USERNAME>/<PROJECT>`.
+  You can find these at the top of your project's url, `https://github.com/<USERNAME>/<REPO>`.
   (In the same row as 'Code', 'Issues' and 'Pull requests').  
   Scroll down in the Settings tab until you encounter the 'Github Pages' section.  
   Make sure the source is properly configured as the `gh-pages branch`.  
   When everything is set up right, it should say:  
-  `Your site is published at https://<USERNAME>.github.io/<PROJECT>/`  
+  `Your site is published at https://<USERNAME>.github.io/<REPO>/`  
 
 ## Put it all in a shell script
 To automate all of this for new commits, you can create a publish.sh script:  
@@ -172,7 +172,8 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
             PUBLISH_BRANCH: gh-pages
             PUBLISH_DIR: ./public
     ```
-    Make sure that submodules are activated (2 lines below `- uses: actions/checkout@master`),  
+    Make sure that submodules are activated if you're using one
+    (see 2 lines below `- uses: actions/checkout@master`),  
     since the build command would fail if the submodule was not present.
 
   * See [actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) and
@@ -199,7 +200,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
       },
       {
         "src": "/images/icons-512.png",  <- BAD
-      "src": "images/icons-512.png",   <- GOOD!
+        "src": "images/icons-512.png",   <- GOOD!
         "type": "image/png",
         "sizes": "512x512"
       }
@@ -327,14 +328,144 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
   - Uncheck everything except 'Progressive Web App', and click `Run Audits`.
   - You will be presented with the PWA requirements you do not fulfill yet.
 
-## Adding Netlify CMS to existing GitHub Pages Hugo site
+## Adding Netlify CMS to an existing GitHub Pages Hugo site
 > **GOALS:**  
 > * Functioning CMS for static Hugo site.
 > * Hosted by GitHub Pages, not Netlify.
 > * Logging into the CMS through GitHub OAuth, with Netlify auth server (not git-gateway).  
->   (Note that unlike Gitlab, Github OAuth does not support *implicit grant*, which means that
->   **every login through GitHub requires a server-side Oauth component**.
->   Netlify is so kind to provide such an auth server completely free of charge
+>   (Note that unlike Gitlab, Github OAuth does not support *implicit grant*, which means that  
+>   **every login through GitHub requires a server-side Oauth component**.  
+>   Netlify is so kind to provide such an auth server completely free of charge  
 >   at `https://api.netlify.com/auth/done`, which we will be using.)
 
-* 
+This method is based on a [blog post](https://cnly.github.io/2018/04/14/just-3-steps-adding-netlify-cms-to-existing-github-pages-site-within-10-minutes.html)
+by [Alex Chen](https://github.com/Cnly).  
+On top of that, the [Netlify CMS Docs](https://www.netlifycms.org/docs/add-to-your-site/)
+are *really* useful!
+
+### 1. Creating a GitHub OAuth App
+* Go to [GitHub Dev Settings](https://github.com/settings/developers) and click **New OAuth App**.
+
+* Enter the **Application name**; for maximal transparency the repository's name
+  is most convenient here.
+  
+* Enter the **Homepage URL**; either your project pages URL (`https://<USERNAME>.github.io/<REPO>/`)
+  or a custom domain name.
+
+* In **Authorization callback URL**, enter `https://api.netlify.com/auth/done`.
+
+* When finished, keep the page open; we still need to add the **Client ID** and
+  **Client Secret** to the Netlify site.
+
+### 2. Creating a Netlify Site
+**Note:**
+This Netlify site is required for logging into the CMS, since the auth server cannot be hosted on Github Pages.
+As such, the content of the site is irrelevant; its only function is providing the authentication.
+
+* Log into your Netlify account and create a new site from any repo;
+  we aren't using this site anyway.
+
+* Go to **Settings**, and copy your **Site name**. It should be something like `zen-mestorf-23ec0c`.
+
+* From the sidebar go to **Domain Management** and add your GitHub Pages domain (`<USERNAME>.github.io`)
+  as a custom domain. Choose **Yes** when asked if you are `github.io`’s owner.
+
+* From the sidebar go to **Access control**, scroll down to **OAuth** and click **Install provider**.
+
+* Choose **GitHub** as provider, and enter the **Client ID** and **Client Secret**
+  from the GitHub OAuth app page mentioned above.
+
+### 3. Installing Netlify CMS
+The most straightforward way for installing Netlify CMS is by simply adding its files,
+an `index.html` and `config.yml` file, to our static site in an **admin** folder.
+For Hugo this admin folder should be located in the static folder:  
+```
+mkdir static/admin
+cd static/admin
+touch index.html config.yml
+```
+
+* The `admin/index.html` file is the entry point for the Netlify CMS admin interface;
+  this means that users should navigate to `https://<USERNAME>.github.io/<REPO>/admin/` to log in.
+  On the code side, it's a basic HTML starter page that loads the Netlify CMS JavaScript file.
+  It should look like this:
+  ```html
+  <!doctype html>
+  <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  </body>
+  </html>
+  ```
+
+* The `admin/config.yml` file is the heart of your Netlify CMS installation, and a bit more complex.
+  See the [Configuration](https://www.netlifycms.org/docs/add-to-your-site/#configuration)
+  and [Collection fields](https://www.netlifycms.org/docs/configuration-options/#fields) sections
+  of the Netlify CMS Docs for more details.
+
+  It should look something like this:
+  ```yml
+  backend:
+    name: github
+    repo: <USERNAME>/<REPO>
+    branch: master
+    site_domain: zen-mestorf-23ec0c.netlify.com
+
+  # Use this if you don't want to commit directly to the publication branch,
+  # and add an interface for drafting, reviewing, and approving posts:
+  # publish_mode: editorial_workflow
+
+  # Media files will be stored in the repo under static/images/uploads:
+  media_folder: "static/images/uploads"
+  # The src attribute for uploaded media will begin with /images/uploads:
+  public_folder: "/images/uploads"
+
+  collections:
+    - name: "posts"     # Used in routes, e.g., /admin/collections/posts
+      label: "Post"     # Used in the UI
+      folder: "content" # The path to the folder where the documents are stored
+      create: true      # Allow users to create new documents in this collection
+      slug: "{{slug}}"  # Filename template; {{slug}} is a url-safe version of the post's title
+      fields:           # The fields for each document, usually in front matter:
+      # Fields listed here are shown as fields in the content editor,
+      # then saved as front matter at the beginning of the document
+      # (except for body, which follows the front matter).
+      # Each field contains the following properties:
+      # - label: Field label in the editor UI.
+      # - name: Field name in the document front matter.
+      # - widget: Determines UI style and value data type; When a content editor enters
+      #           a value here, that value is saved in the document front matter
+      #           as the value for the name specified for the field.
+      # - default (optional): Sets a default value for the field.
+      # - required (optional): Specify as false to make a field optional; defaults to true.
+        - label: "Title"
+          name: "title"
+          widget: "string"
+        - label: "Weight"
+          name: "weight"
+          widget: "number"
+          valueType: "int"
+          required: false
+        - label: "Publish Date"
+          name: "date"
+          widget: "datetime"
+          required: false
+        - label: "Draft"
+          name: "draft"
+          widget: "boolean"
+          required: false
+          default: true
+        - label: "Body"
+          name: "body"
+          widget: "markdown"
+  ```
+  Be sure to replace `zen-mestorf-23ec0c.netlify.com` with the Netlify site you created in step 2.
+
+* Save the files, commit, and push to GitHub.  
+  Navigate to `https://<USERNAME>.github.io/<REPO>/admin/` to see your CMS!
