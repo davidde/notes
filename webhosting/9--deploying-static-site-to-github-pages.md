@@ -11,7 +11,7 @@ There are 2 types of GitHub Pages:
 We will be using the **Project Pages** method in this tutorial.
 
 # Hugo static sites
-Check out the complete
+Check out the
 [Hugo documentation for Github Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
 if you run into trouble.
 
@@ -71,8 +71,8 @@ In this way we maintain separate version control history for both the source and
   When everything is set up right, it should say:  
   `Your site is published at https://<USERNAME>.github.io/<REPO>/`  
 
-## Put it all in a shell script
-To automate all of this for new commits, you can create a publish.sh script:  
+## Publish automatically with a shell script
+To automate all of the previous for new commits, you can create a publish.sh script:  
 `cat > publish.sh`  
 ```bash
 #!/bin/sh
@@ -114,8 +114,8 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
 
 ## Use Github Actions to publish automatically
 > **NOTE:**  
-> This method obsoletes the publish.sh script, by redeploying
-> automatically whenever the master branch is modified.
+> This method obsoletes the previously created publish.sh script,  
+> by redeploying automatically whenever the master branch is modified.
 
 * If Github Actions is still in beta, do not forget to
 [sign up for the beta](https://github.com/features/actions).
