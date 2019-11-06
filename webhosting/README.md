@@ -1,4 +1,4 @@
-# The 'All-in-One' Developer Guide to deploying websites
+# The 'All-in-One' Tutorial to Deploying Websites
 This tutorial attempts to document the entire process you have to go through **after** your website is made,
 and you want to deploy it to the web, from a beginner developer's perspective.
 
