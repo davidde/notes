@@ -73,7 +73,7 @@ In this way we maintain separate version control history for both the source and
 
 ## Put it all in a shell script
 To automate all of this for new commits, you can create a publish.sh script:  
-`$ cat > publish.sh`  
+`cat > publish.sh`  
 ```bash
 #!/bin/sh
 
@@ -329,16 +329,16 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
   - You will be presented with the PWA requirements you do not fulfill yet.
 
 ## Adding Netlify CMS to an existing GitHub Pages Hugo site
-> **GOALS:**  
-> * Functioning CMS for static Hugo site.
-> * Hosted by GitHub Pages, not Netlify.
-> * Logging into the CMS through GitHub OAuth, with Netlify auth server (not git-gateway).  
->   (Note that unlike Gitlab, Github OAuth does not support *implicit grant*, which means that  
->   **every login through GitHub requires a server-side Oauth component**.  
->   Netlify is so kind to provide such an auth server completely free of charge  
->   at `https://api.netlify.com/auth/done`, which we will be using.)
+**GOALS:**  
+* Functioning CMS for static Hugo site.
+* Hosted by GitHub Pages, not Netlify.
+* Logging into the CMS through GitHub OAuth, with Netlify auth server (not git-gateway).  
+  (Note that unlike Gitlab, Github OAuth does not support *implicit grant*, which means that  
+  **every login through GitHub requires a server-side Oauth component**.  
+  Netlify is so kind to provide such an auth server completely free of charge  
+  at `https://api.netlify.com/auth/done`, which we will be using.)
 
-This method is based on a [blog post](https://cnly.github.io/2018/04/14/just-3-steps-adding-netlify-cms-to-existing-github-pages-site-within-10-minutes.html)
+This method is based on [this blog post](https://cnly.github.io/2018/04/14/just-3-steps-adding-netlify-cms-to-existing-github-pages-site-within-10-minutes.html)
 by [Alex Chen](https://github.com/Cnly).  
 On top of that, the [Netlify CMS Docs](https://www.netlifycms.org/docs/add-to-your-site/)
 are *really* useful!
@@ -349,18 +349,17 @@ are *really* useful!
 * Enter the **Application name**; for maximal transparency the repository's name
   is most convenient here.
   
-* Enter the **Homepage URL**; either your project pages URL (`https://<USERNAME>.github.io/<REPO>/`)
-  or a custom domain name.
+* Enter the **Homepage URL**; i.e. your project pages URL `https://<USERNAME>.github.io/<REPO>/`.
 
 * In **Authorization callback URL**, enter `https://api.netlify.com/auth/done`.
 
-* When finished, keep the page open; we still need to add the **Client ID** and
+* When finished, keep the page open; we still need to add the generated **Client ID** and
   **Client Secret** to the Netlify site.
 
 ### 2. Creating a Netlify Site
-**Note:**
-This Netlify site is required for logging into the CMS, since the auth server cannot be hosted on Github Pages.
-As such, the content of the site is irrelevant; its only function is providing the authentication.
+> **Note:**  
+> This Netlify site is required for logging into the CMS, since the auth server cannot be hosted on Github Pages.  
+> As such, the content of the site is irrelevant; its only function is providing the authentication.
 
 * Log into your Netlify account and create a new site from any repo;
   we aren't using this site anyway.
@@ -368,7 +367,7 @@ As such, the content of the site is irrelevant; its only function is providing t
 * Go to **Settings**, and copy your **Site name**. It should be something like `zen-mestorf-23ec0c`.
 
 * From the sidebar go to **Domain Management** and add your GitHub Pages domain (`<USERNAME>.github.io`)
-  as a custom domain. Choose **Yes** when asked if you are `github.io`’s owner.
+  as a **Custom domain**. Choose **Yes** when asked if you are `github.io`’s owner.
 
 * From the sidebar go to **Access control**, scroll down to **OAuth** and click **Install provider**.
 
@@ -404,7 +403,7 @@ touch index.html config.yml
   </html>
   ```
 
-* The `admin/config.yml` file is the heart of your Netlify CMS installation, and a bit more complex.
+* The `admin/config.yml` file is the heart of your Netlify CMS installation, and a bit more complex.  
   See the [Configuration](https://www.netlifycms.org/docs/add-to-your-site/#configuration)
   and [Collection fields](https://www.netlifycms.org/docs/configuration-options/#fields) sections
   of the Netlify CMS Docs for more details.
