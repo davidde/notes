@@ -329,14 +329,9 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
   - You will be presented with the PWA requirements you do not fulfill yet.
 
 ## Adding Netlify CMS to an existing GitHub Pages Hugo site
-**GOALS:**  
-* Functioning CMS for static Hugo site.
-* Hosted by GitHub Pages, not Netlify.
-* Logging into the CMS through GitHub OAuth, with Netlify auth server (not git-gateway).  
-  (Note that unlike Gitlab, Github OAuth does not support *implicit grant*, which means that  
-  **every login through GitHub requires a server-side Oauth component**.  
-  Netlify is so kind to provide such an auth server completely free of charge  
-  at `https://api.netlify.com/auth/done`, which we will be using.)
+| :heavy_check_mark: GOALS:                 |
+|:------------------------------------------|
+| <ul><li>Functioning CMS for static Hugo site.</li> <li>Hosted by GitHub Pages, not Netlify.</li> <li>Logging into the CMS through GitHub OAuth, with Netlify auth server (not git-gateway). <br/> (Note that unlike Gitlab, Github OAuth does not support *implicit grant*, which means that <br/> **every login through GitHub requires a server-side Oauth component**. <br/> Netlify is so kind to provide such an auth server completely free of charge <br/> at `https://api.netlify.com/auth/done`, which we will be using.) </li></ul> |
 
 This method is based on [this blog post](https://cnly.github.io/2018/04/14/just-3-steps-adding-netlify-cms-to-existing-github-pages-site-within-10-minutes.html)
 by [Alex Chen](https://github.com/Cnly).  
