@@ -628,8 +628,8 @@ contents of remote server directories (e.g. to verify that a mirror you're runni
 complete).
 * `--span-hosts, -H`  
 Allow wget to follow links that are on a different domain when doing recursive retrieving.  
-In general, this is not recommended since this will download **every** single linked page,
-which will result in a hugo increase in downloads.
+In general, this is not recommended in combination with `--recursive`, since this will download
+**every** single linked page, which will result in a huge increase in downloads.
 
 #### Some performance comparisons:
 * ```
