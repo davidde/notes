@@ -627,7 +627,7 @@ be useful for debugging purposes, or when you want to be able to easily check on
 contents of remote server directories (e.g. to verify that a mirror you're running is
 complete).
 * `--span-hosts, -H`  
-Allow wget to follow links that are on a different domain when doing recursive retrieving.  
+Allow wget to follow links that are on a different domain.  
 In general, this is not recommended in combination with `--recursive`, since this will download
 **every** single linked page, which will result in a huge increase in downloads.
 
