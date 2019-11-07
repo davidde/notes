@@ -626,6 +626,10 @@ files contain the raw directory listings received from FTP servers.  Not removin
 be useful for debugging purposes, or when you want to be able to easily check on the
 contents of remote server directories (e.g. to verify that a mirror you're running is
 complete).
+* `--span-hosts, -H`  
+Allow wget to follow links that are on a different domain when doing recursive retrieving.  
+In general, this is not recommended since this will download **every** single linked page,
+which will result in a hugo increase in downloads.
 
 #### Some performance comparisons:
 * ```
