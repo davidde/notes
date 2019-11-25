@@ -364,7 +364,7 @@ Show the *reference logs*. The *reflogs* record when the tips of branches are up
 this means they contain all commits that are/were created in your local repository.  
 This is very useful **to restore commits** you lost after a reset; simply
 [checkout](#-git-checkout-cffd76070aaebf82e4b5eb330fe9a2df944c1b81)
-or [cherry-pick](#-git-cherry-pick--x-hash-) the removed commit by its hash.
+or [cherry-pick](#-git-cherry-pick--x-hash) the removed commit by its hash.
 
 ### $ `git remote add origin [remote-repository-URL]`  
 Add your project to github by setting a remote first.  
@@ -416,7 +416,7 @@ In this case, since they were previously committed, you could still retrieve the
 
 * `git reset HEAD~ (--soft/--mixed/--hard/--keep)`  
   Undo the last commit from the current branch.
-  To restore it use [git cherry-pick](#-git-cherry-pick--x-hash-) with the commit's hash.  
+  To restore it use [git cherry-pick](#-git-cherry-pick--x-hash) with the commit's hash.  
   (HEAD is a pointer to the most recent git commit in a specific branch;
   detached head means the head does not point to the most recent commit.
   This happens when you move the head back in time by checking out a
