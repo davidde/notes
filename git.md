@@ -101,6 +101,7 @@ The "--force" flag forces git to checkout anyway, which will result in losing th
 Cherry picking in Git means to choose a commit from one branch and apply it onto another.  
 This is in contrast with other ways such as [merge](#-git-merge-other_branch)
 and [rebase](#-git-rebase-other_branch), which normally apply many commits onto another branch.  
+Cherry picking can also be used to restore deleted commits from the [reflog](#-git-reflog).  
 -x: This generates a standard commit message with mention where it was cherry-picked from.  
     This is good practice when cherry-picking from a public branch.  
 
@@ -414,7 +415,8 @@ Undo all commits that came after 6f16fb26b3294!
 In this case, since they were previously committed, you could still retrieve them using [git reflog](#-git-reflog).
 
 * `git reset HEAD~ (--soft/--mixed/--hard/--keep)`  
-  Undo the last commit from the current branch.  
+  Undo the last commit from the current branch.
+  To restore it use [git cherry-pick](#-git-cherry-pick--x-hash-) with the commit's hash.  
   (HEAD is a pointer to the most recent git commit in a specific branch;
   detached head means the head does not point to the most recent commit.
   This happens when you move the head back in time by checking out a
