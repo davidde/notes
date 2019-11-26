@@ -366,14 +366,14 @@ This is very useful **to restore commits** you lost after a reset; simply
 [checkout](#-git-checkout-cffd76070aaebf82e4b5eb330fe9a2df944c1b81)
 or [cherry-pick](#-git-cherry-pick--x-hash) the removed commit by its hash.
 
-### $ `git remote add origin [remote-repository-URL]`  
-Add your project to github by setting a remote first.  
-Afterwards, push or pull your project by running:  
+### $ `git remote add origin [github-repository-URL]`  
+Add a (github) remote to your project.  
+Afterwards, you can push or pull it by running:  
 `git push origin master`  
 `git pull origin master`  
 (Run `git remote -v` to check if the remote was added correctly)  
-(To change the URL, for instance from `git` to `https`, use:  
-`git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`)  
+(To change the URL, for instance from `git` to `https`,
+use [git remote set-url](#-git-remote-set-url-origin-httpsgithubcomUSERNAMEREPOSITORYgit))  
 upstream/master: this is the repository you forked, to which you're trying
 to contribute. When collaborating, it's often necessary to add this repository
 as a remote, in order to resolve merge conflicts between your fork and upstream:  
@@ -396,8 +396,11 @@ Resolve merge conflicts locally:
   `git checkout master`  
   `git push origin master`  
 
-* `git remote show origin`  
-Display complete info on both 'push' and 'pull' configurations per branch.
+### $ `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`  
+Change the origin remote's URL.
+
+### $ `git remote show origin`  
+Display complete info on the origin remote's `push` and `pull` configurations per branch.
 
 ### $ `git reset (--hard)`  
 Unstages all staged files.  
