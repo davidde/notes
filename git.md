@@ -367,32 +367,32 @@ This is very useful **to restore commits** you lost after a reset; simply
 or [cherry-pick](#-git-cherry-pick--x-hash) the removed commit by its hash.
 
 ### $ `git remote add origin [github-repository-URL]`  
-Add a (github) remote to your project.  
-Afterwards, you can push or pull it by running:  
+Add a (github) remote to your project. `origin` is the conventional name for the remote repository
+that a project was originally cloned from. Afterwards, you can push or pull it by running:  
 `git push origin master`  
 `git pull origin master`  
 (Run `git remote -v` to check if the remote was added correctly)  
 (To change the URL, for instance from `git` to `https`,
 use [git remote set-url](#-git-remote-set-url-origin-httpsgithubcomUSERNAMEREPOSITORYgit))  
-upstream/master: this is the repository you forked, to which you're trying
-to contribute. When collaborating, it's often necessary to add this repository
-as a remote, in order to resolve merge conflicts between your fork and upstream:  
-`git remote add upstream [REMOTE-REPO-URL]`  
-then you can pull in the conflicting changes from upstream/master:  
-`git pull upstream master`  
-and merge the master branch into your 'change' branch:  
-`git checkout change`  
-`git merge master`  
-(git merge merges all specified branches into the currently checked out branch)  
-Resolve merge conflicts locally:
-  - Update 'file.txt'
-  - `git add file.txt`
-  - `git commit`   (-> the 'merge commit')
 
-  Then push your 'change' branch to your fork (NOT upstream):  
+* `git remote add upstream [REMOTE-REPO-URL]`  
+  `upstream` is the conventional name for a parent repository, e.g. the parent/upstream of a forked repo.  
+  When collaborating, it's often necessary to add the upstream repository as a remote,
+  in order to resolve merge conflicts between your fork and its upstream parent.
+  Then you can pull in the conflicting changes from `upstream/master`:  
+  `git pull upstream master`  
+  and merge the master branch into your 'change' branch:  
+  `git checkout change`  
+  `git merge master` (-> merges all specified branches into the currently checked out 'change' branch)  
+  Then resolve the local merge conflicts:
+    - Update 'file.txt'
+    - `git add file.txt`
+    - `git commit`   (-> the 'merge commit')  
+
+  And push your 'change' branch to your fork (NOT upstream):  
   (this will automatically update your pull request)  
   `git push origin change`  
-  Finally, just update the master branch on your fork:  
+  Finally, just update the master branch on your remote Github fork:  
   `git checkout master`  
   `git push origin master`  
 
