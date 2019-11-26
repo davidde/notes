@@ -230,7 +230,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
 
 * Create the serviceworker that will do the actual work:  
   ```
-  curl https://raw.githubusercontent.com/DavidDeprost/mirabello-hugo/master/static/service-worker.js
+  curl https://raw.githubusercontent.com/davidde/mirabello-hugo/master/static/service-worker.js
        --output static/service-worker.js
   ```  
   It should be located right next to the `manifest.json` file in the `static` directory.
