@@ -286,6 +286,13 @@ Find your IP address in the output:
 (in directory where briss-0.9.jar is located; requires java)  
 Start up briss, app to crop/resize/split pdfs.
 
+### $ `jpegoptim image.jpg --size=1000k`
+Compress a .jpg image to 1MB. Note that by default, it will **overwrite the original image**.  
+To prevent overwriting the original image, pass it a destination directory for the resulting images:  
+`jpegoptim image.jpg --size=1000k -d new_images`  
+But note you will have to add the `-o` flag on consecutive calls, to overwrite the previously generated image,
+since this command will not run if the target file already exists.
+
 ### $ `ls -hal [/path/to/directory/or/file]`  
 Show stats of the directory or file, including permissions (and which files for directories).  
 -h (human-readable): Files sizes are displayed in the human-readable format of kilobytes and megabytes.  
