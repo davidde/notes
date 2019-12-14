@@ -730,6 +730,33 @@ With these changes, the most useful shortcuts are:
   * Give it executable permissions: `sudo chmod +x /usr/local/bin/git-subcommand`
   * It is now available in the shell by running `git subcommand`
 
+### $ `git child`
+```sh
+#!/bin/sh
+
+# Checkout the child (newer) commit.
+# Place this script somewhere in your path, e.g. /usr/local/bin/git-child
+
+alias commits="git log --all --ancestry-path ^HEAD --format=format:%H"
+children=$(commits)
+
+if [ $? != 0 ]; then exit 1
+elif [ -z "$children" ]; then # Failure case:
+    echo -n "You're at the tip of this branch\nHEAD remains at "
+    git log -1 --oneline | cat
+    exit 1
+else # Success case:
+    amount=$(commits | wc -l)
+    if [ "$amount" = 0 ]; then
+        child=$(git branch --contains $children)
+    else
+        child=$(commits | tail -n 1)
+    fi
+    git checkout $child
+    exit 0
+fi
+```
+
 ### $ `git delete`
 ```sh
 #!/bin/sh
