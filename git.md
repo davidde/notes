@@ -740,21 +740,21 @@ With these changes, the most useful shortcuts are:
 alias commits="git log --all --ancestry-path ^HEAD --format=format:%H"
 children=$(commits)
 
+# Failure case:
 if [ $? != 0 ]; then exit 1
-elif [ -z "$children" ]; then # Failure case:
+elif [ -z "$children" ]; then
     echo -n "You're at the tip of this branch\nHEAD remains at "
     git log -1 --oneline | cat
     exit 1
-else # Success case:
-    amount=$(commits | wc -l)
-    if [ "$amount" = 0 ]; then
-        child=$(git branch --contains $children)
-    else
-        child=$(commits | tail -n 1)
-    fi
-    git checkout $child
-    exit 0
+# Success case:
+elif [ "$(commits | wc -l)" = 0 ]; then
+    child=$(git branch --contains $children)
+else
+    child=$(commits | tail -n 1)
 fi
+
+git checkout $child
+exit 0
 ```
 
 ### $ `git delete`
