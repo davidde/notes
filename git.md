@@ -632,7 +632,9 @@ List the existing tags in git's version control.
   `git push origin v1.0.0`  
 
 * `git tag -d v1.0.0`  
-Delete the `v1.0.0` tag.
+Delete the `v1.0.0` tag.  
+To delete a remote tag, use:  
+`git push --delete origin v1.0.0`
 
 
 ## Custom git commands
