@@ -586,10 +586,9 @@ This means updating all of them in one go is as simple as running
   git submodule update --remote --merge
   ```
 
-### $ `git tag`  
-List the existing tags in git's version control.  
-
-* There are 2 types of tags in git:  
+### $ `git tag [tag-name]`  
+List existing tags when no tag name is specified, or create a tag otherwise.  
+Note that there are 2 types of tags in git, which are created differently:  
   * **Lightweight tags**:  
     A lightweight tag is very much like a branch that doesn’t change;  it's just a commit with a tag name.  
     (It’s generally recommended to create annotated tags for the added information.)  
@@ -636,6 +635,8 @@ Delete the `v1.0.0` tag.
 To delete a remote tag, use:  
 `git push --delete origin v1.0.0`
 
+* `git tag -l`  
+List existing tags. Identical to `git tag` without arguments.  
 
 ## Custom git commands
 ## a) git aliases
