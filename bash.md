@@ -121,6 +121,9 @@ Use Imagemagick's convert utility to convert an `.svg` image to an `.ico` image.
 Drop the `-background none` if you want to modify the backgroundless `.svg` to white background `.ico`.  
 Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example.
 
+* `convert image.png image.jpg`  
+  Imagemagick is also very straightforward for simpler conversions.
+
 ### $ `curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create`  
 curl = see url; it returns the content at the requested url  
 -i: include http headers  
