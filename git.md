@@ -590,9 +590,11 @@ This means updating all of them in one go is as simple as running
 List existing tags when no tag name is specified, or create a tag otherwise.  
 Note that there are 2 types of tags in git, which are created differently:  
   * **Lightweight tags**:  
-    A lightweight tag is very much like a branch that doesn’t change;  it's just a commit with a tag name.  
-    (It’s generally recommended to create annotated tags for the added information.)  
-    Create a lightweight tag with:  
+    A lightweight tag is very much like a branch that doesn’t change; it's just a commit with a tag name.  
+    This is the type of tag that GitHub creates by default, when a Release is authored from the UI  
+    (although it will allow selecting an already existing annotated tag).
+    
+    **=> Create a lightweight tag with:**  
     ```
     $ git tag v1.0.0
     $ git show v1.0.0
@@ -606,8 +608,13 @@ Note that there are 2 types of tags in git, which are created differently:
   * **Annotated tags**:  
     An annotated tag is stored as a full object in the Git database; it is checksummed,
     contains the tagger name, email, date and tagging message.
-    It is also the type that [npm version](./bash.md#-npm-) creates.  
-    Create an annotated tag with:
+    This is the type that [npm version](./bash.md#-npm-) creates.  
+    
+    > Even though there is currently no way to create annotated tags from the Github UI,
+    > they're still recommended for the added information. This means you'll have to create them
+    > from the command line and push them to Github with e.g. `git push --tags`.
+        
+    **=> Create an annotated tag with:**
     ```
     $ git tag -a v1.0.0 -m "Bump release to v1.0.0"
     $ git show v1.0.0
