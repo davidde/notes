@@ -617,6 +617,7 @@ Note that there are 2 types of tags in git, which are created differently:
     **=>** Create an annotated tag with:
     ```
     $ git tag -a v1.0.0 -m "Bump release to v1.0.0"
+    (= git tag -am "Bump release to v1.0.0" v1.0.0) 
     $ git show v1.0.0
     tag v1.0.0
     Tagger: Ben Straub <ben@straub.cc>
@@ -631,11 +632,9 @@ Note that there are 2 types of tags in git, which are created differently:
         Changed the version number
     ```  
     
-  **NOTE:**  
-  Tags are *not* automatically pushed to the remote, so it's recommended to explicitly push them if necessary:  
-  `git push --tags (origin master)`  
-  Or, if you only want to push a single tag:  
-  `git push origin v1.0.0`  
+  | :warning: NOTE:                                                                                                    |
+  |:-------------------------------------------------------------------------------------------------------------------|
+  | Tags are *not* automatically pushed to the remote, so it's recommended to explicitly push them if necessary: </br> `git push --tags (origin master)` </br> Or, if you only want to push a single tag: </br> `git push origin v1.0.0` |
 
 * `git tag -d v1.0.0`  
 Delete the `v1.0.0` tag.  
