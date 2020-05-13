@@ -594,7 +594,7 @@ Note that there are 2 types of tags in git, which are created differently:
     This is the type of tag that GitHub creates by default, when a Release is authored from the UI  
     (although it will allow selecting an already existing annotated tag).
     
-    **=> Create a lightweight tag with:**  
+    **=>** Create a lightweight tag with:  
     ```
     $ git tag v1.0.0
     $ git show v1.0.0
@@ -614,7 +614,7 @@ Note that there are 2 types of tags in git, which are created differently:
     > they're still recommended for the added information. This means you'll have to create them
     > from the command line and push them to Github with e.g. `git push --tags`.
         
-    **=> Create an annotated tag with:**
+    **=>** Create an annotated tag with:
     ```
     $ git tag -a v1.0.0 -m "Bump release to v1.0.0"
     $ git show v1.0.0
