@@ -152,6 +152,9 @@ Make sure to use the official packagename, or it won't work. If not sure about t
 This will list either the official name of your package or the official names of similar packages
 if the packagename doesn't exist.
 
+### $ `dwebp favicon.webp -o favicon.png`
+Convert `.webp` image to `.png` image. Requires the `webp` package.
+
 ### $ `~/.dropbox-dist/dropboxd`  
 Execute dropbox-daemon on Linux.
 
