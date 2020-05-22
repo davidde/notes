@@ -187,7 +187,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
 
 * Create a manifest file at `static/manifest.json`, and add the before-mentioned icons.  
   Make sure that the `src` attribute does not start with a `/`:
-  ```
+  ```json
   {
     "short_name": "site",
     "name": "Full website name and function",
@@ -209,7 +209,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
-  ￼}
+  }
   ```
 
 * Link the manifest.json in the `<head>` section of your website:  
@@ -266,10 +266,10 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
      * See the License for the specific language governing permissions and
      * limitations under the License.
      */
-  ￼
+  
     /* eslint-env browser */
     'use strict';
-  ￼
+  
     if ('serviceWorker' in navigator) {
       // Delay registration until after the page has loaded, to ensure that our
       // precaching requests don't degrade the first visit experience.
@@ -288,7 +288,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
             // The updatefound event implies that reg.installing is set; see
             // https://w3c.github.io/ServiceWorker/#service-worker-registration-updatefound-event
             var installingWorker = reg.installing;
-  ￼
+  
             installingWorker.onstatechange = function() {
               switch (installingWorker.state) {
                 case 'installed':
@@ -305,7 +305,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
                     console.log('Content is now available offline!');
                   }
                   break;
-  ￼
+  
                 case 'redundant':
                   console.error('The installing service worker became redundant.');
                   break;
@@ -317,7 +317,7 @@ After committing your changes, you can now simply run `./publish.sh` to publish 
         });
       });
     }
-  ￼</script>
+  </script>
 
   {{ partial "footer.html" . }}
   ```
