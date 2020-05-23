@@ -41,7 +41,7 @@ Or for a single line, use:
 `git blame` only reveals the last introduced changes to each line, not who or when the lines  
 were *first* introduced into the codebase. This can be rather annoying if the last change  
 was for example an indentation change.  
-Use `git log -S` to find the commits that first introduced a specific line of code.
+Use [git log -S](#-git-log) to find the commits that first introduced a specific line of code.
 
 ### $ `git branch [branch-name]`  
 Create a new branch.
