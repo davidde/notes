@@ -116,10 +116,10 @@ However, if you want newly created files/directories to inherit the group of its
 you can set the setgid bit on that parent directory:   
 `chmod g+s [directory]`    
 
-### $ `code --list-extensions > extensions.list`
-Save all installed VScode extensions to `extensions.list`.  
+### $ `code --list-extensions > vscode-extensions.list`
+Save all installed VScode extensions to `vscode-extensions.list`.  
 Then you can easily install them all at once on another machine from this list:  
-`cat extensions.list | xargs -L1 code --install-extension`
+`cat vscode-extensions.list | xargs -L1 code --install-extension`
 
 ### $ `convert -background none -resize 64x64 g-logo.svg g-logo.ico`  
 Use Imagemagick's convert utility to convert an `.svg` image to an `.ico` image.  
