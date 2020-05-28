@@ -576,56 +576,55 @@ However, to download a complete site, with relative links so you can view it loc
 the command is slightly more complex:
 ```bash
 wget https://example.com \
-   --wait=2 \
-   --level=inf \
-   --limit-rate=20K \
    --recursive \
-   --page-requisites \
-   --user-agent=Mozilla \
+   --no-host-directories \
    --no-parent \
+   --page-requisites \
    --convert-links \
    --adjust-extension \
-   --no-clobber \
+   --user-agent=Mozilla \
    -e robots=off
 ```
 | :warning: | If you need the full website, make sure to specify the root URL, <br/> and not an index page (like e.g. `https://example.com/index.php`).          |
 |-----------|:------------|
 
 #### Parameters explained:
-* `--wait=2, -w 2`  
-Wait the specified number of seconds between the retrievals, in this case 2 seconds.  
-Use of this option is recommended, as it lightens the server load by making the requests less frequent.
-* `--level=depth, -l depth`  
-Specify recursion maximum depth level. Use inf as the value for infinite.
-* `--limit-rate=20K`  
-Limit the download speed to 20KB/s.  
-This is useful when, for whatever reason, you don't want Wget to consume the entire available bandwidth.
 * `--recursive, -r`  
 Turn on recursive retrieving. The default maximum depth is 5.  
 If the website has more than 5 levels of nested directories, then you can specify it with `--level=depth`.
+* `--no-host-directories, -nH`  
+Turn off DNS-resolving and make Wget compare hosts literally to make things run much faster.
+* `--no-parent, -np`  
+Do not ever ascend to the parent directory when retrieving recursively.
 * `--page-requisites, -p`  
 Download all the files that are necessary to properly display a given HTML page.  
 This includes such things as inlined images, sounds, and referenced stylesheets.
-* `--user-agent=Mozilla, -U Mozilla`  
-Identify as Mozilla to the HTTP server.
-* `--no-parent, -np`  
-Do not ever ascend to the parent directory when retrieving recursively.
 * `--convert-links, -k`  
 After the download is complete, convert the links in the document to make them suitable for local viewing.
 * `--adjust-extension, -E`  
 If a file of type `application/xhtml+xml` or `text/html` is downloaded and the URL does not end  
 with the regexp `\.[Hh][Tt][Mm][Ll]?`, this option will cause the suffix `.html` to be appended to the local filename.
+* `--user-agent=Mozilla, -U Mozilla`  
+Identify as Mozilla to the HTTP server.
+* `-e robots=off`  
+Turn off the robot exclusion.
+
+Other:  
+* `--wait=2, -w 2`  
+Wait the specified number of seconds between the retrievals, in this case 2 seconds.  
+Use of this option is recommended, as it lightens the server load by making the requests less frequent.
+* `--level=depth, -l depth`  
+Specify recursion maximum depth level. Use inf as the value for infinite. (Note that this will make it take really long!)
+* `--limit-rate=20K`  
+Limit the download speed to 20KB/s.  
+This is useful when, for whatever reason, you don't want Wget to consume the entire available bandwidth.
+* `--no-directories, -nd`  
+Download all files to the current directory.
 * `--no-clobber, -nc`  
 When running Wget with `--recursive`, re-downloading a file will result in the new copy simply overwriting the old.
 Adding `--no-clobber` will prevent this behavior, instead causing the original version to be preserved,
 and any newer copies on the server to be ignored. However, when the files have been downloaded before,
 `--no-clobber` will be ignored when combined with `--convert-links`.
-* `-e robots=off`  
-Turn off the robot exclusion.
-
-Other:  
-* `--no-directories, -nd`  
-Download all files to the current directory.
 * `--accept png,jpg`, `-A png,jpg`  
 Accept only files with the extensions png or jpg.
 * `--reject png,jpg`, `-R png,jpg`  
