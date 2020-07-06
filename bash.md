@@ -712,3 +712,6 @@ In general, this is not recommended in combination with `--recursive`, since thi
 > It appears that executing these commands in quick succession  
 > (especially without a `--limit-rate` or `--wait` period),  
 > temporarily restricts your internet access.
+
+### $ `xkill`  
+Very useful command that allows you to terminate a hanging program by clicking its GUI window with the mouse.
