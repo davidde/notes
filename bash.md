@@ -275,6 +275,9 @@ sudo apt install -t stretch-backports git
 ```  
 => Backports will install the latest stable version of git instead of the one included in stretch.
 
+### $ `inxi -F`
+Get full system information.
+
 ### $ `ip a`  
 Find your IP address in the output:   
 ```
