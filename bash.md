@@ -258,9 +258,10 @@ Search for 'StringToFind' in all files in the current directory (.)
 | :point_up: Grep is also useful for extracting substrings from a larger text: |
 |:-----------------------------------------------------------------------------|
 
-* `grep -oP "crypt\s+UUID=\K[^ ]*" /etc/crypttab`  
+* `grep -oP "^crypt\s+UUID=\K[^ ]*" /etc/crypttab`  
 -o, --only-matching: return only the matched part  
 -P, --perl-regexp: interpret as **Perl regex**  
+^: Start of line anchor (i.e. only match when the following string is found at the start of a line)  
 \s+: 1 or more spaces  
 \K: **Perl regex** that causes the string matched so far to be dropped  
 `[^ ]*`: Keep matching all characters, but stop when encountering a space.  
