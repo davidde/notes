@@ -255,6 +255,17 @@ Search for 'StringToFind' in all files in the current directory (.)
 `grep -R --exclude-dir=node_modules 'StringToFind' [/path/to/search]`  
 `grep -R --exclude-dir={node_modules,.cache} 'StringToFind' [/path/to/search]`
 
+| :point_up: Grep is also useful for extracting substrings from a larger text: |
+|:-----------------------------------------------------------------------------|
+
+* `grep -oP "crypt\s+UUID=\K[^ ]*" /etc/crypttab`  
+-o, --only-matching: return only the matched part  
+-P, --perl-regexp: interpret as **Perl regex**  
+\s+: 1 or more spaces  
+\K: **Perl regex** that causes the string matched so far to be dropped  
+`[^ ]*`: Keep matching all characters, but stop when encountering a space.  
+=> In other words, this extracts the UUID of the crypt device from `/etc/crypttab`.  
+
 ### $ `head path/to/file`  
 Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile).  
 `-n [(-)num]`: Print the first `num` lines of the file.   
