@@ -166,8 +166,8 @@ Replace the current process image of the specified executable with a new process
 
 ### $ `ffmpeg -i input.mov -c:v libx264 -c:a copy output.mp4`  
 Convert the video 'input.mov' to 'output.mp4', using the H264 video codec while stream-copying
-the audio codec without any re-encoding. If this gives you an error, try specifying an audio codec
-like `aac` (or `mp3`) instead of `copy`.  
+the audio codec without any re-encoding.  
+If this gives you an error, try specifying an audio codec like `aac` (or `mp3`) instead of `copy`.  
 Also, it seems popular media players like VLC still don't manage to consistently play
 H265 encoded videos without tweaks, so it's probably still preferable to default to H264 (`libx264`),
 even though `libx265` offers superior quality/size:  
@@ -186,7 +186,7 @@ even though `libx265` offers superior quality/size:
   so use the slowest preset that you have patience for. The available presets in descending
   order of speed are: ultrafast, superfast, veryfast, faster, fast, **medium** (default preset),
   slow, slower, veryslow.  
-  E.g.: `ffmpeg -i input.mov -c:v libx264 -preset slow -crf 25 -c:a copy output.mkv`
+  E.g.: `ffmpeg -i input.mov -c:v libx265 -preset slow -crf 30 -c:a aac output.mkv`
 
 * `ffmpeg -i input.gif output.mp4`  
   `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
