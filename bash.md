@@ -168,10 +168,13 @@ Replace the current process image of the specified executable with a new process
 Convert the video 'input.mov' to 'output.mp4', using the H264 video codec while stream-copying
 the audio codec without any re-encoding.  
 If this gives you an error, try specifying an audio codec like `aac` (or `mp3`) instead of `copy`.  
-Also, it seems popular media players like VLC still don't manage to consistently play
-H265 encoded videos without tweaks, so it's probably still preferable to default to H264 (`libx264`),
-even though `libx265` offers superior quality/size:  
-`ffmpeg -i input.mov -c:v libx265 -c:a aac output.mkv`
+Also, it should be noted that H265 (`libx265`) offers superior quality/size:  
+```
+ffmpeg -i input.mov -c:v libx265 -c:a aac output.mkv
+```
+But some popular media players still don't manage to consistently play H265 encoded videos without tweaks;
+for instance VLC requires enabling the `VA-API Video decoder` in `Hardware accelerated decoding` in
+Input & Codecs Settings.
 
 * `ffmpeg -i input.mov -c:v libx264 -c:a copy -crf 24 output.mp4`  
   Compress 'input.mov' with a **constant rate factor** of 24, and convert it to 'output.mp4'.
