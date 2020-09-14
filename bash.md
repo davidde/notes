@@ -164,24 +164,36 @@ Replace the current process image of the specified executable with a new process
 * `exec zsh`  
   Replace the current shell process with a new one with updated aliases/variables.
 
-### $ `ffmpeg -i input.mov -acodec copy -vcodec copy output.mp4`  
-Convert the video 'input.mov' to 'output.mp4'.
+### $ `ffmpeg -i input.mov -c:v libx264 -c:a copy output.mp4`  
+Convert the video 'input.mov' to 'output.mp4', using the H264 video codec while stream-copying
+the audio codec without any re-encoding. If this gives you an error, try specifying an audio codec
+like `aac` (or `mp3`) instead of `copy`.  
+Also, it seems popular media players like VLC still don't manage to consistently play
+H265 encoded videos without tweaks, so it's probably still preferable to default to H264 (`libx264`),
+even though `libx265` offers superior quality/size:  
+`ffmpeg -i input.mov -c:v libx265 -c:a aac output.mkv`
 
-* `ffmpeg -i input.mov -vcodec libx264 -crf 24 output.mp4`  
-Compress 'input.mov' with a constant rate factor of 24, and convert it to 'output.mp4'.
+* `ffmpeg -i input.mov -c:v libx264 -c:a copy -crf 24 output.mp4`  
+  Compress 'input.mov' with a **constant rate factor** of 24, and convert it to 'output.mp4'.
 
-* `ffmpeg -i input.mp4 -b 1000000 output.mp4`  
-Change the bitrate (quality) to 1000000 bytes/sec.
-(Calculate the bitrate you need by dividing 1 GB by the video length in seconds.
-So, for a video of length 16:40 (1000 seconds), use a bitrate of 1000000 bytes/sec.)  
-Bitrate = video in bytes / length in seconds
+  The range of the CRF scale is 0–51, where 0 is lossless, 23 is the default (28 for H265),
+  and 51 is worst quality possible. A lower value leads to higher quality, and a subjectively sane
+  range is 18–28 (for H264, differs for other codecs!). Consider a CRF of 18 to be visually lossless
+  or nearly so; it should look the same as the input but isn't technically lossless.
+
+  You can combine this with a preset: a collection of options that will provide a certain
+  encoding speed to compression ratio. A slower preset will provide better compression,
+  so use the slowest preset that you have patience for. The available presets in descending
+  order of speed are: ultrafast, superfast, veryfast, faster, fast, **medium** (default preset),
+  slow, slower, veryslow.  
+  E.g.: `ffmpeg -i input.mov -c:v libx264 -preset slow -crf 25 -c:a copy output.mkv`
 
 * `ffmpeg -i input.gif output.mp4`  
-`ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
-`ffmpeg -i input.gif -c vp9 -b:v 0 -crf 41 output.webm`  
-Convert an animated gif to `.mp4` or `.webm`.  
-Video, especially `.webm`, is much more efficient to load on webpages than animated gifs.   
-To replace an animated gif with video in html:   
+  `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
+  `ffmpeg -i input.gif -c vp9 -b:v 0 -crf 41 output.webm`  
+  Convert an animated gif to `.mp4` or `.webm`.  
+  Video, especially `.webm`, is much more efficient to load on webpages than animated gifs.   
+  To replace an animated gif with video in html:   
   ```
   <video autoplay loop muted playsinline>
     <source src="oneDoesNotSimply.webm" type="video/webm">
