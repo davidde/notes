@@ -172,16 +172,17 @@ Re-encoding lossy audio is generally not advisable for sound quality reasons,
 but if this gives you an error (e.g. if the input audio codec is outdated or unsupported),
 change the `-c copy` part into `-c:s copy`. That will result in only the video
 and subtitles being copied, while the audio will be re-encoded with the current default codec,
-Vorbis Audio. Most likely you'll hear no difference in sound quality, and it will take less disk
-space. Alternatively, if you want to use a specific audio codec, add e.g. `-c:a aac` or `-c:a mp3`.  
+`libvorbis` (Vorbis Audio). Most likely you'll hear no difference in sound quality, and it will
+take less disk space. Alternatively, you can specify another audio codec with e.g. `-c:a libopus`
+(Opus Audio), which can be considered the modern standard. `aac` and `mp3` are also possible.  
 Note that not all media players consistently play H265 encoded videos without tweaks;
 for instance for some H265 videos, VLC requires enabling the `VA-API Video decoder`
-in `Hardware accelerated decoding` in Input & Codecs Settings.
+in `Hardware accelerated decoding` in `Input & Codecs Settings`.
 
 * `ffmpeg -i input.mov -c copy -c:v libx265 -crf 30 output.mkv`  
   Compress `input.mov` with a **constant rate factor** of 30, and convert it to `output.mkv`.
   
-  The range of the CRF scale is 0–51, where 0 is lossless, 28 is the default (23 for H264),
+  The range of the CRF scale is 0–51, where 0 is lossless, 28 is the default (23 for H264/`libx264`),
   and 51 is worst quality possible. A lower value leads to higher quality, and a subjectively sane
   range is 24–34 (18–28 for H264!). Consider a CRF of 24 (18 for H264) to be visually lossless or
   nearly so.
@@ -206,6 +207,7 @@ in `Hardware accelerated decoding` in Input & Codecs Settings.
 
 * `ffmpeg -i input.mov -c copy -t 15 output.mkv`  
   Convert the first 15 seconds of `input.mov` to `output.mkv`, stream-copying everything without any re-encoding.  
+  
   The `-t` flag is really useful to test-run a specific command. It allows evaluating the quality of a
   fraction of the video (faster encode!) before committing to the time-intensive full command.
 
@@ -213,6 +215,7 @@ in `Hardware accelerated decoding` in Input & Codecs Settings.
   `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
   `ffmpeg -i input.gif -c vp9 -b:v 0 -crf 41 output.webm`  
   Convert an animated gif to `.mp4` or `.webm`.  
+  
   Video, especially `.webm`, is much more efficient to load on webpages than animated gifs.   
   To replace an animated gif with video in html:   
   ```
