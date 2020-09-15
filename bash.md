@@ -164,32 +164,49 @@ Replace the current process image of the specified executable with a new process
 * `exec zsh`  
   Replace the current shell process with a new one with updated aliases/variables.
 
-### $ `ffmpeg -i input.mov -c:v libx264 -c:a copy output.mp4`  
-Convert the video 'input.mov' to 'output.mp4', using the H264 video codec while stream-copying
-the audio codec without any re-encoding.  
-If this gives you an error, try specifying an audio codec like `aac` (or `mp3`) instead of `copy`.  
-Also, it should be noted that H265 (`libx265`) offers superior quality/size:  
-```
-ffmpeg -i input.mov -c:v libx265 -c:a aac output.mkv
-```
-But some popular media players still don't manage to consistently play H265 encoded videos without tweaks;
-for instance VLC requires enabling the `VA-API Video decoder` in `Hardware accelerated decoding` in
-Input & Codecs Settings.
+### $ `ffmpeg -i input.mov -c copy -c:v libx265 output.mkv`  
+Convert `input.mov` to `output.mkv`, using the H265 video **c**odec while stream-copying audio
+and subtitles without any re-encoding.
 
-* `ffmpeg -i input.mov -c:v libx264 -c:a copy -crf 24 output.mp4`  
-  Compress 'input.mov' with a **constant rate factor** of 24, and convert it to 'output.mp4'.
+Re-encoding lossy audio is generally not advisable for sound quality reasons,
+but if this gives you an error (e.g. if the input audio codec is outdated or unsupported),
+change the `-c copy` part into `-c:s copy`. That will result in only the video
+and subtitles being copied, while the audio will be re-encoded with the current default codec,
+Vorbis Audio. Most likely you'll hear no difference in sound quality, and it will take less disk
+space. Alternatively, if you want to use a specific audio codec, add e.g. `-c:a aac` or `-c:a mp3`.  
+Note that not all media players consistently play H265 encoded videos without tweaks;
+for instance for some H265 videos, VLC requires enabling the `VA-API Video decoder`
+in `Hardware accelerated decoding` in Input & Codecs Settings.
 
-  The range of the CRF scale is 0–51, where 0 is lossless, 23 is the default (28 for H265),
+* `ffmpeg -i input.mov -c copy -c:v libx265 -crf 30 output.mkv`  
+  Compress `input.mov` with a **constant rate factor** of 30, and convert it to `output.mkv`.
+  
+  The range of the CRF scale is 0–51, where 0 is lossless, 28 is the default (23 for H264),
   and 51 is worst quality possible. A lower value leads to higher quality, and a subjectively sane
-  range is 18–28 (for H264, differs for other codecs!). Consider a CRF of 18 to be visually lossless
-  or nearly so; it should look the same as the input but isn't technically lossless.
+  range is 24–34 (18–28 for H264!). Consider a CRF of 24 (18 for H264) to be visually lossless or
+  nearly so.
 
-  You can combine this with a preset: a collection of options that will provide a certain
-  encoding speed to compression ratio. A slower preset will provide better compression,
-  so use the slowest preset that you have patience for. The available presets in descending
-  order of speed are: ultrafast, superfast, veryfast, faster, fast, **medium** (default preset),
-  slow, slower, veryslow.  
-  E.g.: `ffmpeg -i input.mov -c:v libx265 -preset slow -crf 30 -c:a aac output.mkv`
+* `ffmpeg -i input.mov -i input.srt -c copy -c:v libx265 output.mkv`  
+  Convert `input.mov` to `output.mkv`, while embedding a subtitle stream from `input.srt`.
+  
+  This works for both .srt and .ass subtitle files. Possible values for the subtitle codec
+  (`-c:s [codec]`) are `copy`, `ass`/`ssa` (which are synonyms), and `srt` (named `subt` in
+  VLC > Tools > Codec Information). `srt` subtitles are generally preferable because of wider
+  compatibility and familiarity. But note that if the `ssa` subs use a non-default placement
+  (e.g. for overlaying hardcoded subs in another language) this will not convert over.
+  In this case it is better to stick to the original `ssa` subtitles.
+  
+  To also *name* the subtitle track, use:
+  ```
+  ffmpeg -i input.mov -i input.srt -c copy -c:v libx265 -metadata:s:s:0 language=English output.mkv
+  ```
+  That is, add `language` metadata to the first (index 0) **s**ubtitle **s**tream. Similarly,
+  you could add language metadata to the audio stream with `-metadata:s:a:0 language=English`.
+
+* `ffmpeg -i input.mov -c copy -t 15 output.mkv`  
+  Convert the first 15 seconds of `input.mov` to `output.mkv`, stream-copying everything without any re-encoding.  
+  The `-t` flag is really useful to test-run a specific command. It allows evaluating the quality of a
+  fraction of the video (faster encode!) before committing to the time-intensive full command.
 
 * `ffmpeg -i input.gif output.mp4`  
   `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
