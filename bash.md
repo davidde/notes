@@ -196,12 +196,13 @@ in `Hardware accelerated decoding` in Input & Codecs Settings.
   (e.g. for overlaying hardcoded subs in another language) this will not convert over.
   In this case it is better to stick to the original `ssa` subtitles.
   
-  To also *name* the subtitle track, use:
+  To also add a language identifier to the subtitle track, use:
   ```
-  ffmpeg -i input.mov -i input.srt -c copy -c:v libx265 -metadata:s:s:0 language=English output.mkv
+  ffmpeg -i input.mov -i input.srt -c copy -c:v libx265 -metadata:s:s:0 language=eng output.mkv
   ```
-  That is, add `language` metadata to the first (index 0) **s**ubtitle **s**tream. Similarly,
-  you could add language metadata to the audio stream with `-metadata:s:a:0 language=English`.
+  That is, add `language` metadata to the first (index 0) **s**ubtitle **s**tream. The convention
+  is to use the 3-letter [ISO 639](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
+  codes. Similarly, you can add language metadata to the audio stream with `-metadata:s:a:0 language=eng`.
 
 * `ffmpeg -i input.mov -c copy -t 15 output.mkv`  
   Convert the first 15 seconds of `input.mov` to `output.mkv`, stream-copying everything without any re-encoding.  
