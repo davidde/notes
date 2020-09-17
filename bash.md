@@ -210,6 +210,10 @@ in `Hardware accelerated decoding` in `Input & Codecs Settings`.
   
   The `-t` flag is really useful to test-run a specific command. It allows evaluating the quality of a
   fraction of the video (faster encode!) before committing to the time-intensive full command.
+  
+  | **Note:** |
+  |-----------|
+  | If you're having **aspect ratio problems**, <br> try adding a **video filter scale** like `-vf "scale=640:-2"`. |
 
 * `ffmpeg -i input.gif output.mp4`  
   `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
