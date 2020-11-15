@@ -310,7 +310,7 @@ Search for 'StringToFind' in all files in the current directory (.)
 => In other words, this extracts the UUID of the crypt device from `/etc/crypttab`.  
 
 ### $ `head path/to/file -n 10`  
-Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile).  
+Print the first 10 lines of the file. Opposite of [tail](#-tail-pathtofile--n-10).  
 `-n [(-)num]`: Print the first `num` lines of the file.   
 Head's output always starts at the start (head) of the file; the variable here is num:   
 * Num by default measures from the head, i.e. start of the file.  
@@ -591,7 +591,7 @@ Detect what process is listening to (and occupying) port 8000.
 
 
 ### $ `tail path/to/file -n 10`  
-Print the last 10 lines of the file. Opposite of [head](#-head-pathtofile).  
+Print the last 10 lines of the file. Opposite of [head](#-head-pathtofile--n-10).  
 `-n [(+)num]`: Print the last `num` lines of the file.   
 Tail's output always ends at the end (tail) of the file; the variable here is num:   
 - Num by default measures from the tail, i.e. end of the file.  
