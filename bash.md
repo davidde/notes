@@ -361,6 +361,13 @@ To prevent overwriting the original image, pass it a destination directory for t
 But note you will have to add the `-o` flag on consecutive calls, to overwrite the previously generated image,
 since this command will not run if the target file already exists.
 
+### $ `loginctl`  
+Systemd login manager command. When executed without arguments it defaults to `loginctl list-sessions`.
+* `loginctl list-sessions`: List the current sessions.
+* `loginctl list-users`: List currently logged in users.
+* `loginctl session-status [ID-from-list]`: Show runtime status information about one or more sessions.
+* `loginctl terminate-session [ID-from-list]`: Terminate a session; kills all processes of the session.
+
 ### $ `ls -hal [/path/to/directory/or/file]`  
 Show stats of the directory or file, including permissions (and which files for directories).  
 -h (human-readable): Files sizes are displayed in the human-readable format of kilobytes and megabytes.  
