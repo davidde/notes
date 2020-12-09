@@ -215,6 +215,14 @@ in `Hardware accelerated decoding` in `Input & Codecs Settings`.
   |-----------|
   | If you're having **aspect ratio problems**, <br> try adding a **video filter scale** like `-vf "scale=640:-2"`. |
 
+* `ffmpeg -i main.wmv -i ending.avi -filter_complex concat=n=2:v=1:a=1 -c:v libx265 -crf 26 -r 30 output.mkv`  
+  Concatenate multiple input videos with different codecs into a single video. It's recommended to specify a frame rate with `-r`
+  if the videos have different frame rates, or ffmpeg might get confused.  
+  concat explanation:  
+  n: number of inputs  
+  v: number of video streams in each input (0 to disable video)  
+  a: number of audio streams in each input (0 to disable audio)
+
 * `ffmpeg -i input.gif output.mp4`  
   `ffmpeg -i input.gif -b:v 0 -crf 25 output.mp4`  
   `ffmpeg -i input.gif -c vp9 -b:v 0 -crf 41 output.webm`  
