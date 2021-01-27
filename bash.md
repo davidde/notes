@@ -369,6 +369,40 @@ To prevent overwriting the original image, pass it a destination directory for t
 But note you will have to add the `-o` flag on consecutive calls, to overwrite the previously generated image,
 since this command will not run if the target file already exists.
 
+### $ `ln -vs <source> <destination>`  
+Create a symlink. Without flags, `ln` creates by default a hard link.  
+`-v, --verbose`: Be verbose; print name of each linked file.  
+`-s, --symbolic`: Create symbolic link instead of hard link.  
+`-f, --force`: Remove destination files that already exist (where the link should be created).  
+`-T, --no-target-directory`: Treat destination always as a normal file, never as directory.
+
+The man pages generally use the format: `ln <TARGET> <LINK_NAME>` (i.e. source = target, and destination = link name)  
+I feel the python-based convention of source/destination is more intuitive than target/link. Whatever your preference,
+what it comes down to is that the directory that should **hold** the link is the second argument, while the directory
+that you're linking **to** (the target or source), is the first one:
+```bash
+# Symlink the .zshrc inside the dotfiles to `~/.zshrc`:
+ln -vs ~/.dotfiles/home/.zshrc ~
+# This is the same as:
+ln -vs ~/.dotfiles/home/.zshrc ~/.zshrc
+
+# However, for directories this is NOT the same, since the source/target
+# is always created *inside* the destination:
+ln -vs ~/.dotfiles/home/.config/vlc/ ~/.config/     # vlc folder created inside config
+ln -vs ~/.dotfiles/home/.config/vlc/ ~/.config/vlc/ # vlc folder created inside vlc
+```
+These symlinks have the dotfiles directory as source, and the home directory as destination,
+but they are said to be **from** home **to** dotfiles, which may be confusing.
+
+If you want to create a directory symlink where the destination name differs from the source name,
+you should use the `-T, --no-target-directory` flag:
+```
+ln -svfT ~/Pictures/wallpapers/best-backgrounds/ ~/.local/share/backgrounds/
+```
+The result of this is that `~/.local/share/backgrounds/` itself is the symlink that points to
+`~/Pictures/wallpapers/best-backgrounds/`. Without the `-T` flag, `ln` would create a
+`best-backgrounds` symlink directory **inside** `~/.local/share/backgrounds/`.
+
 ### $ `loginctl`  
 Systemd login manager command. When executed without arguments it defaults to `loginctl list-sessions`.
 * `loginctl list-sessions`: List the current sessions.
