@@ -399,6 +399,25 @@ use [git remote set-url](#-git-remote-set-url-origin-httpsgithubcomUSERNAMEREPOS
 ### $ `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`  
 Change the origin remote's URL.
 
+* `git remote set-url --add --push origin https://github.com/USERNAME/OTHER-REPO.git`  
+Add a new push URL to your repository. This is mostly useful for **pushing to several remotes** at once
+with a single `git push`. However, adding a new push URL will replace the default push location,
+so you'll have to add the original again:  
+`git remote set-url --add --push origin https://github.com/USERNAME/ORIGINAL-REPO.git`  
+After this, pushing to origin will push to both remote repos.  
+
+  **Alternatively**, you can keep the original `origin` remote with a single push URL,
+  and create a new `all` remote that pushes to all repos:
+  ```
+  git remote add all https://github.com/USERNAME/ORIGINAL-REPO.git
+  git remote set-url --add --push all https://github.com/USERNAME/OTHER-REPO.git
+  git remote set-url --add --push all https://github.com/USERNAME/ORIGINAL-REPO.git
+  ```
+  You can then set it as "default" push with:
+  ```
+  git push -u all --all
+  ```
+
 ### $ `git remote show origin`  
 Display complete info on the origin remote's `push` and `pull` configurations per branch.
 
