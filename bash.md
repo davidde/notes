@@ -242,6 +242,9 @@ in `Hardware accelerated decoding` in `Input & Codecs Settings`.
   the `.webm <source>` and use the `.mp4` instead. If you prefer a `.webm <source>` be used first,
   specify it first!
 
+* `ffmpeg -i input.mov -vf scale=1280:720 output.mkv`  
+  Resize the video to other resolution/aspect ratio.
+
 ### $ `find <PATH> [<FILTERS>] [<ACTIONS>]`   
 Recursively finds all files/directories in `<PATH>` and its subdirectories, with the specified `<FILTERS>`.     
 `find`’s power comes from it’s ability to filter which files or directories it selects
@@ -679,6 +682,9 @@ Create an empty file called 'file.txt'.
 The `tree` command prints a tree diagram of the current directory structure to the terminal.  
 `> contents.html` pipes the output to the file contents.html.  
 `-H [href]`: print output in HTML form.
+
+### $ `wc -c path/to/file.txt`
+wc stands for word count, however with the `-c, --bytes` flag, it counts the bytes instead.
 
 ### $ `wget https://example.com`  
 Download the url `https://example.com`.  
