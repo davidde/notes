@@ -151,7 +151,21 @@ $ `eval $(ssh-agent)`
    - If you created your key with a different name/path, add the path to the command:  
    $ `ssh-add ~/.ssh/user1_host1`  
    - Enter the passphrase for the specific private key
-   
+
+----------------------------------------------
+**Note for Windows:**
+* To have SSH agent start automatically on Windows, run `Set-Service ssh-agent -StartupType Automatic` in a super-user powershell prompt.
+* We then need to tell Git to use the Windows SSH agent instead of its own. We do this by updating the git config:
+  ```
+  git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
+  ```
+  Now when we use Git, we won’t be prompted for our passphrase, even after a reboot.
+
+Sources:  
+- https://superuser.com/questions/1327633/how-to-maintain-ssh-agent-login-session-with-windows-10s-new-openssh-and-powers
+- https://richardballard.co.uk/ssh-keys-on-windows-10/
+----------------------------------------------
+
 ## Adding your public key to a remote server
 ### a) Github/Gitlab/etc.
 - Open the id_rsa.pub file (or use `$ cat ~/.ssh/id_rsa.pub`) and copy the entire content of that file.
