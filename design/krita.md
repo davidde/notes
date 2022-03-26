@@ -11,3 +11,5 @@
   - Hold `Middleclick` and drag around.
 * 
 
+## Useful hotkeys
+* Reset canvas rotation: `5` key.
