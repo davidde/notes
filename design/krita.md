@@ -13,3 +13,4 @@
 
 ## Useful hotkeys
 * Reset canvas rotation: `5` key.
+* Show canvas only (maximize artwork visibility): `tab` key
