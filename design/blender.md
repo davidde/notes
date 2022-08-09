@@ -30,6 +30,10 @@ This mode allows adjusting the mesh with specialized tools:
 * Smooth Tool (Shift+S hotkey): Smoothes over the mesh.
 * Inflate Tool (I hotkey): Inflates the mesh, for instance to create droplet like forms (especially with the Airbrush `Stroke Method`).
 
+### Texture Paint
+> **Note that Texture Painting does not get saved automatically within the Blender file!!!**  
+> You need to separately save it in an image file.
+
 ### Animation
 * `I`: Insert keyframe.
 
@@ -37,3 +41,9 @@ This mode allows adjusting the mesh with specialized tools:
 #### Graph editor (left tab)
 Hit `Home` to see everything.
 
+## Geometry Nodes
+> **To recover lost geometry nodes:**  
+> Place mouse in node panel and press `HOME`.  
+> (Also make sure the right object is selected!)
+
+* `Ctrl + J`: Create a frame over the geometry node, e.g. for giving it a title/comment.
