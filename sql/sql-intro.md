@@ -18,17 +18,36 @@
     - a flexible query language with **aggregation** and **join operations**
     - constraints: rules for protecting the consistency of your data
 
+* SQL jargon:
+  - **Table or Entity**: 2-dimensional data structure made of rows and columns
+  - **Row, Record or Instance**: Contains data that belongs together.
+  - **Column or Attribute**: Contains data of the same type.
+  - **Field**: Intersection of a row and column; contains specific information of a specific thing.
+  - **Primary Key**: Field that uniquely defines a record.
+  - **Foreign Key**: the link that connects 2 tables.
+  - **Index**: like the index in a book; with a search word you can find the correct record in a table, e.g. the column that contains family names.
+
 * Common **aggregation** functions in SQL:   
 (An aggregation function 'aggregates' data from all rows,
 and returns a single result value)
 
-|     Question                   |     Aggregation    |
-|--------------------------------|--------------------|
-| How many rows have this value? |      count         |
-| What's the average value?      |      avg           |
-| What's the greatest value?     |      max           |
-| What's the smallest value?     |      min           |
-| What's the sum?                |      sum           |
+  |     Question                   |     Aggregation    |
+  |--------------------------------|--------------------|
+  | How many rows have this value? |      count         |
+  | What's the average value?      |      avg           |
+  | What's the greatest value?     |      max           |
+  | What's the smallest value?     |      min           |
+  | What's the sum?                |      sum           |
+
+  For example:
+  ```sql
+  SELECT count(*) AS number FROM animals
+  ```
+  This will return the total number of records in the animals table, giving it the alias number. `count(*)` is used frequently because **aggregate functions do not take into account the value NULL**! This means that in the following example:
+  ```sql
+  SELECT count(name) FROM animals
+  ```
+  Animals that were not named (have NULL for name) aren't taken into account, meaning this may result in less than the total number of records/animals.
 
 ## Datatypes in SQL
 ### Text and string types
@@ -90,8 +109,23 @@ The `WHERE` clause expresses restrictions — filtering a table for rows that fo
 Return only rows that have 'gorilla' as the value of the species column.
 * `WHERE name >= 'George'`  
 Return only rows where the name column is alphabetically after 'George'.
-* `WHERE species != 'gorilla' and name != 'George'`  
+* `WHERE species <> 'gorilla' AND name <> 'George'`  
 Return only rows where species isn't 'gorilla' and name isn't 'George'.
+
+
+#### Operators used with WHERE: <, >, <=, >=, <>, =, like, between ... and ... , in (...)
+* `like` has a few special options like:
+  - `%` which represents an arbitrary number of characters.  
+    E.g. `SELECT species FROM animals WHERE species like '%fish%'`  
+    This would return for instance 'goldfish' and 'kingfisher', as well as 'fishxyz'.
+  - `_` represents 1 arbitrary character.  
+
+* `SELECT name FROM beers WHERE alcohol IS NULL`  
+  This will return all beers where the alcohol percentage was not entered. Note the use of `IS` instead of `=` when `NULL` is involved!
+* `SELECT name FROM beers WHERE alcohol BETWEEN 5 AND 7`
+* `SELECT name FROM beers WHERE alcohol IN (0, 5, 8)`  
+  With the operator IN you can group together different **OR conditions** (i.e. WHERE alcohol = 0 OR alcohol = 5 OR alcohol = 8).
+
 
 ### LIMIT ... (OFFSET ...)
 The `LIMIT` clause sets a limit on how many rows to return in the result table. The optional `OFFSET` clause says how far to skip ahead into the results.  
@@ -103,16 +137,32 @@ The `order by` clause tells the database how to sort the results — usually acc
 E.g. `ORDER BY species, name`  
 Sort results first by the species column, then by name within each species.
 
-The optional `DESC` modifier tells the database to order results in descending order, for instance from large numbers to small ones, or from Z to A.
+The optional `DESC` modifier tells the database to order results in descending order, for instance from large numbers to small ones, or from Z to A. (There is also an `ASC` modifier that orders in ascending order, but this is the default sorting order.)
 
 ### GROUP BY ...
-The `GROUP BY` clause is only used with aggregations, such as max, count or sum. Without a group by clause, a select statement with an aggregation will aggregate over the whole selected table(s), returning only one row. With a `GROUP BY` clause, it will return one row for each distinct value of the column or expression in the group by clause.
+The `GROUP BY` clause is only used with aggregations, such as `max`, `count` or `sum`. Without a `GROUP BY` clause, a select statement with an aggregation will aggregate over the whole selected table(s), returning only one row. With a `GROUP BY` clause, it will return one row for each distinct value of the column or expression in the group by clause.
 
-E.g. QUERY = "SELECT species, min(birthdate) FROM animals group by species;"  
-This will return a table with 2 columns; the first with all the species, and the second with the birthdate of the oldest animal of that species.  
--> **contrast this with:**  
-QUERY = "SELECT species, min(birthdate) FROM animals;"  
-Will return only a single row of 2 columns; the species and the birthdate of the oldest animal.
+For example:
+```sql
+SELECT species, min(birthdate) FROM animals GROUP BY species
+```
+This will return a table with 2 columns; the first with all the species, and the second with the birthdates of the oldest animal of that species.  
+**-> Contrast this with:**  
+```sql
+SELECT species, min(birthdate) FROM animals
+```
+This will return only a single row of 2 columns; the species and the birthdate of the oldest animal.
+
+> **Note**  
+> When using `GROUP BY` all columns that appear in the `SELECT` clause and are **NOT** a part of an aggregate function should be part of the `GROUP BY`. (E.g species in the above `GROUP BY` example.)
+
+SQL also has a `round` function: `round(price, 1)` will round the `price` column to 1 number after the decimal. This is useful for instance to count all products that have a certain integer price point:
+```sql
+SELECT round(price, 0) as rounded_price, count(*) as amount
+FROM products
+GROUP BY rounded_price
+ORDER BY amount ASC
+```
 
 ## Predicates
 ### DISTINCT
@@ -120,6 +170,8 @@ Will return only a single row of 2 columns; the species and the birthdate of the
 SELECT DISTINCT species FROM animals
 ```
 Will return all the species from the animals table. The `DISTINCT` predicate ensures that the returned subset consists of unique species; without it, the subset may contain a single species multiple times if there are several animals from the same species in the table.
+
+By default the predicate `ALL` is used, so it does not need to be typed.
 
 ## INSERT statement
 The basic syntax for the `INSERT` statement:
@@ -164,7 +216,7 @@ AND diet.food = 'fish'
 ```
 
 ## HAVING clause
-The `HAVING` clause works like the `WHERE` clause, but it applies after group by aggregations take place. The syntax is like this:
+The `HAVING` clause works like the `WHERE` clause, but it applies after `GROUP BY` aggregations take place. The syntax is like this:
 ```sql
 SELECT columns FROM tables GROUP BY column HAVING condition
 ```
@@ -182,6 +234,10 @@ If you use both `WHERE` and `HAVING`, the `WHERE` condition will filter the rows
 
 `HAVING` is different from `WHERE`: `WHERE` filters individual rows before the application of `GROUP BY`, while `HAVING` filters group rows created by `GROUP BY`.
 
+> **In short:**  
+> You use `HAVING` if the selection is based on the result of an aggregate function.  
+> In all other cases you use `WHERE`.  
+> 
 > You can read more about `HAVING` [here](http://www.postgresql.org/docs/9.4/static/sql-select.html#SQL-HAVING).
 
 * **Question:** Which species does the zoo have only one of?
