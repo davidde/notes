@@ -26,6 +26,11 @@
   - **Primary Key**: Field that uniquely defines a record.
   - **Foreign Key**: the link that connects 2 tables.
   - **Index**: like the index in a book; with a search word you can find the correct record in a table, e.g. the column that contains family names.
+  - **collation**: The comparison and sorting of characters depends on the specific **collation** of the database server. The standard collation of MySQL does not distinguish between lower and upper case. This means the following are equivalent in standard MySQL:
+    ```
+    WHERE name='Tom'
+    WHERE name='tom'
+    ```
 
 * Common **aggregation** functions in SQL:   
 (An aggregation function 'aggregates' data from all rows,
@@ -47,7 +52,7 @@ and returns a single result value)
   ```sql
   SELECT count(name) FROM animals
   ```
-  Animals that were not named (have NULL for name) aren't taken into account, meaning this may result in less than the total number of records/animals.
+  Animals that were not named (have NULL for name) aren't taken into account, meaning this may result in less than the total number of records/animals. This is why `count` is usually combined with `*` in practice.
 
 ## Datatypes in SQL
 ### Text and string types
@@ -98,6 +103,15 @@ Remember:
 - In SQL, we always put string **and date values** inside 'single' quotes.
 - By convention, SQL keywords are written in **ALL CAPS** so they can easily be distinguished visually from the tables and other variables.
 
+## Predicates
+### DISTINCT
+```sql
+SELECT DISTINCT species FROM animals
+```
+Will return all the species from the animals table. The `DISTINCT` predicate ensures that the returned subset consists of unique species; without it, the subset may contain a single species multiple times if there are several animals from the same species in the table.
+
+By default the predicate `ALL` is used, so it does not need to be typed.
+
 ## SELECT statement and select clauses
 The `SELECT` statement can express arbitrary complex searches and aggregations of data; it uses **select clauses** like `where`, `limit` and `order`/`group by` for more specific searches.  
 E.g. QUERY = "SELECT * FROM animals where species = 'orangutan' order by birthdate;"  
@@ -113,8 +127,8 @@ Return only rows where the name column is alphabetically after 'George'.
 Return only rows where species isn't 'gorilla' and name isn't 'George'.
 
 
-#### Operators used with WHERE: <, >, <=, >=, <>, =, like, between ... and ... , in (...)
-* `like` has a few special options like:
+#### Operators used with WHERE: <, >, <=, >=, <>, =, LIKE, BETWEEN ... AND ... , IN (...)
+* `LIKE` has a few special options like:
   - `%` which represents an arbitrary number of characters.  
     E.g. `SELECT species FROM animals WHERE species like '%fish%'`  
     This would return for instance 'goldfish' and 'kingfisher', as well as 'fishxyz'.
@@ -164,57 +178,6 @@ GROUP BY rounded_price
 ORDER BY amount ASC
 ```
 
-## Predicates
-### DISTINCT
-```sql
-SELECT DISTINCT species FROM animals
-```
-Will return all the species from the animals table. The `DISTINCT` predicate ensures that the returned subset consists of unique species; without it, the subset may contain a single species multiple times if there are several animals from the same species in the table.
-
-By default the predicate `ALL` is used, so it does not need to be typed.
-
-## INSERT statement
-The basic syntax for the `INSERT` statement:
-```sql
-INSERT INTO table ( column1, column2, ... ) VALUES ( val1, val2, ... );
-```
-If the values are in the same order as the table's columns (starting with the first column), you don't have to specify the columns in the insert statement:
-```sql
-INSERT INTO table VALUES ( val1, val2, ... );
-```
-For instance, if a table has three columns (a, b, c) and you want to insert into a and b, you can leave off the column names from the `INSERT` statement.
-But if you want to insert into b and c, or a and c, you have to specify the columns.
-
-A single `INSERT` statement can only insert into a single table. (Contrast this with the SELECT statement, which can pull data from several tables using a JOIN.)
-
-
-## JOIN statement
-To join two tables:  
-- choose the **join condition**, i.e. the rule you want the database to use to match up rows from one table with rows from the other table.
-- write a join in terms of the columns in each table.
-
-E.g. Find the **names** of all individual animals that eat fish  
-(**animals columns**: name, species, birthdate)  
-(**diet columns**: species, food)  
-
-**-> Problem:** the animals table tells us nothing about what each animal eats, and the diet table doesn't list individual animals, ... only species.
-
-**-> Solution:** the species column is in both the animals and diet tables, so we can do a 'join' between both tables:
-```sql
-SELECT animals.name
-FROM animals JOIN diet
-ON animals.species = diet.species
-WHERE food = 'fish'
-```
-**join condition:** on animals.species = diet.species  
-
-Alternatively, we can use simple join syntax:
-```sql
-SELECT name FROM animals, diet
-WHERE animals.species = diet.species
-AND diet.food = 'fish'
-```
-
 ## HAVING clause
 The `HAVING` clause works like the `WHERE` clause, but it applies after `GROUP BY` aggregations take place. The syntax is like this:
 ```sql
@@ -255,6 +218,64 @@ SELECT species, count(*) AS num
     HAVING num = 1;
 ```
 
+Examples:
+* Determine the minimum alcohol percentage for every `brouwerNr`. The result should only show the `brouwerNr`s and percentages smaller than 5%.
+  ```sql
+  SELECT brouwerNr, min(alcohol) as min FROM bieren
+  GROUP BY brouwerNr HAVING min < 5
+  ORDER BY brouwerNr
+  ```
+
+* Calculate the average alcohol percentage for each brouwerNr for which the brewery produces more than 10 beers.
+  ```sql
+  SELECT brouwerNr, avg(alcohol) as avg FROM bieren
+  GROUP BY brouwerNr HAVING count(*) > 10
+  ORDER BY brouwerNr
+  ```
+
+## INSERT statement
+The basic syntax for the `INSERT` statement:
+```sql
+INSERT INTO table ( column1, column2, ... ) VALUES ( val1, val2, ... );
+```
+If the values are in the same order as the table's columns (starting with the first column), you don't have to specify the columns in the insert statement:
+```sql
+INSERT INTO table VALUES ( val1, val2, ... );
+```
+For instance, if a table has three columns (a, b, c) and you want to insert into a and b, you can leave off the column names from the `INSERT` statement.
+But if you want to insert into b and c, or a and c, you have to specify the columns.
+
+A single `INSERT` statement can only insert into a single table. (Contrast this with the SELECT statement, which can pull data from several tables using a JOIN.)
+
+
+## JOIN statement
+In practice it often happens you need data from more than 1 table. Therefore you can make queries that join one table to another and select the correct data from it.
+To join two tables:  
+- choose the **join condition**, i.e. the rule you want the database to use to match up rows from one table with rows from the other table.
+- write a join in terms of the columns in each table.
+
+E.g. Find the **names** of all individual animals that eat fish  
+(**animals columns**: name, species, birthdate)  
+(**diet columns**: species, food)  
+
+**-> Problem:** the animals table tells us nothing about what each animal eats, and the diet table doesn't list individual animals, ... only species.
+
+**-> Solution:** the species column is in both the animals and diet tables, so we can do a 'join' between both tables:
+```sql
+SELECT animals.name
+FROM animals JOIN diet
+ON animals.species = diet.species
+WHERE food = 'fish'
+```
+**join condition:** on animals.species = diet.species  
+
+Alternatively, we can use simple join syntax:
+```sql
+SELECT name FROM animals, diet
+WHERE animals.species = diet.species
+AND diet.food = 'fish'
+```
+
 * **Question:** Which food is eaten by only one individual animal?
 
 There are a few different ways to solve this, but here's one of them:
@@ -274,6 +295,109 @@ SELECT food, count(animals.name) AS num
     GROUP BY food
     HAVING num = 1;
 ```
+
+### INNER JOIN
+With an `INNER JOIN` you can combine records from 2 or more tables based on a condition with fields from different tables. Records from either table that do not have a corresponding record in the other table, will not be shown.
+
+You can apply it on every `FROM` component. The `INNER JOIN` is the most used type of join.
+
+For example:  
+We have 2 tables:
+* Jobs:
+
+  | jobId | Description | personId |
+  |-------|-------------|----------|
+  | 1     | washing     | 3        |
+  | 2     | drying      | 1        |
+  | 3     | storing     | NULL     |
+
+* Persons:
+
+  | personId | Name        |
+  |----------|-------------|
+  | 1        | Miko        |
+  | 2        | Ian         |
+  | 3        | Fred        |
+
+In an INNER JOIN a row from one table only gets into the result if there is a corresponding row in the other table:
+```sql
+SELECT description, name FROM jobs INNER JOIN persons
+ON jobs.personId = persons.personId
+```
+Result:  
+
+| Description | Name        |
+|-------------|-------------|
+| Drying      | Miko        |
+| Washing     | Fred        |
+
+### (OUTER) JOIN
+With an `OUTER JOIN` you can combine records from 2 or more tables based on similar values in a common field:
+* With the command `LEFT JOIN` you create a **LEFT OUTER JOIN**. In a LEFT OUTER JOIN all records from the first (left) table are used, even if there are no corresponding values in the second (right) table.
+* With the command `RIGHT JOIN` you create a **RIGHT OUTER JOIN**. In a RIGHT OUTER JOIN all records from the second (right) table are used, even if there are no corresponding values in the first (left) table.
+
+Examples:  
+* ```sql
+  SELECT description, name FROM jobs LEFT JOIN persons
+  ON jobs.personId = persons.personId
+  ```
+  Result:
+
+  | Description | Name        |
+  |-------------|-------------|
+  | Drying      | Miko        |
+  | Washing     | Fred        |
+  | Storing     | NULL        |
+
+* ```sql
+  SELECT description, name FROM jobs RIGHT JOIN persons
+  ON jobs.personId = persons.personId
+  ```
+  Result:
+
+  | Description | Name        |
+  |-------------|-------------|
+  | Drying      | Miko        |
+  | NULL        | Ian         |
+  | Washing     | Fred        |
+
+* Give an overview of all `leveranciers` and their accompanying `bestellingen`. Also show the `leveranciers` with whom we haven't ordered anything yet. Only show the fields `bestelId` and `leverancierNaam`.
+  ```sql
+  SELECT leverancierNaam, bestelId
+  FROM bestellingen RIGHT JOIN leveranciers
+  ON bestellingen.leverancierId = leveranciers.leverancierId
+  ORDER BY bestelId
+  ```
+  This is identical to:
+  ```sql
+  SELECT leverancierNaam, bestelId
+  FROM leveranciers LEFT JOIN bestellingen
+  ON leveranciers.leverancierId = bestellingen.leverancierId
+  ORDER BY bestelId
+  ```
+
+> **INNER vs OUTER JOIN**  
+> In SQL, a join is used to compare and combine — literally join — and return specific rows of data from two or more tables in a database. An **INNER JOIN** finds and returns matching data from tables, while an **OUTER JOIN** finds and returns matching data *and some dissimilar data* from tables.
+
+### SELF JOIN
+A `SELF JOIN` is an INNER JOIN or OUTER JOIN that uses the same table twice. In order to do this, you need to give the table 2 different aliases.
+
+* Make a list of all `brouwers` that live in the same `gemeente`. To the table `brouwers` we give each time an alias. If you use a column name, you also need to use the alias to specify from which table.
+  ```sql
+  SELECT b1.brnaam, b2.brnaam, b1.gemeente
+  FROM brouwers as b1 INNER JOIN brouwers as b2
+  ON b1.gemeente = b2.gemeente AND b1.brouwernr < b2.brouwernr
+  ORDER BY b1.gemeente
+  ```
+  `b1.brouwernr < b2.brouwernr` makes sure that combinations like Artois–Artois and double records like Artois–Domus and Domus–Artois are avoided.
+
+* Find the `bestellingen` that have a `besteldatum` that equals the `leveringsdatum` from one or more other `bestellingen`. Give `bestelId` of the first delivery, `besteldatum` of the first delivery, `bestelId` of the second delivery, and `leveringsdatum` of the second delivery.
+  ```sql
+  SELECT b1.bestelId AS id1, b1.bestelDatum AS bestelDat1, b2.bestelId AS id2, b2.leveringsDatum AS leverDat2
+  FROM bestellingen AS b1
+  INNER JOIN bestellingen AS b2
+  ON b1.bestelDatum = b2.leveringsDatum
+  ```
 
 ## Normalised Database Design
 In a normalised database, the relationships among the tables match the relationships that are really there among the data.
