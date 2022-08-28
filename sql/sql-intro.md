@@ -399,6 +399,78 @@ A `SELF JOIN` is an INNER JOIN or OUTER JOIN that uses the same table twice. In 
   ON b1.bestelDatum = b2.leveringsDatum
   ```
 
+## UNION
+With a UNION you can combine the results from any 2 or more SELECT instructions.
+
+Rules:
+
+* All SELECT queries in a UNION need to get the same number of fields, even though they do not need the same length or data type.
+* Aliases are only possible for the first SELECT, and are ignored in the latter.
+* For sorting with ORDER BY you should reference the fields from the first SELECT component. ORDER BY is placed at the end of the entire UNION.
+* Double results are not shown by default in a UNION. If you want to show them, use UNION ALL.
+
+**Example:**  
+Create a list of all beers, giving them a label from one of the following: alcohol-free (<0,2), low alcohol (<0,5), contains alcohol (>0,5) and unknown (IS NULL). Sort by alcohol percentage.
+```sql
+SELECT naam, alcohol, 'alcohol-free' AS label
+FROM bieren WHERE alcohol<0.2
+UNION
+SELECT naam, alcohol, 'low alcohol' AS label
+FROM bieren WHERE alcohol>=0.2 and alcohol <0.5
+UNION
+SELECT naam, alcohol, 'contains alcohol' AS label
+FROM bieren WHERE alcohol>=0.5
+UNION
+SELECT naam, alcohol, 'unknown' AS label
+FROM bieren WHERE alcohol IS NULL
+ORDER BY alcohol
+```
+
+## SUBQUERIES
+Examples:
+
+* Give a list of all beers with the highest alcohol percentage.
+  ```sql
+  SELECT naam FROM bieren
+  WHERE alcohol = (SELECT max(alcohol) FROM bieren)
+  ```
+  When using a relation operator like =, <, >, >=, <= and <>, the subquery can only give 1 result.
+
+* Give a list of all beers that are brewn in Oudenaarde.
+  ```sql
+  SELECT naam FROM bieren
+  WHERE brouwerNr in
+  (SELECT brouwerNr FROM brouwers
+  WHERE gemeente = 'Oudenaarde')
+  ```
+
+* Give the `soortNr` of the `soorten` that are only brewn by 1 brewery.
+  ```sql
+  SELECT soortNr FROM
+  (SELECT DISTINCT soortNr, brouwerNr FROM bieren) AS list
+  GROUP BY soortNr
+  HAVING count(*)=1
+  ```
+  A subquery in a FROM component needs to have an alias.
+
+* Make a list with the average alcohol percentage per `soort`.
+  ```sql
+  SELECT soort, gemiddelde
+  FROM (SELECT soortnr, avg(alcohol) as gemiddelde
+    FROM bieren GROUP BY soortnr) as r1
+  INNER JOIN soorten
+  ON r1.soortnr = soorten.soortnr
+  ```
+
+* Make a list of all beers with a lower alcohol percentage than the average alcohol percentage of its own `soort`.
+  ```sql
+  SELECT b1.* FROM bieren as b1
+  WHERE b1.alcohol <
+  (SELECT avg(b2.alcohol) FROM bieren as b2
+  WHERE b2.soortnr=b1.soortnr)
+  ```
+  This uses the table `bieren` twice, so it uses aliases to distinguish the fields.
+
 ## Normalised Database Design
 In a normalised database, the relationships among the tables match the relationships that are really there among the data.
 

@@ -34,6 +34,7 @@
 * On the left are the imported databases. Double klick the one you need, and it will appear bold.
 * Type the SQL query in the central tab named `Query 1`.
 * Click the yellow lightning button to execute it.
+* The yellow lightning button with the cursor only executes the query where the cursor is located, while the yellow lightning button with the magnifying glass shows the **execution plan** of the query, i.e. the steps that are taken when the query is executed. This is useful to compare efficiency of different queries; queries with less "Full Table Scan"s should be preferedd over those with more.
 
 ## Show database structure
 * Menu > Database > Reverse Engineer ... (CTRL + R)
