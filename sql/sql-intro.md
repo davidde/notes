@@ -233,21 +233,6 @@ Examples:
   ORDER BY brouwerNr
   ```
 
-## INSERT statement
-The basic syntax for the `INSERT` statement:
-```sql
-INSERT INTO table ( column1, column2, ... ) VALUES ( val1, val2, ... );
-```
-If the values are in the same order as the table's columns (starting with the first column), you don't have to specify the columns in the insert statement:
-```sql
-INSERT INTO table VALUES ( val1, val2, ... );
-```
-For instance, if a table has three columns (a, b, c) and you want to insert into a and b, you can leave off the column names from the `INSERT` statement.
-But if you want to insert into b and c, or a and c, you have to specify the columns.
-
-A single `INSERT` statement can only insert into a single table. (Contrast this with the SELECT statement, which can pull data from several tables using a JOIN.)
-
-
 ## JOIN statement
 In practice it often happens you need data from more than 1 table. Therefore you can make queries that join one table to another and select the correct data from it.
 To join two tables:  
@@ -470,6 +455,103 @@ Examples:
   WHERE b2.soortnr=b1.soortnr)
   ```
   This uses the table `bieren` twice, so it uses aliases to distinguish the fields.
+
+## INSERT statement
+The basic syntax for the `INSERT` statement:
+```sql
+INSERT INTO table ( column1, column2, ... ) VALUES ( val1, val2, ... );
+```
+If the values are in the same order as the table's columns (starting with the first column), you don't have to specify the columns in the insert statement:
+```sql
+INSERT INTO table VALUES ( val1, val2, ... );
+```
+For instance, if a table has three columns (a, b, c) and you want to insert into a and b, you can leave off the column names from the `INSERT` statement.
+But if you want to insert into b and c, or a and c, you have to specify the columns.
+
+A single `INSERT` statement can only insert into a single table. (Contrast this with the SELECT statement, which can pull data from several tables using a JOIN.)
+
+Examples:
+1. Add a new soort 'Extra donker' to the table 'soorten'.
+    ```sql
+    INSERT INTO soorten (Soort)
+    VALUES ('Extra donker')
+    ```
+    Because `SoortNr` is a field that is indexed automatically, we do not need to add it in our SQL instruction; it will be assigned automatically.
+
+2. Add a new 'brouwer' to the table `brouwers`.
+   Data of the new brouwer: Brouwerij Vaattappers is located at Interleuvenlaan 2 in 3000 Heverlee and has an `omzet` of 1000.
+    ```sql
+    INSERT INTO brouwers (brNaam, adres, postcode, gemeente, omzet)
+    VALUES ('Brouwerij Vaattappers', 'Interleuvenlaan 2', 3000, 'Heverlee', 1000)
+    ```
+    Here also BrouwerNr is not added to the SQL instruction because it is numbered automatically.
+
+3. Add 3 new kinds of beer to the table `soorten`: witbier, Ice bier and honing bier.
+    ```sql
+    INSERT INTO soorten (Soort)
+    VALUES ('witbier'),
+    ('Ice bier'),
+    ('honing bier')
+    ```
+    Again, `SoortNr` is not used because it is numbered automatically.
+    
+4. Add all beers with an alcohol percentage higher than 10 to the table `bieren_oud`.
+    ```sql
+    INSERT INTO bieren_oud
+    SELECT * FROM bieren
+    WHERE alcohol > 10
+    ```
+
+## UPDATE statement
+Basic syntax:
+```sql
+UPDATE table
+SET new_value
+WHERE criteria
+```
+
+Examples:
+1. Increase the alcohol percentage of all beers with `soortnr` 21 by 0,5. Make this modification in the table `bieren_oud`.
+    ```sql
+    UPDATE bieren_oud
+    SET alcohol = alcohol + 0.5
+    WHERE soortnr = 21
+    ```
+
+2. Lower the alcohol percentage by 1 of all beers whose brewery has a revenue (`omzet`) larger than 25000. Make this modification in the table `bieren_oud`.
+    ```sql
+    UPDATE bieren_oud
+    SET alcohol = alcohol - 1
+    WHERE brouwerNr IN (SELECT brouwerNr FROM brouwers WHERE omzet > 25000)
+    ```
+
+## DELETE statement
+Basic syntax:
+```sql
+DELETE [table]
+FROM table-expression
+WHERE criteria
+```
+
+**NOTE:**
+* A DELETE statement always **removes an entire record**. It cannot remove specific fields; this should be done with an UPDATE instruction.
+* To remove an entire table, you should use a DROP statement, not DELETE.
+* Once removed with a DELETE statement, the records cannot be recovered. Before using a DELETE, use a SELECT instruction to select the correct records.
+
+Examples:
+1. Remove the beer with `biernr` 750 from the table `bieren_oud`.
+    ```sql
+    DELETE
+    FROM bieren_oud
+    WHERE biernr=750
+    ```
+
+2. Remove the beers that were brewn in Soy from the table `bieren_oud`.
+    ```sql
+    DELETE
+    FROM bieren_oud
+    WHERE brouwerNr IN (SELECT brouwerNr FROM brouwers WHERE gemeente = 'soy')
+    ```
 
 ## Normalised Database Design
 In a normalised database, the relationships among the tables match the relationships that are really there among the data.
