@@ -553,6 +553,218 @@ Examples:
     WHERE brouwerNr IN (SELECT brouwerNr FROM brouwers WHERE gemeente = 'soy')
     ```
 
+## CREATE TABLE
+### A. Empty table
+Basic syntax:
+```sql
+CREATE TABLE table
+(field1 type [(size)] [NOT NULL] [index1]
+[, field2 type [(size)] [NOT NULL] [index2] [,...]
+[CONSTRAINT multipleindex [,...]])
+```
+If `NOT NULL` is used, the field should always have a value.
+
+**Example:**  
+Make a new table 'klanten' with the fields 'klantnr', 'klnaam', 'kladres', 'klpost' and 'klgemeente'. The fields 'klantnr' and 'klnaam' should always have a value.
+```sql
+CREATE TABLE klanten
+(klantnr integer NOT NULL, klnaam varchar(30) NOT NULL,
+kladres varchar(40), klpost char(4), klgemeente varchar(40))
+```
+
+### B. With data from another table
+Basic syntax:
+```sql
+CREATE TABLE newtable
+AS SELECT field1[,field2[,...]]
+FROM source
+```
+The fields will be copied to the new table from the source table.
+
+**Example:**  
+Create a table 'alcoholarm', and put in the data from the low-alcohol beers. Also put in the name of the brewery and the name of the beer.
+```sql
+CREATE TABLE alcoholarm
+AS SELECT naam, brNaam
+FROM bieren
+INNER JOIN brouwers ON bieren.brouwernr=brouwers.brouwernr
+INNER JOIN soorten ON bieren.soortnr=soorten.soortnr
+WHERE soort='Alcoholarm'
+```
+
+## DROP TABLE
+`DROP TABLE` removes an existing table entirely from the database.
+
+Basic syntax:
+```sql
+DROP TABLE [table]
+```
+
+**Example:**  
+Remove the table 'klanten'.
+```sql
+DROP TABLE klanten
+```
+
+## ALTER TABLE
+### A. Add a field
+Basic syntax:
+```sql
+ALTER TABLE table
+ADD [COLUMN] field type [(size)] [NOT NULL],
+field2 type [(size)] [NOT NULL],...,
+fieldn type [(size)] [NOT NULL]
+```
+`size` is only for text and binary fields, and indicates the size in characters. `size` should always be enclosed in parenthesis `()`. `NOT NULL` indicates only correct data can be entered when adding new records.
+
+**Example:**  
+Add a field 'opmerkingen' to the table 'brouwers'.
+```sql
+ALTER TABLE brouwers
+ADD opmerkingen varchar(25)
+```
+
+### B. Remove a field
+Basic syntax:
+```sql
+ALTER TABLE table
+DROP [COLUMN] field1, DROP [COLUMN] field2, ... fieldn
+```
+
+**Example:**  
+Remove the field 'opmerkingen' and 'contactpersoon' from the table 'brouwers'.
+```sql
+ALTER TABLE brouwers
+DROP opmerkingen, DROP contactpersoon
+```
+
+## CONSTRAINT
+`CONSTRAINT` is only used in a `CREATE TABLE` or `ALTER TABLE` statement to define keys or relationships. It allows us to define constraints on 1 or more fields:
+- **UNIQUE**: assign a **unique index** to a field; this prevents 2 records from having the same value for this field. When applied to multiple fields, the *combination of the values* in the fields needs to be unique.
+- **Primary key**: Only 1 per table, and should be **UNIQUE** and NOT NULL.
+- **Foreign key**: A field (or combination of fields) that refers to the primary key of another table.
+
+**Examples:**  
+* Create a table 'klanten' with the fields 'klantId' and 'klantNaam'. 'klantId' is the primary key. 'klantNaam' should always have a value, that can at maximum be 30 characters.
+  ```sql
+  CREATE TABLE klanten
+  (klantId integer NOT NULL auto_increment, klantNaam varchar(30) NOT NULL,
+  CONSTRAINT pk_klantId PRIMARY KEY(klantId))
+  ```
+  'pk_klantId' is the name of the constraint; pk for primary key. `auto_increment` indicates the field will be numbered automatically, and can only be used on primary keys.
+  
+* Create a table 'gebruikers' with the fields 'nummer', 'naam' and 'userId'. The field 'userId' needs to have a unique value, but isn't the primary key. 'nummer' is the primary key.
+  ```sql
+  CREATE TABLE gebruikers
+  (nummer integer NOT NULL,
+  naam varchar(30),
+  userId varchar(8),
+  CONSTRAINT pk_nummer PRIMARY KEY(nummer),
+  CONSTRAINT u_userId UNIQUE(userId))
+  ```
+
+* Create a table 'bestellingen' with the fields 'bestelId', 'klantNummer' and 'besteldatum'. The primary key is 'bestelId'. Between the fields 'klantNummer' of this table and 'klantId' of the table 'klanten' we define a one-to-many relationship.
+  ```sql
+  CREATE TABLE bestellingen
+  (bestelId integer,
+  klantNummer integer,
+  besteldatum datetime,
+  CONSTRAINT pk_bestelId PRIMARY KEY (bestelId),
+  CONSTRAINT f_klantnummer FOREIGN KEY (klantnummer) REFERENCES klanten (klantId))
+  ```
+
+* Create a table 'bestellijnen' with the fields 'bestelNummer', 'bierNummer' and 'aantal'. Define a composite key with the fields 'bestelNummer' and 'bierNummer'.
+  ```sql
+  CREATE TABLE bestellijnen
+  (bestelNummer integer,
+  bierNummer integer,
+  aantal integer,
+  CONSTRAINT pk_bestelBier PRIMARY KEY (bestelNummer, bierNummer))
+  ```
+
+* Define a one-to-many relationship between the tables 'bestellingen' (bestelId) and 'bestellijnen' (bestelnummer).
+  ```sql
+  ALTER TABLE bestellijnen
+  ADD CONSTRAINT f_bestelnummer FOREIGN KEY (bestelnummer) REFERENCES bestellingen (bestelId)
+  ```
+
+* Remove the constraint 'f_bestelnummer'.
+  ```sql
+  ALTER TABLE bestellijnen
+  DROP FOREIGN KEY f_bestelnummer
+  ```
+
+* Remove the primary key of the table 'bestellijnen'.
+  ```sql
+  ALTER TABLE bestellijnen
+  DROP PRIMARY KEY
+  ```
+
+## Indexes
+### Why indexes?
+Some SQL instructions like `CREATE TABLE` have a near constant processing time, that cannot be changed. Other instructions like `SELECT`, `UPDATE` and `DELETE` can be sped up significantly with indexes. Most database systems automatically add an index to the fields of a primary key.
+
+To get data from a table without an index the database system performs a **tablescan**, i.e. a complete search of the entire table. When an index is defined, the database can consult it first and possibly find the data directly, which is much faster.
+
+### Define an index
+```sql
+CREATE [UNIQUE] INDEX name
+ON table (field [asc | desc] [, field [asc | desc] [,...]])
+```
+
+**Example:**  
+Create an index for the field 'klantnaam' of the table 'klanten'.
+```sql
+CREATE INDEX i_naam
+ON klanten (klantNaam)
+```
+
+### Remove an index
+```sql
+DROP INDEX name ON table
+```
+
+**Example:**  
+Remove the index 'i_naam' of the table 'klanten'.
+```sql
+DROP INDEX i_naam
+ON klanten
+```
+
+## Views
+A view can be seen as a virtual table that is summoned by a `SELECT` statement.
+A much used application of views is for shielding data to implement security/privacy.
+
+### A. Create a view
+```sql
+CREATE VIEW viewname
+AS "SELECT-instruction"
+```
+`ORDER BY` is not allowed. All other instructions are allowed, including aggregate functions and math operations.
+
+**Example:**  
+Create a view 'bierlijst'. This list contains the name of the beer, the name of the brewery and the kind of the beer.
+```sql
+CREATE VIEW bierlijst
+AS SELECT naam, brNaam, soort
+FROM bieren INNER JOIN brouwers
+ON bieren.brouwernr = brouwers.brouwernr
+INNER JOIN soorten
+ON bieren.soortnr = soorten.soortnr
+```
+You can now look at this list with: `SELECT * FROM bierlijst`. It should be visible in the schema too.
+
+### B. Delete a view
+```sql
+DROP VIEW viewname
+```
+
+**Example:**  
+```sql
+DROP VIEW bierlijst
+```
+
+
 ## Normalised Database Design
 In a normalised database, the relationships among the tables match the relationships that are really there among the data.
 
