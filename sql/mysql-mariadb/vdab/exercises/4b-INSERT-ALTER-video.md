@@ -1,12 +1,11 @@
 # INSERT - ALTER
 ## Database video
 1. Voeg jezelf toe als klant.
-
-    (zoek eerst volgend klantId op: 31)
     ```sql
-    INSERT INTO klanten
-    VALUES (31, 'Deprost', 'David', 'Kammerstraat 16', '9000', 'Gent', 1, 0, '2022-08-30', 0)
+    INSERT INTO klanten (naam, voornaam, adres, postcode, woonplaats, klantStatus, totaalGehuurd, datumLid, lidgeld)
+    VALUES ('Deprost', 'David', 'Kammerstraat 16', '9000', 'Gent', 1, 0, '2022-08-30', 0)
     ```
+    Het klantId veld is een autonummeringsveld dat de database zelf zal aanvullen, en wij dus mogen negeren.
 
 2. Geef alle films met maatschappijCode 'VH' een prijsverhoging van 10%.
     ```sql
@@ -22,6 +21,14 @@
     FROM (SELECT filmId, titel, genre FROM films
     INNER JOIN genres ON films.genreId = genres.genreId
     WHERE genre = 'thriller') as t
+    ```
+
+    Of simpeler:
+    ```sql
+    CREATE TABLE thrillers
+    AS
+    SELECT * FROM films
+    WHERE genreId = (SELECT genreId FROM genres WHERE genre = 'thriller')
     ```
 
 4. Voeg aan de table 'maatschappijen' een veld 'mailadres' toe. Dit veld mag maximaal 40 tekens lang zijn en mag niet leeg zijn.
