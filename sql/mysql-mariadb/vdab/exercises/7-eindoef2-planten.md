@@ -109,7 +109,7 @@
     ORDER BY leverancierNaam, plantNaam
     ```
 
-10. ! Toon de leveranciers die de meeste planten geleverd hebben. Toon de namen van de leveranciers en hoeveel planten zij leverden.
+10. ! Toon de leveranciers die de meeste planten geleverd hebben. Toon de namen van de leveranciers en hoeveel planten zij leverden (**per bestelling**).
 
     WRONG:
     ```sql
