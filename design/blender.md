@@ -29,6 +29,8 @@ This mode allows adjusting the mesh with specialized tools:
   - You can adjust the Strength with the `Shift + F` hotkey.
 * Smooth Tool (Shift+S hotkey): Smoothes over the mesh.
 * Inflate Tool (I hotkey): Inflates the mesh, for instance to create droplet like forms (especially with the Airbrush `Stroke Method`).
+* `CTRL + R` to remesh: increase the vertices and polygons.
+* Use **masking (`SHIFT + 7`)** to control which part of the mesh is influenced by sculpting. `CTRL + I` to invert a mask.
 
 ### Texture Paint
 > **Note that Texture Painting does not get saved automatically within the Blender file!!!**  
