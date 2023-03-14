@@ -34,6 +34,12 @@
       <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.7" />
       <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
   </Project>
   ```
 * NuGet packages:
