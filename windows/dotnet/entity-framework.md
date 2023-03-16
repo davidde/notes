@@ -19,19 +19,19 @@
 
     <ItemGroup>
       <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-      <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-      <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.7" />
+      <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.0" />
       <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
     </ItemGroup>
 
