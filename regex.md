@@ -60,5 +60,39 @@ $ `rename 'y/a-z/A-Z/' *.jpg`
 |                                                                                              |
 |  (?=…)       | Positive lookahead	            | `(?=\d{10})\d{5}` matches	01234 in 0123456789  |
 |  (?<=…)      | Positive lookbehind	          | `(?<=\d)cat` matches	cat in 1cat              |
-|  (?!…)       | Negative lookahead             |	`(?!theatre)the\w+`	theme                      |
-|  (?<!…)      | Negative lookbehind            |	`\w{3}(?<!mon)ster`	Munster                    |
+|  (?!…)       | Negative lookahead             | `(?!theatre)the\w+`	theme                      |
+|  (?<!…)      | Negative lookbehind            | `\w{3}(?<!mon)ster`	Munster                    |
+| (?:…)        | Non-capturing group  | The capturing group will be ignored, and the first capturing will be the first capturing group without `?:` |
+
+E.g.:
+* ```
+  (https?|ftp)://([^/\r\n]+)(/[^\r\n]*)?
+  ```
+  (`[^/\r\n]+` matches 1 or more characters that are not `/`, `\r` or `\n`)  
+  <br>
+  Matches:
+  ```
+  Match "http://stackoverflow.com/"
+      Group 1: "http"
+      Group 2: "stackoverflow.com"
+      Group 3: "/"
+
+  Match "https://stackoverflow.com/questions/tagged/regex"
+      Group 1: "https"
+      Group 2: "stackoverflow.com"
+      Group 3: "/questions/tagged/regex"
+  ```
+* But:
+  ```
+  (?:https?|ftp)://([^/\r\n]+)(/[^\r\n]*)?
+  ```
+  Matches:
+  ```
+  Match "http://stackoverflow.com/"
+      Group 1: "stackoverflow.com"
+      Group 2: "/"
+
+  Match "https://stackoverflow.com/questions/tagged/regex"
+      Group 1: "stackoverflow.com"
+      Group 2: "/questions/tagged/regex"
+  ```
