@@ -87,3 +87,8 @@
 To revert the database to the initial state before the first migration:
 - `Update-Database -Migration 0 -Context xxxContext -Project Model -StartupProject Model -verbose`
 - `dotnet ef database update 0 --context xxxContext --project C:\Users\Admin\source\repo\EFProject\Model`
+
+| NOTE |
+|------|
+| <ul><li> The first option requires `Microsoft.EntityFrameworkCore.Tools` to be installed in the project with NuGet.</li> <li>The second option requires the dotnet tool to be installed: `dotnet tool install --global dotnet-ef`.</li></ul> |
+
