@@ -1,5 +1,7 @@
 # Blender
 ## Hotkeys
+* `1-9`: Change perspective. (`1` being the **Front Orthographic**.)
+* `Shift + Middle Mouse Button`: Panning, i.e. moving the viewport.
 * `Shift + A`: Add new mesh/curve/etc.
 * `F9` to modify its properties. Note you can only do this at the start, before it becomes a mesh! Once it becomes a mesh, it is a set of faces, vertices, and edges rather than a representation of parameters, so you can no longer adjust it. Even deselecting it will create the mesh, so to adjust it then you'll need to delete it and add it again!
 * `N`: Transform properties.
