@@ -483,8 +483,17 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 * `npm publish`   
 Publish the package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
 
-### $ `qpdf -decrypt InputFile OutputFile`  
-Remove protection/encryption from pdf files.
+### $ `qpdf`
+`qpdf` is a C++ command-line tool and library that performs content-preserving transformations on PDF files. It can also be used for splitting and merging files, creating files, or encrypting/decrypting them. The qpdf Manual is hosted online at https://qpdf.readthedocs.io.
+
+  * `qpdf -decrypt Inputfile.pdf Outputfile.pdf`  
+    Remove protection/encryption from pdf files.
+  * `qpdf Inputfile.pdf Outputfile.pdf --split-pages`  
+    Split the pdf into single page pdfs.
+  * `qpdf Inputfile.pdf Outputfile.pdf --split-pages=n`  
+    Split each group of n pages to a separate output pdf.
+  * `qpdf Inputfile.pdf --pages Inputfile.pdf 5-6 -- Outputfile.pdf`  
+    Extract a page range (or single page) from the inputfile to the outputfile.
 
 ### $ `passwd`   
 Change the password for the current user.   
