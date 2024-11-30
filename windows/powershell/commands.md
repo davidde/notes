@@ -18,14 +18,15 @@
 >   }
 >   ```
 
-### `grep <PATTERN> <FILE/FOLDER>`
+### `grep <PATTERN> <FOLDER>`
 `grep` is obviously not directly available in PowerShell, but can be achieved in the following way with `Get-ChildItem`:
 ```powershell
-Get-ChildItem <FILE/FOLDER> -recurse | Select-String -Pattern <PATTERN>
+Get-ChildItem <FOLDER> -Recurse | Select-String -Pattern <PATTERN> | Select-Object -Unique Path
+# When <FOLDER> is left out, it searches the current working directory.
 
 # Example:
-Get-ChildItem "2-finaliteit\6-ado\Theorie\AdoCursus\*.cs" -recurse | Select-String -Pattern "refresh"
-# This will return all filenames with line numbers where the pattern occurred.
+Get-ChildItem "2-finaliteit\6-ado\Theorie\AdoCursus\*.cs" -Recurse | Select-String -Pattern "refresh" | Select-Object -Unique Path
+# This will return all unique `.cs` filenames where 'refresh' occurred.
 ```
 
 ### `New-Alias <NEW_NAME> <COMMAND>`
