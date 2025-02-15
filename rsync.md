@@ -166,10 +166,11 @@ rsync -havu --info=progress2 --exclude='{".Trash*",lost+found,.DS_Store,"._*"}' 
 Git Bash uses the ssh in `C:\Program Files\Git\usr\bin\ssh.exe` by default, which works fine, but asks for your SSH key password, since it's not added to this SSH's SSH agent.
 
 ### In PowerShell:
+Note the **double and single quotes** around the SSH binary, this is essential for PowerShell to get the right path:
 ```powershell
 & "C:\Program Files\Git\usr\bin\rsync.exe" -havu --info=progress2 --exclude='{".Trash*",lost+found,.DS_Store,"._*"}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" "/d/new-pics" tab:/storage/emulated/0/Pictures
 ```
-PowerShell uses the ssh in `/c/Windows/System32/OpenSSH/ssh.exe` by default, which means we need to pass it `rsync`'s SSH from Git Bash. Again we need to provide the SSH key password.
+PowerShell uses the ssh in `/c/Windows/System32/OpenSSH/ssh.exe` by default, which means we need to pass it `rsync`'s SSH from Git Bash. Again we need to provide the SSH key password, which is trickier here; you can just copy, right-click, and directly press enter, which should correctly pass the password.
 
 It doesn't seem there is a straightforward way to make `rsync` work with the native Windows SSH command, which is a shame, since that version works well with `ssh-agent` to set up passwordless login. It is still possible to generate a passwordless SSH key though, since you'll only be using it on your own devices anyway.
 
