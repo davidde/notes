@@ -21,7 +21,7 @@ Since `rsync` is a unix tool that is not natively supported on Windows, we need 
   to check if everything is working so far.
 * You could also use it in PowerShell like this:
   ```powershell
-  & "C:\Program Files\Git\usr\bin\rsync.exe" --version
+  & 'C:\Program Files\Git\usr\bin\rsync.exe' --version
   ```
   Note the use of the ampersand `&`; this is required to make PowerShell recognize an external executable, instead of treating it as a cmdlet or a string. You can add this command to your PowerShell profile.
 * Make sure an SSH client is also installed; more info [here](./ssh.md).
@@ -129,7 +129,7 @@ It is also possible to reverse `src` and `dest` to sync in the reverse order, fr
 
 ### Command with more useful flags:
 ```bash
-rsync -auh --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' SRC DEST
+rsync -auh --info=progress2 --exclude='{.Trash*,lost+found,.DS_Store,._*}' SRC DEST
 ```
 * `-a, --archive`: a combination flag equivalent to `-rlptgoD`, a quick way of saying you want recursion (i.e. traverse directories) and want to preserve almost everything (including modification times, groups, owners, permissions and symlinks, but `-H, --hard-links` being a notable exception). It’s more commonly used than `-r, --recursive` and is the recommended flag to use.
 * `-u, --update`: forces rsync to skip any files which exist on the destination and have a modified time that is newer than the source file.
@@ -162,13 +162,13 @@ Then continue to use `rsync` from the Windows computer:
 * **Syncing from the Windows PC to Android:**
 
   ```bash
-  rsync -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' /d/new-pics tab:/storage/emulated/0/Pictures
+  rsync -havu --info=progress2 --exclude='{.Trash*,lost+found,.DS_Store,._*}' /d/new-pics tab:/storage/emulated/0/Pictures
   ```
   Git Bash uses the ssh in `C:\Program Files\Git\usr\bin\ssh.exe` by default, which works fine, but asks for your SSH key password, since it's not added to this SSH's SSH agent.
 * **Syncing from Android to the Windows PC:**
 
   ```bash
-  rsync -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' tab:/storage/emulated/0/Pictures/new-pics /d
+  rsync -havu --info=progress2 --exclude='{.Trash*,lost+found,.DS_Store,._*}' tab:/storage/emulated/0/Pictures/new-pics /d
   ```
 
 ### In PowerShell:
@@ -176,7 +176,7 @@ Then continue to use `rsync` from the Windows computer:
 
   Note the **double and single quotes** around the SSH binary, this is essential for PowerShell to get the right path:
   ```powershell
-  & "C:\Program Files\Git\usr\bin\rsync.exe" -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" /d/new-pics tab:/storage/emulated/0/Pictures
+  & 'C:\Program Files\Git\usr\bin\rsync.exe' -havu --info=progress2 --exclude='{.Trash*,lost+found,.DS_Store,._*}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" /d/new-pics tab:/storage/emulated/0/Pictures
   ```
   PowerShell uses the ssh in `/c/Windows/System32/OpenSSH/ssh.exe` by default, which means we need to pass it `rsync`'s SSH from Git Bash. Again we need to provide the SSH key password, which is trickier here; you can just copy, right-click, and directly press enter, which should correctly pass the password.
 
@@ -184,5 +184,5 @@ Then continue to use `rsync` from the Windows computer:
 
   Note the **double and single quotes** around the SSH binary, this is essential for PowerShell to get the right path:
   ```powershell
-  & "C:\Program Files\Git\usr\bin\rsync.exe" -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" tab:/storage/emulated/0/Pictures/new-pics /d
+  & 'C:\Program Files\Git\usr\bin\rsync.exe' -havu --info=progress2 --exclude='{.Trash*,lost+found,.DS_Store,._*}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" tab:/storage/emulated/0/Pictures/new-pics /d
   ```
