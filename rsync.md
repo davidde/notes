@@ -44,13 +44,9 @@ Since `rsync` is a unix tool that is not natively supported on Windows, we need 
   termux-setup-storage
   ```
   This command creates a new `~/storage` folder with symbolic links to various common folders, and is required in order for Termux to access the normal Android file system.
-* Install rsync in Termux:
+* Install `rsync` and `OpenSSH` in Termux. This will also generate SSH keys:
   ```bash
-  pkg install rsync
-  ```
-* Install OpenSSH in Termux. This will also generate SSH keys:
-  ```bash
-  pkg install openssh
+  pkg install rsync openssh
   ```
   The Termux app doesn't have permission to use the default SSH port 22, so change the port in `../usr/etc/ssh/sshd_config`:
   ```bash
@@ -95,7 +91,7 @@ Since `rsync` is a unix tool that is not natively supported on Windows, we need 
   type $env:USERPROFILE\.ssh\github_rsa.pub | ssh -p 8022 172.27.27.193 "cat >> .ssh/authorized_keys"
   ```
   Always double check you're actually copying the public key (`.pub`), and not the private key!
-* From this point on, password authentication could be disabled by editing the sshd config again in `../usr/etc/ssh/sshd_config` (on the Android device). Replace the line beginning with "PasswordAuthentication" with:
+* From this point on, password authentication could be disabled by editing the sshd config again in `../usr/etc/ssh/sshd_config` (on the Android device). Update the line beginning with "PasswordAuthentication" to:
   ```bash
   PasswordAuthentication no
   ```
@@ -133,7 +129,7 @@ It is also possible to reverse `src` and `dest` to sync in the reverse order, fr
 
 ### Command with more useful flags:
 ```bash
-rsync -auh --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}'
+rsync -auh --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' SRC DEST
 ```
 * `-a, --archive`: a combination flag equivalent to `-rlptgoD`, a quick way of saying you want recursion (i.e. traverse directories) and want to preserve almost everything (including modification times, groups, owners, permissions and symlinks, but `-H, --hard-links` being a notable exception). It’s more commonly used than `-r, --recursive` and is the recommended flag to use.
 * `-u, --update`: forces rsync to skip any files which exist on the destination and have a modified time that is newer than the source file.
@@ -143,34 +139,50 @@ rsync -auh --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"
 
 Other interesting flags:
 * `-n, --dry-run`: perform a trial run with no changes made.
-* `-v, --verbose`: print the files.
+* `-v, --verbose`: print what the command is doing.
 * `-e COMMAND, --rsh=COMMAND`: specify the remote shell / SSH command to use. E.g.:
   ```bash
-  rsync -have "C:\Program Files\Git\usr\bin\ssh.exe -i ~/.ssh/github_rsa.pub -p 8022" "user@192.168.1.78:/sdcard/Notes/*" "/cygdrive/d/NOTES/notes/"
+  rsync -have "C:\Program Files\Git\usr\bin\ssh.exe -i ~/.ssh/github_rsa.pub -p 8022" user@192.168.1.78:/sdcard/Notes/* /d/NOTES/notes/
   ```
   This flag is useful if you need additional options to the ssh command outside of the user and host, like the port and public key. It is not required otherwise.
   Alternatively, you can also put these options in `~/.ssh/config`.
 * `--delete`: make sure that files that no longer exist in the source location are also removed in the destination. This is very useful for maintaining exact duplicates with incremental updates. However, be careful with the trailing slash syntax for the source location. **Combining the wrong trailing slash syntax with the wrong destination will likely delete everything in the destination!** Using `-n, --dry-run` is beneficial here.
 
 ## Using rsync with the previously set up SSH
+> [!NOTE]
+> It doesn't seem there is a straightforward way to make `rsync` work with the native Windows SSH command, which is a shame, since that version works well with `ssh-agent` to set up passwordless logins. This means that each `rsync` to/from a remote device will prompt for the SSH key's password (or the remote's password after failing 3 times). A solution to this is to generate a passwordless SSH key, since you'll only be using it on your own devices anyway.
+
 First make sure the SSH server daemon is running in Termux on the Android device:
 ```bash
 sshd -D
 ```
-Then continue to use `rsync` from the Windows computer.
+Then continue to use `rsync` from the Windows computer:
 
 ### In Git Bash:
-```bash
-rsync -havu --info=progress2 --exclude='{".Trash*",lost+found,.DS_Store,"._*"}' '/d/new-pics' tab:/storage/emulated/0/Pictures
-```
-Git Bash uses the ssh in `C:\Program Files\Git\usr\bin\ssh.exe` by default, which works fine, but asks for your SSH key password, since it's not added to this SSH's SSH agent.
+* **Syncing from the Windows PC to Android:**
+
+  ```bash
+  rsync -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' /d/new-pics tab:/storage/emulated/0/Pictures
+  ```
+  Git Bash uses the ssh in `C:\Program Files\Git\usr\bin\ssh.exe` by default, which works fine, but asks for your SSH key password, since it's not added to this SSH's SSH agent.
+* **Syncing from Android to the Windows PC:**
+
+  ```bash
+  rsync -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' tab:/storage/emulated/0/Pictures/new-pics /d
+  ```
 
 ### In PowerShell:
-Note the **double and single quotes** around the SSH binary, this is essential for PowerShell to get the right path:
-```powershell
-& "C:\Program Files\Git\usr\bin\rsync.exe" -havu --info=progress2 --exclude='{".Trash*",lost+found,.DS_Store,"._*"}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" "/d/new-pics" tab:/storage/emulated/0/Pictures
-```
-PowerShell uses the ssh in `/c/Windows/System32/OpenSSH/ssh.exe` by default, which means we need to pass it `rsync`'s SSH from Git Bash. Again we need to provide the SSH key password, which is trickier here; you can just copy, right-click, and directly press enter, which should correctly pass the password.
+* **Syncing from the Windows PC to Android:**
 
-It doesn't seem there is a straightforward way to make `rsync` work with the native Windows SSH command, which is a shame, since that version works well with `ssh-agent` to set up passwordless login. It is still possible to generate a passwordless SSH key though, since you'll only be using it on your own devices anyway.
+  Note the **double and single quotes** around the SSH binary, this is essential for PowerShell to get the right path:
+  ```powershell
+  & "C:\Program Files\Git\usr\bin\rsync.exe" -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" /d/new-pics tab:/storage/emulated/0/Pictures
+  ```
+  PowerShell uses the ssh in `/c/Windows/System32/OpenSSH/ssh.exe` by default, which means we need to pass it `rsync`'s SSH from Git Bash. Again we need to provide the SSH key password, which is trickier here; you can just copy, right-click, and directly press enter, which should correctly pass the password.
 
+* **Syncing from Android to the Windows PC:**
+
+  Note the **double and single quotes** around the SSH binary, this is essential for PowerShell to get the right path:
+  ```powershell
+  & "C:\Program Files\Git\usr\bin\rsync.exe" -havu --info=progress2 --exclude='{".Trash*","lost+found",".DS_Store","._*"}' -e "'C:\Program Files\Git\usr\bin\ssh.exe' -v" tab:/storage/emulated/0/Pictures/new-pics /d
+  ```
