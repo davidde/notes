@@ -95,7 +95,7 @@ Since `rsync` is a unix tool that is not natively supported on Windows, we need 
   ```bash
   PasswordAuthentication no
   ```
-  Make sure the you can still login before doing this.
+  Make sure that you can still login before doing this.
 * To make it even easier to use this ssh command (and rsync also!), we can put the port and ip address in `~/.ssh/config`:
   ```
   Host tab
@@ -142,7 +142,7 @@ Other interesting flags:
 * `-v, --verbose`: print what the command is doing.
 * `-e COMMAND, --rsh=COMMAND`: specify the remote shell / SSH command to use. E.g.:
   ```bash
-  rsync -have "C:\Program Files\Git\usr\bin\ssh.exe -i ~/.ssh/github_rsa.pub -p 8022" user@192.168.1.78:/sdcard/Notes/* /d/NOTES/notes/
+  rsync -have "C:\Program Files\Git\usr\bin\ssh.exe -i ~/.ssh/github_rsa.pub -p 8022" user@172.27.27.193:/sdcard/Notes/* /d/NOTES/notes/
   ```
   This flag is useful if you need additional options to the ssh command outside of the user and host, like the port and public key. It is not required otherwise.
   Alternatively, you can also put these options in `~/.ssh/config`.
@@ -150,7 +150,7 @@ Other interesting flags:
 
 ## Using rsync with the previously set up SSH
 > [!NOTE]
-> It doesn't seem there is a straightforward way to make `rsync` work with the native Windows SSH command, which is a shame, since that version works well with `ssh-agent` to set up passwordless logins. This means that each `rsync` to/from a remote device will prompt for the SSH key's password (or the remote's password after failing 3 times). A solution to this is to generate a passwordless SSH key, since you'll only be using it on your own devices anyway.
+> It doesn't seem there is a straightforward way to make `rsync` work with the native Windows SSH command, which is a shame, since that version works well with `ssh-agent` to set up passwordless logins. This means that each `rsync` to/from a remote device will prompt for the SSH key's password (or the remote's password after failing 3 times). A possible solution to this is to generate a passwordless SSH key, but that's only recommended when using the key exclusively on your own devices.
 
 First make sure the SSH server daemon is running in Termux on the Android device:
 ```bash
