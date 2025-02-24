@@ -121,14 +121,6 @@ Save all installed VScode extensions to `vscode-extensions.list`.
 Then you can easily install them all at once on another machine from this list:  
 `cat vscode-extensions.list | xargs -L1 code --install-extension`
 
-### $ `convert -background none -resize 64x64 g-logo.svg g-logo.ico`  
-Use Imagemagick's convert utility to convert an `.svg` image to an `.ico` image.  
-Drop the `-background none` if you want to modify the backgroundless `.svg` to white background `.ico`.  
-Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example.
-
-* `convert image.png image.jpg`  
-  Imagemagick is also very straightforward for simpler conversions.
-
 ### $ `curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create`  
 curl = see url; it returns the content at the requested url  
 -i: include http headers  
@@ -423,6 +415,29 @@ Show stats of the directory or file, including permissions (and which files for 
 -a (all): Display hidden files, including the directory itself, and its parent directory.  
 -l (list): Display more information in a well-ordered list.  
 => On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
+
+### $ `magick g-logo.svg -background none -resize 64x64 g-logo.ico`  
+Use [Imagemagick's convert](https://imagemagick.org/script/convert.php) utility to convert an `.svg` image to an `.ico` image.  
+Drop the `-background none` if you want to modify the backgroundless `.svg` to white background `.ico`.  
+Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example.
+
+* Imagemagick is also very straightforward for simpler conversions, e.g.:  
+  ```
+  magick image.png image.jpg
+  magick image.png -resize 50% image.jpg
+  ```
+
+* Use the [magick mogrify](http://www.imagemagick.org/script/mogrify.php) command to resize, blur, crop, etc. an image. This tool is similar to `magick` except that the original image file is **overwritten**:
+  ```bash
+  # Note this will resize the existing image.jpg in place, destroying the original:
+  magick mogrify -resize 50% image.jpg
+
+  # You can resize all JPEG images in a folder to a maximum dimension of 256x256:
+  magick mogrify -resize 256x256 *.jpg
+
+  # You can convert all PNG images in a folder to the JPEG format:
+  magick mogrify -format jpg *.png
+  ```
 
 ### $ `mkvmerge 1.mp4 \+ 2.mp4 \+ 3.mp4 -o out.mkv`  
 Concatenate multipe video files into one mkv file.  
