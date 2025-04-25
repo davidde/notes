@@ -498,9 +498,21 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 * `npm publish`   
 Publish the package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
 
-### $ `qpdf`
-`qpdf` is a C++ command-line tool and library that performs content-preserving transformations on PDF files. It can also be used for splitting and merging files, creating files, or encrypting/decrypting them. The qpdf Manual is hosted online at https://qpdf.readthedocs.io.
+### $ `passwd`   
+Change the password for the current user.   
+To change the password of root:   
+  - Login to root with either `su -` or `sudo -i`.   
+  - Change the password with `passwd`.
+  - Log back out using **CTRL + D**, `exit` or `su - username`.
+  - Test logging in with new password: `su -` or `sudo -i`.   
 
+### $ `qpdf`
+[The Qpdf Manual is hosted online at https://qpdf.readthedocs.io](https://qpdf.readthedocs.io/en/stable/cli.html).  
+`qpdf` is a C++ command-line tool and library that performs content-preserving transformations on PDF files. It can also be used for deleting pages, splitting and merging files, creating files, or encrypting/decrypting them.
+  * `qpdf Inputfile.pdf --pages . 2-r1 -- Outputfile.pdf`  
+    Delete the first page of the pdf file. The `.` in the page range is a shorthand for the primary input file, `Inputfile.pdf` (when it's specified), while the `r1` specifies all pages to the end of the file.
+  * `qpdf Inputfile.pdf --pages . 1,3-r1 -- Outputfile.pdf`  
+    Delete only the second page of the pdf file.
   * `qpdf -decrypt Inputfile.pdf Outputfile.pdf`  
     Remove protection/encryption from pdf files.
   * `qpdf Inputfile.pdf Outputfile.pdf --split-pages`  
@@ -510,15 +522,7 @@ Publish the package to npmjs. Make sure the version was upgraded with `npm versi
   * `qpdf Inputfile.pdf --pages Inputfile.pdf 5-6 -- Outputfile.pdf`  
     Extract a page range (or single page) from the inputfile to the outputfile.
 
-### $ `passwd`   
-Change the password for the current user.   
-To change the password of root:   
-  - Login to root with either `su -` or `sudo -i`.   
-  - Change the password with `passwd`.
-  - Log back out using **CTRL + D**, `exit` or `su - username`.
-  - Test logging in with new password: `su -` or `sudo -i`.   
-
-### $ `rename`   
+### $ `rename`
 Rename is a powerful command that fully supports Perl [regular expressions](./regex.md).  
 If the full power of regexes is not required, the [mmv](#-mmv-long_nametxt-short_1txt) command
 might be considerably simpler.
