@@ -416,7 +416,7 @@ Show stats of the directory or file, including permissions (and which files for 
 -l (list): Display more information in a well-ordered list.  
 => On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
 
-### $ `magick g-logo.svg -background none -resize 64x64 g-logo.ico`  
+### $ `magick logo.svg -background none -resize 64x64 logo.ico`  
 Use [Imagemagick's convert](https://imagemagick.org/script/convert.php) utility to convert an `.svg` image to an `.ico` image.  
 Drop the `-background none` if you want to modify the backgroundless `.svg` to white background `.ico`.  
 Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example.
@@ -425,6 +425,11 @@ Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example
   ```
   magick image.png image.jpg
   magick image.png -resize 50% image.jpg
+  ```
+
+* Or for converting images to pdf files:
+  ```
+  magick image.jpg -quality 100 image.pdf
   ```
 
 * Use the [magick mogrify](http://www.imagemagick.org/script/mogrify.php) command to resize, blur, crop, etc. an image. This tool is similar to `magick` except that the original image file is **overwritten**:
@@ -509,10 +514,14 @@ To change the password of root:
 ### $ `qpdf`
 [The Qpdf Manual is hosted online at https://qpdf.readthedocs.io](https://qpdf.readthedocs.io/en/stable/cli.html).  
 `qpdf` is a C++ command-line tool and library that performs content-preserving transformations on PDF files. It can also be used for deleting pages, splitting and merging files, creating files, or encrypting/decrypting them.
-  * `qpdf Inputfile.pdf --pages . 2-r1 -- Outputfile.pdf`  
-    Delete the first page of the pdf file. The `.` in the page range is a shorthand for the primary input file, `Inputfile.pdf` (when it's specified), while the `r1` specifies all pages to the end of the file.
-  * `qpdf Inputfile.pdf --pages . 1,3-r1 -- Outputfile.pdf`  
+  * `qpdf Inputfile.pdf --pages . 2-z -- Outputfile.pdf`  
+    Delete the first page of the pdf file. The `.` in the page range is a shorthand for the primary input file, `Inputfile.pdf` (when it's specified), while the `z` (= `r1`) specifies the last page.
+  * `qpdf Inputfile.pdf --pages . 1,3-z -- Outputfile.pdf`  
     Delete only the second page of the pdf file.
+  * `qpdf Inputfile.pdf --pages . 1-4,6-8,10-z -- Outputfile.pdf`  
+    Delete the 5th and 9th pages of the pdf file.
+  * `qpdf Inputfile.pdf --pages cover.pdf 1 . 1-z -- Outputfile.pdf`  
+    Add a cover to the pdf file. Convert an image to a pdf file first with the imagemagick [magick](#-magick-logosvg--background-none--resize-64x64-logoico) command.
   * `qpdf -decrypt Inputfile.pdf Outputfile.pdf`  
     Remove protection/encryption from pdf files.
   * `qpdf Inputfile.pdf Outputfile.pdf --split-pages`  
