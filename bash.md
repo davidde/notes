@@ -443,6 +443,11 @@ Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example
   # You can convert all PNG images in a folder to the JPEG format:
   magick mogrify -format jpg *.png
   ```
+  The `mogrify` command is very useful for bulk converting entire folders, e.g.:
+  ```bash
+  magick mogrify -resize 50% *.jpg
+  ```
+  This will reduce the size of all `.jpg` images in the folder by 50%.
 
 ### $ `mkvmerge 1.mp4 \+ 2.mp4 \+ 3.mp4 -o out.mkv`  
 Concatenate multipe video files into one mkv file.  
