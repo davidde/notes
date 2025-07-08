@@ -456,7 +456,7 @@ Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example
   ```
 * Create a `favicon.ico` from another image file:
   ```bash
-  magick logo.png -define icon:auto-resize=64,32,16 favicon.ico
+  magick logo.png -define icon:auto-resize=16,32,48,256 favicon.ico
   ```
 
 ### $ `mkvmerge 1.mp4 \+ 2.mp4 \+ 3.mp4 -o out.mkv`  
