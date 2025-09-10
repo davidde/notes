@@ -179,6 +179,9 @@ in `Hardware accelerated decoding` in `Input & Codecs Settings`.
   range is 24–34 (18–28 for H264!). Consider a CRF of 24 (18 for H264) to be visually lossless or
   nearly so.
 
+* `ffmpeg -i input.mp4 -c copy -c:v libx265 -crf 24 -ss 00:15:00 -to 00:20:00 short-output.mkv`  
+  Extract 5 minutes (from the 15th minute to the 20th minute) from the input video, compress and convert it to an x265 mkv using a constant rate factor of 24.
+
 * `ffmpeg -i input.mov -i input.srt -c copy -c:v libx265 output.mkv`  
   Convert `input.mov` to `output.mkv`, while embedding a subtitle stream from `input.srt`.
   
