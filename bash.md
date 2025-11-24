@@ -121,14 +121,6 @@ Save all installed VScode extensions to `vscode-extensions.list`.
 Then you can easily install them all at once on another machine from this list:  
 `cat vscode-extensions.list | xargs -L1 code --install-extension`
 
-### $ `convert -background none -resize 64x64 g-logo.svg g-logo.ico`  
-Use Imagemagick's convert utility to convert an `.svg` image to an `.ico` image.  
-Drop the `-background none` if you want to modify the backgroundless `.svg` to white background `.ico`.  
-Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example.
-
-* `convert image.png image.jpg`  
-  Imagemagick is also very straightforward for simpler conversions.
-
 ### $ `curl -i -X POST -d "isbn=978-1470184841&title=Metamorphosis&author=Franz Kafka&price=5.90" localhost:3000/books/create`  
 curl = see url; it returns the content at the requested url  
 -i: include http headers  
@@ -186,6 +178,9 @@ in `Hardware accelerated decoding` in `Input & Codecs Settings`.
   and 51 is worst quality possible. A lower value leads to higher quality, and a subjectively sane
   range is 24–34 (18–28 for H264!). Consider a CRF of 24 (18 for H264) to be visually lossless or
   nearly so.
+
+* `ffmpeg -i input.mp4 -c copy -c:v libx265 -crf 24 -ss 00:15:00 -to 00:20:00 short-output.mkv`  
+  Extract 5 minutes (from the 15th minute to the 20th minute) from the input video, compress and convert it to an x265 mkv using a constant rate factor of 24.
 
 * `ffmpeg -i input.mov -i input.srt -c copy -c:v libx265 output.mkv`  
   Convert `input.mov` to `output.mkv`, while embedding a subtitle stream from `input.srt`.
@@ -424,6 +419,49 @@ Show stats of the directory or file, including permissions (and which files for 
 -l (list): Display more information in a well-ordered list.  
 => On most systems, `ll` is an alias for `ls -lh` or `ls -la`, enter `type ll` to find out which.
 
+### $ `magick logo.svg -background none -resize 64x64 logo.ico`  
+Use [Imagemagick's convert](https://imagemagick.org/script/convert.php) utility to convert an `.svg` image to an `.ico` image.  
+Drop the `-background none` if you want to modify the backgroundless `.svg` to white background `.ico`.  
+Use the `-fill '#FF0000' -colorize 100` flag to color the image red, for example.
+
+* Imagemagick is also very straightforward for simpler conversions, e.g.:  
+  ```
+  magick image.png image.jpg
+  magick image.png -resize 50% image.jpg
+  ```
+
+* Or for converting images to pdf files:
+  ```
+  magick image.jpg -quality 100 image.pdf
+  ```
+
+* Use the [magick mogrify](http://www.imagemagick.org/script/mogrify.php) command to resize, blur, crop, etc. an image. This tool is similar to `magick` except that the original image file is **overwritten**:
+  ```bash
+  # Note this will resize the existing image.jpg in place, destroying the original:
+  magick mogrify -resize 50% image.jpg
+  ```
+* Also, the [magick mogrify](http://www.imagemagick.org/script/mogrify.php) command is very useful for bulk converting entire folders when passing a `*` wildcard pattern. Additionally, the `-format` and `-path` options prevent the file from being overwritten:
+  ```bash
+  # Convert all png images in the folder to the jpg format:
+  # (This will add the jpg images next to the png images without
+  # overwriting the original png versions due to the -format option)
+  magick mogrify -format jpg *.png
+
+  # Reduce the size of all jpg images in the folder by 50%:
+  # (Will overwrite original images!)
+  magick mogrify -resize 50% *.jpg
+
+  # Resize all jpg images in the folder to a maximum dimension of 256x256:
+  # (The -path option writes output to a different folder,
+  # instead of overwriting; note that this path is not created,
+  # it needs to be an existing path!)
+  magick mogrify -resize 256x256 -path jpgs *.jpg
+  ```
+* Create a `favicon.ico` from another image file:
+  ```bash
+  magick logo.png -define icon:auto-resize=16,32,48,256 favicon.ico
+  ```
+
 ### $ `mkvmerge 1.mp4 \+ 2.mp4 \+ 3.mp4 -o out.mkv`  
 Concatenate multipe video files into one mkv file.  
 This command can be installed with:  
@@ -483,9 +521,25 @@ Node Package Manager: the npm command line tool is used to manage and publish ja
 * `npm publish`   
 Publish the package to npmjs. Make sure the version was upgraded with `npm version` before publishing.
 
-### $ `qpdf`
-`qpdf` is a C++ command-line tool and library that performs content-preserving transformations on PDF files. It can also be used for splitting and merging files, creating files, or encrypting/decrypting them. The qpdf Manual is hosted online at https://qpdf.readthedocs.io.
+### $ `passwd`   
+Change the password for the current user.   
+To change the password of root:   
+  - Login to root with either `su -` or `sudo -i`.   
+  - Change the password with `passwd`.
+  - Log back out using **CTRL + D**, `exit` or `su - username`.
+  - Test logging in with new password: `su -` or `sudo -i`.   
 
+### $ `qpdf`
+[The Qpdf Manual is hosted online at https://qpdf.readthedocs.io](https://qpdf.readthedocs.io/en/stable/cli.html).  
+`qpdf` is a C++ command-line tool and library that performs content-preserving transformations on PDF files. It can also be used for deleting pages, splitting and merging files, creating files, or encrypting/decrypting them.
+  * `qpdf Inputfile.pdf --pages . 2-z -- Outputfile.pdf`  
+    Delete the first page of the pdf file. The `.` in the page range is a shorthand for the primary input file, `Inputfile.pdf` (when it's specified), while the `z` (= `r1`) specifies the last page.
+  * `qpdf Inputfile.pdf --pages . 1,3-z -- Outputfile.pdf`  
+    Delete only the second page of the pdf file.
+  * `qpdf Inputfile.pdf --pages . 1-4,6-8,10-z -- Outputfile.pdf`  
+    Delete the 5th and 9th pages of the pdf file.
+  * `qpdf Inputfile.pdf --pages cover.pdf 1 . 1-z -- Outputfile.pdf`  
+    Add a cover to the pdf file. Convert an image to a pdf file first with the imagemagick [magick](#-magick-logosvg--background-none--resize-64x64-logoico) command.
   * `qpdf -decrypt Inputfile.pdf Outputfile.pdf`  
     Remove protection/encryption from pdf files.
   * `qpdf Inputfile.pdf Outputfile.pdf --split-pages`  
@@ -495,15 +549,7 @@ Publish the package to npmjs. Make sure the version was upgraded with `npm versi
   * `qpdf Inputfile.pdf --pages Inputfile.pdf 5-6 -- Outputfile.pdf`  
     Extract a page range (or single page) from the inputfile to the outputfile.
 
-### $ `passwd`   
-Change the password for the current user.   
-To change the password of root:   
-  - Login to root with either `su -` or `sudo -i`.   
-  - Change the password with `passwd`.
-  - Log back out using **CTRL + D**, `exit` or `su - username`.
-  - Test logging in with new password: `su -` or `sudo -i`.   
-
-### $ `rename`   
+### $ `rename`
 Rename is a powerful command that fully supports Perl [regular expressions](./regex.md).  
 If the full power of regexes is not required, the [mmv](#-mmv-long_nametxt-short_1txt) command
 might be considerably simpler.

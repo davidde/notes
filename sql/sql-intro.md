@@ -2,13 +2,13 @@
 ## Intro
 * How do we structure application data?
 
-|     In memory:                           |     Durable storage:                    |
-|------------------------------------------|-----------------------------------------|
-| **Simple variables**: numbers, strings   | **Flat files on disk**: text, xml, json |
-|                                          |                                         |
-| **Data structures**: lists, dictionaries | **Databases**: key-value store          |
-|                                          |                                         |
-| = EPHEMERAL/TEMPORARY                    | = PERSISTANT/DURABLE                    |
+  |     In memory:                           |     Durable storage:                    |
+  |------------------------------------------|-----------------------------------------|
+  | **Simple variables**: numbers, strings   | **Flat files on disk**: text, xml, json |
+  |                                          |                                         |
+  | **Data structures**: lists, dictionaries | **Databases**: key-value store          |
+  |                                          |                                         |
+  | = EPHEMERAL/TEMPORARY                    | = PERSISTANT/DURABLE                    |
 
 * All databases provide:
     - persistent storage
