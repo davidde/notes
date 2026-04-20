@@ -1,4 +1,4 @@
-# Admin tasks
+# General Windows Administration
 ## Configure DHCP (Static/dynamic IP)
 * Press `Windows + R`, type `ncpa.cpl` and press `Enter`.
 * This opens the `Network Connections` window; double click the connection you want to edit.
@@ -25,25 +25,25 @@ Instead of letting Windows download updates and then blocking the reboot, this p
    Result: Windows will tell you updates are ready, but it won't touch them until you click "Download." This keeps your system state "clean" while you sleep.
 
 ### 2. Prevent PC waking up when explicitly told to sleep
-#### 1. Disable the "Power Management" Wake Policy
+#### Disable the "Power Management" Wake Policy
 Windows has a specific policy that gives it permission to wake the system for updates. You need to kill this explicitly.
 
-1. In Group Policy Editor, go to: `Computer Configuration > Administrative Templates > Windows Components > Windows Update > Legacy Policies` (or just under the main Windows Update folder in some versions).
-2. Look for **Enabling Windows Update Power Management to automatically wake up the system to install scheduled updates**.
-3. Set this to **Disabled**.
-4. Click **Apply**.
+* In Group Policy Editor, go to: `Computer Configuration > Administrative Templates > Windows Components > Windows Update > Legacy Policies` (or just under the main Windows Update folder in some versions).
+* Look for **Enabling Windows Update Power Management to automatically wake up the system to install scheduled updates**.
+* Set this to **Disabled**.
+* Click **Apply**.
 
-#### 2. The "Scheduled Maintenance" Killer
+#### The "Scheduled Maintenance" Killer
 Even with the settings above, Windows has a "Maintenance" task that runs at 2:00 AM by default.
 
-1. Press the **Start** button and search for **"Security and Maintenance"**.
-2. Expand the **Maintenance** section and click **Change maintenance settings**.
-3. **Uncheck** "Allow scheduled maintenance to wake up my computer at the scheduled time."
+* Press the **Start** button and search for **"Security and Maintenance"**.
+* Expand the **Maintenance** section and click **Change maintenance settings**.
+* **Uncheck** "Allow scheduled maintenance to wake up my computer at the scheduled time."
 
 This is to prevent the computer from waking up when you explicitly put it to sleep.
 
-#### 3. Disable wake timers and devices
-1. If the computer still wakes itself up from sleep, try the following commands:
+#### Disable wake timers and devices
+* If the computer still wakes itself up from sleep, try the following commands:
   ```powershell
   # This will list the device that caused the last wake:
   # (Likely causes are network adapters using Wake-on-LAN)
@@ -51,28 +51,9 @@ This is to prevent the computer from waking up when you explicitly put it to sle
   # This requires an admin powershell, and lists any scheduled wake timers that are still active:
   powercfg /waketimers
   ```
-2. Disable the device's ability to wake the computer, e.g. for a network adapter:
+* Disable the device's ability to wake the computer, e.g. for a network adapter:
    - Open `Device Manager > Network Adapters > "Adapter name" > Properties`
    - `Power Management` tab: Uncheck **Allow this device to wake the computer**.
    - `Advanced` tab: Find `Wake on Magic Packet` and `Wake on Pattern Match`, and set both to **Disabled**.
-3. Deactivate any wake timers still running.
-
-## Securing Windows
-### Secure Boot
-Secure boot prevents malicious code from hijacking your internal boot process, e.g. when the internal HDD is infected by unsigned bootkit malware.
-
-### Only allow booting from _internal HDD_
-* Secure boot does nothing for the likely attack vector where someone with physical access to the device boots an image from a flash drive.  
-* To prevent unauthorized access from booting external media, the UEFI has to be configured properly.
-
-#### The strongest protection comes from:
-* Internal Drive at #1 + Anything else/External Media **Disabled**:  
-  Don't just put external media last; in this case a sophisticated attacker can still boot from external USB drives after physically removing the internal hard drive. The system will automatically proceed to boot from the next item in the list...
-
-* Quick Boot Menu Disabled.
-
-* ​Admin Password for UEFI, so the above 2 cannot be revoked without providing your admin password.
-
-### Full disk encryption
-Full Disk encryption provides significant additional security when an attacker gets physical access to the disk.
+* Deactivate any wake timers still running.
 
