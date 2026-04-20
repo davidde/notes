@@ -6,3 +6,10 @@
 * In the `Properties` window, select `Internet Protocol Version 4 (TCP/IPv4)`, and click `Properties` again.
 * In the IPv4 window, switch the radiobutton from `Obtain an IP address automatically` (= dynamic IP) to `Use the following IP address` (= static IP), and fill in the data for the IP address you want to use.
 * You can do the same for DNS server right below.
+
+## Force-update windows
+If the Windows Update GUI doesn't work for some reason, use the following command in an admin command prompt:
+```
+usoclient startinteractivescan
+```
+
