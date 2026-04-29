@@ -122,8 +122,15 @@ Then you can easily install them all at once on another machine from this list:
 `cat vscode-extensions.list | xargs -L1 code --install-extension`
 
 ### $ `cpdf -crop "20 110 375 610" input.pdf -o output.pdf`   
-* Crop the displayed part of input.pdf to a smaller size, and write it to output.pdf.
-  To get the initial "cropbox" size of the input pdf:
+Crop the displayed part of `input.pdf` to a smaller size, and write it to `output.pdf`:  
+  - Number 1: Vertical distance from top of document
+  - Number 2: Horizontal distance from left side of document
+  - Number 3: Vertical length
+  - Number 4: Horizontal length
+
+---
+
+* To get the initial "cropbox" size of the input pdf:
   ```bash
   cpdf -info input.pdf
   ```
