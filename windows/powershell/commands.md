@@ -48,10 +48,3 @@ Creates an alias `NEW_NAME` for an existing `COMMAND`.
 
 For more info see [this blog post about PSWritePDF](https://evotec.xyz/merging-splitting-and-creating-pdf-files-with-powershell/).
 
-
-## Force-update windows
-If the Windows Update GUI doesn't work for some reason, use the following command in an admin command prompt:
-```
-usoclient startinteractivescan
-```
-
